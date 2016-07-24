@@ -14,7 +14,7 @@ class Question extends Component {
   render() {
     let { question } = this.props
     return (
-      <div>
+      <div className='container'>
         <h2>{ question.get('content') }</h2>
         <h3> User: {question.getIn(['user', 'name'])} </h3>
       </div>

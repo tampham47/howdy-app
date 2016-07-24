@@ -10,7 +10,7 @@ import compression from 'compression';
 import Promise from 'bluebird';
 
 import configureStore from 'store/configureStore';
-import createRoutes from 'routes/index';
+import createRoutes from 'routes';
 
 import { Provider } from 'react-redux';
 

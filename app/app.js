@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 import { browserHistory } from 'react-router'
 
 import configureStore from 'store/configureStore'
-import createRoutes from 'routes/index'
+import createRoutes from 'routes'
 import { Provider } from 'react-redux'
 import Immutable from 'immutable'
 import _ from 'lodash'

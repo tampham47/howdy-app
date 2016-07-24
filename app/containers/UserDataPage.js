@@ -14,7 +14,7 @@ class UserDataPage extends Component {
   render() {
     let { currentUser, username } = this.props;
     return (
-      <div>
+      <div className='container'>
         <h2>{username}</h2>
         <li>name: {currentUser.name}</li>
         <li>nickname: {currentUser.nickname}</li>

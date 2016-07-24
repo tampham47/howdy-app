@@ -5,8 +5,8 @@ import { Link } from 'react-router';
 class Intro extends Component {
   render() {
     return (
-      <div className="intro">
-        <h1>Intro Page</h1>
+      <div className="container">
+        <h3>Intro Page</h3>
         <Link to="/questions">to question</Link>
       </div>
     );

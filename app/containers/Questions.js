@@ -15,7 +15,7 @@ class QuestionContainer extends Component {
   }
   render() {
     return (
-      <div>
+      <div className='container'>
         <h2>Question</h2>
         <Questions questions={this.props.questions} />
         <Link to="/">Back to Home</Link>
