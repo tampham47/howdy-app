@@ -2,7 +2,7 @@
 	"apps": [
 		{
 			"exec_mode": "fork_mode",
-			"name": "menucraft",
+			"name": "goingsunny",
 			"script": "app/server",
 			"watch": false,
 			"ignore_watch": [
@@ -15,19 +15,21 @@
 			"env": {
 				"NODE_ENV": "development",
 				"LOG": 1,
-				"PORT": 5005,
+				"PORT": 5500,
 				"NODE_PATH": "./app",
-				"HOST_PATH": "localhost:5005"
+				"HOST_PATH": "dev.goingsunny.com"
 			},
 			"env_production": {
 				"NODE_ENV": "production",
-				"PORT": 5005,
+				"PORT": 5500,
 				"NODE_PATH": "./app",
-				"HOST_PATH": "menucraft.websaigon.co"
+				"HOST_PATH": "goingsunny.com"
 			},
 			"env_staging": {
 				"NODE_ENV": "staging",
-				"PORT": 5005
+				"PORT": 5500,
+				"NODE_PATH": "./app",
+				"HOST_PATH": "stag.goingsunny.com"
 			}
 		}
 	]

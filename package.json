@@ -10,7 +10,8 @@
     "build": "rimraf dist/ && npm run webpack && gulp css:build",
     "postinstall": "npm run build",
     "togoingsunny": "ssh -i _deploy/goingsunny.pem centos@52.221.229.162",
-    "deploy_prod": "ssh -t -i _deploy/goingsunny.pem centos@52.221.229.162 'logout'"
+    "deploy_dev": "ssh -t -i _deploy/goingsunny.pem centos@52.221.229.162 'sudo su - && cd prod/goingsunny && git pull && npm run build && pm2 startOrRestart pm2.json --env development'",
+    "deploy_prod": "ssh -t -i _deploy/goingsunny.pem centos@52.221.229.162 'sudo su - && cd prod/goingsunny && git pull && npm run build && pm2 startOrRestart pm2.json --env production'"
   },
   "engines": {
     "node": "6.1.0",
