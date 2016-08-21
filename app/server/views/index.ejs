@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Redux real-world example</title>
+    <title>Goingsunny</title>
     <link rel="stylesheet" href="<%= styleSrc %>" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" type="text/css" media="screen" charset="utf-8"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" >
   </head>
   <body>
-    <div id="root"><%- html %></div>
+    <div id="root" class="relm"><%- html %></div>
     <script type="text/javascript" charset="utf-8">
       window.__REDUX_STATE__ = '<%= reduxState %>';
     </script>
@@ -13,7 +15,6 @@
     <% scriptSrcs.forEach(function(src){ %>
       <script src="<%= src %>"></script>
     <% }) %>
-
   </body>
 </html>
 

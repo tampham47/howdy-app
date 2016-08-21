@@ -1,0 +1,460 @@
+/**
+ *
+ */
+
+// @use postcss-discard-comments;
+// @use postcss-simple-vars;
+// @use postcss-nested;
+
+$left-menu-width: 300px;
+$main-content-w: 640px;
+// $left-menu-width: 450px;
+$minibar-width: 120px;
+$minibar-background-color: rgba(51, 49, 50, 0.4);
+$gutter: 2rem;
+$header-h: 65px;
+
+$normal-icon-w: 40px;
+$normal-border-radius: 4px;
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+html {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+body, .relm {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 100%;
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  display: flex;
+  font-family: Arial, sans-serif;
+}
+
+.main-area {
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+
+.main-content {
+  width: $main-content-w;
+  position: relative;
+  height: 100%;
+  padding-top: $header-h;
+  padding-bottom: 70px;
+  min-height: 300px;
+
+  &__scroller {
+    height: 100%;
+    overflow-y: auto;
+  }
+}
+
+.left-menu {
+  width: $left-menu-width;
+  height: 100%;
+  flex-shrink: none;
+  display: flex;
+  position: relative;
+  background-color: #343434;
+
+  &__create-room-btn {
+    position: absolute;
+    bottom: 0;
+    width: auto;
+    padding: auto;
+    left: $gutter;
+    right: $gutter;
+  }
+}
+
+.left-menu-minibar-wrapper {
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  width: $minibar-width;
+  height: 100%;
+  display: none;
+}
+.left-menu-minibar {
+  box-sizing: content-box;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  padding-left: 0;
+  padding-right: 20px;
+
+  background-color: $minibar-background-color;
+  list-style: none;
+
+  /* Maybe add a scrolling shadow here (occlusion shadow culling)
+   * http://jsfiddle.net/MadLittleMods/anwdp5nj/
+   * http://lea.verou.me/2012/04/background-attachment-local/
+  */
+
+  &:after {
+    $minibar-occlusion-shadow-height: 5rem;
+    content: '';
+    position: absolute;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    height: $minibar-occlusion-shadow-height;
+    box-shadow: inset 0 -$minibar-occlusion-shadow-height calc($minibar-occlusion-shadow-height / 2) calc(-$minibar-occlusion-shadow-height / 2) rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+  }
+}
+
+.left-menu-minibar-item {
+  display: flex;
+  justify-content: center;
+  /* 100% doesn't quite work as expected in this box with a scrollbar for some reason? */
+  width: $minibar-width;
+
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
+  cursor: pointer;
+
+
+  /* Some visual cues to track the items better as they scroll */
+  &:nth-child(2n + 5) {
+    .left-menu-minibar-item-icon:before {
+      content: '';
+      display: block;
+      width: 14px;
+      height: 14px;
+      box-shadow: inset 0 0 8px 0 rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+    }
+  }
+  &:nth-child(5n + 4) {
+    .left-menu-minibar-item-icon:after {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 8px;
+      box-shadow: inset 0 0 8px 0 rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+    }
+  }
+}
+
+.left-menu-minibar-item-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 70px;
+  height: 70px;
+
+  background: #ffffff;
+  background:
+    linear-gradient(
+      to right,
+      $minibar-background-color 0%,
+      $minibar-background-color $minibar-width,
+      transparent 75px
+    ),
+    /* Lighter version of left-menu gradient */
+    linear-gradient(
+      to bottom,
+      #6a44d4 30%,
+      #ff8aed 60%,
+      #ff4f75
+    );
+  background-attachment: fixed;
+  background-size: $left-menu-width 100vh;
+
+  border-radius: 14px;
+}
+
+.left-menu-minibar-item-name {
+  /* visually hidden */
+  overflow: hidden;
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
+
+.left-menu-room-list {
+  overflow: auto;
+  flex: 1;
+
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  padding: $gutter;
+  list-style: none;
+}
+
+.left-menu-room-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+
+  /* Some visual cues to track the items better as they scroll */
+  &:nth-child(4n + 2) {
+    .left-menu-room-item-icon:before {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+    }
+  }
+  &:nth-child(7n + 3) {
+    .left-menu-room-item-icon:after {
+      content: '';
+      display: block;
+      width: 12px;
+      height: 12px;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+    }
+  }
+}
+
+.left-menu-room-item-icon {
+  $icon-w: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: $icon-w;
+  height: $icon-w;
+  margin-right: 1rem;
+
+  background: #ffffff;
+  background:
+    linear-gradient(
+      to right,
+      $minibar-background-color 0%,
+      $minibar-background-color $minibar-width,
+      transparent 75px
+    ),
+    /* Lighter version of left-menu gradient */
+    linear-gradient(
+      to bottom,
+      #6a44d4 30%,
+      #ff8aed 60%,
+      #ff4f75
+    );
+  background-attachment: fixed;
+  background-size: $left-menu-width 100vh;
+
+  border-radius: 8px;
+}
+
+.left-menu-room-item-name {
+  overflow: hidden;
+  flex: 1;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  color: #eeeeee;
+  font-size: 1.6rem;
+  font-weight: normal;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.main-header {
+  display: block;
+  height: $header-h;
+  color: white;
+}
+
+.header-bar {
+  height: $header-h;
+  background-color: white;
+  width: 100%;
+  position: absolute;
+  z-index: 99;
+  border-bottom: 1px solid rgba(grey, 0.5);
+
+  &__title {
+    margin: 0;
+    line-height: $header-h;
+    vertical-align: middle;
+    margin-left: $gutter;
+    font-size: 3.2rem;
+    display: inline-block;
+  }
+
+  &__icon {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: $normal-icon-w;
+    height: $normal-icon-w;
+    display: inline-block;
+    background-color: #A2C11C;
+    border-radius: $normal-border-radius;
+    overflow: hidden;
+    vertical-align: middle;
+  }
+
+  &__control-wrapper {
+    float: right;
+    display: inline-block;
+    font-size: 3.2rem;
+    margin-right: $gutter;
+
+    a {
+      padding: 0 10px;
+      color: grey;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: $header-h;
+
+      &:last-child {
+        margin-right: -10px;
+      }
+    }
+  }
+}
+
+.message-list {
+  padding: $gutter 0;
+}
+
+.message-item {
+  $icon-w: 40px;
+  position: relative;
+  font-size: 1.6rem;
+
+  &__icon {
+    width: $icon-w;
+    height: $icon-w;
+    position: absolute;
+    background-color: pink;
+    border-radius: 4px;
+    overflow: hidden;
+    left: 30px;
+  }
+
+  &__wrapper {
+    margin-left: 2*$icon-w;
+    margin-right: $gutter;
+
+    p {
+      margin-bottom: $gutter;
+    }
+  }
+
+  &__title {
+    &__name {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+    &__username {
+      margin-right: 5px;
+    }
+    &__time {}
+  }
+  &__content {}
+}
+
+.input-area {
+  $icon-w: 40px;
+  width: 100%;
+  height: 70px;
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(grey, 0.5);
+  font-size: 1.6rem;
+
+  &__wrapper {
+    position: relative;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+
+  &__icon {
+    width: $icon-w;
+    height: $icon-w;
+    position: absolute;
+    left: 30px;
+    top: 10px;
+    background-color: pink;
+    border-radius: 4px;
+  }
+
+  &__content-wrapper {
+    padding: 10px;
+    padding-left: 2*$icon-w;
+
+    textarea {
+      width: 100%;
+      min-height: auto;
+      height: 50px;
+      margin-bottom: 0;
+      font-size: 1.6rem;
+      border: 0;
+      padding: 0;
+      padding-right: $gutter;
+    }
+  }
+}
+
+.room-panel {
+  flex: 1;
+  background-color: lighten(whitesmoke, 2%);
+  height: 100%;
+  padding-top: $header-h;
+
+  &__wrapper {
+    padding: 0.5*$gutter;
+
+    h6 {
+      margin-bottom: 0.5*$gutter;
+      font-size: 1.8rem;
+    }
+  }
+}
+
+.people-list {}
+
+.people-item {
+  $icon-w: 35px;
+  display: inline-block;
+  width: $icon-w;
+  height: $icon-w;
+  background-color: pink;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-right: 10px;
+  margin-bottom: 2px;
+}

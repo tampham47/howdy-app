@@ -8,7 +8,9 @@
     "test:ci": "cross-env NODE_ENV=test cross-env NODE_PATH=./app mocha --compilers js:babel-register -r app/spec/support/setup.mocha.js --recursive 'app/spec/**/*.test.js'",
     "webpack": "webpack",
     "build": "rimraf dist/ && npm run webpack && gulp css:build",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "togoingsunny": "ssh -i _deploy/goingsunny.pem centos@52.221.229.162",
+    "deploy_prod": "ssh -t -i _deploy/goingsunny.pem centos@52.221.229.162 'logout'"
   },
   "engines": {
     "node": "6.1.0",
@@ -34,7 +36,7 @@
     "humps": "^0.6.0",
     "immutable": "^3.8.1",
     "isomorphic-fetch": "^2.1.1",
-    "keystone": "^0.3.22",
+    "keystone": "https://github.com/keystonejs/keystone.git",
     "lodash": "^3.10.1",
     "normalizr": "^1.0.0",
     "react": "^15.0.2",
