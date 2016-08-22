@@ -1,3 +1,7 @@
+/**
+ *
+ */
+
 import Express from 'express';
 import path from 'path';
 
@@ -13,7 +17,6 @@ import configureStore from 'store/configureStore';
 import createRoutes from 'routes';
 
 import { Provider } from 'react-redux';
-import keystone from 'keystone';
 
 let server = new Express();
 let port = process.env.PORT || 3000;
@@ -37,116 +40,92 @@ if ( process.env.NODE_ENV === 'production' ) {
   styleSrc = '/main.css';
 }
 
-// keystone.use(Express.static(path.join(__dirname, '../..', 'dist')));
-// server.set('views', path.join(__dirname, 'views'));
-// server.set('view engine', 'ejs');
+server.use(compression());
+server.use(Express.static(path.join(__dirname, '../..', 'dist')));
+server.set('views', path.join(__dirname, 'views'));
+server.set('view engine', 'ejs');
 
-var keystoneRoutes = function(app) {
-  app.use(compression());
-
-  // mock apis
-  app.get('/api/questions', (req, res)=> {
-    let { questions } = require('./mock_api');
-    res.send(questions);
-  });
-  app.get('/api/users/:id', (req, res)=> {
-    let { getUser } = require('./mock_api')
-    res.send(getUser(req.params.id))
-  })
-  app.get('/api/questions/:id', (req, res)=> {
-    let { getQuestion } = require('./mock_api')
-    res.send(getQuestion(req.params.id))
-  })
-
-  app.get('*', (req, res, next)=> {
-    let history = useRouterHistory(useQueries(createMemoryHistory))();
-    let store = configureStore();
-    let routes = createRoutes(history);
-    let location = history.createLocation(req.url);
-
-    match({ routes, location }, (error, redirectLocation, renderProps) => {
-      if (redirectLocation) {
-        res.redirect(301, redirectLocation.pathname + redirectLocation.search);
-      } else if (error) {
-        res.status(500).send(error.message);
-      } else if (renderProps == null) {
-        res.status(404).send('Not found')
-      } else {
-        let [ getCurrentUrl, unsubscribe ] = subscribeUrl();
-        let reqUrl = location.pathname + location.search;
-
-        getReduxPromise().then(()=> {
-          let reduxState = escape(JSON.stringify(store.getState()));
-          let html = ReactDOMServer.renderToString(
-            <Provider store={store}>
-              { <RouterContext {...renderProps}/> }
-            </Provider>
-          );
-
-          if ( getCurrentUrl() === reqUrl ) {
-            res.render('index', { html, scriptSrcs, reduxState, styleSrc });
-          } else {
-            res.redirect(302, getCurrentUrl());
-          }
-          unsubscribe();
-        })
-        .catch((err)=> {
-          unsubscribe();
-          next(err);
-        });
-        function getReduxPromise () {
-          let { query, params } = renderProps;
-          let comp = renderProps.components[renderProps.components.length - 1].WrappedComponent;
-          let promise = comp.fetchData ?
-            comp.fetchData({ query, params, store, history }) :
-            Promise.resolve();
-
-          return promise;
-        }
-      }
-    });
-    function subscribeUrl () {
-      let currentUrl = location.pathname + location.search;
-      let unsubscribe = history.listen((newLoc)=> {
-        if (newLoc.action === 'PUSH') {
-          currentUrl = newLoc.pathname + newLoc.search;
-        }
-      });
-      return [
-        ()=> currentUrl,
-        unsubscribe
-      ];
-    }
-  });
-
-  app.use((err, req, res, next)=> {
-    console.log(err.stack);
-    // TODO report error here or do some further handlings
-    res.status(500).send("something went wrong...")
-  });
-};
-
-console.log(`Server is listening to port: ${port}`);
-keystone.init({
-  'name': 'My Project',
-  'favicon': 'public/favicon.ico',
-
-  // 'less': 'public',
-  'static': [path.join(__dirname, '../..', 'dist')],
-
-  'views': 'views',
-  'view engine': 'ejs',
-
-  'auto update': true,
-  'mongo': 'mongodb://localhost/universal-redux-template',
-
-  'session': true,
-  'auth': true,
-  'user model': 'User',
-  'cookie secret': '(your secret here)'
+// mock apis
+server.get('/api/questions', (req, res)=> {
+  let { questions } = require('./mock_api');
+  res.send(questions);
 });
 
-keystone.import('models');
-keystone.set('routes', keystoneRoutes);
-keystone.start();
+server.get('/api/users/:id', (req, res)=> {
+  let { getUser } = require('./mock_api')
+  res.send(getUser(req.params.id))
+})
+server.get('/api/questions/:id', (req, res)=> {
+  let { getQuestion } = require('./mock_api')
+  res.send(getQuestion(req.params.id))
+})
 
+server.get('*', (req, res, next)=> {
+  let history = useRouterHistory(useQueries(createMemoryHistory))();
+  let store = configureStore();
+  let routes = createRoutes(history);
+  let location = history.createLocation(req.url);
+
+  match({ routes, location }, (error, redirectLocation, renderProps) => {
+    if (redirectLocation) {
+      res.redirect(301, redirectLocation.pathname + redirectLocation.search);
+    } else if (error) {
+      res.status(500).send(error.message);
+    } else if (renderProps == null) {
+      res.status(404).send('Not found')
+    } else {
+      let [ getCurrentUrl, unsubscribe ] = subscribeUrl();
+      let reqUrl = location.pathname + location.search;
+
+      getReduxPromise().then(()=> {
+        let reduxState = escape(JSON.stringify(store.getState()));
+        let html = ReactDOMServer.renderToString(
+          <Provider store={store}>
+            { <RouterContext {...renderProps}/> }
+          </Provider>
+        );
+
+        if ( getCurrentUrl() === reqUrl ) {
+          res.render('index', { html, scriptSrcs, reduxState, styleSrc });
+        } else {
+          res.redirect(302, getCurrentUrl());
+        }
+        unsubscribe();
+      })
+      .catch((err)=> {
+        unsubscribe();
+        next(err);
+      });
+      function getReduxPromise () {
+        let { query, params } = renderProps;
+        let comp = renderProps.components[renderProps.components.length - 1].WrappedComponent;
+        let promise = comp.fetchData ?
+          comp.fetchData({ query, params, store, history }) :
+          Promise.resolve();
+
+        return promise;
+      }
+    }
+  });
+  function subscribeUrl () {
+    let currentUrl = location.pathname + location.search;
+    let unsubscribe = history.listen((newLoc)=> {
+      if (newLoc.action === 'PUSH') {
+        currentUrl = newLoc.pathname + newLoc.search;
+      }
+    });
+    return [
+      ()=> currentUrl,
+      unsubscribe
+    ];
+  }
+});
+
+server.use((err, req, res, next)=> {
+  console.log(err.stack);
+  // TODO report error here or do some further handlings
+  res.status(500).send("something went wrong...")
+})
+
+console.log(`Server is listening to port: ${port}`);
+server.listen(port);

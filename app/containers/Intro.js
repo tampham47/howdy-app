@@ -1,8 +1,30 @@
+/**
+ * Goingsunny 2016
+ * Tw
+ */
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import mqtt from 'mqtt';
 
 class Intro extends Component {
+
+  componentDidMount() {
+    var client = mqtt.connect('ws://goingsunny.com:5551');
+
+    client.on('connect', function () {
+      console.log('mqtt connected');
+      client.subscribe('goingsunny');
+      client.publish('goingsunny', 'Hello mqtt');
+    });
+
+    client.on('message', function (topic, message) {
+      console.log('mqtt: ' + topic);
+      console.log('mqtt: ' + message.toString());
+    });
+  }
+
   render() {
     return (
       <div className="relm">
@@ -19,74 +41,6 @@ class Intro extends Component {
             <li className="left-menu-room-item">
               <div className="left-menu-room-item-icon"></div>
               <h3 className="left-menu-room-item-name">lorem/ipsum</h3>
-            </li>
-            <li className="left-menu-room-item">
-              <div className="left-menu-room-item-icon"></div>
-              <h3 className="left-menu-room-item-name">lorem/ipsum</h3>
-            </li>
-            <li className="left-menu-room-item">
-              <div className="left-menu-room-item-icon"></div>
-              <h3 className="left-menu-room-item-name">lorem/ipsum</h3>
-            </li>
-            <li className="left-menu-room-item">
-              <div className="left-menu-room-item-icon"></div>
-              <h3 className="left-menu-room-item-name">lorem/ipsum</h3>
-            </li>
-            <li className="left-menu-room-item">
-              <div className="left-menu-room-item-icon"></div>
-              <h3 className="left-menu-room-item-name">nulla-consequat/massa-quis-enim</h3>
-            </li>
-            <li className="left-menu-room-item">
-              <div className="left-menu-room-item-icon"></div>
-              <h3 className="left-menu-room-item-name">quisque/rutrum</h3>
-            </li>
-            <li className="left-menu-room-item">
-              <div className="left-menu-room-item-icon"></div>
-              <h3 className="left-menu-room-item-name">maecenas/tempus</h3>
-            </li>
-            <li className="left-menu-room-item">
-              <div className="left-menu-room-item-icon"></div>
-              <h3 className="left-menu-room-item-name">feugiat/tellus</h3>
-            </li>
-            <li className="left-menu-room-item">
-              <div className="left-menu-room-item-icon"></div>
-              <h3 className="left-menu-room-item-name">donec/sodales</h3>
-            </li>
-            <li className="left-menu-room-item">
-              <div className="left-menu-room-item-icon"></div>
-              <h3 className="left-menu-room-item-name">phasellus-viverra/nulla</h3>
-            </li>
-            <li className="left-menu-room-item">
-              <div className="left-menu-room-item-icon"></div>
-              <h3 className="left-menu-room-item-name">velit/cursus-nunc</h3>
-            </li>
-            <li className="left-menu-room-item">
-              <div className="left-menu-room-item-icon"></div>
-              <h3 className="left-menu-room-item-name">donec/sodales</h3>
-            </li>
-            <li className="left-menu-room-item">
-              <div className="left-menu-room-item-icon"></div>
-              <h3 className="left-menu-room-item-name">phasellus-viverra/nulla</h3>
-            </li>
-            <li className="left-menu-room-item">
-              <div className="left-menu-room-item-icon"></div>
-              <h3 className="left-menu-room-item-name">velit/cursus-nunc</h3>
-            </li>
-            <li className="left-menu-room-item">
-              <div className="left-menu-room-item-icon"></div>
-              <h3 className="left-menu-room-item-name">donec/sodales</h3>
-            </li>
-            <li className="left-menu-room-item">
-              <div className="left-menu-room-item-icon"></div>
-              <h3 className="left-menu-room-item-name">phasellus-viverra/nulla</h3>
-            </li>
-            <li className="left-menu-room-item">
-              <div className="left-menu-room-item-icon"></div>
-              <h3 className="left-menu-room-item-name">velit/cursus-nunc</h3>
-            </li>
-            <li className="left-menu-room-item">
-              <div className="left-menu-room-item-icon"></div>
-              <h3 className="left-menu-room-item-name">leo-eget/bibendum</h3>
             </li>
           </ul>
         </nav>
