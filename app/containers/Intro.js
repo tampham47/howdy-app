@@ -7,14 +7,26 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import mqtt from 'mqtt';
+var client = mqtt.connect('ws://goingsunny.com:5551');
 
 class Intro extends Component {
 
-  componentDidMount() {
-    var client = mqtt.connect('ws://goingsunny.com:5551');
+  constructor(props) {
+    super(props);
+    this.state = {
+      messageList: [
+        {content: 'Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.'},
+        {content: 'Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.'},
+        {content: 'Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.'},
+        {content: 'Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.'},
+        {content: 'Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.'},
+      ],
+      inputMessage: ''
+    };
+  }
 
+  componentDidMount() {
     client.on('connect', function () {
-      console.log('mqtt connected');
       client.subscribe('goingsunny');
       client.publish('goingsunny', 'Hello mqtt');
     });
@@ -22,6 +34,33 @@ class Intro extends Component {
     client.on('message', function (topic, message) {
       console.log('mqtt: ' + topic);
       console.log('mqtt: ' + message.toString());
+
+      var messageList = this.state.messageList;
+      messageList.push({
+        content: message.toString()
+      });
+
+      this.setState({
+        messageList: messageList
+      });
+    }.bind(this));
+  }
+
+  handleKeyPress(e) {
+    if (e.charCode === 13) {
+      e.stopPropagation();
+      e.preventDefault();
+
+      client.publish('goingsunny', this.state.inputMessage);
+      this.setState({
+        inputMessage: ''
+      });
+    }
+  }
+
+  handleChange(e) {
+    this.setState({
+      inputMessage: e.target.value
     });
   }
 
@@ -62,79 +101,31 @@ class Intro extends Component {
           <div className="main-content">
             <div className="main-content__scroller">
               <div className="message-list">
-                <div className="message-item">
-                  <div className="message-item__icon"></div>
-                  <div className="message-item__wrapper">
-                    <div className="message-item__title">
-                      <span className="message-item__title__name">Gerasimos Maropoulos</span>
-                      <small className="message-item__title__username">@kataras</small>
-                      <small className="message-item__title__time">Jul 03 19:46</small>
+                {this.state.messageList.map(function(item, index) {
+                  return (
+                    <div className="message-item" key={index}>
+                      <div className="message-item__icon"></div>
+                      <div className="message-item__wrapper">
+                        <div className="message-item__title">
+                          <span className="message-item__title__name">Gerasimos Maropoulos</span>
+                          <small className="message-item__title__username">@kataras</small>
+                          <small className="message-item__title__time">Jul 03 19:46</small>
+                        </div>
+                        <p>{item.content}</p>
+                      </div>
                     </div>
-                    <p>Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.</p>
-                  </div>
-                </div>
-                <div className="message-item">
-                  <div className="message-item__icon"></div>
-                  <div className="message-item__wrapper">
-                    <div className="message-item__title">
-                      <span className="message-item__title__name">Gerasimos Maropoulos</span>
-                      <small className="message-item__title__username">@kataras</small>
-                      <small className="message-item__title__time">Jul 03 19:46</small>
-                    </div>
-                    <p>Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.</p>
-                  </div>
-                </div>
-                <div className="message-item">
-                  <div className="message-item__icon"></div>
-                  <div className="message-item__wrapper">
-                    <div className="message-item__title">
-                      <span className="message-item__title__name">Gerasimos Maropoulos</span>
-                      <small className="message-item__title__username">@kataras</small>
-                      <small className="message-item__title__time">Jul 03 19:46</small>
-                    </div>
-                    <p>Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.</p>
-                  </div>
-                </div>
-                <div className="message-item">
-                  <div className="message-item__icon"></div>
-                  <div className="message-item__wrapper">
-                    <div className="message-item__title">
-                      <span className="message-item__title__name">Gerasimos Maropoulos</span>
-                      <small className="message-item__title__username">@kataras</small>
-                      <small className="message-item__title__time">Jul 03 19:46</small>
-                    </div>
-                    <p>Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.</p>
-                  </div>
-                </div>
-                <div className="message-item">
-                  <div className="message-item__icon"></div>
-                  <div className="message-item__wrapper">
-                    <div className="message-item__title">
-                      <span className="message-item__title__name">Gerasimos Maropoulos</span>
-                      <small className="message-item__title__username">@kataras</small>
-                      <small className="message-item__title__time">Jul 03 19:46</small>
-                    </div>
-                    <p>Thuở còn thơ ngày 3 cữ là thường, tôi lai rai qua từng chai lớn nhỏ, ai bảo say sưa là khổ, tôi mơ màng nghe men vút lên cao</p>
-                  </div>
-                </div>
-                <div className="message-item">
-                  <div className="message-item__icon"></div>
-                  <div className="message-item__wrapper">
-                    <div className="message-item__title">
-                      <span className="message-item__title__name">Gerasimos Maropoulos</span>
-                      <small className="message-item__title__username">@kataras</small>
-                      <small className="message-item__title__time">Jul 03 19:46</small>
-                    </div>
-                    <p>Nhớ những ngày say sỉn té ở cầu ao, vợ bắt được chưa mắng câu nào đã khóc.</p>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             </div>
             <div className="input-area">
               <div className="input-area__wrapper">
                 <div className="input-area__icon"></div>
                 <div className="input-area__content-wrapper">
-                  <textarea name="" id="" cols="30" rows="10" placeholder="Click here to type chat message"></textarea>
+                  <textarea name="" id="" cols="30" rows="10" placeholder="Click here to type chat message"
+                    value={this.state.inputMessage}
+                    onKeyPress={this.handleKeyPress.bind(this)}
+                    onChange={this.handleChange.bind(this)}></textarea>
                 </div>
               </div>
             </div>
