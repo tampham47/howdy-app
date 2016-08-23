@@ -13,7 +13,7 @@
 				"followSymlinks": false
 			},
 			"env": {
-				"NODE_ENV": "development",
+				"NODE_ENV": "production",
 				"LOG": 1,
 				"PORT": 5500,
 				"NODE_PATH": "./app",
