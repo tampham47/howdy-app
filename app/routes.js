@@ -12,12 +12,14 @@ import App from 'containers/App';
 import Intro from 'containers/Intro';
 import Questions from 'containers/Questions';
 import Question from 'containers/Question';
+import Login from 'containers/Login';
 
 export default function(history) {
   return (
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={Intro} />
+        <Route path="login" component={Login} />
         <Route path="questions" component={Questions} />
         <Route path="questions/:id" component={Question} />
       </Route>

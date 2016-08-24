@@ -84,6 +84,10 @@ class Intro extends Component {
               <div className="left-menu-room-item-icon"></div>
               <h3 className="left-menu-room-item-name">Tiếng anh thật dễ</h3>
             </li>
+            <li className="left-menu-room-item">
+              <div className="left-menu-room-item-icon"></div>
+              <Link to={'login'} className="left-menu-room-item-name">Login</Link>
+            </li>
           </ul>
 
           <button className="left-menu__new-room-btn button-primary">Add a chanel</button>
