@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import mqtt from 'mqtt';
 var client = mqtt.connect('ws://goingsunny.com:5551');
+// var client = mqtt.connect('ws://broker.goingsunny.com');
 
 class Intro extends Component {
 
@@ -82,6 +83,8 @@ class Intro extends Component {
               <h3 className="left-menu-room-item-name">lorem/ipsum</h3>
             </li>
           </ul>
+
+          <button className="left-menu__new-room-btn button-primary">Add a chanel</button>
         </nav>
 
         <main className="main-area">

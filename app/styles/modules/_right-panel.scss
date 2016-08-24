@@ -1,0 +1,35 @@
+/**
+ * gsun2016
+ * tw
+ */
+
+
+.room-panel {
+  flex: 1;
+  background-color: lighten(whitesmoke, 2%);
+  height: 100%;
+  padding-top: $header-h;
+
+  &__wrapper {
+    padding: 0.5*$gutter;
+
+    h6 {
+      margin-bottom: 0.5*$gutter;
+      font-size: 1.8rem;
+    }
+  }
+}
+
+.people-list {}
+
+.people-item {
+  $icon-w: 35px;
+  display: inline-block;
+  width: $icon-w;
+  height: $icon-w;
+  background-color: pink;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-right: 10px;
+  margin-bottom: 2px;
+}
