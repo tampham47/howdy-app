@@ -1,3 +1,8 @@
+/**
+ * gsun2016
+ * Tw
+ */
+
 import superAgent from 'superagent'
 import Promise, { using } from 'bluebird'
 import _ from 'lodash'
