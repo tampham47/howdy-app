@@ -5,13 +5,14 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 // import { loadLoginDetail } from 'actions/Logins';
 
 class Login extends Component {
-  static fetchData({ store, params }) {
-    // let { id } = params
-    // return store.dispatch(loadLoginDetail({ id }))
-  }
+  // static fetchData({ store, params }) {
+  //   let { id } = params
+  //   return store.dispatch(loadLoginDetail({ id }))
+  // }
 
   componentDidMount() {
     // let { id } = this.props.params;
@@ -25,9 +26,9 @@ class Login extends Component {
       <div className="goingmerry-bg">
         <div className="middle-wrapper">
           <h3 className="login-title">Login by</h3>
-          <button className="button-primary">Continue with Facebook</button>
-          <button className="">Continue with Google</button>
-          <button className="">Continue with Twitter</button>
+          <Link to='/' className="button button-primary">Continue with Facebook</Link>
+          <Link to='/' className="button">Continue with Google</Link>
+          <Link to='/' className="button">Continue with Twitter</Link>
           <small>* we don't post any thing on your network</small>
         </div>
       </div>
