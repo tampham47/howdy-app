@@ -1,0 +1,10 @@
+/**
+ * gsun2016
+ * tw
+ */
+
+import mqtt from 'mqtt';
+var client = mqtt.connect('ws://goingsunny.com:5551');
+// var client = mqtt.connect('ws://broker.goingsunny.com');
+
+export default client;

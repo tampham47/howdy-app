@@ -6,9 +6,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import mqtt from 'mqtt';
-var client = mqtt.connect('ws://goingsunny.com:5551');
-// var client = mqtt.connect('ws://broker.goingsunny.com');
+import client from 'libs/mqtt';
 
 class Intro extends Component {
 
@@ -16,11 +14,11 @@ class Intro extends Component {
     super(props);
     this.state = {
       messageList: [
-        {content: 'Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.'},
-        {content: 'Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.'},
-        {content: 'Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.'},
-        {content: 'Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.'},
-        {content: 'Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.'},
+        // {content: 'Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.'},
+        // {content: 'Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.'},
+        // {content: 'Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.'},
+        // {content: 'Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.'},
+        // {content: 'Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.'},
       ],
       inputMessage: ''
     };
@@ -44,6 +42,10 @@ class Intro extends Component {
       this.setState({
         messageList: messageList
       });
+
+      // scroll to newest message
+      var scroller = document.getElementById('content-scroller');
+      scroller.scrollTop = scroller.scrollHeight;
     }.bind(this));
   }
 
@@ -76,11 +78,11 @@ class Intro extends Component {
             </li>
             <li className="left-menu-room-item">
               <div className="left-menu-room-item-icon"></div>
-              <h3 className="left-menu-room-item-name">lorem/ipsum</h3>
+              <h3 className="left-menu-room-item-name">English Town</h3>
             </li>
             <li className="left-menu-room-item">
               <div className="left-menu-room-item-icon"></div>
-              <h3 className="left-menu-room-item-name">lorem/ipsum</h3>
+              <h3 className="left-menu-room-item-name">Tiếng anh thật dễ</h3>
             </li>
           </ul>
 
@@ -102,7 +104,7 @@ class Intro extends Component {
           </div>
 
           <div className="main-content">
-            <div className="main-content__scroller">
+            <div id='content-scroller' className="main-content__scroller">
               <div className="message-list">
                 {this.state.messageList.map(function(item, index) {
                   return (
