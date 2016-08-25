@@ -6,20 +6,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import client from 'libs/mqtt';
+import client from 'middleware/mqtt';
 
 class Intro extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      messageList: [
-        // {content: 'Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.'},
-        // {content: 'Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.'},
-        // {content: 'Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.'},
-        // {content: 'Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.'},
-        // {content: 'Showing off the power of `background-attachment: fixed` and a nice trick when you have a known constant location.'},
-      ],
+      messageList: [],
       inputMessage: ''
     };
   }
