@@ -110,6 +110,7 @@ server.get('*', (req, res, next)=> {
       }
     }
   });
+
   function subscribeUrl () {
     let currentUrl = location.pathname + location.search;
     let unsubscribe = history.listen((newLoc)=> {

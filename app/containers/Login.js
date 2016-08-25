@@ -26,7 +26,7 @@ class Login extends Component {
       <div className="goingmerry-bg">
         <div className="middle-wrapper">
           <h3 className="login-title">Login by</h3>
-          <Link to='/' className="button button-primary">Continue with Facebook</Link>
+          <a href='/login/facebook' className="button button-primary">Continue with Facebook</a>
           <Link to='/' className="button">Continue with Google</Link>
           <Link to='/' className="button">Continue with Twitter</Link>
           <small>* we don't post any thing on your network</small>

@@ -1,3 +1,7 @@
+/**
+ *
+ */
+
 import { CALL_API, CHAIN_API } from 'middleware/api'
 
 export const LOADED_QUESTIONS = Symbol('LOADED_QUESTIONS')
