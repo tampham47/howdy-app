@@ -9,15 +9,13 @@ import path from 'path';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { useRouterHistory, RouterContext, match } from 'react-router';
-
 import { createMemoryHistory, useQueries } from 'history';
 import compression from 'compression';
 import Promise from 'bluebird';
-
 import configureStore from 'store/configureStore';
 import createRoutes from 'routes';
-
 import { Provider } from 'react-redux';
+import ppfacebook from './passport-fb';
 
 let server = new Express();
 let port = process.env.PORT || 3000;
@@ -47,6 +45,8 @@ server.use(compression());
 server.use(Express.static(path.join(__dirname, '../..', 'dist')));
 server.set('views', path.join(__dirname, 'views'));
 server.set('view engine', 'ejs');
+//import passport facebook
+ppfacebook(server);
 
 // mock apis
 server.get('/api/questions', (req, res)=> {
