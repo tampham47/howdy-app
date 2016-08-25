@@ -13,6 +13,7 @@ import Intro from 'containers/Intro';
 import Questions from 'containers/Questions';
 import Question from 'containers/Question';
 import Login from 'containers/Login';
+import Explore from 'containers/Explore';
 
 export default function(history) {
   return (
@@ -20,6 +21,7 @@ export default function(history) {
       <Route path="/" component={App}>
         <IndexRoute component={Intro} />
         <Route path="login" component={Login} />
+        <Route path="explore" component={Explore} />
         <Route path="questions" component={Questions} />
         <Route path="questions/:id" component={Question} />
       </Route>

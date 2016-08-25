@@ -7,6 +7,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import client from 'middleware/mqtt';
+import LeftMenu from 'components/LeftMenu';
+import HeaderBar from 'components/HeaderBar';
 
 class Intro extends Component {
 
@@ -64,42 +66,10 @@ class Intro extends Component {
   render() {
     return (
       <div className="relm">
-        <nav className="left-menu">
-          <ul className="left-menu-room-list">
-            <li className="left-menu-room-item">
-              <div className="left-menu-room-item-icon"></div>
-              <h3 className="left-menu-room-item-name">Goingsunny</h3>
-            </li>
-            <li className="left-menu-room-item">
-              <div className="left-menu-room-item-icon"></div>
-              <h3 className="left-menu-room-item-name">English Town</h3>
-            </li>
-            <li className="left-menu-room-item">
-              <div className="left-menu-room-item-icon"></div>
-              <h3 className="left-menu-room-item-name">Tiếng anh thật dễ</h3>
-            </li>
-            <li className="left-menu-room-item">
-              <div className="left-menu-room-item-icon"></div>
-              <Link to={'login'} className="left-menu-room-item-name">Login</Link>
-            </li>
-          </ul>
-
-          <button className="left-menu__new-room-btn button-primary">Add a chanel</button>
-        </nav>
+        <LeftMenu/>
 
         <main className="main-area">
-          <div className="header-bar">
-            <h1 className="header-bar__title">
-              <span className="header-bar__icon"></span>
-              goingsunny
-            </h1>
-            <div className="header-bar__control-wrapper">
-              <a href=""><i className="fa fa-star-o"></i></a>
-              <a href=""><i className="fa fa-cog"></i></a>
-              <a href=""><i className="fa fa-send-o"></i></a>
-              <a href=""><i className="fa fa-toggle-left"></i></a>
-            </div>
-          </div>
+          <HeaderBar/>
 
           <div className="main-content">
             <div id='content-scroller' className="main-content__scroller">
