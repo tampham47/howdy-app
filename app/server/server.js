@@ -62,6 +62,16 @@ server.get('/api/questions/:id', (req, res)=> {
   let { getQuestion } = require('./mock_api')
   res.send(getQuestion(req.params.id))
 })
+server.get('/api/u', (req, res)=> {
+  res.send({
+    username: 'doffy_server',
+    fullName: 'Tam Pham',
+    avatar: 'https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/537508_521071031251049_436179873_n.jpg?oh=aff4fd347f12ffd1bc41ac6d8a91d33b&oe=5858F41B',
+    gender: 'male',
+    id: '1283617604996384',
+    email: 'tampham47@live.com'
+  });
+})
 
 server.get('*', (req, res, next)=> {
   let history = useRouterHistory(useQueries(createMemoryHistory))();

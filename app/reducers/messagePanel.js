@@ -5,7 +5,12 @@
 import * as ActionType from 'actions/message-panel';
 import Immutable from 'immutable';
 
-let defaultState = Immutable.fromJS([])
+let defaultState = Immutable.fromJS({
+  user: {
+    name: 'doffy'
+  }
+});
+
 function messagePanelReducer (state = defaultState, action) {
   switch(action.type) {
     case ActionType.LOADED_PROFILE:

@@ -10,7 +10,7 @@ export function loadProfile() {
   return {
     [CALL_API]: {
       method: 'get',
-      path: '/api/profile',
+      path: '/api/u',
       successType: LOADED_PROFILE
     }
   }

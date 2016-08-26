@@ -3,7 +3,7 @@
  * Tw
  */
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import client from 'middleware/mqtt';
@@ -26,7 +26,8 @@ class MessagePanel extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount', this.props.user);
+    this.props.loadProfile();
+    console.log('componentDidMount', this.props.user.get('name'));
 
     client.on('connect', function () {
       client.subscribe('goingsunny');
@@ -84,18 +85,20 @@ class MessagePanel extends Component {
                 {this.state.messageList.map(function(item, index) {
                   return (
                     <div className="message-item" key={index}>
-                      <div className="message-item__icon"></div>
+                      <div className="message-item__icon">
+                        <img src={this.props.user.get('avatar')} alt=""/>
+                      </div>
                       <div className="message-item__wrapper">
                         <div className="message-item__title">
-                          <span className="message-item__title__name">Gerasimos Maropoulos</span>
-                          <small className="message-item__title__username">@kataras</small>
+                          <span className="message-item__title__name">{this.props.user.get('fullName')}</span>
+                          <small className="message-item__title__username">{`@${this.props.user.get('username')}`}</small>
                           <small className="message-item__title__time">Jul 03 19:46</small>
                         </div>
                         <p>{item.content}</p>
                       </div>
                     </div>
                   );
-                })}
+                }.bind(this))}
               </div>
             </div>
             <div className="input-area">
@@ -141,5 +144,10 @@ function mapStateToProps(state) {
     user: state.messagePanel
   };
 }
+
+MessagePanel.propTypes = {
+  user: PropTypes.object.isRequired
+}
+
 export { MessagePanel };
-export default connect(mapStateToProps)(MessagePanel);
+export default connect(mapStateToProps, { loadProfile })(MessagePanel);
