@@ -88,7 +88,9 @@ server.get('*', (req, res, next)=> {
   if (req.isAuthenticated && req.isAuthenticated()) {
     initialState.authUser = req.user;
     initialState.authUser.avatar = req.user.photos[0].value;
+    initialState.authUser.isAuthenticated = true;
   }
+
   let history = useRouterHistory(useQueries(createMemoryHistory))();
   let store = configureStore(initialState);
   let routes = createRoutes(history);

@@ -35,6 +35,10 @@ class LeftMenu extends Component {
             <div className="left-menu-room-item-icon"></div>
             <Link to='/' className="left-menu-room-item-name">Main</Link>
           </li>
+          <li className="left-menu-room-item">
+            <div className="left-menu-room-item-icon"></div>
+            <Link to='/chanel' className="left-menu-room-item-name">Goto Chanel</Link>
+          </li>
         </ul>
 
         <button className="left-menu__new-room-btn button-primary">Add a chanel</button>
