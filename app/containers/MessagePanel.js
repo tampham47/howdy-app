@@ -34,8 +34,10 @@ class MessagePanel extends Component {
 
     client.on('connect', function () {
       var data = JSON.stringify({
-        content: 'Hello mqtt',
-        authUser: {}
+        content: 'Welcome to goingsunny',
+        authUser: {
+          displayName: 'Gsbot'
+        }
       })
       client.subscribe('goingsunny');
       client.publish('goingsunny', data);

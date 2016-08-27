@@ -16,6 +16,11 @@ import Question from 'containers/Question';
 import Login from 'containers/Login';
 import Explore from 'containers/Explore';
 
+
+var onAuth = function() {
+
+};
+
 export default function(history) {
   return (
     <Router history={history}>
