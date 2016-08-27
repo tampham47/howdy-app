@@ -66,6 +66,10 @@ class MessagePanel extends Component {
       e.stopPropagation();
       e.preventDefault();
 
+      if (this.state.inputMessage.trim() === '')  {
+        return;
+      }
+
       var data = JSON.stringify({
         content: this.state.inputMessage,
         authUser: this.state.authUser
