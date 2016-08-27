@@ -6,11 +6,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import client from 'middleware/mqtt';
 import LeftMenu from 'components/LeftMenu';
 import HeaderBar from 'components/HeaderBar';
 import { loadProfile } from 'actions/message-panel';
 import * as ActionType from 'actions/chanels';
+import client from 'middleware/mqtt';
 
 class MessagePanel extends Component {
 
