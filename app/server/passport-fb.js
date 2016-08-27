@@ -16,7 +16,8 @@ passport.use(new Strategy({
   clientID: '1391679424181926',
   clientSecret: 'b5106f229d82bad60a493de18dc4473b',
   callbackURL: 'http://localhost:3000/login/facebook/return',
-  profileFields: ['id', 'displayName', 'name', 'gender', 'photos', 'email']
+  // scope: [ 'email', 'basic_info', 'user_photos'],
+  profileFields: ['id', 'displayName', 'name', 'gender', 'photos', 'email', 'link']
 },
 function(accessToken, refreshToken, profile, cb) {
   // In this example, the user's Facebook profile is supplied as the user
@@ -24,7 +25,7 @@ function(accessToken, refreshToken, profile, cb) {
   // be associated with a user record in the application's database, which
   // allows for account linking and authentication with other identity
   // providers.
-  console.log(`profile ${accessToken} : ${refreshToken} : ${profile}`);
+  console.log(`>>PROFILE ${accessToken} : ${refreshToken} : ${profile}`);
   return cb(null, profile);
 }));
 

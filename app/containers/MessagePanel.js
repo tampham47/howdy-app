@@ -13,35 +13,41 @@ import { loadProfile } from 'actions/message-panel';
 
 class MessagePanel extends Component {
 
-  static fetchData({ store, params }) {
-    return store.dispatch(loadProfile());
-  }
+  // static fetchData({ store, params }) {
+  //   return store.dispatch(loadProfile());
+  // }
 
   constructor(props) {
     super(props);
+
     this.state = {
       messageList: [],
-      inputMessage: ''
+      inputMessage: '',
+      authUser: props.authUser
     };
   }
 
   componentDidMount() {
-    this.props.loadProfile();
-    console.log('componentDidMount', this.props.user.get('name'));
+    // console.log('componentDidMount', this.props.authUser.get('name'));
+    console.log('componentDidMount', this.props.authUser.get('displayName'));
+    console.log('componentDidMount', this.props.authUser.get('avatar'));
 
     client.on('connect', function () {
+      var data = JSON.stringify({
+        content: 'Hello mqtt',
+        authUser: {}
+      })
       client.subscribe('goingsunny');
-      client.publish('goingsunny', 'Hello mqtt');
+      client.publish('goingsunny', data);
     });
 
     client.on('message', function (topic, message) {
-      console.log('mqtt: ' + topic);
-      console.log('mqtt: ' + message.toString());
+
+      var messageData = JSON.parse(message.toString());
+      console.log('message', messageData);
 
       var messageList = this.state.messageList;
-      messageList.push({
-        content: message.toString()
-      });
+      messageList.push(messageData);
 
       this.setState({
         messageList: messageList
@@ -58,7 +64,12 @@ class MessagePanel extends Component {
       e.stopPropagation();
       e.preventDefault();
 
-      client.publish('goingsunny', this.state.inputMessage);
+      var data = JSON.stringify({
+        content: this.state.inputMessage,
+        authUser: this.state.authUser
+      });
+      client.publish('goingsunny', data);
+
       this.setState({
         inputMessage: ''
       });
@@ -83,15 +94,16 @@ class MessagePanel extends Component {
             <div id='content-scroller' className="main-content__scroller">
               <div className="message-list">
                 {this.state.messageList.map(function(item, index) {
+                  item.authUser = item.authUser || {};
                   return (
                     <div className="message-item" key={index}>
                       <div className="message-item__icon">
-                        <img src={this.props.user.get('avatar')} alt=""/>
+                        <img src={item.authUser.avatar} alt=""/>
                       </div>
                       <div className="message-item__wrapper">
                         <div className="message-item__title">
-                          <span className="message-item__title__name">{this.props.user.get('fullName')}</span>
-                          <small className="message-item__title__username">{`@${this.props.user.get('username')}`}</small>
+                          <span className="message-item__title__name">{item.authUser.displayName}</span>
+                          <small className="message-item__title__username">{`@${item.authUser.displayName}`}</small>
                           <small className="message-item__title__time">Jul 03 19:46</small>
                         </div>
                         <p>{item.content}</p>
@@ -141,12 +153,12 @@ class MessagePanel extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.messagePanel
+    authUser: state.authUser
   };
 }
 
 MessagePanel.propTypes = {
-  user: PropTypes.object.isRequired
+  authUser: PropTypes.object.isRequired
 }
 
 export { MessagePanel };

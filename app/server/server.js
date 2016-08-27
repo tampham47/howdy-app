@@ -48,6 +48,11 @@ server.set('view engine', 'ejs');
 //import passport facebook
 ppfacebook(server);
 
+server.all('*', function(req, res, next) {
+  console.log('HEADER', req.user);
+  next();
+});
+
 // mock apis
 server.get('/api/questions', (req, res)=> {
   let { questions } = require('./mock_api');
@@ -74,8 +79,14 @@ server.get('/api/u', (req, res)=> {
 })
 
 server.get('*', (req, res, next)=> {
+  // incase of authenticated
+  var initialState = {};
+  if (req.isAuthenticated && req.isAuthenticated()) {
+    initialState.authUser = req.user;
+    initialState.authUser.avatar = req.user.photos[0].value;
+  }
   let history = useRouterHistory(useQueries(createMemoryHistory))();
-  let store = configureStore();
+  let store = configureStore(initialState);
   let routes = createRoutes(history);
   let location = history.createLocation(req.url);
 
