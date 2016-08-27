@@ -12,6 +12,7 @@ class QuestionContainer extends Component {
 
   componentDidMount() {
     this.props.loadQuestions()
+    console.log('componentDidMount', this.props.questions);
   }
   render() {
     return (

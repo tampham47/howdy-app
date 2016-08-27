@@ -21,6 +21,10 @@
     border-radius: 4px;
     overflow: hidden;
     left: 30px;
+
+    img {
+      width: 100%;
+    }
   }
 
   &__wrapper {
@@ -28,7 +32,7 @@
     margin-right: $gutter;
 
     p {
-      margin-bottom: $gutter;
+      margin-bottom: 0.5*$gutter;
     }
   }
 

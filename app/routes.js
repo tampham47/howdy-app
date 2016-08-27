@@ -10,16 +10,22 @@ import configureStore from 'store/configureStore';
 
 import App from 'containers/App';
 import Intro from 'containers/Intro';
+import MessagePanel from 'containers/MessagePanel';
 import Questions from 'containers/Questions';
 import Question from 'containers/Question';
 import Login from 'containers/Login';
 import Explore from 'containers/Explore';
 
+
+var onAuth = function() {
+
+};
+
 export default function(history) {
   return (
     <Router history={history}>
       <Route path="/" component={App}>
-        <IndexRoute component={Intro} />
+        <IndexRoute component={MessagePanel} />
         <Route path="login" component={Login} />
         <Route path="explore" component={Explore} />
         <Route path="questions" component={Questions} />
