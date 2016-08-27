@@ -6,10 +6,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import client from 'middleware/mqtt';
 import LeftMenu from 'components/LeftMenu';
 import HeaderBar from 'components/HeaderBar';
 import { loadProfile } from 'actions/message-panel';
+import * as ActionType from 'actions/chanels';
+import client from 'middleware/mqtt';
 
 class MessagePanel extends Component {
 
@@ -21,38 +22,31 @@ class MessagePanel extends Component {
     super(props);
 
     this.state = {
-      messageList: [],
       inputMessage: '',
       authUser: props.authUser
     };
   }
 
   componentDidMount() {
-    // console.log('componentDidMount', this.props.authUser.get('name'));
-    console.log('componentDidMount', this.props.authUser.get('displayName'));
-    console.log('componentDidMount', this.props.authUser.get('avatar'));
 
-    client.on('connect', function () {
+    client.on('connect', function() {
       var data = JSON.stringify({
         content: 'Welcome to goingsunny',
         authUser: {
           displayName: 'Gsbot'
         }
-      })
+      });
+
       client.subscribe('goingsunny');
       client.publish('goingsunny', data);
-    });
+    }.bind(this));
 
     client.on('message', function (topic, message) {
 
       var messageData = JSON.parse(message.toString());
-      console.log('message', messageData);
-
-      var messageList = this.state.messageList;
-      messageList.push(messageData);
-
-      this.setState({
-        messageList: messageList
+      this.props.dispatch({
+        type: ActionType.NEW_MESSAGE,
+        response: messageData
       });
 
       // scroll to newest message
@@ -89,6 +83,11 @@ class MessagePanel extends Component {
   }
 
   render() {
+
+    var chanelData = this.props.chanels.toJS();
+    var currentChanel = chanelData.currentChanel;
+    var messageList = chanelData.messagesInChanel[currentChanel];
+
     return (
       <div className="relm">
         <LeftMenu/>
@@ -99,7 +98,7 @@ class MessagePanel extends Component {
           <div className="main-content">
             <div id='content-scroller' className="main-content__scroller">
               <div className="message-list">
-                {this.state.messageList.map(function(item, index) {
+                {messageList.map(function(item, index) {
                   item.authUser = item.authUser || {};
                   return (
                     <div className="message-item" key={index}>
@@ -159,13 +158,24 @@ class MessagePanel extends Component {
 
 function mapStateToProps(state) {
   return {
-    authUser: state.authUser
+    authUser: state.authUser,
+    currentUser: state.currentUser,
+    chanels: state.chanels,
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+    loadProfile,
+  }
+}
+
 MessagePanel.propTypes = {
-  authUser: PropTypes.object.isRequired
+  authUser: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  chanels: PropTypes.object.isRequired,
 }
 
 export { MessagePanel };
-export default connect(mapStateToProps, { loadProfile })(MessagePanel);
+export default connect(mapStateToProps, mapDispatchToProps)(MessagePanel);
