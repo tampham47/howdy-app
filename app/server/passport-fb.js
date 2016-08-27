@@ -15,7 +15,7 @@ import { Strategy } from 'passport-facebook';
 passport.use(new Strategy({
   clientID: '1391679424181926',
   clientSecret: 'b5106f229d82bad60a493de18dc4473b',
-  callbackURL: 'http://localhost:3000/login/facebook/return',
+  callbackURL: '/login/facebook/return',
   // scope: [ 'email', 'basic_info', 'user_photos'],
   profileFields: ['id', 'displayName', 'name', 'gender', 'photos', 'email', 'link']
 },
