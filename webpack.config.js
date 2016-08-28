@@ -1,6 +1,11 @@
+/**
+ *
+ */
+
 var path = require('path');
 var webpack = require('webpack');
 var AssetsPlugin = require('assets-webpack-plugin');
+var copyWebpackPlugin = require('copy-webpack-plugin');
 
 var DEBUG = !(process.env.NODE_ENV === 'production');
 var env = {
@@ -33,7 +38,8 @@ var config = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': JSON.stringify(env)
-    })
+    }),
+    new copyWebpackPlugin([{ from: 'public' }])
   ],
   module: {
     loaders: [
