@@ -10,7 +10,6 @@ import client from 'middleware/mqtt';
 class App extends Component {
 
   componentDidMount() {
-
     client.on('connect', function() {
       var data = JSON.stringify({
         content: 'Welcome to goingsunny',
@@ -39,6 +38,9 @@ class App extends Component {
   }
 
   render() {
+    // var pData = JSON.parse(JSON.stringify(this.props));
+    // console.log('APP', pData);
+
     return (
       <div className="relm">
         {this.props.children}
@@ -48,7 +50,7 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  return {};
+  return state;
 }
 
 export default connect(mapStateToProps)(App);

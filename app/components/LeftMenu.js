@@ -25,19 +25,11 @@ class LeftMenu extends Component {
           </li>
           <li className="left-menu-room-item">
             <div className="left-menu-room-item-icon"></div>
-            <Link to='login' className="left-menu-room-item-name">Login</Link>
-          </li>
-          <li className="left-menu-room-item">
-            <div className="left-menu-room-item-icon"></div>
-            <Link to='explore' className="left-menu-room-item-name">Explore</Link>
-          </li>
-          <li className="left-menu-room-item">
-            <div className="left-menu-room-item-icon"></div>
             <Link to='/' className="left-menu-room-item-name">Main</Link>
           </li>
           <li className="left-menu-room-item">
             <div className="left-menu-room-item-icon"></div>
-            <Link to='/chanel' className="left-menu-room-item-name">Goto Chanel</Link>
+            <Link to='explore' className="left-menu-room-item-name">Explore</Link>
           </li>
         </ul>
 

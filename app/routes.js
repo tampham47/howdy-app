@@ -22,9 +22,7 @@ export default function(history) {
   return (
     <Router history={history}>
       <Route path="/" component={App}>
-        {<IndexRoute component={Chanels} />}
-        {/*<IndexRoute component={requireAuthentication(Chanels, Login)} />*/}
-        <Route path="chanel" component={requireAuthentication(Chanels, Login)} />
+        <IndexRoute component={requireAuthentication(Chanels, Login)} />
         <Route path="login" component={Login} />
         <Route path="explore" component={Explore} />
         <Route path="questions" component={Questions} />

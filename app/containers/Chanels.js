@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import LeftMenu from 'components/LeftMenu';
 import HeaderBar from 'components/HeaderBar';
-import { loadProfile } from 'actions/message-panel';
 import * as ActionType from 'actions/chanels';
 import client from 'middleware/mqtt';
 
@@ -24,40 +23,12 @@ class MessagePanel extends Component {
 
     this.state = {
       inputMessage: '',
-      authUser: props.authUser
+      authUser: props.authUser,
+      currentUser: props.currentUser,
     };
   }
 
   componentDidMount() {
-    // console.log('componentDidMount ST/ORE', this.props.store);
-    // this.props.subscribe(function(a, b) {
-    //   console.log('subscribe', a, b);
-    // });
-
-    // client.on('connect', function() {
-    //   var data = JSON.stringify({
-    //     content: 'Welcome to goingsunny',
-    //     authUser: {
-    //       displayName: 'Gsbot'
-    //     }
-    //   });
-
-    //   client.subscribe('goingsunny');
-    //   client.publish('goingsunny', data);
-    // }.bind(this));
-
-    // client.on('message', function (topic, message) {
-
-    //   var messageData = JSON.parse(message.toString());
-    //   this.props.dispatch({
-    //     type: ActionType.NEW_MESSAGE,
-    //     response: messageData
-    //   });
-
-    //   // scroll to newest message
-    //   var scroller = document.getElementById('content-scroller');
-    //   scroller.scrollTop = scroller.scrollHeight;
-    // }.bind(this));
   }
 
   handleKeyPress(e) {
@@ -88,6 +59,8 @@ class MessagePanel extends Component {
   }
 
   render() {
+    var propsData = JSON.parse(JSON.stringify(this.props));
+    console.log('propsData', propsData);
 
     var chanelData = this.props.chanels.toJS();
     var currentChanel = chanelData.currentChanel;
@@ -125,7 +98,9 @@ class MessagePanel extends Component {
             </div>
             <div className="input-area">
               <div className="input-area__wrapper">
-                <div className="input-area__icon"></div>
+                <div className="input-area__icon">
+                  {<img src={propsData.currentUser.avatar} alt=""/>}
+                </div>
                 <div className="input-area__content-wrapper">
                   <textarea name="" id="" cols="30" rows="10" placeholder="Click here to type chat message"
                     value={this.state.inputMessage}
@@ -172,7 +147,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    loadProfile,
   }
 }
 

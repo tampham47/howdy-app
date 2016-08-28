@@ -76,6 +76,11 @@
     top: 10px;
     background-color: pink;
     border-radius: 4px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+    }
   }
 
   &__content-wrapper {
