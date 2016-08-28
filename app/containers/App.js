@@ -12,6 +12,7 @@ class App extends Component {
   componentDidMount() {
     client.on('connect', function() {
       var data = JSON.stringify({
+        chanelId: 'goingsunny',
         content: 'Welcome to goingsunny',
         authUser: {
           displayName: 'Gsbot'

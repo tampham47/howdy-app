@@ -14,21 +14,23 @@ import client from 'middleware/mqtt';
 class MessagePanel extends Component {
 
   // static fetchData({ store, params }) {
-  //   return store.dispatch(loadProfile());
+  //   let { chanelId } = params;
+  //   return store.dispatch(loadChanelData({ chanelId }));
   // }
 
   constructor(props) {
-    console.log('props', props);
     super(props);
 
     this.state = {
       inputMessage: '',
-      authUser: props.authUser,
       currentUser: props.currentUser,
     };
   }
 
   componentDidMount() {
+    console.log('componentDidMount chanel');
+    // let { chanelId } = params;
+    // this.props.loadChanelData({ chanelId });
   }
 
   handleKeyPress(e) {
@@ -41,8 +43,9 @@ class MessagePanel extends Component {
       }
 
       var data = JSON.stringify({
+        chanelId: this.props.chanels.get('currentChanel'),
         content: this.state.inputMessage,
-        authUser: this.state.authUser
+        authUser: this.state.currentUser
       });
       client.publish('goingsunny', data);
 
@@ -62,16 +65,16 @@ class MessagePanel extends Component {
     var propsData = JSON.parse(JSON.stringify(this.props));
     console.log('propsData', propsData);
 
-    var chanelData = this.props.chanels.toJS();
+    var chanelData = propsData.chanels;
     var currentChanel = chanelData.currentChanel;
-    var messageList = chanelData.messagesInChanel[currentChanel];
+    var messageList = chanelData.messagesInChanel[currentChanel] || [];
 
     return (
       <div className="relm">
         <LeftMenu/>
 
         <main className="main-area">
-          <HeaderBar/>
+          <HeaderBar title={currentChanel}/>
 
           <div className="main-content">
             <div id='content-scroller' className="main-content__scroller">

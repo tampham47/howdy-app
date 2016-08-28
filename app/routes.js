@@ -11,7 +11,7 @@ import configureStore from 'store/configureStore';
 import requireAuthentication from 'components/Authenticated';
 import App from 'containers/App';
 import Login from 'containers/Login';
-import Chanels from 'containers/Chanels';
+import Chanel from 'containers/Chanel';
 import Explore from 'containers/Explore';
 import Questions from 'containers/Questions';
 import Question from 'containers/Question';
@@ -22,7 +22,8 @@ export default function(history) {
   return (
     <Router history={history}>
       <Route path="/" component={App}>
-        <IndexRoute component={requireAuthentication(Chanels, Login)} />
+        <IndexRoute component={requireAuthentication(Chanel, Login)} />
+        <Route path="chanel/:chanelId" component={requireAuthentication(Chanel, Login)} />
         <Route path="login" component={Login} />
         <Route path="explore" component={Explore} />
         <Route path="questions" component={Questions} />

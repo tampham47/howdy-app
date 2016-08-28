@@ -81,18 +81,14 @@ server.get('/api/u', (req, res)=> {
 server.get('*', (req, res, next)=> {
   // incase of authenticated
   var initialState = {
-    authUser: {
-      displayName: 'Anonymous'
-    },
     currentUser: {
       displayName: 'Anonymous'
     }
   };
   if (req.isAuthenticated && req.isAuthenticated()) {
-    initialState.authUser = req.user;
-    initialState.authUser.avatar = req.user.photos[0].value;
-    initialState.authUser.isAuthenticated = true;
-    initialState.currentUser = initialState.authUser;
+    initialState.currentUser = req.user;
+    initialState.currentUser.avatar = req.user.photos[0].value;
+    initialState.currentUser.isAuthenticated = true;
   }
 
   let history = useRouterHistory(useQueries(createMemoryHistory))();
