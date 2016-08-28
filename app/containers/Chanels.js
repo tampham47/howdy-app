@@ -19,6 +19,7 @@ class MessagePanel extends Component {
   // }
 
   constructor(props) {
+    console.log('props', props);
     super(props);
 
     this.state = {
@@ -28,31 +29,35 @@ class MessagePanel extends Component {
   }
 
   componentDidMount() {
+    // console.log('componentDidMount ST/ORE', this.props.store);
+    // this.props.subscribe(function(a, b) {
+    //   console.log('subscribe', a, b);
+    // });
 
-    client.on('connect', function() {
-      var data = JSON.stringify({
-        content: 'Welcome to goingsunny',
-        authUser: {
-          displayName: 'Gsbot'
-        }
-      });
+    // client.on('connect', function() {
+    //   var data = JSON.stringify({
+    //     content: 'Welcome to goingsunny',
+    //     authUser: {
+    //       displayName: 'Gsbot'
+    //     }
+    //   });
 
-      client.subscribe('goingsunny');
-      client.publish('goingsunny', data);
-    }.bind(this));
+    //   client.subscribe('goingsunny');
+    //   client.publish('goingsunny', data);
+    // }.bind(this));
 
-    client.on('message', function (topic, message) {
+    // client.on('message', function (topic, message) {
 
-      var messageData = JSON.parse(message.toString());
-      this.props.dispatch({
-        type: ActionType.NEW_MESSAGE,
-        response: messageData
-      });
+    //   var messageData = JSON.parse(message.toString());
+    //   this.props.dispatch({
+    //     type: ActionType.NEW_MESSAGE,
+    //     response: messageData
+    //   });
 
-      // scroll to newest message
-      var scroller = document.getElementById('content-scroller');
-      scroller.scrollTop = scroller.scrollHeight;
-    }.bind(this));
+    //   // scroll to newest message
+    //   var scroller = document.getElementById('content-scroller');
+    //   scroller.scrollTop = scroller.scrollHeight;
+    // }.bind(this));
   }
 
   handleKeyPress(e) {
