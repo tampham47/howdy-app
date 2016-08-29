@@ -39,9 +39,6 @@ class App extends Component {
   }
 
   render() {
-    // var pData = JSON.parse(JSON.stringify(this.props));
-    // console.log('APP', pData);
-
     return (
       <div className="relm">
         {this.props.children}

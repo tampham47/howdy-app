@@ -80,11 +80,7 @@ server.get('/api/u', (req, res)=> {
 
 server.get('*', (req, res, next)=> {
   // incase of authenticated
-  var initialState = {
-    currentUser: {
-      displayName: 'Anonymous'
-    }
-  };
+  var initialState = {};
   if (req.isAuthenticated && req.isAuthenticated()) {
     initialState.currentUser = req.user;
     initialState.currentUser.avatar = req.user.photos[0].value;
