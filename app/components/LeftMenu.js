@@ -12,7 +12,7 @@ class LeftMenu extends Component {
 
   handleChanelChange(chanel) {
     this.props.changeChanel({ chanel });
-    this.props.router.push(`/chanel/${chanel}`);
+    this.props.router.push(`/channel/${chanel}`);
   }
 
   render() {

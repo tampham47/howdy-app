@@ -5,21 +5,32 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, withRouter } from 'react-router';
 import LeftMenu from 'components/LeftMenu';
 import HeaderBar from 'components/HeaderBar';
 import * as ActionType from 'actions/chanels';
 import client from 'middleware/mqtt';
+import { changeChanel } from 'actions/chanels';
 
-class MessagePanel extends Component {
+class Chanel extends Component {
 
   // static fetchData({ store, params }) {
-  //   let { chanelId } = params;
-  //   return store.dispatch(loadChanelData({ chanelId }));
+  //   console.log('Chanel fetchData', params.chanelId);
+  //   var { chanelId } = params;
+  //   store.dispatch(changeChanel({ chanel: chanelId }));
+  // }
+
+  // static getDefaultStore({ store, params }) {
+  //   console.log('getDefaultStore');
+  //   var { chanelId } = params;
+  //   store.dispatch(changeChanel({ chanel: chanelId }));
   // }
 
   constructor(props) {
     super(props);
+    var { chanelId } = props.params;
+    props.changeChanel({ chanel: chanelId });
+    console.log('props', props.params.chanelId);
 
     this.state = {
       inputMessage: '',
@@ -28,9 +39,9 @@ class MessagePanel extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount chanel');
-    // let { chanelId } = params;
-    // this.props.loadChanelData({ chanelId });
+    var chanelId = this.props.params.chanelId;
+    this.props.changeChanel({ chanel: chanelId });
+    console.log('componentDidMount chanel', chanelId);
   }
 
   handleKeyPress(e) {
@@ -150,14 +161,17 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    changeChanel,
   }
 }
 
-MessagePanel.propTypes = {
+Chanel.propTypes = {
   authUser: PropTypes.object.isRequired,
   currentUser: PropTypes.object.isRequired,
   chanels: PropTypes.object.isRequired,
 }
 
-export { MessagePanel };
-export default connect(mapStateToProps, mapDispatchToProps)(MessagePanel);
+Chanel.defaultProps = {};
+
+export { Chanel };
+export default connect(mapStateToProps, mapDispatchToProps)(Chanel);

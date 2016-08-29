@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute } from 'react-router';
 import configureStore from 'store/configureStore';
 
-import requireAuthentication from 'components/Authenticated';
+import requireAuthentication from 'containers/Auth';
 import App from 'containers/App';
 import Login from 'containers/Login';
 import Chanel from 'containers/Chanel';
@@ -23,7 +23,7 @@ export default function(history) {
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={requireAuthentication(Chanel, Login)} />
-        <Route path="chanel/:chanelId" component={requireAuthentication(Chanel, Login)} />
+        <Route path="channel/:chanelId" component={requireAuthentication(Chanel, Login)} />
         <Route path="login" component={Login} />
         <Route path="explore" component={Explore} />
         <Route path="questions" component={Questions} />

@@ -4,14 +4,15 @@
 
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
-// import {pushState} from 'redux-router';
+import { changeChanel } from 'actions/chanels';
 
 export default function requireAuthentication(Component, AuthComponent) {
 
-  class AuthenticatedComponent extends React.Component {
+  class Auth extends React.Component {
 
-    componentDidMount() {
-      // console.log('AuthComponent', this.props.authUser.get('isAuthenticated'));
+    static getDefaultStore({ store, params }) {
+      var { chanelId } = params;
+      store.dispatch(changeChanel({ chanel: chanelId }));
     }
 
     // componentWillMount() {
@@ -31,14 +32,12 @@ export default function requireAuthentication(Component, AuthComponent) {
 
     render() {
       var propsData = JSON.parse(JSON.stringify(this.props));
-      console.log('AuthenticatedComponent', propsData);
 
-      return (
-        <div>
-          {propsData.currentUser.isAuthenticated === true ? <Component {...this.props}/> : <AuthComponent {...this.props} />}
-        </div>
-      )
-
+      if (propsData.currentUser.isAuthenticated === true) {
+        return <Component {...this.props}/>
+      } else {
+        return <AuthComponent {...this.props} />
+      }
     }
   }
 
@@ -49,10 +48,17 @@ export default function requireAuthentication(Component, AuthComponent) {
     currentUser: state.currentUser
   });
 
-  AuthenticatedComponent.propTypes = {
+  Auth.propTypes = {
     currentUser: PropTypes.object.isRequired
   }
 
-  return connect(mapStateToProps)(AuthenticatedComponent);
+  function mapDispatchToProps(dispatch) {
+    return {
+      dispatch,
+      changeChanel,
+    }
+  }
+
+  return connect(mapStateToProps, mapDispatchToProps)(Auth);
 
 }

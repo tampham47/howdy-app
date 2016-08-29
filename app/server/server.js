@@ -80,11 +80,7 @@ server.get('/api/u', (req, res)=> {
 
 server.get('*', (req, res, next)=> {
   // incase of authenticated
-  var initialState = {
-    currentUser: {
-      displayName: 'Anonymous'
-    }
-  };
+  var initialState = {};
   if (req.isAuthenticated && req.isAuthenticated()) {
     initialState.currentUser = req.user;
     initialState.currentUser.avatar = req.user.photos[0].value;
@@ -126,12 +122,15 @@ server.get('*', (req, res, next)=> {
         unsubscribe();
         next(err);
       });
-      function getReduxPromise () {
+
+      function getReduxPromise() {
         let { query, params } = renderProps;
         let comp = renderProps.components[renderProps.components.length - 1].WrappedComponent;
-        let promise = comp.fetchData ?
-          comp.fetchData({ query, params, store, history }) :
-          Promise.resolve();
+        let promise = comp.fetchData ? comp.fetchData({ query, params, store, history }) : Promise.resolve();
+
+        if (comp.getDefaultStore) {
+          comp.getDefaultStore({query, params, store, history});
+        }
 
         return promise;
       }
