@@ -9,11 +9,7 @@ import _ from 'lodash';
 let defaultState = Immutable.fromJS({
   currentChanel: 'goingsunny',
   chanelList: [],
-  messagesInChanel: {
-    goingsunny: [],
-    englishtown: [],
-    englisheasy: []
-  }
+  messagesInChanel: {}
 });
 
 function chanelsReducer(state = defaultState, action) {
@@ -24,15 +20,12 @@ function chanelsReducer(state = defaultState, action) {
     case ActionType.CHANEL_LOADED:
       break;
     case ActionType.NEW_MESSAGE:
-      console.log('NEW_MESSAGE', action.response);
       var chanelId = action.response.chanelId;
       var messageList = state.getIn(['messagesInChanel', chanelId]);
-      console.log('NEW_MESSAGE', typeof messageList);
-      if (typeof messageList !== 'undefined') {
-        return state.updateIn(['messagesInChanel', chanelId], list => list.push(action.response));
-      } else {
-        return state.setIn(['messagesInChanel', chanelId], [action.response]);
+      if (typeof messageList == `undefined`) {
+        state = state.setIn(['messagesInChanel', chanelId], Immutable.List.of());
       }
+      return state.updateIn(['messagesInChanel', chanelId], list => list.push(action.response));
       break;
     default:
       return state;
