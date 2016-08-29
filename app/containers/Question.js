@@ -8,6 +8,7 @@ import { loadQuestionDetail } from 'actions/questions'
 
 class Question extends Component {
   static fetchData({ store, params }) {
+    console.log('fetchData Question');
     let { id } = params
     return store.dispatch(loadQuestionDetail({ id }))
   }

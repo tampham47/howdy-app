@@ -126,12 +126,15 @@ server.get('*', (req, res, next)=> {
         unsubscribe();
         next(err);
       });
-      function getReduxPromise () {
+
+      function getReduxPromise() {
         let { query, params } = renderProps;
         let comp = renderProps.components[renderProps.components.length - 1].WrappedComponent;
-        let promise = comp.fetchData ?
-          comp.fetchData({ query, params, store, history }) :
-          Promise.resolve();
+        let promise = comp.fetchData ? comp.fetchData({ query, params, store, history }) : Promise.resolve();
+
+        if (comp.getDefaultStore) {
+          comp.getDefaultStore({query, params, store, history});
+        }
 
         return promise;
       }

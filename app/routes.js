@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute } from 'react-router';
 import configureStore from 'store/configureStore';
 
-import requireAuthentication from 'components/Authenticated';
+import requireAuthentication from 'containers/Auth';
 import App from 'containers/App';
 import Login from 'containers/Login';
 import Chanel from 'containers/Chanel';
