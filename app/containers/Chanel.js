@@ -10,28 +10,16 @@ import LeftMenu from 'components/LeftMenu';
 import HeaderBar from 'components/HeaderBar';
 import * as ActionType from 'actions/chanels';
 import client from 'middleware/mqtt';
-import { changeChanel } from 'actions/chanels';
+import { changeChanel, loadChannels } from 'actions/chanels';
 
 class Chanel extends Component {
 
   // static fetchData({ store, params }) {
-  //   console.log('Chanel fetchData', params.chanelId);
-  //   var { chanelId } = params;
-  //   store.dispatch(changeChanel({ chanel: chanelId }));
-  // }
-
-  // static getDefaultStore({ store, params }) {
-  //   console.log('getDefaultStore');
-  //   var { chanelId } = params;
-  //   store.dispatch(changeChanel({ chanel: chanelId }));
+  //   store.dispatch(loadChannels());
   // }
 
   constructor(props) {
     super(props);
-    var { chanelId } = props.params;
-    props.changeChanel({ chanel: chanelId });
-    console.log('props', props.params.chanelId);
-
     this.state = {
       inputMessage: '',
       currentUser: props.currentUser,
@@ -39,9 +27,9 @@ class Chanel extends Component {
   }
 
   componentDidMount() {
-    var chanelId = this.props.params.chanelId;
-    this.props.changeChanel({ chanel: chanelId });
-    console.log('componentDidMount chanel', chanelId);
+    // var chanelId = this.props.params.chanelId;
+    // this.props.changeChanel({ chanel: chanelId });
+    // this.props.loadChannels();
   }
 
   handleKeyPress(e) {
@@ -82,10 +70,10 @@ class Chanel extends Component {
 
     return (
       <div className="relm">
-        <LeftMenu/>
+        <LeftMenu chanelList={chanelData.chanelList} />
 
         <main className="main-area">
-          <HeaderBar title={currentChanel}/>
+          <HeaderBar title={currentChanel} />
 
           <div className="main-content">
             <div id='content-scroller' className="main-content__scroller">
@@ -155,6 +143,7 @@ function mapStateToProps(state) {
     authUser: state.authUser,
     currentUser: state.currentUser,
     chanels: state.chanels,
+    chanelList: state.chanels.chanelList,
   };
 }
 
@@ -162,6 +151,7 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatch,
     changeChanel,
+    loadChannels
   }
 }
 

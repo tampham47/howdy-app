@@ -60,6 +60,7 @@ function createRequestPromise (apiActionCreator, next, getState, dispatch) {
       .send(params.body)
       .query(params.query)
       .end((err, res)=> {
+        console.log('superagent', err, res);
         if (err) {
           if ( params.errorType ) {
             dispatch(actionWith(apiAction, {

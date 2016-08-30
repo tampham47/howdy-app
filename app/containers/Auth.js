@@ -4,11 +4,16 @@
 
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
-import { changeChanel } from 'actions/chanels';
+import { changeChanel, loadChannels } from 'actions/chanels';
 
 export default function requireAuthentication(Component, AuthComponent) {
 
   class Auth extends React.Component {
+
+    static fetchData({ store, params }) {
+      console.log('fetchData');
+      return store.dispatch(loadChannels());
+    }
 
     static getDefaultStore({ store, params }) {
       var { chanelId } = params;
@@ -56,6 +61,7 @@ export default function requireAuthentication(Component, AuthComponent) {
     return {
       dispatch,
       changeChanel,
+      loadChannels
     }
   }
 

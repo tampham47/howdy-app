@@ -17,7 +17,8 @@ function chanelsReducer(state = defaultState, action) {
     case ActionType.CHANEL_CHANGED:
       return state.setIn(['currentChanel'], action.response.chanel);
       break;
-    case ActionType.CHANEL_LOADED:
+    case ActionType.CHANNEL_LOADED:
+      return state.setIn(['chanelList'], Immutable.fromJS(action.response));
       break;
     case ActionType.NEW_MESSAGE:
       var chanelId = action.response.chanelId;
