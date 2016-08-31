@@ -4,7 +4,7 @@
 
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
-import { changeChanel, loadChannels } from 'actions/chanels';
+import { changeChanel, loadChannels, loadMessageByChannel } from 'actions/chanels';
 
 export default function requireAuthentication(Component, AuthComponent) {
 
@@ -12,12 +12,16 @@ export default function requireAuthentication(Component, AuthComponent) {
 
     static fetchData({ store, params }) {
       console.log('fetchData');
-      return store.dispatch(loadChannels());
+      return store.dispatch(loadMessageByChannel(''));
     }
 
     static getDefaultStore({ store, params }) {
       var { chanelId } = params;
       store.dispatch(changeChanel({ chanel: chanelId || 'goingsunny' }));
+    }
+
+    componentDidMount() {
+      this.props.loadMessageByChannel('');
     }
 
     // componentWillMount() {
@@ -61,7 +65,8 @@ export default function requireAuthentication(Component, AuthComponent) {
     return {
       dispatch,
       changeChanel,
-      loadChannels
+      loadChannels,
+      loadMessageByChannel
     }
   }
 

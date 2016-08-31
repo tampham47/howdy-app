@@ -3,6 +3,7 @@
  * Tw
  */
 
+import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router';
@@ -10,13 +11,14 @@ import LeftMenu from 'components/LeftMenu';
 import HeaderBar from 'components/HeaderBar';
 import * as ActionType from 'actions/chanels';
 import client from 'middleware/mqtt';
-import { changeChanel, loadChannels } from 'actions/chanels';
+import { changeChanel, loadChannels, loadMessageByChannel } from 'actions/chanels';
 
 class Chanel extends Component {
 
-  // static fetchData({ store, params }) {
-  //   store.dispatch(loadChannels());
-  // }
+  static fetchData({ store, params }) {
+    var channelUrl = params.chanelUrl || 'goingsunny';
+    store.dispatch(loadMessageByChannel(channelUrl));
+  }
 
   constructor(props) {
     super(props);
@@ -27,6 +29,10 @@ class Chanel extends Component {
   }
 
   componentDidMount() {
+    console.log('Channel.componentDidMount');
+    var channelUrl = this.props.params.chanelUrl || 'goingsunny';
+    this.props.loadMessageByChannel(channelUrl);
+
     // var chanelId = this.props.params.chanelId;
     // this.props.changeChanel({ chanel: chanelId });
     // this.props.loadChannels();
@@ -42,9 +48,11 @@ class Chanel extends Component {
       }
 
       var data = JSON.stringify({
+        isManual: true,
         chanelId: this.props.chanels.get('currentChanel'),
         content: this.state.inputMessage,
-        authUser: this.state.currentUser
+        authUser: this.state.currentUser,
+        channelUrl: this.props.chanels.get('currentChanel')
       });
       client.publish('goingsunny', data);
 
@@ -60,13 +68,20 @@ class Chanel extends Component {
     });
   }
 
+  filterMessageByChannel(arr, channelUrl) {
+    return _.filter(arr, { channelUrl: channelUrl });
+  }
+
   render() {
+    var channelUrl = this.props.params.channelUrl || 'goingsunny';
     var propsData = JSON.parse(JSON.stringify(this.props));
     console.log('propsData', propsData);
+    console.log('messages', this.props.messages.toJS());
 
     var chanelData = propsData.chanels;
     var currentChanel = chanelData.currentChanel;
-    var messageList = chanelData.messagesInChanel[currentChanel] || [];
+    // var messageList = chanelData.messagesInChanel[currentChanel] || [];
+    var messageList = this.filterMessageByChannel(this.props.messages.toJS(), channelUrl);
 
     return (
       <div className="relm">
@@ -144,6 +159,7 @@ function mapStateToProps(state) {
     currentUser: state.currentUser,
     chanels: state.chanels,
     chanelList: state.chanels.chanelList,
+    messages: state.messages
   };
 }
 
@@ -151,7 +167,8 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatch,
     changeChanel,
-    loadChannels
+    loadChannels,
+    loadMessageByChannel
   }
 }
 

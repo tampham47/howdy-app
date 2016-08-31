@@ -23,7 +23,7 @@ export default function(history) {
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={requireAuthentication(Chanel, Login)} />
-        <Route path="channel/:chanelId" component={requireAuthentication(Chanel, Login)} />
+        <Route path="channel/:channelUrl" component={requireAuthentication(Chanel, Login)} />
         <Route path="login" component={Login} />
         <Route path="explore" component={Explore} />
         <Route path="questions" component={Questions} />

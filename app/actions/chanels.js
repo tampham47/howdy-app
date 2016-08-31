@@ -8,6 +8,7 @@ import { CALL_API, CHAIN_API } from 'middleware/api';
 export const CHANEL_CHANGED = Symbol('CHANEL_CHANGED');
 export const CHANNEL_LOADED = Symbol('CHANNEL_LOADED');
 export const NEW_MESSAGE = Symbol('NEW_MESSAGE');
+export const LOADED_MESSAGES = Symbol('LOADED_MESSAGES');
 
 export function changeChanel(chanel) {
   return {
@@ -25,3 +26,44 @@ export function loadChannels() {
     }
   }
 };
+
+export function loadMessageByChannel(channel) {
+  return {
+    [CHAIN_API]: [
+      ()=> {
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: '/channel',
+            successType: CHANNEL_LOADED
+          }
+        };
+      },
+      (channels) => {
+        var channelList = [];
+        channels.forEach(function(i) {
+          channelList.push(i.url);
+        });
+
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: `/message?query={"channelUrl":${JSON.stringify(channelList)}}`,
+            successType: LOADED_MESSAGES
+          }
+        }
+      }
+    ]
+  }
+
+};
+
+export function loadMessages(channel) {
+  return {
+    [CALL_API]: {
+      method: 'get',
+      path: `/message?query={"channelUrl":"${channel}}"`,
+      successType: LOADED_MESSAGES
+    }
+  }
+}
