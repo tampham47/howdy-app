@@ -17,7 +17,7 @@ export default function requireAuthentication(Component, AuthComponent) {
 
     static getDefaultStore({ store, params }) {
       var { chanelId } = params;
-      store.dispatch(changeChanel({ chanel: chanelId }));
+      store.dispatch(changeChanel({ chanel: chanelId || 'goingsunny' }));
     }
 
     // componentWillMount() {
