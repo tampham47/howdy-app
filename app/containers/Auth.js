@@ -11,13 +11,13 @@ export default function requireAuthentication(Component, AuthComponent) {
   class Auth extends React.Component {
 
     static fetchData({ store, params }) {
-      console.log('fetchData');
-      return store.dispatch(loadMessageByChannel(''));
+      var { channelUrl } = params;
+      return store.dispatch(loadMessageByChannel(channelUrl));
     }
 
     static getDefaultStore({ store, params }) {
-      var { chanelId } = params;
-      store.dispatch(changeChanel({ chanel: chanelId || 'goingsunny' }));
+      var { channelUrl } = params;
+      store.dispatch(changeChanel({ chanel: channelUrl || 'goingsunny' }));
     }
 
     componentDidMount() {
