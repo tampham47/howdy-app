@@ -21,6 +21,7 @@ export default function requireAuthentication(Component, AuthComponent) {
     }
 
     componentDidMount() {
+      console.log('Auth.componentDidMount');
       this.props.loadMessageByChannel('');
     }
 

@@ -1,0 +1,28 @@
+/**
+ * gsun2016
+ * tw
+ */
+
+.appearin-iframe {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  z-index: 9999;
+  background-color: rgba(gray, 0.5);
+  padding: 0.5*$gutter;
+
+  &._active {
+    display: block;
+  }
+
+  &__wrapper {
+    // padding: $gutter;
+    background-color: pink;
+    height: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+}

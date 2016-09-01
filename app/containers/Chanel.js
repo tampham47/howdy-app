@@ -12,6 +12,7 @@ import HeaderBar from 'components/HeaderBar';
 import * as ActionType from 'actions/chanels';
 import client from 'middleware/mqtt';
 import { changeChanel, loadChannels, loadMessageByChannel } from 'actions/chanels';
+import { showAppearin } from 'actions/appearin';
 
 class Chanel extends Component {
 
@@ -32,10 +33,6 @@ class Chanel extends Component {
     console.log('Channel.componentDidMount');
     var channelUrl = this.props.params.chanelUrl || 'goingsunny';
     this.props.loadMessageByChannel(channelUrl);
-
-    // var chanelId = this.props.params.chanelId;
-    // this.props.changeChanel({ chanel: chanelId });
-    // this.props.loadChannels();
   }
 
   handleKeyPress(e) {
@@ -70,6 +67,11 @@ class Chanel extends Component {
 
   filterMessageByChannel(arr, channelUrl) {
     return _.filter(arr, { channelUrl: channelUrl });
+  }
+
+  handleAddVideoRoom() {
+    console.log('Channel.handleAddVideoRoom');
+    this.props.showAppearin();
   }
 
   render() {
@@ -130,24 +132,42 @@ class Chanel extends Component {
 
           <div className="room-panel">
             <div className="room-panel__wrapper">
-              <h6>People</h6>
+              <div className="room-panel__videos">
+                <h6>Video rooms</h6>
+                <ul className="people-list">
+                  <li className="people-item"></li>
+                  <li className="people-item"></li>
+                  <li className="people-item"></li>
+                  <li className="people-item"></li>
+                </ul>
+                <button className="button-link" onClick={this.handleAddVideoRoom}>add a video room</button>
+              </div>
 
-              <ul className="people-list">
-                <li className="people-item"></li>
-                <li className="people-item"></li>
-                <li className="people-item"></li>
-                <li className="people-item"></li>
-                <li className="people-item"></li>
-                <li className="people-item"></li>
-                <li className="people-item"></li>
-                <li className="people-item"></li>
-                <li className="people-item"></li>
-                <li className="people-item"></li>
-                <li className="people-item"></li>
-              </ul>
+              <div className="room-panel__users">
+                <h6>People</h6>
+                <ul className="people-list">
+                  <li className="people-item"></li>
+                  <li className="people-item"></li>
+                  <li className="people-item"></li>
+                  <li className="people-item"></li>
+                  <li className="people-item"></li>
+                  <li className="people-item"></li>
+                  <li className="people-item"></li>
+                  <li className="people-item"></li>
+                  <li className="people-item"></li>
+                  <li className="people-item"></li>
+                  <li className="people-item"></li>
+                </ul>
+              </div>
             </div>
           </div>
         </main>
+
+        <div className="appearin-iframe _active">
+          <div className="appearin-iframe__wrapper">
+            <iframe src="https://appear.in/tampham47" width="100%" height="100%" frameborder="0"></iframe>
+          </div>
+        </div>
       </div>
     );
   }
@@ -159,7 +179,8 @@ function mapStateToProps(state) {
     currentUser: state.currentUser,
     chanels: state.chanels,
     chanelList: state.chanels.chanelList,
-    messages: state.messages
+    messages: state.messages,
+    appearin: state.appearin,
   };
 }
 
@@ -168,7 +189,8 @@ function mapDispatchToProps(dispatch) {
     dispatch,
     changeChanel,
     loadChannels,
-    loadMessageByChannel
+    loadMessageByChannel,
+    showAppearin
   }
 }
 

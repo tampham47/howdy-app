@@ -12,6 +12,7 @@ import questionDetail from 'reducers/questionDetail';
 import messagePanel from 'reducers/messagePanel';
 import authUser from 'reducers/authUser';
 import messages from 'reducers/messages';
+import appearin from 'reducers/appearin';
 
 const rootReducer = combineReducers({
   chanels,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   questions,
   questionDetail,
   messages,
+  appearin,
 });
 
 export default rootReducer;
