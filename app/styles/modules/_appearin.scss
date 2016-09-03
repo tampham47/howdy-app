@@ -4,7 +4,6 @@
  */
 
 .appearin-iframe {
-  position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
@@ -12,17 +11,72 @@
   display: none;
   z-index: 9999;
   background-color: rgba(gray, 0.5);
-  padding: 0.5*$gutter;
+  position: absolute;
+  padding: 0;
+
+  &__wrapper {
+    background-color: whitesmoke;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  &__control-wrapper {
+    top: 0;
+    right: 0;
+    position: absolute;
+    padding: 4px;
+
+    button,
+    .button {
+      padding: 4px;
+      line-height: 11px;
+      height: 22px;
+      margin-right: 4px;
+      margin-bottom: 0;
+      padding-left: 10px;
+      padding-right: 10px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    &__left {}
+    &__full {}
+    &__min {}
+  }
 
   &._active {
     display: block;
   }
 
-  &__wrapper {
-    // padding: $gutter;
-    background-color: pink;
-    height: 100%;
-    border-radius: 4px;
-    overflow: hidden;
+  // default is left mode
+  .appearin-iframe__control-wrapper__left {
+    display: none;
+  }
+
+  &--full {
+    padding: 0.5*$gutter;
+    position: fixed;
+
+    .appearin-iframe__control-wrapper__left {
+      display: inline-block;
+    }
+    .appearin-iframe__control-wrapper__full {
+      display: none;
+    }
+  }
+
+  &--min {
+    height: 250px;
+    top: auto;
+    padding: 0;
+
+    .appearin-iframe__control-wrapper__left {
+      display: inline-block;
+    }
+    .appearin-iframe__control-wrapper__min {
+      display: none;
+    }
   }
 }

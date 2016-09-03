@@ -9,6 +9,7 @@
   background-color: lighten(whitesmoke, 2%);
   height: 100%;
   padding-top: $header-h;
+  position: relative;
 
   &__wrapper {
     padding: 0.5*$gutter;

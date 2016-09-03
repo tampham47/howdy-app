@@ -49,7 +49,7 @@ server.set('view engine', 'ejs');
 ppfacebook(server);
 
 server.all('*', function(req, res, next) {
-  console.log('HEADER', req.user);
+  // console.log('HEADER', req.user);
   next();
 });
 

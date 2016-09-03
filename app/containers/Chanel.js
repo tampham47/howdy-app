@@ -132,7 +132,7 @@ class Chanel extends Component {
 
           <div className="room-panel">
             <div className="room-panel__wrapper">
-              <div className="room-panel__videos">
+              {/*<div className="room-panel__videos">
                 <h6>Video rooms</h6>
                 <ul className="people-list">
                   <li className="people-item"></li>
@@ -141,7 +141,7 @@ class Chanel extends Component {
                   <li className="people-item"></li>
                 </ul>
                 <button className="button-link" onClick={this.handleAddVideoRoom}>add a video room</button>
-              </div>
+              </div>*/}
 
               <div className="room-panel__users">
                 <h6>People</h6>
@@ -160,14 +160,20 @@ class Chanel extends Component {
                 </ul>
               </div>
             </div>
+
+            <div className="appearin-iframe appearin-iframe--min _active">
+              <div className="appearin-iframe__control-wrapper">
+                <button className="button-primary appearin-iframe__control-wrapper__min">min</button>
+                <button className="button-primary appearin-iframe__control-wrapper__full">full</button>
+                <button className="button-primary appearin-iframe__control-wrapper__left">left</button>
+              </div>
+              <div className="appearin-iframe__wrapper">
+                <iframe src="https://appear.in/tampham47" width="100%" height="100%" frameborder="0"></iframe>
+              </div>
+            </div>
           </div>
         </main>
 
-        <div className="appearin-iframe _active">
-          <div className="appearin-iframe__wrapper">
-            <iframe src="https://appear.in/tampham47" width="100%" height="100%" frameborder="0"></iframe>
-          </div>
-        </div>
       </div>
     );
   }
