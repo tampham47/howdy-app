@@ -8,7 +8,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  display: none;
+  display: block;
   z-index: 9999;
   background-color: rgba(gray, 0.5);
   position: absolute;
@@ -21,11 +21,23 @@
     overflow: hidden;
   }
 
+  &__create-room {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+  &__content {
+    display: none;
+    height: 100%;
+    width: 100%;
+  }
+
   &__control-wrapper {
     top: 0;
     right: 0;
     position: absolute;
     padding: 4px;
+    display: none;
 
     button,
     .button {
@@ -50,7 +62,15 @@
   }
 
   &._active {
-    display: block;
+    .appearin-iframe__create-room {
+      display: none;
+    }
+    .appearin-iframe__content {
+      display: block;
+    }
+    .appearin-iframe__control-wrapper {
+      display: block;
+    }
   }
 
   &--left {
@@ -90,5 +110,31 @@
       pointer-events: none;
       opacity: 0.5;
     }
+  }
+}
+
+.button--add-room {
+  display: block;
+  height: 100%;
+  width: 100%;
+  vertical-align: middle;
+  border: none;
+  position: relative;
+  padding: 0;
+
+  &__m-wrapper {
+    display: block;
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+
+    i {
+      display: block;
+    }
+  }
+
+  &:hover {
+    background-color: pink;
   }
 }

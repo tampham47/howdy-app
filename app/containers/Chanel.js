@@ -72,9 +72,9 @@ class Chanel extends Component {
     return _.filter(arr, { channelUrl: channelUrl });
   }
 
-  handleAddVideoRoom() {
+  handleAddVideoRoom(isAppearin) {
     console.log('Channel.handleAddVideoRoom');
-    this.props.showAppearin(true);
+    this.props.showAppearin(isAppearin);
   }
 
   handleChangeMode(mode) {
@@ -89,6 +89,7 @@ class Chanel extends Component {
     var currentChanel = chanelData.currentChanel;
     var messageList = this.filterMessageByChannel(this.props.messages.toJS(), channelUrl);
     var appearinMode = 'appearin-iframe--' + this.props.appearin.get('mode');
+    var isAppearinActive = this.props.appearin.get('isAppearin') ? '_active' : '';
 
     console.log('propsData', propsData);
     console.log('messages', this.props.messages.toJS());
@@ -160,9 +161,9 @@ class Chanel extends Component {
               </div>
             </div>
 
-            <div className={"appearin-iframe _active " + appearinMode}>
+            <div className={`appearin-iframe ${appearinMode} ${isAppearinActive}`}>
               <div className="appearin-iframe__control-wrapper">
-                <button onClick={this.handleChangeMode.bind(this, 'min')}
+                <button onClick={this.handleAddVideoRoom.bind(this, false)}
                   className="appearin-iframe__control-wrapper__close">
                   <i className="fa fa-close" aria-hidden="true"></i>
                 </button>
@@ -179,8 +180,20 @@ class Chanel extends Component {
                   <i className="fa fa-caret-square-o-right" aria-hidden="true"></i>
                 </button>
               </div>
+
               <div className="appearin-iframe__wrapper">
-                <iframe src="https://appear.in/tampham47" width="100%" height="100%" frameBorder="0"></iframe>
+                <div className="appearin-iframe__create-room">
+                  <a href="javascript:;" className="button button--add-room"
+                    onClick={this.handleAddVideoRoom.bind(this, true)}>
+                    <span className="button--add-room__m-wrapper">
+                      <i className="fa fa-plus" aria-hidden="true"></i>
+                      add video chat rom
+                    </span>
+                  </a>
+                </div>
+                <div className="appearin-iframe__content">
+                  <iframe src="https://appear.in/tampham47" width="100%" height="100%" frameBorder="0"></iframe>
+                </div>
               </div>
             </div>
           </div>
