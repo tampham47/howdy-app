@@ -20,14 +20,6 @@ function chanelsReducer(state = defaultState, action) {
     case ActionType.CHANNEL_LOADED:
       return state.setIn(['chanelList'], Immutable.fromJS(action.response));
       break;
-    // case ActionType.NEW_MESSAGE:
-    //   var chanelId = action.response.chanelId;
-    //   var messageList = state.getIn(['messagesInChanel', chanelId]);
-    //   if (typeof messageList == `undefined`) {
-    //     state = state.setIn(['messagesInChanel', chanelId], Immutable.List.of());
-    //   }
-    //   return state.updateIn(['messagesInChanel', chanelId], list => list.push(action.response));
-    //   break;
     default:
       return state;
   }

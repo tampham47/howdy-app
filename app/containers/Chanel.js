@@ -4,15 +4,18 @@
  */
 
 import _ from 'lodash';
+import client from 'middleware/mqtt';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router';
+
 import LeftMenu from 'components/LeftMenu';
 import HeaderBar from 'components/HeaderBar';
+
 import * as ActionType from 'actions/chanels';
-import client from 'middleware/mqtt';
 import { changeChanel, loadChannels, loadMessageByChannel } from 'actions/chanels';
-import { showAppearin } from 'actions/appearin';
+import { showAppearin, changeMode } from 'actions/appearin';
+import * as AppearinType from 'actions/appearin';
 
 class Chanel extends Component {
 
@@ -71,19 +74,25 @@ class Chanel extends Component {
 
   handleAddVideoRoom() {
     console.log('Channel.handleAddVideoRoom');
-    this.props.showAppearin();
+    this.props.showAppearin(true);
+  }
+
+  handleChangeMode(mode) {
+    this.props.changeMode(mode);
   }
 
   render() {
     var channelUrl = this.props.params.channelUrl || 'goingsunny';
     var propsData = JSON.parse(JSON.stringify(this.props));
-    console.log('propsData', propsData);
-    console.log('messages', this.props.messages.toJS());
 
     var chanelData = propsData.chanels;
     var currentChanel = chanelData.currentChanel;
-    // var messageList = chanelData.messagesInChanel[currentChanel] || [];
     var messageList = this.filterMessageByChannel(this.props.messages.toJS(), channelUrl);
+    var appearinMode = 'appearin-iframe--' + this.props.appearin.get('mode');
+
+    console.log('propsData', propsData);
+    console.log('messages', this.props.messages.toJS());
+    console.log('appearinMode', appearinMode);
 
     return (
       <div className="relm">
@@ -132,16 +141,6 @@ class Chanel extends Component {
 
           <div className="room-panel">
             <div className="room-panel__wrapper">
-              {/*<div className="room-panel__videos">
-                <h6>Video rooms</h6>
-                <ul className="people-list">
-                  <li className="people-item"></li>
-                  <li className="people-item"></li>
-                  <li className="people-item"></li>
-                  <li className="people-item"></li>
-                </ul>
-                <button className="button-link" onClick={this.handleAddVideoRoom}>add a video room</button>
-              </div>*/}
 
               <div className="room-panel__users">
                 <h6>People</h6>
@@ -161,14 +160,27 @@ class Chanel extends Component {
               </div>
             </div>
 
-            <div className="appearin-iframe appearin-iframe--min _active">
+            <div className={"appearin-iframe _active " + appearinMode}>
               <div className="appearin-iframe__control-wrapper">
-                <button className="button-primary appearin-iframe__control-wrapper__min">min</button>
-                <button className="button-primary appearin-iframe__control-wrapper__full">full</button>
-                <button className="button-primary appearin-iframe__control-wrapper__left">left</button>
+                <button onClick={this.handleChangeMode.bind(this, 'min')}
+                  className="appearin-iframe__control-wrapper__close">
+                  <i className="fa fa-close" aria-hidden="true"></i>
+                </button>
+                <button onClick={this.handleChangeMode.bind(this, 'min')}
+                  className="button-primary appearin-iframe__control-wrapper__min">
+                  <i className="fa fa-compress" aria-hidden="true"></i>
+                </button>
+                <button onClick={this.handleChangeMode.bind(this, 'full')}
+                  className="button-primary appearin-iframe__control-wrapper__full">
+                  <i className="fa fa-expand" aria-hidden="true"></i>
+                </button>
+                <button onClick={this.handleChangeMode.bind(this, 'left')}
+                  className="button-primary appearin-iframe__control-wrapper__left">
+                  <i className="fa fa-caret-square-o-right" aria-hidden="true"></i>
+                </button>
               </div>
               <div className="appearin-iframe__wrapper">
-                <iframe src="https://appear.in/tampham47" width="100%" height="100%" frameborder="0"></iframe>
+                <iframe src="https://appear.in/tampham47" width="100%" height="100%" frameBorder="0"></iframe>
               </div>
             </div>
           </div>
@@ -190,14 +202,12 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-    changeChanel,
-    loadChannels,
-    loadMessageByChannel,
-    showAppearin
-  }
+var mapDispatchToProps = {
+  changeChanel,
+  loadChannels,
+  loadMessageByChannel,
+  showAppearin,
+  changeMode
 }
 
 Chanel.propTypes = {

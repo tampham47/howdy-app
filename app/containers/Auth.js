@@ -6,7 +6,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import { changeChanel, loadChannels, loadMessageByChannel } from 'actions/chanels';
 
-export default function requireAuthentication(Component, AuthComponent) {
+export default function requireAuthentication(MainComponent, AuthComponent) {
 
   class Auth extends React.Component {
 
@@ -44,7 +44,11 @@ export default function requireAuthentication(Component, AuthComponent) {
       var propsData = JSON.parse(JSON.stringify(this.props));
 
       if (propsData.currentUser.isAuthenticated === true) {
-        return <Component {...this.props}/>
+        return (
+          <div>
+            <MainComponent {...this.props} />
+          </div>
+        )
       } else {
         return <AuthComponent {...this.props} />
       }

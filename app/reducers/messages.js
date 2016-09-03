@@ -11,7 +11,6 @@ let defaultState = Immutable.fromJS([]);
 function messagesReducer(state = defaultState, action) {
   switch(action.type) {
     case ActionType.LOADED_MESSAGES:
-      console.log('LOADED_MESSAGES', action.response);
       return Immutable.fromJS(action.response);
       break;
     case ActionType.NEW_MESSAGE:

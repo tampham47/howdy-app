@@ -7,11 +7,13 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router';
 import { List } from 'immutable';
 import { changeChanel } from 'actions/chanels';
+import { changeMode } from 'actions/appearin';
 
 class LeftMenu extends Component {
 
   handleChanelChange(chanel) {
     this.props.changeChanel({ chanel });
+    // this.props.changeMode('min');
     this.props.router.push(`/channel/${chanel}`);
   }
 
@@ -47,4 +49,4 @@ LeftMenu.propTypes = {};
 LeftMenu.defaultProps = {
   chanelList: []
 };
-export default connect(null, { changeChanel })(withRouter(LeftMenu));
+export default connect(null, { changeChanel, changeMode })(withRouter(LeftMenu));
