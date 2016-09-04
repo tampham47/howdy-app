@@ -83,7 +83,6 @@ server.get('*', (req, res, next)=> {
   var initialState = {};
   if (req.isAuthenticated && req.isAuthenticated()) {
     initialState.currentUser = req.user;
-    initialState.currentUser.avatar = req.user.photos[0].value;
     initialState.currentUser.isAuthenticated = true;
   }
 

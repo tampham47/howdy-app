@@ -187,7 +187,7 @@ class Chanel extends Component {
                     onClick={this.handleAddVideoRoom.bind(this, true)}>
                     <span className="button--add-room__m-wrapper">
                       <i className="fa fa-plus" aria-hidden="true"></i>
-                      add video chat rom
+                      add video chat room
                     </span>
                   </a>
                 </div>

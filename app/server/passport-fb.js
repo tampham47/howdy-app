@@ -25,8 +25,9 @@ function(accessToken, refreshToken, profile, cb) {
   // be associated with a user record in the application's database, which
   // allows for account linking and authentication with other identity
   // providers.
-  console.log(`>>PROFILE ${accessToken} : ${refreshToken} : ${profile}`);
-  return cb(null, profile);
+  // console.log(`>>PROFILE ${accessToken} : ${refreshToken} : ${profile}`);
+  var p = mapToGsunProfile(profile);
+  return cb(null, p);
 }));
 
 // Configure Passport authenticated session persistence.
@@ -46,6 +47,22 @@ passport.deserializeUser(function(obj, cb) {
 });
 
 
+var mapToGsunProfile = function(profile) {
+  let { id, username, displayName, gender, profileUrl, provider } = profile;
+  let email = profile.emails[0].value;
+  let avatar = profile.photos[0].value;
+  return {
+    id,
+    username,
+    displayName,
+    gender,
+    profileUrl,
+    provider,
+    email,
+    avatar,
+  };
+};
+
 var PassportFacebook = function(app) {
   // Use application-level middleware for common functionality, including
   // logging, parsing, and session handling.
@@ -58,7 +75,6 @@ var PassportFacebook = function(app) {
   // session.
   app.use(passport.initialize());
   app.use(passport.session());
-
 
   app.get('/login/facebook', passport.authenticate('facebook'));
 
