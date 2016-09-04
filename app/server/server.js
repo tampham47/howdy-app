@@ -86,11 +86,9 @@ server.get('*', (req, res, next)=> {
     initialState.currentUser.isAuthenticated = true;
   }
 
-  console.log('>> CURRENTUSER', initialState.currentUser);
-
   let history = useRouterHistory(useQueries(createMemoryHistory))();
   let store = configureStore(initialState);
-  let routes = createRoutes(history);
+  let routes = createRoutes(history, initialState.currentUser);
   let location = history.createLocation(req.url);
 
   match({ routes, location }, (error, redirectLocation, renderProps) => {

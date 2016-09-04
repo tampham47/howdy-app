@@ -26,6 +26,11 @@ class Chanel extends Component {
     return store.dispatch(loadMessageByChannel(channelUrl));
   }
 
+  static getDefaultStore({ store, params }) {
+    var { channelUrl } = params;
+    store.dispatch(changeChanel({ chanel: channelUrl || 'goingsunny' }));
+  }
+
   constructor(props) {
     super(props);
     this.state = {
