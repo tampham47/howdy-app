@@ -22,11 +22,11 @@ class Explore extends Component {
   }
 
   render() {
-    // let { Explore } = this.props;
+    let chanelData = this.props.chanels.toJS();
 
     return (
       <div className="relm">
-        <LeftMenu/>
+        <LeftMenu chanelList={chanelData.chanelList} />
 
         <main className="main-area">
           <HeaderBar title='Explore chanels' />
@@ -128,7 +128,9 @@ class Explore extends Component {
 }
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    chanels: state.chanels,
+  };
 }
 
 Explore.propTypes = {

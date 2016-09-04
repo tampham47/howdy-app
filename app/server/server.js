@@ -86,6 +86,8 @@ server.get('*', (req, res, next)=> {
     initialState.currentUser.isAuthenticated = true;
   }
 
+  console.log('>> CURRENTUSER', initialState.currentUser);
+
   let history = useRouterHistory(useQueries(createMemoryHistory))();
   let store = configureStore(initialState);
   let routes = createRoutes(history);
@@ -97,7 +99,7 @@ server.get('*', (req, res, next)=> {
     } else if (error) {
       res.status(500).send(error.message);
     } else if (renderProps == null) {
-      res.status(404).send('Not found')
+      res.status(404).send('Not found');
     } else {
       let [ getCurrentUrl, unsubscribe ] = subscribeUrl();
       let reqUrl = location.pathname + location.search;

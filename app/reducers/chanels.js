@@ -9,17 +9,18 @@ import _ from 'lodash';
 let defaultState = Immutable.fromJS({
   currentChanel: 'goingsunny',
   chanelList: [],
-  messagesInChanel: {}
+  messagesInChanel: {},
+  isShowAddChannelComp: false
 });
 
 function chanelsReducer(state = defaultState, action) {
   switch (action.type) {
     case ActionType.CHANEL_CHANGED:
       return state.setIn(['currentChanel'], action.response.chanel);
-      break;
     case ActionType.CHANNEL_LOADED:
       return state.setIn(['chanelList'], Immutable.fromJS(action.response));
-      break;
+    case ActionType.SHOWED_ADD_CHANNEL_COMP:
+      return state.set('isShowAddChannelComp', action.response);
     default:
       return state;
   }

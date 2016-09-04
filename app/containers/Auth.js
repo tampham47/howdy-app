@@ -44,13 +44,9 @@ export default function requireAuthentication(MainComponent, AuthComponent) {
       var propsData = JSON.parse(JSON.stringify(this.props));
 
       if (propsData.currentUser.isAuthenticated === true) {
-        return (
-          <div>
-            <MainComponent {...this.props} />
-          </div>
-        )
+        return <MainComponent {...this.props} />;
       } else {
-        return <AuthComponent {...this.props} />
+        return <AuthComponent {...this.props} />;
       }
     }
   }

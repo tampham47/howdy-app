@@ -59,3 +59,32 @@
     }
   }
 }
+
+.comp-add-room {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+  z-index: 99999;
+  background-color: rgba(grey, 0.5);
+
+  &._active {
+    display: block;
+  }
+
+  &__wrapper {
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    transform: translateY(-50%);
+  }
+
+  &__content {
+    background-color: white;
+    padding: $gutter;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+}

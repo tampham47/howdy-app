@@ -20,7 +20,6 @@ class App extends Component {
       });
 
       client.subscribe('goingsunny');
-
       // client.publish('goingsunny', data);
     }.bind(this));
 

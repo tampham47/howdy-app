@@ -6,15 +6,18 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router';
 import { List } from 'immutable';
-import { changeChanel } from 'actions/chanels';
+import { changeChanel, showAddChannelComp } from 'actions/chanels';
 import { changeMode } from 'actions/appearin';
 
 class LeftMenu extends Component {
 
   handleChanelChange(chanel) {
     this.props.changeChanel({ chanel });
-    // this.props.changeMode('min');
     this.props.router.push(`/channel/${chanel}`);
+  }
+
+  handleAddChannel() {
+    this.props.showAddChannelComp(true);
   }
 
   render() {
@@ -39,7 +42,8 @@ class LeftMenu extends Component {
           </li>
         </ul>
 
-        <button className="left-menu__new-room-btn button-primary">Add a chanel</button>
+        <button className="left-menu__new-room-btn button-primary"
+          onClick={this.handleAddChannel.bind(this)}>Add a chanel</button>
       </nav>
     )
   }
@@ -49,4 +53,4 @@ LeftMenu.propTypes = {};
 LeftMenu.defaultProps = {
   chanelList: []
 };
-export default connect(null, { changeChanel, changeMode })(withRouter(LeftMenu));
+export default connect(null, { changeChanel, changeMode, showAddChannelComp })(withRouter(LeftMenu));

@@ -11,6 +11,8 @@ import { Link, withRouter } from 'react-router';
 
 import LeftMenu from 'components/LeftMenu';
 import HeaderBar from 'components/HeaderBar';
+import PeopleInChannel from 'components/PeopleInChannel';
+import AddChannel from 'components/AddChannel';
 
 import * as ActionType from 'actions/chanels';
 import { changeChanel, loadChannels, loadMessageByChannel } from 'actions/chanels';
@@ -21,7 +23,7 @@ class Chanel extends Component {
 
   static fetchData({ store, params }) {
     var channelUrl = params.chanelUrl || 'goingsunny';
-    store.dispatch(loadMessageByChannel(channelUrl));
+    return store.dispatch(loadMessageByChannel(channelUrl));
   }
 
   constructor(props) {
@@ -97,6 +99,7 @@ class Chanel extends Component {
 
     return (
       <div className="relm">
+        <AddChannel isActive={chanelData.isShowAddChannelComp}/>
         <LeftMenu chanelList={chanelData.chanelList} />
 
         <main className="main-area">
@@ -141,25 +144,7 @@ class Chanel extends Component {
           </div>
 
           <div className="room-panel">
-            <div className="room-panel__wrapper">
-
-              <div className="room-panel__users">
-                <h6>People</h6>
-                <ul className="people-list">
-                  <li className="people-item"></li>
-                  <li className="people-item"></li>
-                  <li className="people-item"></li>
-                  <li className="people-item"></li>
-                  <li className="people-item"></li>
-                  <li className="people-item"></li>
-                  <li className="people-item"></li>
-                  <li className="people-item"></li>
-                  <li className="people-item"></li>
-                  <li className="people-item"></li>
-                  <li className="people-item"></li>
-                </ul>
-              </div>
-            </div>
+            <PeopleInChannel />
 
             <div className={`appearin-iframe ${appearinMode} ${isAppearinActive}`}>
               <div className="appearin-iframe__control-wrapper">
@@ -198,7 +183,6 @@ class Chanel extends Component {
             </div>
           </div>
         </main>
-
       </div>
     );
   }
