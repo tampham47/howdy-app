@@ -105,8 +105,14 @@ passport.deserializeUser(function(obj, cb) {
 
 var mapToGsunProfile = function(profile) {
   let { id, username, displayName, gender, profileUrl, provider } = profile;
-  let email = profile.emails[0].value;
-  let avatar = profile.photos[0].value;
+  var email, avatar;
+  if (profile.emails) {
+    email = profile.emails[0].value;
+  }
+  if (profile.photos) {
+    avatar = profile.photos[0].value;
+  }
+
   return {
     providerId: id,
     username,
