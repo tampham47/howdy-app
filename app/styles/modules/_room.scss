@@ -69,16 +69,20 @@
   display: none;
   z-index: 99999;
   background-color: rgba(grey, 0.8);
+  overflow-y: scroll;
 
   &._active {
     display: block;
   }
 
   &__wrapper {
-    position: absolute;
-    top: 40%;
-    width: 100%;
-    transform: translateY(-50%);
+    margin-top: 3*$gutter;
+    margin-bottom: $gutter;
+
+    // position: absolute;
+    // top: 40%;
+    // width: 100%;
+    // transform: translateY(-50%);
   }
 
   &__content {

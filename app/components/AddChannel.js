@@ -8,6 +8,11 @@ import { Link } from 'react-router';
 import { showAddChannelComp } from 'actions/chanels';
 
 class AddRoom extends Component {
+
+  handleCancelButton() {
+    this.props.showAddChannelComp(false);
+  }
+
   render() {
     var isActive = this.props.isActive ? '_active' : '';
 
@@ -38,7 +43,8 @@ class AddRoom extends Component {
 
                   <div className="add-room-form__controls">
                     <input className="button button-primary" type="submit" value="Submit" />
-                    <input className="button" type="button" value="Cancel" />
+                    <input className="button" type="button" value="Cancel"
+                      onClick={this.handleCancelButton.bind(this)} />
                   </div>
                 </form>
 
