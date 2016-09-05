@@ -49,7 +49,7 @@ server.set('view engine', 'ejs');
 ppfacebook(server);
 
 server.all('*', function(req, res, next) {
-  // console.log('HEADER', req.user);
+  console.log('HEADER', req.url, req.user && req.user.displayName);
   next();
 });
 
@@ -85,6 +85,8 @@ server.get('*', (req, res, next)=> {
     initialState.currentUser = req.user;
     initialState.currentUser.isAuthenticated = true;
   }
+
+  // console.log('>> CURRENT_USER', initialState.currentUser);
 
   let history = useRouterHistory(useQueries(createMemoryHistory))();
   let store = configureStore(initialState);

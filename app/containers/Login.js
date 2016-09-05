@@ -5,22 +5,24 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
-// import { loadLoginDetail } from 'actions/Logins';
+import { Link, withRouter } from 'react-router';
 
 class Login extends Component {
-  // static fetchData({ store, params }) {
-  //   let { id } = params
-  //   return store.dispatch(loadLoginDetail({ id }))
-  // }
 
-  componentDidMount() {
-    // let { id } = this.props.params;
-    // this.props.loadLoginDetail({ id });
+  componentWillMount() {
+    var user = {};
+    if (this.props.currentUser && ('toJS' in this.props.currentUser)) {
+      user = this.props.currentUser.toJS();
+    }
+
+    if (user.isAuthenticated) {
+      this.props.router.push('/');
+    }
   }
 
+  componentDidMount() {}
+
   render() {
-    // let { Login } = this.props;
 
     return (
       <div className="goingmerry-bg">
@@ -37,11 +39,13 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    currentUser: state.currentUser
+  };
 }
 
 Login.propTypes = {
 };
 
 export { Login };
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps)(withRouter(Login));
