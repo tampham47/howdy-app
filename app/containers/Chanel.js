@@ -14,9 +14,9 @@ import HeaderBar from 'components/HeaderBar';
 import PeopleInChannel from 'components/PeopleInChannel';
 import AddChannel from 'components/AddChannel';
 
-import * as ActionType from 'actions/chanels';
 import { changeChanel, loadChannels, loadMessageAndChannel } from 'actions/chanels';
 import { showAppearin, changeMode } from 'actions/appearin';
+import * as ActionType from 'actions/chanels';
 import * as AppearinType from 'actions/appearin';
 
 class Chanel extends Component {
@@ -110,7 +110,7 @@ class Chanel extends Component {
 
     return (
       <div className="relm">
-        <AddChannel isActive={chanelData.isShowAddChannelComp}/>
+        <AddChannel isActive={chanelData.isShowAddChannelComp} />
         <LeftMenu chanelList={chanelData.chanelList} />
 
         <main className="main-area">
