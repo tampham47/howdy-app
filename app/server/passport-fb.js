@@ -5,6 +5,9 @@
 
 import passport from 'passport';
 import { Strategy } from 'passport-facebook';
+import superAgent from 'superagent';
+import config from 'config';
+import uuid from 'uuid';
 
 // Configure the Facebook strategy for use by Passport.
 // OAuth 2.0-based strategies require a `verify` function which receives the
@@ -26,8 +29,44 @@ function(accessToken, refreshToken, profile, cb) {
   // allows for account linking and authentication with other identity
   // providers.
   // console.log(`>>PROFILE ${accessToken} : ${refreshToken} : ${profile}`);
+
   var p = mapToGsunProfile(profile);
-  return cb(null, p);
+  var queryStr = JSON.stringify({
+    providerId: p.providerId,
+    provider: p.provider
+  });
+
+  // insert user into db via apis
+  superAgent.get(`${config.API_BASE_URL}/user?query=${queryStr}`)
+    .end(function(err, res){
+
+      if (res.body.length > 0) {
+        p = res.body[0];
+        delete p.accessToken;
+        delete p.refreshToken;
+        delete p.password;
+        return cb(null, p);
+      } else {
+
+        p.accessToken = accessToken;
+        p.refreshToken = refreshToken;
+        p.password = uuid.v4();
+        p.name = {
+         first: p.displayName
+        };
+
+        superAgent.post(`${config.API_BASE_URL}/user`)
+        .set('Content-Type', 'application/json')
+        .send(p)
+        .end(function(err, res) {
+          if (err) {
+            return cb(err, null);
+          } else {
+            return cb(null, res.body);
+          }
+        });
+      }
+    });
 }));
 
 // Configure Passport authenticated session persistence.
@@ -52,7 +91,7 @@ var mapToGsunProfile = function(profile) {
   let email = profile.emails[0].value;
   let avatar = profile.photos[0].value;
   return {
-    id,
+    providerId: id,
     username,
     displayName,
     gender,
