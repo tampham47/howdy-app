@@ -6,14 +6,15 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router';
 import { List } from 'immutable';
-import { changeChanel, showAddChannelComp } from 'actions/chanels';
+import { changeChanel, showAddChannelComp, loadMessageByChannel, loadMessages } from 'actions/chanels';
 import { changeMode } from 'actions/appearin';
 
 class LeftMenu extends Component {
 
-  handleChanelChange(chanel) {
-    this.props.changeChanel({ chanel });
-    this.props.router.push(`/channel/${chanel}`);
+  handleChanelChange(channelUrl) {
+    this.props.changeChanel({ channelUrl });
+    this.props.loadMessages({ channelUrl });
+    this.props.router.push(`/channel/${channelUrl}`);
   }
 
   handleAddChannel() {
@@ -53,4 +54,12 @@ LeftMenu.propTypes = {};
 LeftMenu.defaultProps = {
   chanelList: []
 };
-export default connect(null, { changeChanel, changeMode, showAddChannelComp })(withRouter(LeftMenu));
+
+var mapDispatchToProps = {
+  changeChanel,
+  changeMode,
+  showAddChannelComp,
+  loadMessageByChannel,
+  loadMessages
+}
+export default connect(null, mapDispatchToProps)(withRouter(LeftMenu));

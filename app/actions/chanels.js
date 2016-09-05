@@ -18,11 +18,13 @@ export function showAddChannelComp(payload) {
   };
 }
 
-export function changeChanel(chanel) {
+export function changeChanel({ channelUrl }) {
   return {
     type: CHANEL_CHANGED,
-    response: chanel
-  }
+    response: {
+      channelUrl
+    }
+  };
 }
 
 export function loadChannels() {
@@ -32,8 +34,48 @@ export function loadChannels() {
       path: '/channel',
       successType: CHANNEL_LOADED
     }
+  };
+}
+
+export function loadMessageAndChannel({ channelUrl }) {
+  return {
+    [CHAIN_API]: [
+      ()=> {
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: '/channel',
+            successType: CHANNEL_LOADED
+          }
+        };
+      },
+      (channels) => {
+        // var channelList = [];
+        // channels.forEach(function(i) {
+        //   channelList.push(i.url);
+        // });
+
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: `/message?query={"channelUrl":${JSON.stringify(channelUrl)}}`,
+            successType: LOADED_MESSAGES
+          }
+        }
+      }
+    ]
   }
-};
+}
+
+export function loadMessages({ channelUrl }) {
+  return {
+    [CALL_API]: {
+      method: 'get',
+      path: `/message?query={"channelUrl":${JSON.stringify(channelUrl)}}`,
+      successType: LOADED_MESSAGES
+    }
+  }
+}
 
 export function loadMessageByChannel(channel) {
   return {
@@ -62,16 +104,5 @@ export function loadMessageByChannel(channel) {
         }
       }
     ]
-  }
-
-};
-
-export function loadMessages(channel) {
-  return {
-    [CALL_API]: {
-      method: 'get',
-      path: `/message?query={"channelUrl":"${channel}}"`,
-      successType: LOADED_MESSAGES
-    }
   }
 }

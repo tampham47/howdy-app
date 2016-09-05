@@ -15,24 +15,25 @@ import PeopleInChannel from 'components/PeopleInChannel';
 import AddChannel from 'components/AddChannel';
 
 import * as ActionType from 'actions/chanels';
-import { changeChanel, loadChannels, loadMessageByChannel } from 'actions/chanels';
+import { changeChanel, loadChannels, loadMessageAndChannel } from 'actions/chanels';
 import { showAppearin, changeMode } from 'actions/appearin';
 import * as AppearinType from 'actions/appearin';
 
 class Chanel extends Component {
 
   static fetchData({ store, params }) {
-    var channelUrl = params.chanelUrl || 'goingsunny';
-    return store.dispatch(loadMessageByChannel(channelUrl));
+    var channelUrl = params.channelUrl || 'goingsunny';
+    return store.dispatch(loadMessageAndChannel({ channelUrl }));
   }
 
   static getDefaultStore({ store, params }) {
-    var { channelUrl } = params;
-    store.dispatch(changeChanel({ chanel: channelUrl || 'goingsunny' }));
+    var channelUrl = params.channelUrl || 'goingsunny';
+    store.dispatch(changeChanel({ channelUrl }));
   }
 
   constructor(props) {
     super(props);
+
     this.state = {
       inputMessage: '',
       currentUser: props.currentUser,
@@ -41,8 +42,8 @@ class Chanel extends Component {
 
   componentDidMount() {
     console.log('Channel.componentDidMount');
-    var channelUrl = this.props.params.chanelUrl || 'goingsunny';
-    this.props.loadMessageByChannel(channelUrl);
+    var channelUrl = this.props.params.channelUrl || 'goingsunny';
+    this.props.loadMessageAndChannel({ channelUrl });
   }
 
   handleKeyPress(e) {
@@ -54,13 +55,18 @@ class Chanel extends Component {
         return;
       }
 
+      var channelUrl = this.props.params.channelUrl || 'goingsunny';
+
       var data = JSON.stringify({
         isManual: true,
         chanelId: this.props.chanels.get('currentChanel'),
         content: this.state.inputMessage,
         authUser: this.state.currentUser,
-        channelUrl: this.props.chanels.get('currentChanel')
+        channelUrl: channelUrl,
+        _user: this.state.currentUser.get('_id'),
+        _channel: null
       });
+
       client.publish('goingsunny', data);
 
       this.setState({
@@ -207,7 +213,7 @@ function mapStateToProps(state) {
 var mapDispatchToProps = {
   changeChanel,
   loadChannels,
-  loadMessageByChannel,
+  loadMessageAndChannel,
   showAppearin,
   changeMode
 }
@@ -219,6 +225,10 @@ Chanel.propTypes = {
 }
 
 Chanel.defaultProps = {};
+
+Chanel.contextTypes = {
+  store: React.PropTypes.object.isRequired
+};
 
 export { Chanel };
 export default connect(mapStateToProps, mapDispatchToProps)(Chanel);

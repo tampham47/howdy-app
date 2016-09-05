@@ -16,7 +16,7 @@ let defaultState = Immutable.fromJS({
 function chanelsReducer(state = defaultState, action) {
   switch (action.type) {
     case ActionType.CHANEL_CHANGED:
-      return state.setIn(['currentChanel'], action.response.chanel);
+      return state.setIn(['currentChanel'], action.response.channelUrl);
     case ActionType.CHANNEL_LOADED:
       return state.setIn(['chanelList'], Immutable.fromJS(action.response));
     case ActionType.SHOWED_ADD_CHANNEL_COMP:
