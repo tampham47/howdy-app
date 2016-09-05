@@ -105,7 +105,9 @@ passport.deserializeUser(function(obj, cb) {
 
 var mapToGsunProfile = function(profile) {
   let { id, username, displayName, gender, profileUrl, provider } = profile;
-  var email, avatar;
+  var email = "nouser@goingsunny.com";
+  var avatar = "---";
+
   if (profile.emails) {
     email = profile.emails[0].value;
   }
