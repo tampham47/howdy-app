@@ -8,6 +8,7 @@ import { Strategy } from 'passport-facebook';
 import superAgent from 'superagent';
 import config from 'config';
 import uuid from 'uuid';
+import _ from 'lodash';
 
 // Configure the Facebook strategy for use by Passport.
 // OAuth 2.0-based strategies require a `verify` function which receives the
@@ -36,16 +37,32 @@ function(accessToken, refreshToken, profile, cb) {
     provider: p.provider
   });
 
+  var removeSensitiveData = function(data) {
+    delete data.accessToken;
+    delete data.refreshToken;
+    delete data.password;
+
+    return data;
+  };
+
   // insert user into db via apis
   superAgent.get(`${config.API_BASE_URL}/user?query=${queryStr}`)
     .end(function(err, res){
 
       if (res.body.length > 0) {
-        p = res.body[0];
-        delete p.accessToken;
-        delete p.refreshToken;
-        delete p.password;
-        return cb(null, p);
+        p = _.merge(res.body[0], p);
+        p.password = uuid.v4();
+
+        superAgent.patch(`${config.API_BASE_URL}/user/${p._id}`)
+        .set('Content-Type', 'application/json')
+        .send(p)
+        .end(function(err, res) {
+          if (err) {
+            return cb(err, null);
+          } else {
+            return cb(null, removeSensitiveData(res.body));
+          }
+        });
       } else {
 
         p.accessToken = accessToken;
@@ -62,7 +79,7 @@ function(accessToken, refreshToken, profile, cb) {
           if (err) {
             return cb(err, null);
           } else {
-            return cb(null, res.body);
+            return cb(null, removeSensitiveData(res.body));
           }
         });
       }
