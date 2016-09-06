@@ -75,6 +75,8 @@ function(accessToken, refreshToken, profile, cb) {
          first: p.displayName
         };
 
+        console.log('>> INSERT DATA', p);
+
         superAgent.post(`${config.API_BASE_URL}/user`)
         .set('Content-Type', 'application/json')
         .send(p)
@@ -114,10 +116,10 @@ var mapToGsunProfile = function(profile) {
   var avatar = "---";
 
   if (profile.emails) {
-    email = profile.emails[0].value;
+    email = profile.emails[0].value || email;
   }
   if (profile.photos) {
-    avatar = profile.photos[0].value;
+    avatar = profile.photos[0].value || avatar;
   }
 
   return {
