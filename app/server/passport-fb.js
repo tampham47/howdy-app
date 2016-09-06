@@ -48,6 +48,7 @@ function(accessToken, refreshToken, profile, cb) {
   // insert user into db via apis
   superAgent.get(`${config.API_BASE_URL}/user?query=${queryStr}`)
     .end(function(err, res){
+      console.log('>> ERRR QUERY', err);
 
       if (res.body.length > 0) {
         p = _.merge(res.body[0], p);
@@ -57,6 +58,8 @@ function(accessToken, refreshToken, profile, cb) {
         .set('Content-Type', 'application/json')
         .send(p)
         .end(function(err, res) {
+          console.log('>> ERRR UPDATE', err);
+
           if (err) {
             return cb(err, null);
           } else {
@@ -76,6 +79,8 @@ function(accessToken, refreshToken, profile, cb) {
         .set('Content-Type', 'application/json')
         .send(p)
         .end(function(err, res) {
+          console.log('>> ERRR INSERT', err);
+
           if (err) {
             return cb(err, null);
           } else {
