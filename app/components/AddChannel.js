@@ -22,8 +22,9 @@ class AddRoom extends Component {
   }
 
   handleSubmitButton() {
-    console.log('handleSubmitButton', this.state.form);
+    var u = this.props.currentUser.toJS();
     var f = this.state.form;
+    f._user = u._id;
 
     this.props.showAddChannelComp(false);
     this.props.addChannel(f);
@@ -32,7 +33,6 @@ class AddRoom extends Component {
   handleChanged(prop, event) {
     var f = this.state.form;
     f[prop] = event.target.value;
-
     this.setState({ form: f });
   }
 
@@ -91,5 +91,12 @@ class AddRoom extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    currentUser: state.currentUser
+  };
+}
+
+
 AddRoom.propTypes = {};
-export default connect(null, { showAddChannelComp, addChannel })(AddRoom);
+export default connect(mapStateToProps, { showAddChannelComp, addChannel })(AddRoom);
