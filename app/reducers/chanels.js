@@ -17,10 +17,16 @@ function chanelsReducer(state = defaultState, action) {
   switch (action.type) {
     case ActionType.CHANEL_CHANGED:
       return state.setIn(['currentChanel'], action.response.channelUrl);
+
     case ActionType.CHANNEL_LOADED:
       return state.setIn(['chanelList'], Immutable.fromJS(action.response));
+
     case ActionType.SHOWED_ADD_CHANNEL_COMP:
       return state.set('isShowAddChannelComp', action.response);
+
+    case ActionType.ADDED_CHANNEL:
+      return state.updateIn(['chanelList'], list => list.push(action.response));
+
     default:
       return state;
   }

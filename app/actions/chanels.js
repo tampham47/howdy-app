@@ -12,6 +12,7 @@ export const CHANEL_CHANGED = Symbol('CHANEL_CHANGED');
 export const CHANNEL_LOADED = Symbol('CHANNEL_LOADED');
 export const NEW_MESSAGE = Symbol('NEW_MESSAGE');
 export const LOADED_MESSAGES = Symbol('LOADED_MESSAGES');
+export const ADDED_CHANNEL = Symbol('ADDED_CHANNEL');
 
 export function showAddChannelComp(payload) {
   return {
@@ -169,4 +170,15 @@ export function loadMessageByChannel(channel) {
       }
     ]
   }
+}
+
+export function addChannel(payload) {
+  return {
+    [CALL_API]: {
+      method: 'post',
+      path: '/channel',
+      body: payload,
+      successType: ADDED_CHANNEL
+    }
+  };
 }

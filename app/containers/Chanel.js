@@ -220,7 +220,6 @@ var mapDispatchToProps = {
 }
 
 Chanel.propTypes = {
-  authUser: PropTypes.object.isRequired,
   currentUser: PropTypes.object.isRequired,
   chanels: PropTypes.object.isRequired,
 }
