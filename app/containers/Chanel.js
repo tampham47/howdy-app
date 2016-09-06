@@ -14,7 +14,7 @@ import HeaderBar from 'components/HeaderBar';
 import PeopleInChannel from 'components/PeopleInChannel';
 import AddChannel from 'components/AddChannel';
 
-import { changeChanel, loadChannels, loadMessageAndChannel } from 'actions/chanels';
+import { changeChanel, loadChannels, loadMessageAndChannel, fetchChannelData } from 'actions/chanels';
 import { showAppearin, changeMode } from 'actions/appearin';
 import * as ActionType from 'actions/chanels';
 import * as AppearinType from 'actions/appearin';
@@ -23,7 +23,7 @@ class Chanel extends Component {
 
   static fetchData({ store, params }) {
     var channelUrl = params.channelUrl || 'goingsunny';
-    return store.dispatch(loadMessageAndChannel({ channelUrl }));
+    return store.dispatch(fetchChannelData({ channelUrl }));
   }
 
   static getDefaultStore({ store, params }) {
@@ -43,7 +43,7 @@ class Chanel extends Component {
   componentDidMount() {
     console.log('Channel.componentDidMount');
     var channelUrl = this.props.params.channelUrl || 'goingsunny';
-    this.props.loadMessageAndChannel({ channelUrl });
+    this.props.fetchChannelData({ channelUrl });
   }
 
   handleKeyPress(e) {
@@ -103,6 +103,7 @@ class Chanel extends Component {
     var messageList = this.filterMessageByChannel(this.props.messages.toJS(), channelUrl);
     var appearinMode = 'appearin-iframe--' + this.props.appearin.get('mode');
     var isAppearinActive = this.props.appearin.get('isAppearin') ? '_active' : '';
+    var users = this.props.users.toJS();
 
     console.log('propsData', propsData);
     console.log('messages', this.props.messages.toJS());
@@ -155,7 +156,7 @@ class Chanel extends Component {
           </div>
 
           <div className="room-panel">
-            <PeopleInChannel />
+            <PeopleInChannel datacontext={users} />
 
             <div className={`appearin-iframe ${appearinMode} ${isAppearinActive}`}>
               <div className="appearin-iframe__control-wrapper">
@@ -201,12 +202,11 @@ class Chanel extends Component {
 
 function mapStateToProps(state) {
   return {
-    authUser: state.authUser,
     currentUser: state.currentUser,
     chanels: state.chanels,
-    chanelList: state.chanels.chanelList,
     messages: state.messages,
     appearin: state.appearin,
+    users: state.users,
   };
 }
 
@@ -215,7 +215,8 @@ var mapDispatchToProps = {
   loadChannels,
   loadMessageAndChannel,
   showAppearin,
-  changeMode
+  changeMode,
+  fetchChannelData
 }
 
 Chanel.propTypes = {

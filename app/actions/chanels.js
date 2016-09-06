@@ -4,7 +4,9 @@
  */
 
 import { CALL_API, CHAIN_API } from 'middleware/api';
+import config from 'config';
 
+export const LOADED_USER = Symbol('LOADED_USER');
 export const SHOWED_ADD_CHANNEL_COMP = Symbol('SHOWED_ADD_CHANNEL_COMP');
 export const CHANEL_CHANGED = Symbol('CHANEL_CHANGED');
 export const CHANNEL_LOADED = Symbol('CHANNEL_LOADED');
@@ -32,6 +34,9 @@ export function loadChannels() {
     [CALL_API]: {
       method: 'get',
       path: '/channel',
+      query: {
+        sort: JSON.stringify({ createdAt: 1 }),
+      },
       successType: CHANNEL_LOADED
     }
   };
@@ -45,20 +50,66 @@ export function loadMessageAndChannel({ channelUrl }) {
           [CALL_API]: {
             method: 'get',
             path: '/channel',
+            query: {
+              sort: JSON.stringify({ createdAt: 1 }),
+            },
             successType: CHANNEL_LOADED
           }
         };
       },
       (channels) => {
-        // var channelList = [];
-        // channels.forEach(function(i) {
-        //   channelList.push(i.url);
-        // });
 
         return {
           [CALL_API]: {
             method: 'get',
-            path: `/message?query={"channelUrl":${JSON.stringify(channelUrl)}}`,
+            path: '/message',
+            query: {
+              limit: config.MESSAGE_LIMIT,
+              sort: JSON.stringify({ createdAt: -1 }),
+              query: JSON.stringify({ channelUrl: channelUrl})
+            },
+            successType: LOADED_MESSAGES
+          }
+        }
+      }
+    ]
+  }
+}
+
+export function fetchChannelData({ channelUrl }) {
+  return {
+    [CHAIN_API]: [
+      ()=> {
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: '/user',
+            successType: LOADED_USER
+          }
+        }
+      },
+      (users)=> {
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: '/channel',
+            query: {
+              sort: JSON.stringify({ createdAt: 1 }),
+            },
+            successType: CHANNEL_LOADED
+          }
+        };
+      },
+      (channels) => {
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: '/message',
+            query: {
+              limit: config.MESSAGE_LIMIT,
+              sort: JSON.stringify({ createdAt: -1 }),
+              query: JSON.stringify({ channelUrl: channelUrl})
+            },
             successType: LOADED_MESSAGES
           }
         }
@@ -71,7 +122,12 @@ export function loadMessages({ channelUrl }) {
   return {
     [CALL_API]: {
       method: 'get',
-      path: `/message?query={"channelUrl":${JSON.stringify(channelUrl)}}`,
+      path: '/message',
+      query: {
+        limit: config.MESSAGE_LIMIT,
+        sort: JSON.stringify({ createdAt: -1 }),
+        query: JSON.stringify({ channelUrl: channelUrl})
+      },
       successType: LOADED_MESSAGES
     }
   }
@@ -85,6 +141,9 @@ export function loadMessageByChannel(channel) {
           [CALL_API]: {
             method: 'get',
             path: '/channel',
+            query: {
+              sort: JSON.stringify({ createdAt: 1 }),
+            },
             successType: CHANNEL_LOADED
           }
         };
@@ -98,7 +157,12 @@ export function loadMessageByChannel(channel) {
         return {
           [CALL_API]: {
             method: 'get',
-            path: `/message?query={"channelUrl":${JSON.stringify(channelList)}}`,
+            path: '/message',
+            query: {
+              limit: config.MESSAGE_LIMIT,
+              sort: JSON.stringify({ createdAt: -1 }),
+              query: JSON.stringify({ channelUrl: channelUrl})
+            },
             successType: LOADED_MESSAGES
           }
         }

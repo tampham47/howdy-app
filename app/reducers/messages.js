@@ -11,11 +11,14 @@ let defaultState = Immutable.fromJS([]);
 function messagesReducer(state = defaultState, action) {
   switch(action.type) {
     case ActionType.LOADED_MESSAGES:
-      return Immutable.fromJS(action.response);
-      break;
+      var l = _.sortBy(action.response, function(i) {
+        return i.createdAt;
+      });
+      return Immutable.fromJS(l);
+
     case ActionType.NEW_MESSAGE:
       return state.push(action.response);
-      break;
+
     default:
       return state;
   }

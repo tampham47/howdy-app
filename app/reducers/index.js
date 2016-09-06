@@ -9,6 +9,7 @@ import chanels from 'reducers/chanels';
 import currentUser from 'reducers/currentUser';
 import messages from 'reducers/messages';
 import appearin from 'reducers/appearin';
+import users from 'reducers/users';
 
 // import questions from 'reducers/questions';
 // import questionDetail from 'reducers/questionDetail';
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   currentUser,
   messages,
   appearin,
+  users
 });
 
 export default rootReducer;
