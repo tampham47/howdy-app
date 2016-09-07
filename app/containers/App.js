@@ -11,15 +11,15 @@ class App extends Component {
 
   componentDidMount() {
     client.on('connect', function() {
-      var data = JSON.stringify({
-        chanelId: 'goingsunny',
-        content: 'Welcome to goingsunny',
-        authUser: {
-          displayName: 'Gsbot'
-        }
-      });
-
       client.subscribe('goingsunny');
+
+      // var data = JSON.stringify({
+      //   chanelId: 'goingsunny',
+      //   content: 'Welcome to goingsunny',
+      //   authUser: {
+      //     displayName: 'Gsbot'
+      //   }
+      // });
       // client.publish('goingsunny', data);
     }.bind(this));
 
@@ -29,12 +29,6 @@ class App extends Component {
         type: ActionType.NEW_MESSAGE,
         response: messageData
       });
-
-      // scroll to newest message
-      var scroller = document.getElementById('content-scroller');
-      if (scroller) {
-        scroller.scrollTop = scroller.scrollHeight;
-      }
     }.bind(this));
   }
 

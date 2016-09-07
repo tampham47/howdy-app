@@ -17,7 +17,7 @@ class PeopleInChannel extends Component {
           <ul className="people-list">
             {this.props.datacontext.map(function(item) {
               return (
-                <li className="people-item">
+                <li className="people-item" key={item.id}>
                   {<img src={item.avatar || defaultAvatar} alt={item.displayName} />}
                 </li>
               );

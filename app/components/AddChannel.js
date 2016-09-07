@@ -6,8 +6,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { showAddChannelComp, addChannel } from 'actions/chanels';
-import listener from 'middleware/listener';
-import * as ActionType from 'actions/chanels';
+
 
 class AddRoom extends Component {
 
@@ -26,22 +25,34 @@ class AddRoom extends Component {
   handleSubmitButton() {
     var u = this.props.currentUser.toJS();
     var f = this.state.form;
+
     f._user = u._id;
+    if (f.isPrivate === 'on') {
+      f.state = 'private';
+    }
 
     this.props.addChannel(f);
   }
 
   handleChanged(prop, event) {
     var f = this.state.form;
-    f[prop] = event.target.value;
+
+    switch (prop) {
+      case 'name':
+        f[prop] = event.target.value;
+        f.url = f[prop].toLowerCase().replace(new RegExp(' ', 'g'), '-');
+        break;
+      case 'url':
+        f[prop] = event.target.value.toLowerCase().replace(new RegExp(' ', 'g'), '');
+        break;
+      default:
+        f[prop] = event.target.value;
+    }
+
     this.setState({ form: f });
   }
 
   componentDidMount() {
-    listener.sub(ActionType.ADDED_CHANNEL.toString(), function(e) {
-      this.props.showAddChannelComp(false);
-      this.setState({ form: {} });
-    }.bind(this));
   }
 
   render() {
@@ -62,7 +73,7 @@ class AddRoom extends Component {
                     value={this.state.form.name}
                     onChange={this.handleChanged.bind(this, 'name')} />
 
-                  <label for="channelUrl">Channel URL</label>
+                  <label for="channelUrl">Channel URL (can not contain spaces)</label>
                   <input className="u-full-width" type="text" name="channelUrl"
                     placeholder="goingsunny.com/channel/your-url" id="channelUrl"
                     value={this.state.form.url}

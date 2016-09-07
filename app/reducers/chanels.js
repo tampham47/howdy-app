@@ -25,7 +25,9 @@ function chanelsReducer(state = defaultState, action) {
       return state.set('isShowAddChannelComp', action.response);
 
     case ActionType.ADDED_CHANNEL:
-      return state.updateIn(['chanelList'], list => list.push(action.response));
+      return state
+        .set('isShowAddChannelComp', false)
+        .updateIn(['chanelList'], list => list.push(action.response));
 
     default:
       return state;

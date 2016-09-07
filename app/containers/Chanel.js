@@ -16,8 +16,9 @@ import AddChannel from 'components/AddChannel';
 
 import { changeChanel, loadChannels, loadMessageAndChannel, fetchChannelData } from 'actions/chanels';
 import { showAppearin, changeMode } from 'actions/appearin';
-import * as ActionType from 'actions/chanels';
+import * as ChannelType from 'actions/chanels';
 import * as AppearinType from 'actions/appearin';
+import listener from 'middleware/listener';
 
 class Chanel extends Component {
 
@@ -44,6 +45,16 @@ class Chanel extends Component {
     console.log('Channel.componentDidMount');
     var channelUrl = this.props.params.channelUrl || 'goingsunny';
     this.props.fetchChannelData({ channelUrl });
+
+    // scroll to newest message
+    var scroller = document.getElementById('content-scroller');
+    // using listent only for animation task
+    listener.sub(ChannelType.LOADED_MESSAGES.toString(), function() {
+      scroller.scrollTop = scroller.scrollHeight;
+    });
+    listener.sub(ChannelType.NEW_MESSAGE.toString(), function() {
+      scroller.scrollTop = scroller.scrollHeight;
+    });
   }
 
   handleKeyPress(e) {
