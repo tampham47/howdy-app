@@ -6,6 +6,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { showAddChannelComp, addChannel } from 'actions/chanels';
+import listener from 'middleware/listener';
+import * as ActionType from 'actions/chanels';
 
 class AddRoom extends Component {
 
@@ -26,7 +28,6 @@ class AddRoom extends Component {
     var f = this.state.form;
     f._user = u._id;
 
-    this.props.showAddChannelComp(false);
     this.props.addChannel(f);
   }
 
@@ -34,6 +35,13 @@ class AddRoom extends Component {
     var f = this.state.form;
     f[prop] = event.target.value;
     this.setState({ form: f });
+  }
+
+  componentDidMount() {
+    listener.sub(ActionType.ADDED_CHANNEL.toString(), function(e) {
+      this.props.showAddChannelComp(false);
+      this.setState({ form: {} });
+    }.bind(this));
   }
 
   render() {
