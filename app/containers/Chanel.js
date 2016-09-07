@@ -111,6 +111,9 @@ class Chanel extends Component {
 
     var chanelData = propsData.chanels;
     var currentChanel = chanelData.currentChanel;
+    var channelDetail = _.find(chanelData.chanelList, function(i) {
+      return (i.url === currentChanel);
+    });
     var messageList = this.filterMessageByChannel(this.props.messages.toJS(), channelUrl);
     var appearinMode = 'appearin-iframe--' + this.props.appearin.get('mode');
     var isAppearinActive = this.props.appearin.get('isAppearin') ? '_active' : '';
@@ -119,6 +122,7 @@ class Chanel extends Component {
     console.log('propsData', propsData);
     console.log('messages', this.props.messages.toJS());
     console.log('appearinMode', appearinMode);
+    console.log('channelDetail', channelDetail, chanelData.chanelList);
 
     return (
       <div className="relm">
@@ -126,7 +130,7 @@ class Chanel extends Component {
         <LeftMenu chanelList={chanelData.chanelList} />
 
         <main className="main-area">
-          <HeaderBar title={currentChanel} />
+          <HeaderBar title={channelDetail.name} datacontext={channelDetail} />
 
           <div className="main-content">
             <div id='content-scroller' className="main-content__scroller">
