@@ -111,8 +111,9 @@ class Chanel extends Component {
 
     var chanelData = propsData.chanels;
     var currentChanel = chanelData.currentChanel;
+
     var channelDetail = _.find(chanelData.chanelList, function(i) {
-      return (i.url === currentChanel);
+      return (i.url === channelUrl);
     });
     var messageList = this.filterMessageByChannel(this.props.messages.toJS(), channelUrl);
     var appearinMode = 'appearin-iframe--' + this.props.appearin.get('mode');
