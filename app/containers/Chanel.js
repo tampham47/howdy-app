@@ -50,9 +50,11 @@ class Chanel extends Component {
     var scroller = document.getElementById('content-scroller');
     // using listent only for animation task
     listener.sub(ChannelType.LOADED_MESSAGES.toString(), function() {
+      if (!scroller) return;
       scroller.scrollTop = scroller.scrollHeight;
     });
     listener.sub(ChannelType.NEW_MESSAGE.toString(), function() {
+      if (!scroller) return;
       scroller.scrollTop = scroller.scrollHeight;
     });
   }
@@ -114,7 +116,7 @@ class Chanel extends Component {
 
     var channelDetail = _.find(chanelData.chanelList, function(i) {
       return (i.url === channelUrl);
-    });
+    }) || {};
     var messageList = this.filterMessageByChannel(this.props.messages.toJS(), channelUrl);
     var appearinMode = 'appearin-iframe--' + this.props.appearin.get('mode');
     var isAppearinActive = this.props.appearin.get('isAppearin') ? '_active' : '';
