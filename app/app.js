@@ -33,6 +33,6 @@ const authUser = reduxState.currentUser ? reduxState.currentUser.toJS() : {};
 
 ReactDOM.render((
   <Provider store={store}>
-    { createRoutes(browserHistory, authUser) }
+    { createRoutes(browserHistory, store) }
   </Provider>
 ), document.getElementById('root'))

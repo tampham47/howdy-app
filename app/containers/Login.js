@@ -16,7 +16,11 @@ class Login extends Component {
     }
 
     if (user.isAuthenticated) {
-      this.props.router.push('/');
+      if (this.props.location.query && this.props.location.query.nextstate) {
+        this.props.router.replace(`/${this.props.location.query.nextstate}`);
+      } else {
+        this.props.router.replace('/');
+      }
     }
   }
 

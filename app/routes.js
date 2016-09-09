@@ -17,21 +17,29 @@ import Questions from 'containers/Questions';
 import Question from 'containers/Question';
 import Intro from 'containers/Intro';
 
-var requireAuth = function(currentUser, nextState, replace) {
-  console.log('requireAuth', nextState.location.pathname);
+let requireAuth = function(store, nextState, replace) {
+  var u = store.getState().currentUser && store.getState().currentUser.toJS();
+  console.log('>>> REQUIREAUTH', u);
 
-  if (!(currentUser && currentUser.isAuthenticated)) {
+  if (!(u && (u.isAuthenticated || u.isAuthenticated == 'true'))) {
     // Not authenticated, redirect to login.
-    replace({ nextPathname: nextState.location.pathname }, '/login');
+    var p = nextState.location.pathname;
+
+    replace({
+      pathname: '/login',
+      // query: {
+      //   nextstate: p
+      // }
+    });
   }
 };
 
-export default function(history, currentUser) {
+export default function(history, store) {
   return (
     <Router history={history}>
       <Route path="/" component={App}>
-        <IndexRoute component={Chanel} onEnter={requireAuth.bind(this, currentUser)} />
-        <Route path="channel/:channelUrl" component={Chanel} onEnter={requireAuth.bind(this, currentUser)} />
+        <IndexRoute component={Chanel} onEnter={requireAuth.bind(this, store)} />
+        <Route path="channel/:channelUrl" component={Chanel} onEnter={requireAuth.bind(this, store)} />
 
         <Route path="login" component={Login} />
         <Route path="explore" component={Explore} />

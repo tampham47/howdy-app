@@ -16,6 +16,7 @@ import configureStore from 'store/configureStore';
 import createRoutes from 'routes';
 import { Provider } from 'react-redux';
 import ppfacebook from './passport-fb';
+import Immutable from 'immutable';
 
 let server = new Express();
 let port = process.env.PORT || 3000;
@@ -82,15 +83,19 @@ server.get('*', (req, res, next)=> {
   // incase of authenticated
   var initialState = {};
   if (req.isAuthenticated && req.isAuthenticated()) {
-    initialState.currentUser = req.user;
-    initialState.currentUser.isAuthenticated = true;
+    var u = req.user;
+    u.isAuthenticated = true;
+    initialState.currentUser = Immutable.fromJS(u);
+
+    // initialState.currentUser = req.user;
+    // initialState.currentUser.isAuthenticated = true;
   }
 
   // console.log('>> CURRENT_USER', initialState.currentUser);
 
   let history = useRouterHistory(useQueries(createMemoryHistory))();
   let store = configureStore(initialState);
-  let routes = createRoutes(history, initialState.currentUser);
+  let routes = createRoutes(history, store);
   let location = history.createLocation(req.url);
 
   match({ routes, location }, (error, redirectLocation, renderProps) => {
