@@ -11,20 +11,26 @@ class Login extends Component {
 
   componentWillMount() {
     var user = {};
-    if (this.props.currentUser && ('toJS' in this.props.currentUser)) {
-      user = this.props.currentUser.toJS();
+    if (this.props.currentUser) {
+      user = this.props.currentUser;
     }
 
+    // if (user.isAuthenticated) {
+    //   if (this.props.location.query && this.props.location.query.nextstate) {
+    //     this.props.router.replace(`/${this.props.location.query.nextstate}`);
+    //   } else {
+    //     this.props.router.replace('/');
+    //   }
+    // }
+
     if (user.isAuthenticated) {
-      if (this.props.location.query && this.props.location.query.nextstate) {
-        this.props.router.replace(`/${this.props.location.query.nextstate}`);
-      } else {
-        this.props.router.replace('/');
-      }
+      this.props.router.push('/');
     }
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    console.log('Login.componentDidMount', this.props.currentUser);
+  }
 
   render() {
 
@@ -44,7 +50,7 @@ class Login extends Component {
 
 function mapStateToProps(state) {
   return {
-    currentUser: state.currentUser
+    currentUser: state.currentUser.toJS()
   };
 }
 

@@ -27,7 +27,7 @@ if (window.__REDUX_STATE__) {
 }
 
 const store = configureStore(reduxState);
-const authUser = reduxState.currentUser ? reduxState.currentUser.toJS() : {};
+// const authUser = reduxState.currentUser ? reduxState.currentUser.toJS() : {};
 // console.log('ReduxState', authUser);
 // console.log('STORE', store);
 

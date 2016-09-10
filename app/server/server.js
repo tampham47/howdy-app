@@ -17,6 +17,7 @@ import createRoutes from 'routes';
 import { Provider } from 'react-redux';
 import ppfacebook from './passport-fb';
 import Immutable from 'immutable';
+var debug = require('debug')('server');
 
 let server = new Express();
 let port = process.env.PORT || 3000;
@@ -46,38 +47,14 @@ server.use(compression());
 server.use(Express.static(path.join(__dirname, '../..', 'dist')));
 server.set('views', path.join(__dirname, 'views'));
 server.set('view engine', 'ejs');
-//import passport facebook
-ppfacebook(server);
 
 server.all('*', function(req, res, next) {
-  console.log('HEADER', req.url, req.user && req.user.displayName);
+  debug('>>> HEADER', req.url);
   next();
 });
 
-// mock apis
-server.get('/api/questions', (req, res)=> {
-  let { questions } = require('./mock_api');
-  res.send(questions);
-});
-
-server.get('/api/users/:id', (req, res)=> {
-  let { getUser } = require('./mock_api')
-  res.send(getUser(req.params.id))
-})
-server.get('/api/questions/:id', (req, res)=> {
-  let { getQuestion } = require('./mock_api')
-  res.send(getQuestion(req.params.id))
-})
-server.get('/api/u', (req, res)=> {
-  res.send({
-    username: 'doffy_server',
-    fullName: 'Tam Pham',
-    avatar: 'https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/537508_521071031251049_436179873_n.jpg?oh=aff4fd347f12ffd1bc41ac6d8a91d33b&oe=5858F41B',
-    gender: 'male',
-    id: '1283617604996384',
-    email: 'tampham47@live.com'
-  });
-})
+//import passport facebook
+ppfacebook(server);
 
 server.get('*', (req, res, next)=> {
   // incase of authenticated
@@ -86,13 +63,9 @@ server.get('*', (req, res, next)=> {
     var u = req.user;
     u.isAuthenticated = true;
     initialState.currentUser = Immutable.fromJS(u);
-
-    // initialState.currentUser = req.user;
-    // initialState.currentUser.isAuthenticated = true;
   }
 
-  // console.log('>> CURRENT_USER', initialState.currentUser);
-
+  debug('CURRENT_USER', initialState.currentUser);
   let history = useRouterHistory(useQueries(createMemoryHistory))();
   let store = configureStore(initialState);
   let routes = createRoutes(history, store);

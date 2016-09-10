@@ -9,6 +9,7 @@ import superAgent from 'superagent';
 import config from 'config';
 import uuid from 'uuid';
 import _ from 'lodash';
+var debug = require('debug')('passport');
 
 // Configure the Facebook strategy for use by Passport.
 // OAuth 2.0-based strategies require a `verify` function which receives the
@@ -29,7 +30,7 @@ function(accessToken, refreshToken, profile, cb) {
   // be associated with a user record in the application's database, which
   // allows for account linking and authentication with other identity
   // providers.
-  // console.log(`>>PROFILE ${accessToken} : ${refreshToken} : ${profile}`);
+  // debug(`>>PROFILE ${accessToken} : ${refreshToken} : ${profile}`);
 
   var p = mapToGsunProfile(profile);
   var queryStr = JSON.stringify({
@@ -48,7 +49,7 @@ function(accessToken, refreshToken, profile, cb) {
   // insert user into db via apis
   superAgent.get(`${config.API_BASE_URL}/user?query=${queryStr}`)
     .end(function(err, res){
-      console.log('>> ERRR QUERY', err);
+      debug('ERRR QUERY', err);
 
       if (res.body.length > 0) {
         p = _.merge(res.body[0], p);
@@ -58,7 +59,7 @@ function(accessToken, refreshToken, profile, cb) {
         .set('Content-Type', 'application/json')
         .send(p)
         .end(function(err, res) {
-          console.log('>> ERRR UPDATE', err);
+          debug('ERRR UPDATE', err);
 
           if (err) {
             return cb(err, null);
@@ -75,13 +76,13 @@ function(accessToken, refreshToken, profile, cb) {
          first: p.displayName
         };
 
-        console.log('>> INSERT DATA', p);
+        debug('INSERT DATA', p);
 
         superAgent.post(`${config.API_BASE_URL}/user`)
         .set('Content-Type', 'application/json')
         .send(p)
         .end(function(err, res) {
-          console.log('>> ERRR INSERT', err);
+          debug('ERRR INSERT', err);
 
           if (err) {
             return cb(err, null);
@@ -152,7 +153,7 @@ var PassportFacebook = function(app) {
   app.get('/login/facebook/return',
     passport.authenticate('facebook', { failureRedirect: '/login' }),
     function(req, res) {
-      console.log('AFTER LOGIN');
+      debug('AFTER LOGIN');
       res.redirect('/');
     }
   );

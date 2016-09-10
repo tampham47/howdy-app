@@ -19,18 +19,19 @@ import Intro from 'containers/Intro';
 
 let requireAuth = function(store, nextState, replace) {
   var u = store.getState().currentUser && store.getState().currentUser.toJS();
-  console.log('>>> REQUIREAUTH', u);
+  console.log('>>> REQUIREAUTH', u, (u.isAuthenticated || u.isAuthenticated == 'true'));
 
   if (!(u && (u.isAuthenticated || u.isAuthenticated == 'true'))) {
     // Not authenticated, redirect to login.
     var p = nextState.location.pathname;
+    replace('/login');
 
-    replace({
-      pathname: '/login',
-      // query: {
-      //   nextstate: p
-      // }
-    });
+    // replace({
+    //   pathname: '/login',
+    //   query: {
+    //     nextstate: p
+    //   }
+    // });
   }
 };
 

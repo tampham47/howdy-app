@@ -11,7 +11,7 @@ import listener from 'middleware/listener';
 let defaultState = Immutable.fromJS({});
 
 function listenerReducer(state = defaultState, action) {
-  console.log('listenerReducer', state, action);
+  // console.log('listenerReducer', state, action);
   setTimeout(function() {
     listener.pub({ action });
   }, 0);
