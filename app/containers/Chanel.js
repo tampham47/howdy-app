@@ -13,12 +13,16 @@ import LeftMenu from 'components/LeftMenu';
 import HeaderBar from 'components/HeaderBar';
 import PeopleInChannel from 'components/PeopleInChannel';
 import AddChannel from 'components/AddChannel';
+import MessageItem from 'components/MessageItem';
 
 import { changeChanel, loadChannels, loadMessageAndChannel, fetchChannelData } from 'actions/chanels';
 import { showAppearin, changeMode } from 'actions/appearin';
 import * as ChannelType from 'actions/chanels';
 import * as AppearinType from 'actions/appearin';
 import listener from 'middleware/listener';
+import AppearinSDK from 'appearin-sdk';
+
+var appearin = new AppearinSDK();
 
 class Chanel extends Component {
 
@@ -57,6 +61,36 @@ class Chanel extends Component {
       if (!scroller) return;
       scroller.scrollTop = scroller.scrollHeight;
     });
+    listener.sub(ChannelType.CHANEL_CHANGED.toString(), function() {
+      this.props.showAppearin(false);
+      var iframe = document.getElementById('js-appearin-iframe-holder');
+      iframe.src = 'about:blank';
+    }.bind(this));
+    listener.sub(ChannelType.OPENED_APPEARIN_ROOM.toString(), function(event) {
+      this.props.showAppearin(true);
+      var iframe = document.getElementById('js-appearin-iframe-holder');
+      appearin.addRoomToIframe(iframe, event.detail.content);
+    }.bind(this));
+  }
+
+  getMessageData() {
+    var channelUrl = this.props.params.channelUrl || 'goingsunny';
+    var data = {
+      isManual: true,
+      authUser: this.state.currentUser,
+      channelUrl: channelUrl,
+      _user: this.state.currentUser.get('_id'),
+      _channel: null
+    };
+
+    return data;
+  }
+
+  sendMessage(content, type) {
+    var d = this.getMessageData();
+    d.content = content;
+    d.type = type;
+    client.publish('goingsunny', JSON.stringify(d));
   }
 
   handleKeyPress(e) {
@@ -68,23 +102,8 @@ class Chanel extends Component {
         return;
       }
 
-      var channelUrl = this.props.params.channelUrl || 'goingsunny';
-
-      var data = JSON.stringify({
-        isManual: true,
-        chanelId: this.props.chanels.get('currentChanel'),
-        content: this.state.inputMessage,
-        authUser: this.state.currentUser,
-        channelUrl: channelUrl,
-        _user: this.state.currentUser.get('_id'),
-        _channel: null
-      });
-
-      client.publish('goingsunny', data);
-
-      this.setState({
-        inputMessage: ''
-      });
+      this.sendMessage(this.state.inputMessage);
+      this.setState({ inputMessage: '' });
     }
   }
 
@@ -101,6 +120,28 @@ class Chanel extends Component {
   handleAddVideoRoom(isAppearin) {
     console.log('Channel.handleAddVideoRoom');
     this.props.showAppearin(isAppearin);
+    var iframe = document.getElementById('js-appearin-iframe-holder');
+
+    if (isAppearin) {
+      appearin.getRandomRoomName(function (err, roomName) {
+        if (err) {
+          alert(err.toString());
+        } else {
+          appearin.addRoomToIframe(iframe, roomName);
+          this.sendMessage(roomName, 'appearin-room');
+        }
+      }.bind(this));
+    } else {
+      // remove appearin out of iframe
+      iframe.src = 'about:blank';
+
+    }
+  }
+
+  applyRoom(roomName) {
+    var iframe = document.getElementById('js-appearin-iframe-holder');
+    appearin.addRoomToIframe(iframe, roomName);
+    this.props.showAppearin(true);
   }
 
   handleChangeMode(mode) {
@@ -151,7 +192,7 @@ class Chanel extends Component {
                           <small className="message-item__title__username">{`@${item.authUser.displayName}`}</small>
                           <small className="message-item__title__time">Jul 03 19:46</small>
                         </div>
-                        <p>{item.content}</p>
+                        <MessageItem datacontext={item} />
                       </div>
                     </div>
                   );
@@ -207,7 +248,8 @@ class Chanel extends Component {
                   </a>
                 </div>
                 <div className="appearin-iframe__content">
-                  <iframe src="https://appear.in/tampham47" width="100%" height="100%" frameBorder="0"></iframe>
+                  <iframe src="" id="js-appearin-iframe-holder" width="100%" height="100%" frameBorder="0"></iframe>
+                  {/*<iframe src="https://appear.in/tampham47" width="100%" height="100%" frameBorder="0"></iframe>*/}
                 </div>
               </div>
             </div>

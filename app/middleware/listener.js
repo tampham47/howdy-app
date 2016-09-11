@@ -14,9 +14,7 @@ Listener.prototype.sub = function(actionType, callback) {
 Listener.prototype.pub = function({ action }) {
   if (typeof window !== 'undefined') {
     window.dispatchEvent(new CustomEvent(action.type.toString(), {
-      detail: {
-        payload: action.response
-      }
+      detail: action.response
     }));
   }
 };
