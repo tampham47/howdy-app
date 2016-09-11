@@ -118,9 +118,10 @@
   height: 100%;
   width: 100%;
   vertical-align: middle;
-  border: none;
   position: relative;
   padding: 0;
+  border: none;
+  border-radius: 0;
 
   &__m-wrapper {
     display: block;
@@ -134,7 +135,23 @@
     }
   }
 
+  &:after {
+    position: absolute;
+    left: $gutter/2;
+    top: $gutter/2;
+    bottom: $gutter/2;
+    right: $gutter/2;
+    border: 1px dashed gray;
+    border-radius: 4px;
+    content: '';
+  }
+
   &:hover {
     background-color: #C8E29D;
+    color: white;
+
+    &:after {
+      border-color: white;
+    }
   }
 }

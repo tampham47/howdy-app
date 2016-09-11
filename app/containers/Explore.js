@@ -8,118 +8,46 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import LeftMenu from 'components/LeftMenu';
 import HeaderBar from 'components/HeaderBar';
-// import { loadExploreDetail } from 'actions/Explores';
+import { loadChannels } from 'actions/chanels';
 
 class Explore extends Component {
-  // static fetchData({ store, params }) {
-  //   let { id } = params
-  //   return store.dispatch(loadExploreDetail({ id }))
-  // }
+  static fetchData({ store, params }) {
+    return store.dispatch(loadChannels());
+  }
 
   componentDidMount() {
-    // let { id } = this.props.params;
-    // this.props.loadExploreDetail({ id });
+    this.props.loadChannels();
   }
 
   render() {
-    let chanelData = this.props.chanels.toJS();
+    let channelList = this.props.channelList;
 
     return (
       <div className="relm">
-        <LeftMenu chanelList={chanelData.chanelList} />
+        <LeftMenu chanelList={this.props.channelList} />
 
         <main className="main-area">
           <HeaderBar title='Explore chanels' />
 
           <div className="main-content main-content--expand">
-            <div className="row">
-              <div className="columns four">
-                <div className="room-item">
-                  <div className="room-item__head">
-                    <div className="room-item__head__icon">
-                      <img src="http://place-hoff.com/50/50" alt=""/>
+            <div className="row explore-channel">
+            {this.props.channelList.map(function(i) {
+              return (
+                <div className="columns six">
+                  <div className="room-item">
+                    <div className="room-item__head">
+                      <div className="room-item__head__icon">
+                        <img src="http://place-hoff.com/50/50" alt=""/>
+                      </div>
+                      <Link to={`/channel/${i.url}`} className="room-item__head__title">{i.name}</Link>
+                      <p>{i.description}</p>
                     </div>
-                    <h6 className="room-item__head__title">Goingsunny</h6>
-                  </div>
-                  <div className="room-item__body">
-                    <p>Bài thơ đầu anh viết tặng em, là bài thơ kể về đôi dép, khi nỗi nhớ trong...</p>
-                    <button>view</button>
                   </div>
                 </div>
-              </div>
-              <div className="columns four">
-                <div className="room-item">
-                  <div className="room-item__head">
-                    <div className="room-item__head__icon">
-                      <img src="http://place-hoff.com/45/45" alt=""/>
-                    </div>
-                    <h6 className="room-item__head__title">English Town</h6>
-                  </div>
-                  <div className="room-item__body">
-                    <p>Bài thơ đầu anh viết tặng em, là bài thơ kể về đôi dép, khi nỗi nhớ trong...</p>
-                    <button>view</button>
-                  </div>
-                </div>
-              </div>
-              <div className="columns four">
-                <div className="room-item">
-                  <div className="room-item__head">
-                    <div className="room-item__head__icon">
-                      <img src="http://place-hoff.com/55/55" alt=""/>
-                    </div>
-                    <h6 className="room-item__head__title">Tiếng anh thật dễ</h6>
-                  </div>
-                  <div className="room-item__body">
-                    <p>Bài thơ đầu anh viết tặng em, là bài thơ kể về đôi dép, khi nỗi nhớ trong...</p>
-                    <button>view</button>
-                  </div>
-                </div>
-              </div>
+              );
+            })}
             </div>
-            <div className="row">
-              <div className="columns four">
-                <div className="room-item">
-                  <div className="room-item__head">
-                    <div className="room-item__head__icon">
-                      <img src="http://place-hoff.com/41/41" alt=""/>
-                    </div>
-                    <h6 className="room-item__head__title">Tiếng anh cho người lớn</h6>
-                  </div>
-                  <div className="room-item__body">
-                    <p>Bài thơ đầu anh viết tặng em, là bài thơ kể về đôi dép, khi nỗi nhớ trong...</p>
-                    <button>view</button>
-                  </div>
-                </div>
-              </div>
-              <div className="columns four">
-                <div className="room-item">
-                  <div className="room-item__head">
-                    <div className="room-item__head__icon">
-                      <img src="http://place-hoff.com/52/52" alt=""/>
-                    </div>
-                    <h6 className="room-item__head__title">Topica Native</h6>
-                  </div>
-                  <div className="room-item__body">
-                    <p>Bài thơ đầu anh viết tặng em, là bài thơ kể về đôi dép, khi nỗi nhớ trong...</p>
-                    <button>view</button>
-                  </div>
-                </div>
-              </div>
-              <div className="columns four">
-                <div className="room-item">
-                  <div className="room-item__head">
-                    <div className="room-item__head__icon">
-                      <img src="http://place-hoff.com/53/53" alt=""/>
-                    </div>
-                    <h6 className="room-item__head__title">ABA English</h6>
-                  </div>
-                  <div className="room-item__body">
-                    <p>Bài thơ đầu anh viết tặng em, là bài thơ kể về đôi dép, khi nỗi nhớ trong...</p>
-                    <button>view</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+
           </div>
         </main>
       </div>
@@ -129,7 +57,7 @@ class Explore extends Component {
 
 function mapStateToProps(state) {
   return {
-    chanels: state.chanels,
+    channelList: state.chanels.toJS().chanelList,
   };
 }
 
@@ -137,4 +65,4 @@ Explore.propTypes = {
 };
 
 export { Explore };
-export default connect(mapStateToProps)(Explore);
+export default connect(mapStateToProps, { loadChannels })(Explore);
