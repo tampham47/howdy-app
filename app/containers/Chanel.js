@@ -13,6 +13,7 @@ import LeftMenu from 'components/LeftMenu';
 import HeaderBar from 'components/HeaderBar';
 import PeopleInChannel from 'components/PeopleInChannel';
 import AddChannel from 'components/AddChannel';
+import MessageItem from 'components/MessageItem';
 
 import { changeChanel, loadChannels, loadMessageAndChannel, fetchChannelData } from 'actions/chanels';
 import { showAppearin, changeMode } from 'actions/appearin';
@@ -64,6 +65,11 @@ class Chanel extends Component {
       this.props.showAppearin(false);
       var iframe = document.getElementById('js-appearin-iframe-holder');
       iframe.src = 'about:blank';
+    }.bind(this));
+    listener.sub(ChannelType.OPENED_APPEARIN_ROOM.toString(), function(event) {
+      this.props.showAppearin(true);
+      var iframe = document.getElementById('js-appearin-iframe-holder');
+      appearin.addRoomToIframe(iframe, event.detail.content);
     }.bind(this));
   }
 
@@ -186,7 +192,7 @@ class Chanel extends Component {
                           <small className="message-item__title__username">{`@${item.authUser.displayName}`}</small>
                           <small className="message-item__title__time">Jul 03 19:46</small>
                         </div>
-                        <p>{item.content}</p>
+                        <MessageItem datacontext={item} />
                       </div>
                     </div>
                   );
