@@ -14,6 +14,7 @@ import HeaderBar from 'components/HeaderBar';
 import PeopleInChannel from 'components/PeopleInChannel';
 import AddChannel from 'components/AddChannel';
 import MessageItem from 'components/MessageItem';
+import NotificationPanel from 'components/NotificationPanel';
 
 import { changeChanel, loadChannels, loadMessageAndChannel, fetchChannelData } from 'actions/chanels';
 import { showAppearin, changeMode } from 'actions/appearin';
@@ -170,6 +171,7 @@ class Chanel extends Component {
 
     return (
       <div className="relm">
+        <NotificationPanel isActive={false} />
         <AddChannel isActive={chanelData.isShowAddChannelComp} />
         <LeftMenu chanelList={chanelData.chanelList} />
 

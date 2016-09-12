@@ -62,7 +62,7 @@ class AddRoom extends Component {
       <div className={`comp-add-room ${isActive}`}>
         <div className="comp-add-room__wrapper">
           <div className="container">
-            <div className="columns six offset-by-three">
+            <div className="columns eight offset-by-two">
               <div className="comp-add-room__content">
                 <form className="add-room-form" onSubmit={()=>false}>
                   <h5 className="add-room-form__title">Add channel</h5>

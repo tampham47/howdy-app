@@ -1,0 +1,40 @@
+/**
+ * gsun 2016
+ * tw
+ */
+
+
+.notification-p {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+  z-index: 99999;
+  background-color: rgba(grey, 0.8);
+  overflow-y: scroll;
+
+  &._active {
+    display: block;
+  }
+
+  &__wrapper {
+    margin-top: 0;
+    margin-bottom: $gutter;
+  }
+
+  &__content {
+    background-color: white;
+    padding: $gutter;
+    border-radius: 4px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    overflow: hidden;
+  }
+
+  button,
+  .button {
+    margin-bottom: 0;
+  }
+}

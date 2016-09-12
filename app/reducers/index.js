@@ -11,6 +11,7 @@ import messages from 'reducers/messages';
 import appearin from 'reducers/appearin';
 import users from 'reducers/users';
 import listener from 'reducers/listener';
+import notifications from 'reducers/notifications';
 
 // import questions from 'reducers/questions';
 // import questionDetail from 'reducers/questionDetail';
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   messages,
   appearin,
   users,
+  notifications,
   listener,
 });
 
