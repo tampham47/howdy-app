@@ -29,7 +29,8 @@ class Chanel extends Component {
 
   static fetchData({ store, params }) {
     var channelUrl = params.channelUrl || 'goingsunny';
-    return store.dispatch(fetchChannelData({ channelUrl }));
+    var userId = store.getState().currentUser.id;
+    return store.dispatch(fetchChannelData({ channelUrl, userId }));
   }
 
   static getDefaultStore({ store, params }) {
@@ -47,9 +48,10 @@ class Chanel extends Component {
   }
 
   componentDidMount() {
-    console.log('Channel.componentDidMount');
+    console.log('Channel.componentDidMount', this.props.currentUser);
     var channelUrl = this.props.params.channelUrl || 'goingsunny';
-    this.props.fetchChannelData({ channelUrl });
+    var userId = this.props.currentUser._id;
+    this.props.fetchChannelData({ channelUrl, userId });
 
     // scroll to newest message
     var scroller = document.getElementById('content-scroller');
@@ -80,7 +82,7 @@ class Chanel extends Component {
       isManual: true,
       authUser: this.state.currentUser,
       channelUrl: channelUrl,
-      _user: this.state.currentUser.get('_id'),
+      _user: this.state.currentUser._id,
       _channel: null
     };
 
@@ -264,7 +266,7 @@ class Chanel extends Component {
 
 function mapStateToProps(state) {
   return {
-    currentUser: state.currentUser,
+    currentUser: state.currentUser.toJS(),
     chanels: state.chanels,
     messages: state.messages,
     appearin: state.appearin,

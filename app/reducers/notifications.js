@@ -9,6 +9,8 @@ let defaultState = Immutable.fromJS([]);
 
 function notificationsReducer(state = defaultState, action) {
   switch(action.type) {
+    case action.LOADED_NOTIFICATIONS:
+      return Immutable.fromJS(action.response);
     default:
       return state;
   }

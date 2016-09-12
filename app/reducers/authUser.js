@@ -4,12 +4,16 @@
 
 import Immutable from 'immutable';
 let defaultState = Immutable.fromJS({
-  profile: {},
-  userNotifications: [],
+  notifications: [],
 });
 
-function authUserReducer (state = defaultState) {
-  return state;
+function authUserReducer (state = defaultState, action) {
+  switch(action.type) {
+    case action.LOADED_USER_NOTIFICATIONS:
+      return state.set('notifications', action.response);
+    default:
+      return state;
+  }
 }
 
 export default authUserReducer;

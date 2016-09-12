@@ -6,14 +6,17 @@
 import { CALL_API, CHAIN_API } from 'middleware/api';
 import config from 'config';
 
-export const LOADED_USER = Symbol('LOADED_USER');
 export const SHOWED_ADD_CHANNEL_COMP = Symbol('SHOWED_ADD_CHANNEL_COMP');
 export const CHANEL_CHANGED = Symbol('CHANEL_CHANGED');
 export const CHANNEL_LOADED = Symbol('CHANNEL_LOADED');
 export const NEW_MESSAGE = Symbol('NEW_MESSAGE');
-export const LOADED_MESSAGES = Symbol('LOADED_MESSAGES');
 export const ADDED_CHANNEL = Symbol('ADDED_CHANNEL');
 export const OPENED_APPEARIN_ROOM = Symbol('OPENED_APPEARIN_ROOM');
+
+export const LOADED_MESSAGES = Symbol('LOADED_MESSAGES');
+export const LOADED_USER = Symbol('LOADED_USER');
+export const LOADED_NOTIFICATIONS = Symbol('LOADED_NOTIFICATIONS');
+export const LOADED_USER_NOTIFICATIONS = Symbol('LOADED_USER_NOTIFICATIONS');
 
 export function openAppearinRoom(payload) {
   return {
@@ -85,9 +88,37 @@ export function loadMessageAndChannel({ channelUrl }) {
   }
 }
 
-export function fetchChannelData({ channelUrl }) {
+export function fetchChannelData({ channelUrl, userId }) {
   return {
     [CHAIN_API]: [
+      ()=> {
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: '/notification',
+            query: {
+              query: JSON.stringify({
+                state: 'public'
+              })
+            },
+            successType: LOADED_NOTIFICATIONS
+          }
+        };
+      },
+      (notifications)=> {
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: '/usernotification',
+            query: {
+              query: JSON.stringify({
+                _user: userId
+              })
+            },
+            successType: LOADED_USER_NOTIFICATIONS
+          }
+        };
+      },
       ()=> {
         return {
           [CALL_API]: {
