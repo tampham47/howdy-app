@@ -6,7 +6,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { showAddChannelComp, addChannel } from 'actions/chanels';
-import { updateNotificationPanelState } from 'actions/app-state';
+import { updateNotificationPanelState, updateNotificationAsRead } from 'actions/app-state';
 
 
 class NotificationPanel extends Component {
@@ -23,14 +23,20 @@ class NotificationPanel extends Component {
 
   handleSubmitButton() {
     console.log('handleSubmitButton');
+    var notiList = this.props.unreadNotiList;
+    var user = this.props.currentUser;
+
     this.props.updateNotificationPanelState(false);
+    this.props.updateNotificationAsRead(notiList, user);
   }
 
   render() {
+    console.log('NotificationPanel.render', this.props.currentUser);
+
     var isActive = this.props.isActive ? '_active' : '';
-    var notificationList = this.props.notifications.map(function(i) {
+    var notificationList = this.props.unreadNotiList.map(function(i) {
       return (
-        <li>{i.content}</li>
+        <li key={i.id}>{i.content}</li>
       );
     });
 
@@ -58,13 +64,14 @@ class NotificationPanel extends Component {
 
 function mapStateToProps(state) {
   return {
-    currentUser: state.currentUser
+    currentUser: state.currentUser.toJS()
   };
 }
 var mapDispatchToProps = {
   showAddChannelComp,
   addChannel,
-  updateNotificationPanelState
+  updateNotificationPanelState,
+  updateNotificationAsRead
 };
 
 

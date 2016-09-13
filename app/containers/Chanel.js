@@ -45,17 +45,20 @@ class Chanel extends Component {
     this.state = {
       inputMessage: '',
       currentUser: props.currentUser,
+      unreadNotiList: []
     };
   }
 
   componentDidMount() {
-    console.log('Channel.componentDidMount', this.props.currentUser);
     var channelUrl = this.props.params.channelUrl || 'goingsunny';
     var userId = this.props.currentUser._id;
     this.props.fetchChannelData({ channelUrl, userId });
     // check more data later
-    if (this.props.notifications.length > 0) {
+    var unreadNotiList = this.getUnreadNotifications(this.props.notifications, this.props.userNotifications);
+    console.log('Channel.componentDidMount', unreadNotiList, this.props.userNotifications);
+    if (unreadNotiList.length > 0) {
       this.props.updateNotificationPanelState(true);
+      this.setState({ unreadNotiList });
     }
 
     // scroll to newest message
@@ -156,6 +159,27 @@ class Chanel extends Component {
     this.props.changeMode(mode);
   }
 
+  getUnreadNotifications(notiList, userNotiList) {
+    var r = [];
+
+    for (var i = 0; i < notiList.length; i++) {
+      var b = false;
+
+      for (var j = 0; j < userNotiList.length; j++) {
+        if (notiList[i].id === userNotiList[j].notification) {
+          b = true;
+          break;
+        }
+      }
+
+      if (!b) {
+        r.push(notiList[i]);
+      }
+    }
+
+    return r;
+  }
+
   render() {
     var channelUrl = this.props.params.channelUrl || 'goingsunny';
     var propsData = JSON.parse(JSON.stringify(this.props));
@@ -171,16 +195,13 @@ class Chanel extends Component {
     var isAppearinActive = this.props.appearin.get('isAppearin') ? '_active' : '';
     var users = this.props.users.toJS();
 
-    console.log('propsData', propsData);
-    console.log('messages', this.props.messages.toJS());
-    console.log('appearinMode', appearinMode);
-    console.log('channelDetail', channelDetail, chanelData.chanelList);
+    console.log('propsData', this.props);
 
     return (
       <div className="relm">
         <NotificationPanel
           isActive={this.props.appState.notificationPanelState}
-          notifications={this.props.notifications} />
+          unreadNotiList={this.state.unreadNotiList} />
         <AddChannel isActive={chanelData.isShowAddChannelComp} />
         <LeftMenu chanelList={chanelData.chanelList} />
 
