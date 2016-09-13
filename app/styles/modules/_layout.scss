@@ -47,9 +47,13 @@ body {
   width: $main-content-w;
   position: relative;
   height: 100%;
-  padding-top: $header-h;
   padding-bottom: 70px;
   min-height: 300px;
+
+  &__wrapper {
+    padding-top: $header-h;
+    height: 100%;
+  }
 
   &__scroller {
     height: 100%;
