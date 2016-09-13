@@ -10,17 +10,27 @@ import { showAddChannelComp, addChannel } from 'actions/chanels';
 
 class NotificationPanel extends Component {
 
-  handleCancelButton() {
-  }
-
-  handleSubmitButton() {
+  constructor(props) {
+    super(props);
   }
 
   componentDidMount() {
   }
 
+  handleCancelButton() {
+  }
+
+  handleSubmitButton() {
+    console.log('handleSubmitButton');
+  }
+
   render() {
     var isActive = this.props.isActive ? '_active' : '';
+    var notificationList = this.props.notifications.map(function(i) {
+      return (
+        <li>{i.content}</li>
+      );
+    });
 
     return (
       <div className={`notification-p ${isActive}`}>
@@ -28,10 +38,12 @@ class NotificationPanel extends Component {
           <div className="container">
             <div className="columns eight offset-by-two">
               <div className="notification-p__content">
-                <p>NotificationPanel</p>
+              <ul className="notification-list">
+                { notificationList }
+              </ul>
 
                 <div className="u-pull-right">
-                  <button>OK</button>
+                  <button onClick={this.handleSubmitButton.bind(this)}>OK</button>
                 </div>
               </div>
             </div>

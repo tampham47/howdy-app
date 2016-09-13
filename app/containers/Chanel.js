@@ -173,7 +173,7 @@ class Chanel extends Component {
 
     return (
       <div className="relm">
-        <NotificationPanel isActive={false} />
+        <NotificationPanel isActive={true} {...this.props} />
         <AddChannel isActive={chanelData.isShowAddChannelComp} />
         <LeftMenu chanelList={chanelData.chanelList} />
 
@@ -271,6 +271,8 @@ function mapStateToProps(state) {
     messages: state.messages,
     appearin: state.appearin,
     users: state.users,
+    notifications: state.notifications.toJS(),
+    userNotifications: state.userNotifications.toJS()
   };
 }
 
