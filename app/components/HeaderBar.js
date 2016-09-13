@@ -15,10 +15,9 @@ class HeaderBar extends Component {
           {this.props.title || 'Goingsunny'}
         </h1>
         <div className="header-bar__control-wrapper">
-          <a href=""><i className="fa fa-star-o"></i></a>
-          <a href=""><i className="fa fa-cog"></i></a>
-          <a href=""><i className="fa fa-send-o"></i></a>
-          <a href=""><i className="fa fa-toggle-left"></i></a>
+          <a href=""><i className="fa fa-paper-plane-o"></i></a>
+          <a href=""><i className="fa fa-bookmark-o"></i></a>
+          <a href=""><i className="fa fa-bars"></i></a>
         </div>
       </div>
     )
