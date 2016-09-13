@@ -6,6 +6,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { showAddChannelComp, addChannel } from 'actions/chanels';
+import { updateNotificationPanelState } from 'actions/app-state';
 
 
 class NotificationPanel extends Component {
@@ -22,6 +23,7 @@ class NotificationPanel extends Component {
 
   handleSubmitButton() {
     console.log('handleSubmitButton');
+    this.props.updateNotificationPanelState(false);
   }
 
   render() {
@@ -59,7 +61,12 @@ function mapStateToProps(state) {
     currentUser: state.currentUser
   };
 }
+var mapDispatchToProps = {
+  showAddChannelComp,
+  addChannel,
+  updateNotificationPanelState
+};
 
 
 NotificationPanel.propTypes = {};
-export default connect(mapStateToProps, { showAddChannelComp, addChannel })(NotificationPanel);
+export default connect(mapStateToProps, mapDispatchToProps)(NotificationPanel);

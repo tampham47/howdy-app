@@ -17,6 +17,7 @@ import MessageItem from 'components/MessageItem';
 import NotificationPanel from 'components/NotificationPanel';
 
 import { changeChanel, loadChannels, loadMessageAndChannel, fetchChannelData } from 'actions/chanels';
+import { updateNotificationPanelState } from 'actions/app-state';
 import { showAppearin, changeMode } from 'actions/appearin';
 import * as ChannelType from 'actions/chanels';
 import * as AppearinType from 'actions/appearin';
@@ -52,6 +53,10 @@ class Chanel extends Component {
     var channelUrl = this.props.params.channelUrl || 'goingsunny';
     var userId = this.props.currentUser._id;
     this.props.fetchChannelData({ channelUrl, userId });
+    // check more data later
+    if (this.props.notifications.length > 0) {
+      this.props.updateNotificationPanelState(true);
+    }
 
     // scroll to newest message
     var scroller = document.getElementById('content-scroller');
@@ -173,7 +178,9 @@ class Chanel extends Component {
 
     return (
       <div className="relm">
-        <NotificationPanel isActive={true} {...this.props} />
+        <NotificationPanel
+          isActive={this.props.appState.notificationPanelState}
+          notifications={this.props.notifications} />
         <AddChannel isActive={chanelData.isShowAddChannelComp} />
         <LeftMenu chanelList={chanelData.chanelList} />
 
@@ -266,6 +273,7 @@ class Chanel extends Component {
 
 function mapStateToProps(state) {
   return {
+    appState: state.appState.toJS(),
     currentUser: state.currentUser.toJS(),
     chanels: state.chanels,
     messages: state.messages,
@@ -282,7 +290,8 @@ var mapDispatchToProps = {
   loadMessageAndChannel,
   showAppearin,
   changeMode,
-  fetchChannelData
+  fetchChannelData,
+  updateNotificationPanelState
 }
 
 Chanel.propTypes = {

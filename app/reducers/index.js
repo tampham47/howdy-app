@@ -13,6 +13,7 @@ import users from 'reducers/users';
 import listener from 'reducers/listener';
 import notifications from 'reducers/notifications';
 import userNotifications from 'reducers/userNotifications';
+import appState from 'reducers/app-state';
 
 // import questions from 'reducers/questions';
 // import questionDetail from 'reducers/questionDetail';
@@ -20,6 +21,7 @@ import userNotifications from 'reducers/userNotifications';
 // import authUser from 'reducers/authUser';
 
 const rootReducer = combineReducers({
+  appState,
   chanels,
   currentUser,
   messages,
