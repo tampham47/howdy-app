@@ -57,6 +57,11 @@
       &:last-child {
         margin-right: -$spacing;
       }
+
+      &._active {
+        background-color: $primary-color;
+        color: white;
+      }
     }
   }
 }

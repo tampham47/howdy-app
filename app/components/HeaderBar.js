@@ -4,7 +4,6 @@
 
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { List } from 'immutable';
 
 class HeaderBar extends Component {
   render() {

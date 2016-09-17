@@ -10,11 +10,13 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router';
 
 import LeftMenu from 'components/LeftMenu';
-import HeaderBar from 'components/HeaderBar';
+import ChannelHeader from 'components/ChannelHeader';
 import PeopleInChannel from 'components/PeopleInChannel';
 import AddChannel from 'components/AddChannel';
-import MessageItem from 'components/MessageItem';
 import NotificationPanel from 'components/NotificationPanel';
+import Lesson from 'components/Lesson';
+import MessageList from 'components/MessageList';
+import ChannelSetting from 'components/ChannelSetting';
 
 import { changeChanel, loadChannels, loadMessageAndChannel, fetchChannelData } from 'actions/chanels';
 import { updateNotificationPanelState } from 'actions/app-state';
@@ -82,6 +84,10 @@ class Chanel extends Component {
       var iframe = document.getElementById('js-appearin-iframe-holder');
       appearin.addRoomToIframe(iframe, event.detail.content);
     }.bind(this));
+  }
+
+  componentWillReceiveProps(props) {
+    console.log('Chanel.componentWillReceiveProps', props);
   }
 
   getMessageData() {
@@ -184,7 +190,7 @@ class Chanel extends Component {
     var channelUrl = this.props.params.channelUrl || 'goingsunny';
     var propsData = JSON.parse(JSON.stringify(this.props));
 
-    var chanelData = propsData.chanels;
+    var chanelData = this.props.chanels;
     var currentChanel = chanelData.currentChanel;
 
     var channelDetail = _.find(chanelData.chanelList, function(i) {
@@ -195,7 +201,18 @@ class Chanel extends Component {
     var isAppearinActive = this.props.appearin.get('isAppearin') ? '_active' : '';
     var users = this.props.users.toJS();
 
-    console.log('propsData', this.props);
+    var mainContent;
+
+    switch (this.props.location.query.tab) {
+      case 'message':
+        mainContent = <MessageList datacontext={messageList} />
+        break;
+      case 'lesson':
+        mainContent = <Lesson datacontext={this.props.channelData.currentLesson} />
+        break
+      default:
+        mainContent = <ChannelSetting />
+    }
 
     return (
       <div className="relm">
@@ -207,30 +224,13 @@ class Chanel extends Component {
 
         <main className="main-area">
           <div className="main-content">
-            <HeaderBar title={channelDetail.name} datacontext={channelDetail} />
+            <ChannelHeader title={channelDetail.name} datacontext={channelDetail}
+              location={this.props.location} />
 
             <div className="main-content__wrapper">
               <div id='content-scroller' className="main-content__scroller">
-                <div className="message-list">
-                  {messageList.map(function(item, index) {
-                    item.authUser = item.authUser || {};
-                    return (
-                      <div className="message-item" key={index}>
-                        <div className="message-item__icon">
-                          <img src={item.authUser.avatar} alt=""/>
-                        </div>
-                        <div className="message-item__wrapper">
-                          <div className="message-item__title">
-                            <span className="message-item__title__name">{item.authUser.displayName}</span>
-                            <small className="message-item__title__username">{`@${item.authUser.displayName}`}</small>
-                            <small className="message-item__title__time">Jul 03 19:46</small>
-                          </div>
-                          <MessageItem datacontext={item} />
-                        </div>
-                      </div>
-                    );
-                  }.bind(this))}
-                </div>
+                {/*<MessageList datacontext={messageList} />*/}
+                { mainContent }
               </div>
             </div>
 
@@ -299,7 +299,8 @@ function mapStateToProps(state) {
   return {
     appState: state.appState.toJS(),
     currentUser: state.currentUser.toJS(),
-    chanels: state.chanels,
+    chanels: state.chanels.toJS(),
+    channelData: state.chanels.toJS(),
     messages: state.messages,
     appearin: state.appearin,
     users: state.users,

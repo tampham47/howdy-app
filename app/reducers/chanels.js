@@ -10,7 +10,8 @@ let defaultState = Immutable.fromJS({
   currentChanel: 'goingsunny',
   chanelList: [],
   messagesInChanel: {},
-  isShowAddChannelComp: false
+  isShowAddChannelComp: false,
+  currentLesson: {}
 });
 
 function chanelsReducer(state = defaultState, action) {
@@ -23,6 +24,9 @@ function chanelsReducer(state = defaultState, action) {
 
     case ActionType.SHOWED_ADD_CHANNEL_COMP:
       return state.set('isShowAddChannelComp', action.response);
+
+    case ActionType.LOADED_LESSON_BY_CURRENT_DATE:
+      return state.set('currentLesson', action.response && action.response[0]);
 
     case ActionType.ADDED_CHANNEL:
       return state

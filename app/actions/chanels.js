@@ -5,6 +5,7 @@
 
 import { CALL_API, CHAIN_API } from 'middleware/api';
 import config from 'config';
+import moment from 'moment';
 
 export const SHOWED_ADD_CHANNEL_COMP = Symbol('SHOWED_ADD_CHANNEL_COMP');
 export const CHANEL_CHANGED = Symbol('CHANEL_CHANGED');
@@ -15,8 +16,96 @@ export const OPENED_APPEARIN_ROOM = Symbol('OPENED_APPEARIN_ROOM');
 
 export const LOADED_MESSAGES = Symbol('LOADED_MESSAGES');
 export const LOADED_USER = Symbol('LOADED_USER');
-export const LOADED_NOTIFICATIONS = Symbol('LOADED_NOTIFICATIONS');
 export const LOADED_USER_NOTIFICATIONS = Symbol('LOADED_USER_NOTIFICATIONS');
+export const LOADED_NOTIFICATIONS = Symbol('LOADED_NOTIFICATIONS');
+export const LOADED_LESSON_BY_CURRENT_DATE = Symbol('LOADED_LESSON_BY_CURRENT_DATE');
+
+
+
+export function fetchChannelData({ channelUrl, userId }) {
+  return {
+    [CHAIN_API]: [
+      ()=> {
+        var currentDateStr = moment().format('YYYYMMDD');
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: '/lesson',
+            query: {
+              query: JSON.stringify({
+                availableDateStr: currentDateStr
+              })
+            },
+            successType: LOADED_LESSON_BY_CURRENT_DATE
+          }
+        };
+      },
+      ()=> {
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: '/notification',
+            query: {
+              query: JSON.stringify({
+                state: 'public'
+              })
+            },
+            successType: LOADED_NOTIFICATIONS
+          }
+        };
+      },
+      (notifications)=> {
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: '/usernotification',
+            query: {
+              query: JSON.stringify({
+                _user: userId
+              })
+            },
+            successType: LOADED_USER_NOTIFICATIONS
+          }
+        };
+      },
+      ()=> {
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: '/user',
+            successType: LOADED_USER
+          }
+        }
+      },
+      (users)=> {
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: '/channel',
+            query: {
+              sort: JSON.stringify({ createdAt: 1 }),
+            },
+            successType: CHANNEL_LOADED
+          }
+        };
+      },
+      (channels) => {
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: '/message',
+            query: {
+              limit: config.MESSAGE_LIMIT,
+              sort: JSON.stringify({ createdAt: -1 }),
+              query: JSON.stringify({ channelUrl: channelUrl})
+            },
+            successType: LOADED_MESSAGES
+          }
+        }
+      }
+    ]
+  }
+}
 
 export function openAppearinRoom(payload) {
   return {
@@ -71,76 +160,6 @@ export function loadMessageAndChannel({ channelUrl }) {
       },
       (channels) => {
 
-        return {
-          [CALL_API]: {
-            method: 'get',
-            path: '/message',
-            query: {
-              limit: config.MESSAGE_LIMIT,
-              sort: JSON.stringify({ createdAt: -1 }),
-              query: JSON.stringify({ channelUrl: channelUrl})
-            },
-            successType: LOADED_MESSAGES
-          }
-        }
-      }
-    ]
-  }
-}
-
-export function fetchChannelData({ channelUrl, userId }) {
-  return {
-    [CHAIN_API]: [
-      ()=> {
-        return {
-          [CALL_API]: {
-            method: 'get',
-            path: '/notification',
-            query: {
-              query: JSON.stringify({
-                state: 'public'
-              })
-            },
-            successType: LOADED_NOTIFICATIONS
-          }
-        };
-      },
-      (notifications)=> {
-        return {
-          [CALL_API]: {
-            method: 'get',
-            path: '/usernotification',
-            query: {
-              query: JSON.stringify({
-                _user: userId
-              })
-            },
-            successType: LOADED_USER_NOTIFICATIONS
-          }
-        };
-      },
-      ()=> {
-        return {
-          [CALL_API]: {
-            method: 'get',
-            path: '/user',
-            successType: LOADED_USER
-          }
-        }
-      },
-      (users)=> {
-        return {
-          [CALL_API]: {
-            method: 'get',
-            path: '/channel',
-            query: {
-              sort: JSON.stringify({ createdAt: 1 }),
-            },
-            successType: CHANNEL_LOADED
-          }
-        };
-      },
-      (channels) => {
         return {
           [CALL_API]: {
             method: 'get',
