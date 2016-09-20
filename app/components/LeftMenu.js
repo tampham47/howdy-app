@@ -27,6 +27,23 @@ class LeftMenu extends Component {
     return (
       <nav className="left-menu">
         <ul className="left-menu-room-list">
+          {/*<li className="left-menu-room-item">
+            <div className="left-menu-room-item-icon"></div>
+            <Link to='/profile' className="left-menu-room-item-name">Tam Pham</Link>
+          </li>
+          <li className="left-menu-room-item">
+            <div className="left-menu-room-item-icon"></div>
+            <Link to='/people' className="left-menu-room-item-name">People</Link>
+          </li>
+          <li className="left-menu-room-item">
+            <div className="left-menu-room-item-icon"></div>
+            <Link to='/explore' className="left-menu-room-item-name">Explore</Link>
+          </li>
+          <li><h6>Channels</h6></li>*/}
+          <li className="left-menu-room-item">
+            <div className="left-menu-room-item-icon"></div>
+            <Link to='/profile' className="left-menu-room-item-name">Your Profile</Link>
+          </li>
           {this.props.chanelList.map(function(e) {
             return (
               <li className="left-menu-room-item" key={e.id}>
@@ -36,11 +53,6 @@ class LeftMenu extends Component {
               </li>
             );
           }.bind(this))}
-
-          <li className="left-menu-room-item">
-            <div className="left-menu-room-item-icon"></div>
-            <Link to='/explore' className="left-menu-room-item-name">Explore</Link>
-          </li>
         </ul>
 
         <button className="left-menu__new-room-btn button-primary"

@@ -35,6 +35,8 @@ let requireAuth = function(store, nextState, replace) {
   }
 };
 
+var NoMatchComp;
+
 export default function(history, store) {
   return (
     <Router history={history}>
@@ -44,6 +46,7 @@ export default function(history, store) {
 
         <Route path="login" component={Login} />
         <Route path="explore" component={Explore} />
+        <Route path="*" component={NoMatchComp} />
       </Route>
     </Router>
   );
