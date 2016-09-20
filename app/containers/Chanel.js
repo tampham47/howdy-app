@@ -211,7 +211,7 @@ class Chanel extends Component {
         mainContent = <Lesson datacontext={this.props.channelData.currentLesson} />
         break;
       case 'setting':
-        mainContent = <ChannelSetting />
+        mainContent = <ChannelSetting datacontext={channelDetail} />
         break
       default:
         mainContent = <MessageList datacontext={messageList} />

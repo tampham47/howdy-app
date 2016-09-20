@@ -10,8 +10,8 @@ class ChannelSetting extends Component {
   render() {
     return (
       <section className="channel-setting">
-        <h5>CHANNEL SETTING</h5>
-        <p>This feature will coming soon.</p>
+        <h5>Channel Information</h5>
+        <p>{this.props.datacontext.description}</p>
       </section>
     )
   }
