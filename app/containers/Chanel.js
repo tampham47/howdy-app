@@ -228,7 +228,7 @@ class Chanel extends Component {
     return (
       <div className="relm">
         <NotificationPanel
-          isActive={this.props.appState.notificationPanelState}
+          isActive={ false /*this.props.appState.notificationPanelState*/}
           unreadNotiList={this.state.unreadNotiList} />
         <AddChannel isActive={chanelData.isShowAddChannelComp} />
         <LeftMenu chanelList={chanelData.chanelList} />
