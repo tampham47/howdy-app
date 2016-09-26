@@ -35,7 +35,7 @@ export function updateNotificationAsRead(notificationList, user) {
     chainApi.push(callApi.bind(null, notificationList[i], user));
   }
 
-  console.log('updateNotificationAsRead', chainApi, user);
+  // console.log('updateNotificationAsRead', chainApi, user);
 
   return {
     [CHAIN_API]: chainApi

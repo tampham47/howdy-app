@@ -88,6 +88,13 @@ class Chanel extends Component {
 
   componentWillReceiveProps(props) {
     console.log('Chanel.componentWillReceiveProps', props);
+    // console.log('Channel.componentDidMount', unreadNotiList, this.props.userNotifications);
+
+    var unreadNotiList = this.getUnreadNotifications(props.notifications, props.userNotifications);
+    if (unreadNotiList.length > 0 && !this.props.appState.notificationPanelState) {
+      this.props.updateNotificationPanelState(true);
+      this.setState({ unreadNotiList });
+    }
   }
 
   getMessageData() {
@@ -172,7 +179,8 @@ class Chanel extends Component {
       var b = false;
 
       for (var j = 0; j < userNotiList.length; j++) {
-        if (notiList[i].id === userNotiList[j].notification) {
+        if ((notiList[i].id === userNotiList[j].notification) ||
+          (notiList[i]._id === userNotiList[j]._notification)) {
           b = true;
           break;
         }

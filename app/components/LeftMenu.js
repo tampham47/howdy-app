@@ -40,10 +40,11 @@ class LeftMenu extends Component {
             <Link to='/explore' className="left-menu-room-item-name">Explore</Link>
           </li>
           <li><h6>Channels</h6></li>*/}
-          <li className="left-menu-room-item">
+
+          {/*<li className="left-menu-room-item">
             <div className="left-menu-room-item-icon"></div>
             <Link to='/profile' className="left-menu-room-item-name">Your Profile</Link>
-          </li>
+          </li>*/}
           {this.props.chanelList.map(function(e) {
             return (
               <li className="left-menu-room-item" key={e.id}>
