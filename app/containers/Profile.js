@@ -9,6 +9,7 @@ import { Link } from 'react-router';
 import LeftMenu from 'components/LeftMenu';
 import HeaderBar from 'components/HeaderBar';
 import { loadChannels } from 'actions/chanels';
+import { updateProfile } from 'actions/application';
 
 class Profile extends Component {
   static fetchData({ store, params }) {
@@ -17,8 +18,10 @@ class Profile extends Component {
 
   constructor(props) {
     super(props);
+    var profile = props.currentUser;
+
     this.state = {
-      form: {}
+      form: profile
     };
   }
 
@@ -30,13 +33,6 @@ class Profile extends Component {
     var f = this.state.form;
 
     switch (prop) {
-      case 'name':
-        f[prop] = event.target.value;
-        f.url = f[prop].toLowerCase().replace(new RegExp(' ', 'g'), '-');
-        break;
-      case 'url':
-        f[prop] = event.target.value.toLowerCase().replace(new RegExp(' ', 'g'), '');
-        break;
       default:
         f[prop] = event.target.value;
     }
@@ -44,7 +40,11 @@ class Profile extends Component {
     this.setState({ form: f });
   }
 
-  handleSubmitButton() {}
+  handleSubmitButton() {
+    var profile = this.state.form;
+    console.log('handleSubmitButton', profile);
+    this.props.updateProfile(profile);
+  }
 
   handleCancelButton() {}
 
@@ -61,11 +61,11 @@ class Profile extends Component {
             <div className="main-content main-content--expand">
               <form className="add-room-form" onSubmit={()=>false}>
 
-                <label htmlFor="fullName">Full Name</label>
-                <input className="u-full-width" type="text" name="fullName"
-                  placeholder="" id="fullName"
-                  value={this.state.form.fullName}
-                  onChange={this.handleChanged.bind(this, 'fullName')} />
+                <label htmlFor="displayName">Full Name</label>
+                <input className="u-full-width" type="text" name="displayName"
+                  placeholder="" id="displayName"
+                  value={this.state.form.displayName}
+                  onChange={this.handleChanged.bind(this, 'displayName')} />
 
                 <label htmlFor="email">Email</label>
                 <input className="u-full-width" type="text" name="email"
@@ -87,11 +87,11 @@ class Profile extends Component {
                   value={this.state.form.appearinLink}
                   onChange={this.handleChanged.bind(this, 'appearinLink')} />
 
-                <label htmlFor="description">Bio</label>
+                <label htmlFor="bio">Bio</label>
                 <textarea className="u-full-width"
-                  placeholder="..." name="description" id="description"
-                  value={this.state.form.description}
-                  onChange={this.handleChanged.bind(this, 'description')} >
+                  placeholder="..." name="bio" id="bio"
+                  value={this.state.form.bio}
+                  onChange={this.handleChanged.bind(this, 'bio')} >
                 </textarea>
 
                 <div className="add-room-form__controls">
@@ -114,9 +114,10 @@ class Profile extends Component {
 function mapStateToProps(state) {
   return {
     channelList: state.chanels.toJS().chanelList,
+    currentUser: state.currentUser.toJS(),
   };
 }
 
 Profile.propTypes = {};
 export { Profile };
-export default connect(mapStateToProps, { loadChannels })(Profile);
+export default connect(mapStateToProps, { loadChannels, updateProfile })(Profile);

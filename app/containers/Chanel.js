@@ -19,7 +19,7 @@ import MessageList from 'components/MessageList';
 import ChannelSetting from 'components/ChannelSetting';
 
 import { changeChanel, loadChannels, loadMessageAndChannel, fetchChannelData } from 'actions/chanels';
-import { updateNotificationPanelState } from 'actions/app-state';
+import { updateNotificationPanelState } from 'actions/application';
 import { showAppearin, changeMode } from 'actions/appearin';
 import * as ChannelType from 'actions/chanels';
 import * as AppearinType from 'actions/appearin';

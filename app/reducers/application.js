@@ -3,7 +3,7 @@
  */
 
 import Immutable from 'immutable';
-import * as AppStateType from 'actions/app-state';
+import * as AppStateType from 'actions/application';
 import * as ChannelType from 'actions/chanels';
 import _ from 'lodash';
 

@@ -13,10 +13,11 @@ import App from 'containers/App';
 import Login from 'containers/Login';
 import Chanel from 'containers/Chanel';
 import Explore from 'containers/Explore';
-import Questions from 'containers/Questions';
-import Question from 'containers/Question';
 import Intro from 'containers/Intro';
 import Profile from 'containers/Profile';
+
+// import Questions from 'containers/Questions';
+// import Question from 'containers/Question';
 
 let requireAuth = function(store, nextState, replace) {
   var u = store.getState().currentUser && store.getState().currentUser.toJS();
