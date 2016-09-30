@@ -4,7 +4,7 @@
 
 import Immutable from 'immutable';
 import * as ActionType from 'actions/chanels';
-import * as AppType from 'actions/app-state';
+import * as AppType from 'actions/application';
 import _ from 'lodash';
 let defaultState = Immutable.fromJS([]);
 

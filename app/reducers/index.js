@@ -13,7 +13,7 @@ import users from 'reducers/users';
 import listener from 'reducers/listener';
 import notifications from 'reducers/notifications';
 import userNotifications from 'reducers/userNotifications';
-import appState from 'reducers/app-state';
+import appState from 'reducers/application';
 
 // import questions from 'reducers/questions';
 // import questionDetail from 'reducers/questionDetail';

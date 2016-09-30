@@ -119,6 +119,13 @@
 .add-room-form {
   margin-bottom: 0;
 
+  small,
+  &__helper {
+    margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
   &__title {
     text-transform: uppercase;
   }

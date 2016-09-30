@@ -13,9 +13,11 @@ import App from 'containers/App';
 import Login from 'containers/Login';
 import Chanel from 'containers/Chanel';
 import Explore from 'containers/Explore';
-import Questions from 'containers/Questions';
-import Question from 'containers/Question';
 import Intro from 'containers/Intro';
+import Profile from 'containers/Profile';
+
+// import Questions from 'containers/Questions';
+// import Question from 'containers/Question';
 
 let requireAuth = function(store, nextState, replace) {
   var u = store.getState().currentUser && store.getState().currentUser.toJS();
@@ -43,6 +45,7 @@ export default function(history, store) {
       <Route path="/" component={App}>
         <IndexRoute component={Chanel} onEnter={requireAuth.bind(this, store)} />
         <Route path="channel/:channelUrl" component={Chanel} onEnter={requireAuth.bind(this, store)} />
+        <Route path="profile" component={Profile} onEnter={requireAuth.bind(this, store)} />
 
         <Route path="login" component={Login} />
         <Route path="explore" component={Explore} />

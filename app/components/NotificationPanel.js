@@ -6,7 +6,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { showAddChannelComp, addChannel } from 'actions/chanels';
-import { updateNotificationPanelState, updateNotificationAsRead } from 'actions/app-state';
+import { updateNotificationPanelState, updateNotificationAsRead } from 'actions/application';
 
 
 class NotificationPanel extends Component {

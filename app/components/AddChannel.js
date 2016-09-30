@@ -100,7 +100,6 @@ class AddRoom extends Component {
                       onClick={this.handleCancelButton.bind(this)} />
                   </div>
                 </form>
-
               </div>
             </div>
           </div>
