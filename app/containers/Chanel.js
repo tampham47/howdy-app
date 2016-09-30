@@ -86,6 +86,13 @@ class Chanel extends Component {
     }.bind(this));
   }
 
+  componentWillUnmount() {
+    listener.unsub(ChannelType.LOADED_MESSAGES.toString());
+    listener.unsub(ChannelType.NEW_MESSAGE.toString());
+    listener.unsub(ChannelType.CHANEL_CHANGED.toString());
+    listener.unsub(ChannelType.OPENED_APPEARIN_ROOM.toString());
+  }
+
   componentWillReceiveProps(props) {
     console.log('Chanel.componentWillReceiveProps', props);
     // console.log('Channel.componentDidMount', unreadNotiList, this.props.userNotifications);

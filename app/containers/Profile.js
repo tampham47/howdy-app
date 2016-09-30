@@ -10,6 +10,8 @@ import LeftMenu from 'components/LeftMenu';
 import HeaderBar from 'components/HeaderBar';
 import { loadChannels } from 'actions/chanels';
 import { updateProfile } from 'actions/application';
+import listener from 'middleware/listener';
+import * as ApplicationType from 'actions/application';
 
 class Profile extends Component {
   static fetchData({ store, params }) {
@@ -27,6 +29,14 @@ class Profile extends Component {
 
   componentDidMount() {
     this.props.loadChannels();
+
+    listener.sub(ApplicationType.UPDATED_PROFILE.toString(), function(event) {
+      alert('Your profile has been updated.');
+    }.bind(this));
+  }
+
+  componentWillUnmount() {
+    listener.unsub(ApplicationType.UPDATED_PROFILE.toString());
   }
 
   handleChanged(prop, event) {
@@ -42,7 +52,6 @@ class Profile extends Component {
 
   handleSubmitButton() {
     var profile = this.state.form;
-    console.log('handleSubmitButton', profile);
     this.props.updateProfile(profile);
   }
 
@@ -97,8 +106,8 @@ class Profile extends Component {
                 <div className="add-room-form__controls">
                   <input className="button button-primary" type="button" value="Submit"
                     onClick={this.handleSubmitButton.bind(this)}/>
-                  <input className="button" type="button" value="Cancel"
-                    onClick={this.handleCancelButton.bind(this)} />
+                  {/*<input className="button" type="button" value="Cancel"
+                    onClick={this.handleCancelButton.bind(this)} />*/}
                 </div>
               </form>
             </div>
