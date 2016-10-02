@@ -53,11 +53,14 @@ class Chanel extends Component {
 
   componentDidMount() {
     var channelUrl = this.props.params.channelUrl || 'goingsunny';
-    var userId = this.props.currentUser._id;
+    var userId = this.props.currentUser._id || this.props.currentUser.id;
     this.props.fetchChannelData({ channelUrl, userId });
+
     // check more data later
     var unreadNotiList = this.getUnreadNotifications(this.props.notifications, this.props.userNotifications);
-    console.log('Channel.componentDidMount', unreadNotiList, this.props.userNotifications);
+    console.log('Channel.notifications', this.props.notifications);
+    console.log('Channel.userNotifications', this.props.userNotifications);
+    console.log('Channel.unreadNotiList', unreadNotiList);
     if (unreadNotiList.length > 0) {
       this.props.updateNotificationPanelState(true);
       this.setState({ unreadNotiList });
@@ -98,6 +101,9 @@ class Chanel extends Component {
     // console.log('Channel.componentDidMount', unreadNotiList, this.props.userNotifications);
 
     var unreadNotiList = this.getUnreadNotifications(props.notifications, props.userNotifications);
+    console.log('Channel.notifications', props.notifications);
+    console.log('Channel.userNotifications', props.userNotifications);
+    console.log('Channel.unreadNotiList', unreadNotiList);
     if (unreadNotiList.length > 0 && !this.props.appState.notificationPanelState) {
       this.props.updateNotificationPanelState(true);
       this.setState({ unreadNotiList });
@@ -235,7 +241,7 @@ class Chanel extends Component {
     return (
       <div className="relm">
         <NotificationPanel
-          isActive={ false /*this.props.appState.notificationPanelState*/}
+          isActive={this.props.appState.notificationPanelState}
           unreadNotiList={this.state.unreadNotiList} />
         <AddChannel isActive={chanelData.isShowAddChannelComp} />
         <LeftMenu chanelList={chanelData.chanelList} />
@@ -247,7 +253,6 @@ class Chanel extends Component {
 
             <div className="main-content__wrapper">
               <div id='content-scroller' className="main-content__scroller">
-                {/*<MessageList datacontext={messageList} />*/}
                 { mainContent }
               </div>
             </div>
@@ -302,7 +307,6 @@ class Chanel extends Component {
                 </div>
                 <div className="appearin-iframe__content">
                   <iframe src="" id="js-appearin-iframe-holder" width="100%" height="100%" frameBorder="0"></iframe>
-                  {/*<iframe src="https://appear.in/tampham47" width="100%" height="100%" frameBorder="0"></iframe>*/}
                 </div>
               </div>
             </div>

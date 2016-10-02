@@ -24,8 +24,8 @@ export function updateNotificationAsRead(notificationList, user) {
         method: 'post',
         path: '/usernotification',
         body: {
-          _user: user._id,
-          _notification: noti.id
+          _user: (user._id || user.id),
+          _notification: (noti._id || noti.id)
         },
         successType: UPDATED_NOTIFICATION_AS_READ
       }
