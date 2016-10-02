@@ -40,20 +40,6 @@ export function fetchChannelData({ channelUrl, userId }) {
           }
         };
       },
-      ()=> {
-        return {
-          [CALL_API]: {
-            method: 'get',
-            path: '/notification',
-            query: {
-              query: JSON.stringify({
-                state: 'public'
-              })
-            },
-            successType: LOADED_NOTIFICATIONS
-          }
-        };
-      },
       (notifications)=> {
         return {
           [CALL_API]: {
@@ -65,6 +51,20 @@ export function fetchChannelData({ channelUrl, userId }) {
               })
             },
             successType: LOADED_USER_NOTIFICATIONS
+          }
+        };
+      },
+      ()=> {
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: '/notification',
+            query: {
+              query: JSON.stringify({
+                state: 'public'
+              })
+            },
+            successType: LOADED_NOTIFICATIONS
           }
         };
       },
