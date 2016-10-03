@@ -306,7 +306,7 @@ class Chanel extends Component {
                   </a>
                 </div>
                 <div className="appearin-iframe__content">
-                  <iframe src="" id="js-appearin-iframe-holder" width="100%" height="100%" frameBorder="0"></iframe>
+                  <iframe allowusermedia src="" id="js-appearin-iframe-holder" width="100%" height="100%" frameBorder="0"></iframe>
                 </div>
               </div>
             </div>
