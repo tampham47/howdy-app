@@ -11,7 +11,7 @@ class App extends Component {
 
   componentDidMount() {
 
-    if (window.location.protocol === 'http://') {
+    if (window.location.protocol === 'http:') {
       client.on('connect', function() {
         client.subscribe('goingsunny');
       }.bind(this));
