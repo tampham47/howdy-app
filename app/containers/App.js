@@ -10,18 +10,12 @@ import client from 'middleware/mqtt';
 class App extends Component {
 
   componentDidMount() {
-    client.on('connect', function() {
-      client.subscribe('goingsunny');
 
-      // var data = JSON.stringify({
-      //   chanelId: 'goingsunny',
-      //   content: 'Welcome to goingsunny',
-      //   authUser: {
-      //     displayName: 'Gsbot'
-      //   }
-      // });
-      // client.publish('goingsunny', data);
-    }.bind(this));
+    if (window.location.protocol === 'http://') {
+      client.on('connect', function() {
+        client.subscribe('goingsunny');
+      }.bind(this));
+    }
 
     client.on('message', function (topic, message) {
       var messageData = JSON.parse(message.toString());
