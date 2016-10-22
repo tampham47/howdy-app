@@ -16,6 +16,7 @@ import Explore from 'containers/Explore';
 import Intro from 'containers/Intro';
 import Profile from 'containers/Profile';
 import Feedback from 'containers/Feedback';
+import Blog from 'containers/Blog';
 
 
 let requireAuth = function(store, nextState, replace) {
@@ -46,6 +47,7 @@ export default function(history, store) {
         <Route path="channel/:channelUrl" component={Chanel} onEnter={requireAuth.bind(this, store)} />
         <Route path="profile" component={Profile} onEnter={requireAuth.bind(this, store)} />
         <Route path="feedback" component={Feedback} onEnter={requireAuth.bind(this, store)} />
+        <Route path="blog/:slug" component={Blog} onEnter={requireAuth.bind(this, store)} />
 
         <Route path="login" component={Login} />
         <Route path="explore" component={Explore} />

@@ -30,6 +30,9 @@ class App extends Component {
         <div className="feedback-link">
           <Link to="/feedback">Feedback</Link>
         </div>
+        <div className="feedback-link feedback-link--how-it-works">
+          <Link to="/blog/how-it-works">How it works?</Link>
+        </div>
         {this.props.children}
       </div>
     );

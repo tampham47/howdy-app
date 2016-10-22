@@ -67,19 +67,19 @@ class AddRoom extends Component {
                 <form className="add-room-form" onSubmit={()=>false}>
                   <h5 className="add-room-form__title">Add channel</h5>
 
-                  <label for="nameOfChannel">Name of channel</label>
+                  <label htmlFor="nameOfChannel">Name of channel</label>
                   <input className="u-full-width" type="text" name="nameOfChannel"
                     placeholder="Goingsunny" id="nameOfChannel"
                     value={this.state.form.name}
                     onChange={this.handleChanged.bind(this, 'name')} />
 
-                  <label for="channelUrl">Channel URL (can not contain spaces)</label>
+                  <label htmlFor="channelUrl">Channel URL (can not contain spaces)</label>
                   <input className="u-full-width" type="text" name="channelUrl"
                     placeholder="goingsunny.com/channel/your-url" id="channelUrl"
                     value={this.state.form.url}
                     onChange={this.handleChanged.bind(this, 'url')} />
 
-                  <label for="description">Description</label>
+                  <label htmlFor="description">Description</label>
                   <textarea className="u-full-width"
                     placeholder="..." name="description" id="description"
                     value={this.state.form.description}
