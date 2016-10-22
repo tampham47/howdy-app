@@ -78,3 +78,23 @@ body {
     margin-bottom: 0;
   }
 }
+
+.feedback-link {
+  position: fixed;
+  top: 0.5*$gutter;
+  right: -$gutter;
+  z-index: 9999;
+  transition: all 0.3s;
+
+  a {
+    background-color: orange;
+    text-decoration: none;
+    color: white;
+    padding: 8px;
+    padding-right: 2*$gutter;
+  }
+
+  &:hover {
+    right: 0;
+  }
+}

@@ -4,6 +4,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import * as ActionType from 'actions/chanels';
 import client from 'middleware/mqtt';
 
@@ -26,6 +27,9 @@ class App extends Component {
   render() {
     return (
       <div className="relm">
+        <div className="feedback-link">
+          <Link to="/feedback">Feedback</Link>
+        </div>
         {this.props.children}
       </div>
     );
