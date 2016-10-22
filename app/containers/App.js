@@ -10,12 +10,9 @@ import client from 'middleware/mqtt';
 class App extends Component {
 
   componentDidMount() {
-
-    if (window.location.protocol === 'http:') {
-      client.on('connect', function() {
-        client.subscribe('goingsunny');
-      }.bind(this));
-    }
+    client.on('connect', function() {
+      client.subscribe('goingsunny');
+    }.bind(this));
 
     client.on('message', function (topic, message) {
       var messageData = JSON.parse(message.toString());
