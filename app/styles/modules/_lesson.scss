@@ -5,4 +5,12 @@
 .lesson-section {
   padding: $gutter;
   padding-left: 30px;
+
+  p {
+    margin-bottom: 0.5*$gutter;
+  }
+
+  ul {
+    list-style-type: square;
+  }
 }

@@ -7,6 +7,7 @@ export const UPDATED_NOTIFICATION_PANEL_STATE = Symbol('UPDATED_NOTIFICATION_PAN
 export const UPDATED_NOTIFICATION_AS_READ = Symbol('UPDATED_NOTIFICATION_AS_READ');
 export const UPDATED_PROFILE = Symbol('UPDATED_PROFILE');
 export const ADDED_FEEDBACK = Symbol('ADDED_FEEDBACK');
+export const LOADED_POST_BY_SLUG = Symbol('LOADED_POST_BY_SLUG');
 
 
 export function updateNotificationPanelState(payload) {
@@ -53,7 +54,6 @@ export function updateProfile(payload) {
   };
 }
 
-
 export function addFeedback(payload) {
   return {
     [CALL_API]: {
@@ -61,6 +61,21 @@ export function addFeedback(payload) {
       path: '/enquiry',
       body: payload,
       successType: ADDED_FEEDBACK
+    }
+  };
+}
+
+export function loadPostBySlug(payload) {
+  return {
+    [CALL_API]: {
+      method: 'post',
+      path: '/post',
+      query: {
+        query: JSON.stringify({
+          slug: payload.slug
+        })
+      },
+      successType: LOADED_POST_BY_SLUG
     }
   };
 }

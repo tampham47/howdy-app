@@ -19,7 +19,7 @@ export const LOADED_USER = Symbol('LOADED_USER');
 export const LOADED_USER_NOTIFICATIONS = Symbol('LOADED_USER_NOTIFICATIONS');
 export const LOADED_NOTIFICATIONS = Symbol('LOADED_NOTIFICATIONS');
 export const LOADED_LESSON_BY_CURRENT_DATE = Symbol('LOADED_LESSON_BY_CURRENT_DATE');
-
+export const LOADED_POST_BY_SLUG = Symbol('LOADED_POST_BY_SLUG');
 
 
 export function fetchChannelData({ channelUrl, userId }) {
@@ -238,5 +238,38 @@ export function addChannel(payload) {
       body: payload,
       successType: ADDED_CHANNEL
     }
+  };
+}
+
+export function loadDataForBlog(payload) {
+  return {
+    [CHAIN_API]: [
+      ()=> {
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: '/channel',
+            query: {
+              sort: JSON.stringify({ createdAt: 1 }),
+            },
+            successType: CHANNEL_LOADED
+          }
+        }
+      },
+      ()=> {
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: '/post',
+            query: {
+              query: JSON.stringify({
+                slug: payload.slug
+              })
+            },
+            successType: LOADED_POST_BY_SLUG
+          }
+        }
+      }
+    ]
   };
 }

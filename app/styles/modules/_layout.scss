@@ -67,6 +67,10 @@ body {
     padding-right: $gutter;
     padding-bottom: 0;
   }
+
+  &--full-height {
+    padding-bottom: 0;
+  }
 }
 
 
@@ -96,5 +100,13 @@ body {
 
   &:hover {
     right: 0;
+  }
+
+  &--how-it-works {
+    top: 38px;
+
+    a {
+      background-color: green;
+    }
   }
 }
