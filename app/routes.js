@@ -17,6 +17,7 @@ import Intro from 'containers/Intro';
 import Profile from 'containers/Profile';
 import Feedback from 'containers/Feedback';
 import Blog from 'containers/Blog';
+var NoMatchComp;
 
 
 let requireAuth = function(store, nextState, replace) {
@@ -37,12 +38,19 @@ let requireAuth = function(store, nextState, replace) {
   }
 };
 
-var NoMatchComp;
+let handleChangeUrl = function(state, nextState) {
+  // ga track, ga is a global variable
+  /*global ga*/
+  if (ga && (typeof ga === 'function')) {
+    ga('set', 'page', window.location.pathname);
+    ga('send', 'pageview');
+  }
+};
 
 export default function(history, store) {
   return (
     <Router history={history}>
-      <Route path="/" component={App}>
+      <Route path="/" component={App} onChange={handleChangeUrl.bind(this)} >
         <IndexRoute component={Chanel} onEnter={requireAuth.bind(this, store)} />
         <Route path="channel/:channelUrl" component={Chanel} onEnter={requireAuth.bind(this, store)} />
         <Route path="profile" component={Profile} onEnter={requireAuth.bind(this, store)} />
