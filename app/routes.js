@@ -41,7 +41,7 @@ let requireAuth = function(store, nextState, replace) {
 let handleChangeUrl = function(state, nextState) {
   // ga track, ga is a global variable
   /*global ga*/
-  if (ga && (typeof ga === 'function')) {
+  if ((typeof ga !== 'undefined') && (typeof ga === 'function')) {
     ga('set', 'page', window.location.pathname);
     ga('send', 'pageview');
   }
