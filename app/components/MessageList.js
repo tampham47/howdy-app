@@ -6,6 +6,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import MessageItem from 'components/MessageItem';
+import moment from 'moment';
+
 
 class Lesson extends Component {
   render() {
@@ -22,7 +24,7 @@ class Lesson extends Component {
                 <div className="message-item__title">
                   <span className="message-item__title__name">{item.authUser.displayName}</span>
                   <small className="message-item__title__username">{`@${item.authUser.displayName}`}</small>
-                  <small className="message-item__title__time">Jul 03 19:46</small>
+                  <small className="message-item__title__time">{moment(item.createdAt || null).format('MMM DD, HH:mm')}</small>
                 </div>
                 <MessageItem datacontext={item} />
               </div>

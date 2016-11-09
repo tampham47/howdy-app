@@ -116,6 +116,7 @@ class Chanel extends Component {
       isManual: true,
       authUser: this.state.currentUser,
       channelUrl: channelUrl,
+      createdAt: new Date(),
       _user: this.state.currentUser._id,
       _channel: null
     };
