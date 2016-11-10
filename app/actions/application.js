@@ -9,6 +9,7 @@ export const UPDATED_PROFILE = Symbol('UPDATED_PROFILE');
 export const ADDED_FEEDBACK = Symbol('ADDED_FEEDBACK');
 export const LOADED_POST_BY_SLUG = Symbol('LOADED_POST_BY_SLUG');
 export const UPDATED_LAST_ACCESSED = Symbol('UPDATED_LAST_ACCESSED');
+export const ENROLLED_NEXT_SESSION = Symbol('ENROLLED_NEXT_SESSION');
 
 
 export function updateNotificationPanelState(payload) {
@@ -90,6 +91,17 @@ export function updateLastAccessed(payload) {
         lastAccessedAt: new Date()
       },
       successType: UPDATED_LAST_ACCESSED
+    }
+  };
+}
+
+export function enrollNextSession(payload) {
+  return {
+    [CALL_API]: {
+      method: 'post',
+      path: '/session',
+      body: payload,
+      successType: ENROLLED_NEXT_SESSION
     }
   };
 }
