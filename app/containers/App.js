@@ -7,8 +7,14 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import * as ActionType from 'actions/chanels';
 import client from 'middleware/mqtt';
+import { updateLastAccessed } from 'actions/application';
+
 
 class App extends Component {
+
+  updateOnlineStatus(user) {
+    this.props.dispatch(updateLastAccessed(user));
+  }
 
   componentDidMount() {
     client.on('connect', function() {
@@ -22,17 +28,27 @@ class App extends Component {
         response: messageData
       });
     }.bind(this));
+
+    // update online status every 90sec
+    var currentUser = this.props.currentUser.toJS();
+    if (currentUser.id || currentUser._id) {
+      this.updateOnlineStatus(currentUser);
+      setInterval(function() {
+        this.updateOnlineStatus(currentUser);
+      }.bind(this), 90000);
+    }
   }
 
   render() {
+
     return (
       <div className="relm">
-        <div className="feedback-link">
+        {/*<div className="feedback-link">
           <Link to="/feedback">Feedback</Link>
         </div>
         <div className="feedback-link feedback-link--how-it-works">
           <Link to="/blog/how-it-works">How it works?</Link>
-        </div>
+        </div>*/}
         {this.props.children}
       </div>
     );

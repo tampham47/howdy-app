@@ -8,6 +8,7 @@ export const UPDATED_NOTIFICATION_AS_READ = Symbol('UPDATED_NOTIFICATION_AS_READ
 export const UPDATED_PROFILE = Symbol('UPDATED_PROFILE');
 export const ADDED_FEEDBACK = Symbol('ADDED_FEEDBACK');
 export const LOADED_POST_BY_SLUG = Symbol('LOADED_POST_BY_SLUG');
+export const UPDATED_LAST_ACCESSED = Symbol('UPDATED_LAST_ACCESSED');
 
 
 export function updateNotificationPanelState(payload) {
@@ -76,6 +77,19 @@ export function loadPostBySlug(payload) {
         })
       },
       successType: LOADED_POST_BY_SLUG
+    }
+  };
+}
+
+export function updateLastAccessed(payload) {
+  return {
+    [CALL_API]: {
+      method: 'post',
+      path: `/user/${payload.id || payload._id}`,
+      body: {
+        lastAccessedAt: new Date()
+      },
+      successType: UPDATED_LAST_ACCESSED
     }
   };
 }
