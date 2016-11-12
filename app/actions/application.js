@@ -10,6 +10,7 @@ export const ADDED_FEEDBACK = Symbol('ADDED_FEEDBACK');
 export const LOADED_POST_BY_SLUG = Symbol('LOADED_POST_BY_SLUG');
 export const UPDATED_LAST_ACCESSED = Symbol('UPDATED_LAST_ACCESSED');
 export const ENROLLED_NEXT_SESSION = Symbol('ENROLLED_NEXT_SESSION');
+export const LOADED_CURRENT_SESSION_LIST = Symbol('LOADED_CURRENT_SESSION_LIST');
 
 
 export function updateNotificationPanelState(payload) {
@@ -102,6 +103,21 @@ export function enrollNextSession(payload) {
       path: '/session',
       body: payload,
       successType: ENROLLED_NEXT_SESSION
+    }
+  };
+}
+
+export function loadCurrentSession(payload) {
+  return {
+    [CALL_API]: {
+      method: 'get',
+      path: '/session',
+      query: {
+        query: JSON.stringify({
+          sessionName: payload.sessionName
+        })
+      },
+      successType: LOADED_CURRENT_SESSION_LIST
     }
   };
 }

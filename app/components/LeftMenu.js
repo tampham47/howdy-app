@@ -55,6 +55,10 @@ class LeftMenu extends Component {
           </li>
           <li className="left-menu-room-item">
             <div className="left-menu-room-item-icon"></div>
+            <Link to='/meeting' className="left-menu-room-item-name">Meeting</Link>
+          </li>
+          <li className="left-menu-room-item">
+            <div className="left-menu-room-item-icon"></div>
             <Link to='/blog/how-it-works' className="left-menu-room-item-name">How it works</Link>
           </li>
           <li className="left-menu-room-item">
@@ -73,8 +77,8 @@ class LeftMenu extends Component {
           }.bind(this))}*/}
         </ul>
 
-        <button className="left-menu__new-room-btn button-primary"
-          onClick={this.handleAddChannel.bind(this)}>Add a chanel</button>
+        {/*<button className="left-menu__new-room-btn button-primary"
+          onClick={this.handleAddChannel.bind(this)}>Add a chanel</button>*/}
       </nav>
     )
   }
