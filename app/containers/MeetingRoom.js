@@ -19,7 +19,6 @@ import utils from 'middleware/utils';
 class MeetingRoom extends Component {
 
   static fetchData({ store, params }) {
-    // var slug = params.slug;
     return store.dispatch(loadCurrentSession({
       sessionName: utils.getSessionNameByDate()
     }));
@@ -27,6 +26,9 @@ class MeetingRoom extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      systemMessage: []
+    };
   }
 
   componentDidMount() {
@@ -34,9 +36,19 @@ class MeetingRoom extends Component {
     this.props.dispatch(loadCurrentSession({
       sessionName: utils.getSessionNameByDate()
     }));
+
+    listener.sub(ApplicationType.GOT_BROKER_MESSAGE.toString(), function(e) {
+      console.log('ApplicationType.GOT_BROKER_MESSAGE', e.detail);
+      var systemMessage = this.state.systemMessage;
+      systemMessage.push(e.detail);
+      this.setState({
+        systemMessage: systemMessage
+      });
+    }.bind(this));
   }
 
   componentWillUnmount() {
+    listener.unsub(ApplicationType.GOT_BROKER_MESSAGE.toString());
   }
 
   handdleEnrollNextSession() {
@@ -86,6 +98,12 @@ class MeetingRoom extends Component {
               <div id='content-scroller' className="main-content__scroller">
                 <div className="lesson-section">
                   {renderButton}
+
+                  {this.state.systemMessage.map(function(i, index) {
+                    return (
+                      <p key={index}>{i.channel}</p>
+                    );
+                  })}
                 </div>
               </div>
             </div>

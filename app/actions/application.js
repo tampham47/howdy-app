@@ -11,6 +11,7 @@ export const LOADED_POST_BY_SLUG = Symbol('LOADED_POST_BY_SLUG');
 export const UPDATED_LAST_ACCESSED = Symbol('UPDATED_LAST_ACCESSED');
 export const ENROLLED_NEXT_SESSION = Symbol('ENROLLED_NEXT_SESSION');
 export const LOADED_CURRENT_SESSION_LIST = Symbol('LOADED_CURRENT_SESSION_LIST');
+export const GOT_BROKER_MESSAGE = Symbol('GOT_BROKER_MESSAGE');
 
 
 export function updateNotificationPanelState(payload) {
@@ -119,5 +120,12 @@ export function loadCurrentSession(payload) {
       },
       successType: LOADED_CURRENT_SESSION_LIST
     }
+  };
+}
+
+export function getBrokerMessage(payload) {
+  return {
+    type: GOT_BROKER_MESSAGE,
+    response: payload
   };
 }

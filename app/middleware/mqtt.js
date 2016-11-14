@@ -5,12 +5,7 @@
 
 import mqtt from 'mqtt';
 
-var client;
-var client = mqtt.connect('wss://broker.goingsunny.com');
-// if (typeof window !== 'undefined' && window.location.protocol === 'http:') {
-//   var client = mqtt.connect('ws://broker.goingsunny.com');
-// } else {
-//   var client = mqtt.connect('wss://broker.goingsunny.com');
-// }
+// var client = mqtt.connect('wss://broker.goingsunny.com');
+var client = mqtt.connect('ws://localhost:5551');
 
 export default client;
