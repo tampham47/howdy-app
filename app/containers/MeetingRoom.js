@@ -101,7 +101,9 @@ class MeetingRoom extends Component {
 
                   {this.state.systemMessage.map(function(i, index) {
                     return (
-                      <p key={index}>{i.channel}</p>
+                      <p key={index}>
+                        <Link to={`/c/${i.channel}`}>{i.channel}</Link>
+                      </p>
                     );
                   })}
                 </div>

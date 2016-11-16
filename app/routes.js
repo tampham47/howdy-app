@@ -12,6 +12,7 @@ import requireAuthentication from 'containers/Auth';
 import App from 'containers/App';
 import Login from 'containers/Login';
 import Chanel from 'containers/Chanel';
+import ClassRoom from 'containers/ClassRoom';
 import Explore from 'containers/Explore';
 import Intro from 'containers/Intro';
 import Profile from 'containers/Profile';
@@ -52,6 +53,7 @@ export default function(history, store) {
     <Router history={history}>
       <Route path="/" component={App} onChange={handleChangeUrl.bind(this)} >
         <IndexRoute component={Chanel} onEnter={requireAuth.bind(this, store)} />
+        <Route path="c/:channelUrl" component={ClassRoom} onEnter={requireAuth.bind(this, store)} />
         <Route path="channel/:channelUrl" component={Chanel} onEnter={requireAuth.bind(this, store)} />
         <Route path="profile" component={Profile} onEnter={requireAuth.bind(this, store)} />
         <Route path="feedback" component={Feedback} onEnter={requireAuth.bind(this, store)} />

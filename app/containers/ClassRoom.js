@@ -56,11 +56,10 @@ class Chanel extends Component {
     var userId = this.props.currentUser._id || this.props.currentUser.id;
     this.props.fetchChannelData({ channelUrl, userId });
 
+    this.handleAddVideoRoom(true);
+
     // check more data later
     var unreadNotiList = this.getUnreadNotifications(this.props.notifications, this.props.userNotifications);
-    console.log('Channel.notifications', this.props.notifications);
-    console.log('Channel.userNotifications', this.props.userNotifications);
-    console.log('Channel.unreadNotiList', unreadNotiList);
     if (unreadNotiList.length > 0) {
       this.props.updateNotificationPanelState(true);
       this.setState({ unreadNotiList });
@@ -161,18 +160,11 @@ class Chanel extends Component {
     var iframe = document.getElementById('js-appearin-iframe-holder');
 
     if (isAppearin) {
-      appearin.getRandomRoomName(function (err, roomName) {
-        if (err) {
-          alert(err.toString());
-        } else {
-          appearin.addRoomToIframe(iframe, roomName);
-          this.sendMessage(roomName, 'appearin-room');
-        }
-      }.bind(this));
+      var roomName = this.props.params.channelUrl;
+      appearin.addRoomToIframe(iframe, roomName);
     } else {
       // remove appearin out of iframe
       iframe.src = 'about:blank';
-
     }
   }
 
@@ -274,18 +266,18 @@ class Chanel extends Component {
           </div>
 
           <div className="room-panel">
-            <PeopleInChannel datacontext={users} />
+            {/*<PeopleInChannel datacontext={users} />*/}
 
             <div className={`appearin-iframe ${appearinMode} ${isAppearinActive}`}>
               <div className="appearin-iframe__control-wrapper">
-                <button onClick={this.handleAddVideoRoom.bind(this, false)}
+                {/*<button onClick={this.handleAddVideoRoom.bind(this, false)}
                   className="appearin-iframe__control-wrapper__close">
                   <i className="fa fa-close" aria-hidden="true"></i>
                 </button>
                 <button onClick={this.handleChangeMode.bind(this, 'min')}
                   className="button-primary appearin-iframe__control-wrapper__min">
                   <i className="fa fa-compress" aria-hidden="true"></i>
-                </button>
+                </button>*/}
                 <button onClick={this.handleChangeMode.bind(this, 'full')}
                   className="button-primary appearin-iframe__control-wrapper__full">
                   <i className="fa fa-expand" aria-hidden="true"></i>

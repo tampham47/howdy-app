@@ -77,18 +77,18 @@ export function fetchChannelData({ channelUrl, userId }) {
           }
         }
       },
-      (users)=> {
-        return {
-          [CALL_API]: {
-            method: 'get',
-            path: '/channel',
-            query: {
-              sort: JSON.stringify({ createdAt: 1 }),
-            },
-            successType: CHANNEL_LOADED
-          }
-        };
-      },
+      // (users)=> {
+      //   return {
+      //     [CALL_API]: {
+      //       method: 'get',
+      //       path: '/channel',
+      //       query: {
+      //         sort: JSON.stringify({ createdAt: 1 }),
+      //       },
+      //       successType: CHANNEL_LOADED
+      //     }
+      //   };
+      // },
       (channels) => {
         return {
           [CALL_API]: {

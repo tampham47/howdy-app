@@ -29,18 +29,18 @@ class ChannelHeader extends Component {
           {this.props.title || 'Goingsunny'}
         </h1>
         <div className="header-bar__control-wrapper">
-          <Link to={{ pathname: this.props.location.pathname, query: { tab: 'message' } }}
-            className={this.getActiveState('message')}>
-            <i className="fa fa-paper-plane-o"></i>
-          </Link>
           <Link to={{ pathname: this.props.location.pathname, query: { tab: 'lesson' } }}
             className={this.getActiveState('lesson')}>
             <i className="fa fa-bookmark-o"></i>
           </Link>
-          <Link to={{ pathname: this.props.location.pathname, query: { tab: 'setting' } }}
+          <Link to={{ pathname: this.props.location.pathname, query: { tab: 'message' } }}
+            className={this.getActiveState('message')}>
+            <i className="fa fa-paper-plane-o"></i>
+          </Link>
+          {/*<Link to={{ pathname: this.props.location.pathname, query: { tab: 'setting' } }}
             className={this.getActiveState('setting')}>
             <i className="fa fa-bars"></i>
-          </Link>
+          </Link>*/}
         </div>
       </div>
     )

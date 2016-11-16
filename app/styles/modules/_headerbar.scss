@@ -53,6 +53,9 @@
       display: inline-block;
       vertical-align: middle;
       line-height: $header-h;
+      text-align: center;
+      min-width: 65px;
+      display: inline-block;
 
       &:last-child {
         margin-right: -$spacing;
