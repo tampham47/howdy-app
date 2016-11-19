@@ -14,6 +14,9 @@ import listener from 'middleware/listener';
 import * as ApplicationType from 'actions/application';
 import { enrollNextSession, loadCurrentSession } from 'actions/application';
 import utils from 'middleware/utils';
+import ReactCountdownClock from 'react-countdown-clock';
+import CountDown from 'react-simple-countdown';
+import moment from 'moment';
 
 
 class MeetingRoom extends Component {
@@ -74,6 +77,22 @@ class MeetingRoom extends Component {
     return false;
   }
 
+  onCountDownComplete() {
+    console.log('onCountDownComplete');
+  }
+
+  getNextSessionTime() {
+    var nextSession = moment();
+    if (nextSession.minutes() < 30) {
+      nextSession.minutes(29);
+      nextSession.seconds(59);
+    } else {
+      nextSession.minutes(59);
+      nextSession.seconds(59);
+    }
+    return nextSession.toDate();
+  }
+
   render() {
     let channelList = this.props.channelList;
     var currentUser = this.props.currentUser;
@@ -82,11 +101,23 @@ class MeetingRoom extends Component {
     console.log('currentSessionList', currentSessionList);
 
     var renderButton = <span></span>;
+    var countdownRender = <span></span>;
     if (this.isEnrolledCurrentSession(currentUser, currentSessionList)) {
       renderButton = <p>You enrolled the next session</p>
     } else {
       renderButton = <button className="button-primary" onClick={this.handdleEnrollNextSession.bind(this)}>Enroll next session</button>
     }
+
+    if (typeof window !== 'undefined') {
+    }
+      countdownRender = (
+        <div>
+          <p>Ca học mới sẽ bắt đầu sau</p>
+          <CountDown className="count-down"
+            date={this.getNextSessionTime()}
+            mins="phút" segs="giây" />
+        </div>
+      );
 
     return (
       <div className="relm">
@@ -94,20 +125,13 @@ class MeetingRoom extends Component {
 
         <main className="main-area">
           <div className="main-content main-content--full-height">
-            <HeaderBar title="Meeting Room" />
+            <HeaderBar title="Goingsunny" />
 
             <div className="main-content__wrapper">
               <div id='content-scroller' className="main-content__scroller">
                 <div className="lesson-section">
+                  {countdownRender}
                   {renderButton}
-
-                  {this.state.systemMessage.map(function(i, index) {
-                    return (
-                      <p key={index}>
-                        <Link to={`/c/${i.channel}`}>{i.channel}</Link>
-                      </p>
-                    );
-                  })}
                 </div>
               </div>
             </div>

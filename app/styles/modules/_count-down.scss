@@ -1,0 +1,24 @@
+/**
+ *
+ */
+
+.count-down {
+  &-col {
+    display: inline-block;
+    margin-right: 0.5*$gutter;
+  }
+
+  .is-day,
+  .is-hour {
+    display: none;
+  }
+
+  .is-day,
+  .is-hour,
+  .is-min,
+  .is-seg {
+    strong {
+      margin-right: 0.5*$gutter;
+    }
+  }
+}

@@ -45,17 +45,17 @@ class LeftMenu extends Component {
             <div className="left-menu-room-item-icon"></div>
             <Link to='/profile' className="left-menu-room-item-name">Your Profile</Link>
           </li>
-          <li className="left-menu-room-item">
+          {/*<li className="left-menu-room-item">
             <div className="left-menu-room-item-icon"></div>
             <Link to='/channel/goingsunny?tab=lesson' className="left-menu-room-item-name">Goingsunny</Link>
           </li>
           <li className="left-menu-room-item">
             <div className="left-menu-room-item-icon"></div>
             <Link to='/channel/goingsunny' className="left-menu-room-item-name">Freetalks</Link>
-          </li>
+          </li>*/}
           <li className="left-menu-room-item">
             <div className="left-menu-room-item-icon"></div>
-            <Link to='/meeting' className="left-menu-room-item-name">Meeting</Link>
+            <Link to='/meeting' className="left-menu-room-item-name">Goingsunny</Link>
           </li>
           <li className="left-menu-room-item">
             <div className="left-menu-room-item-icon"></div>
