@@ -6,7 +6,7 @@
 import goingsunny from 'middleware/debug';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, withRouter } from 'react-router';
 import LeftMenu from 'components/LeftMenu';
 import HeaderBar from 'components/HeaderBar';
 import { loadDataForBlog } from 'actions/chanels';
@@ -39,11 +39,13 @@ class MeetingRoom extends Component {
 
     listener.sub(ApplicationType.GOT_BROKER_MESSAGE.toString(), function(e) {
       console.log('ApplicationType.GOT_BROKER_MESSAGE', e.detail);
-      var systemMessage = this.state.systemMessage;
-      systemMessage.push(e.detail);
-      this.setState({
-        systemMessage: systemMessage
-      });
+      alert(`You will be lead to classroom: ${e.detail.channel}`);
+      this.props.router.push(`/c/${e.detail.channel}`);
+      // var systemMessage = this.state.systemMessage;
+      // systemMessage.push(e.detail);
+      // this.setState({
+      //   systemMessage: systemMessage
+      // });
     }.bind(this));
   }
 
@@ -128,4 +130,4 @@ function mapStateToProps(state) {
 
 MeetingRoom.propTypes = {};
 export { MeetingRoom };
-export default connect(mapStateToProps)(MeetingRoom);
+export default connect(mapStateToProps)(withRouter(MeetingRoom));
