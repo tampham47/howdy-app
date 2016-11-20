@@ -217,17 +217,7 @@ class Chanel extends Component {
     var mainContent;
     var mainContentClass = 'main-content--lesson';
 
-    mainContent = (
-      <div>
-        <div className="lesson-section">
-          <h6>Hãy phân vai và nói chuyện với partner của mình.</h6>
-          <img src="/uploads/b_dialogues_everyday_conversations_english_lo_0-05.png" alt=""/>
-          <img src="/uploads/b_dialogues_everyday_conversations_english_lo_0-06.png" alt=""/>
-          <img src="/uploads/b_dialogues_everyday_conversations_english_lo_0-07.png" alt=""/>
-        </div>
-        <Lesson datacontext={this.props.channelData.currentLesson} />
-      </div>
-    );
+    mainContent = <Lesson datacontext={this.props.channelData.currentLesson} />;
 
     switch (this.props.location.query.tab) {
       case 'message':
