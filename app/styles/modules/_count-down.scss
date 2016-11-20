@@ -22,3 +22,18 @@
     }
   }
 }
+
+.count-down-section {
+  padding: $gutter;
+
+  p {
+    margin-bottom: 0;
+    margin-bottom: 1rem;
+  }
+
+  button,
+  .button {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}

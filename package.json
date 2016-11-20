@@ -98,6 +98,8 @@
     "react-transform-hmr": "^1.0.2",
     "rewire-webpack": "^1.0.0",
     "rimraf": "^2.5.2",
+    "run-sequence": "^1.2.2",
+    "sass-module-importer": "^1.4.0",
     "sinon": "^1.17.1",
     "sinon-chai": "^2.8.0",
     "webpack": "^1.9.11",

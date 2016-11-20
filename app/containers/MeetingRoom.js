@@ -41,14 +41,8 @@ class MeetingRoom extends Component {
     }));
 
     listener.sub(ApplicationType.GOT_BROKER_MESSAGE.toString(), function(e) {
-      console.log('ApplicationType.GOT_BROKER_MESSAGE', e.detail);
       alert(`You will be lead to classroom: ${e.detail.channel}`);
       this.props.router.push(`/c/${e.detail.channel}`);
-      // var systemMessage = this.state.systemMessage;
-      // systemMessage.push(e.detail);
-      // this.setState({
-      //   systemMessage: systemMessage
-      // });
     }.bind(this));
   }
 
@@ -98,46 +92,55 @@ class MeetingRoom extends Component {
     var currentUser = this.props.currentUser;
     var currentSessionList = this.props.currentSessionList || [];
 
-    console.log('currentSessionList', currentSessionList);
-
     var renderButton = <span></span>;
     var countdownRender = <span></span>;
+
     if (this.isEnrolledCurrentSession(currentUser, currentSessionList)) {
-      renderButton = <p>You enrolled the next session</p>
+      renderButton = <p>Bạn đã đăng ký tham gia lớp học kế tiếp</p>
     } else {
-      renderButton = <button className="button-primary" onClick={this.handdleEnrollNextSession.bind(this)}>Enroll next session</button>
+      renderButton = (
+        <button className="button-primary"
+          onClick={this.handdleEnrollNextSession.bind(this)}>Tham gia lớp học</button>
+      )
     }
 
-    if (typeof window !== 'undefined') {
-    }
-      countdownRender = (
-        <div>
-          <p>Ca học mới sẽ bắt đầu sau</p>
-          <CountDown className="count-down"
-            date={this.getNextSessionTime()}
-            mins="phút" segs="giây" />
-        </div>
-      );
+    countdownRender = (
+      <div>
+        <p>Ca học mới sẽ bắt đầu sau</p>
+        <CountDown className="count-down"
+          date={this.getNextSessionTime()}
+          mins="phút" segs="giây" />
+      </div>
+    );
 
     return (
       <div className="relm">
-        <LeftMenu chanelList={this.props.channelList} />
-
         <main className="main-area">
-          <div className="main-content main-content--full-height">
-            <HeaderBar title="Goingsunny" />
+          <div className="room-panel">
+            <div className="room-panel__wrapper">
+              <div className="count-down-section">
+                {countdownRender}
+                {renderButton}
+                <p>Đã có 15 người tham gia</p>
 
-            <div className="main-content__wrapper">
-              <div id='content-scroller' className="main-content__scroller">
-                <div className="lesson-section">
-                  {countdownRender}
-                  {renderButton}
-                </div>
+                <Link to="/c/test-your-devices" className="button button-link">Kiểm tra thiết bị</Link>
               </div>
             </div>
           </div>
 
-          <div className="room-panel"></div>
+          <div className="main-content main-content--full-height">
+            <HeaderBar title="goingsunny" />
+
+            <div className="main-content__wrapper">
+              <div id='content-scroller' className="main-content__scroller">
+                <div className="lesson-section">
+                  <img src="/uploads/b_dialogues_everyday_conversations_english_lo_0-05.png" alt=""/>
+                  <img src="/uploads/b_dialogues_everyday_conversations_english_lo_0-06.png" alt=""/>
+                  <img src="/uploads/b_dialogues_everyday_conversations_english_lo_0-07.png" alt=""/>
+                </div>
+              </div>
+            </div>
+          </div>
         </main>
       </div>
     )

@@ -52,7 +52,7 @@ export default function(history, store) {
   return (
     <Router history={history}>
       <Route path="/" component={App} onChange={handleChangeUrl.bind(this)} >
-        <IndexRoute component={Chanel} onEnter={requireAuth.bind(this, store)} />
+        <IndexRoute component={MeetingRoom} onEnter={requireAuth.bind(this, store)} />
         <Route path="c/:channelUrl" component={ClassRoom} onEnter={requireAuth.bind(this, store)} />
         <Route path="channel/:channelUrl" component={Chanel} onEnter={requireAuth.bind(this, store)} />
         <Route path="profile" component={Profile} onEnter={requireAuth.bind(this, store)} />

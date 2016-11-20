@@ -5,11 +5,11 @@
 
 
 .room-panel {
-  flex: 1;
   background-color: lighten(whitesmoke, 2%);
   height: 100%;
-  // padding-top: $header-h;
   position: relative;
+  width: 330px;
+  // flex: 1;
 
   &__wrapper {
     padding: 0.5*$gutter;

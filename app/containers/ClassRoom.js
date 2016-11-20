@@ -70,7 +70,7 @@ class Chanel extends Component {
     // using listent only for animation task
     listener.sub(ChannelType.LOADED_MESSAGES.toString(), function() {
       if (!scroller) return;
-      scroller.scrollTop = scroller.scrollHeight;
+      // scroller.scrollTop = scroller.scrollHeight;
     });
     listener.sub(ChannelType.NEW_MESSAGE.toString(), function() {
       if (!scroller) return;
@@ -214,21 +214,33 @@ class Chanel extends Component {
     var appearinMode = 'appearin-iframe--' + this.props.appearin.get('mode');
     var isAppearinActive = this.props.appearin.get('isAppearin') ? '_active' : '';
     var users = this.props.users.toJS();
-
     var mainContent;
+    var mainContentClass = 'main-content--lesson';
+
+    mainContent = (
+      <div>
+        <div className="lesson-section">
+          <h6>Hãy phân vai và nói chuyện với partner của mình.</h6>
+          <img src="/uploads/b_dialogues_everyday_conversations_english_lo_0-05.png" alt=""/>
+          <img src="/uploads/b_dialogues_everyday_conversations_english_lo_0-06.png" alt=""/>
+          <img src="/uploads/b_dialogues_everyday_conversations_english_lo_0-07.png" alt=""/>
+        </div>
+        <Lesson datacontext={this.props.channelData.currentLesson} />
+      </div>
+    );
 
     switch (this.props.location.query.tab) {
       case 'message':
-        mainContent = <MessageList datacontext={messageList} />
+        mainContentClass = '';
+        mainContent = <MessageList datacontext={messageList} />;
         break;
       case 'lesson':
-        mainContent = <Lesson datacontext={this.props.channelData.currentLesson} />
+        mainContentClass = 'main-content--lesson';
         break;
       case 'setting':
         mainContent = <ChannelSetting datacontext={channelDetail} />
         break
       default:
-        mainContent = <MessageList datacontext={messageList} />
     }
 
     return (
@@ -236,11 +248,36 @@ class Chanel extends Component {
         <NotificationPanel
           isActive={this.props.appState.notificationPanelState}
           unreadNotiList={this.state.unreadNotiList} />
-        <AddChannel isActive={chanelData.isShowAddChannelComp} />
-        <LeftMenu chanelList={chanelData.chanelList} />
+        {/*<AddChannel isActive={chanelData.isShowAddChannelComp} />*/}
+        {/*<LeftMenu chanelList={chanelData.chanelList} />*/}
 
         <main className="main-area">
-          <div className="main-content">
+          <div className="room-panel">
+            {/*<PeopleInChannel datacontext={users} />*/}
+
+            <div className={`appearin-iframe ${appearinMode} ${isAppearinActive}`}>
+              <div className="appearin-iframe__control-wrapper">
+                <button onClick={this.handleChangeMode.bind(this, 'full')}
+                  className="button-primary appearin-iframe__control-wrapper__full">
+                  <i className="fa fa-expand" aria-hidden="true"></i>
+                </button>
+                <button onClick={this.handleChangeMode.bind(this, 'left')}
+                  className="button-primary appearin-iframe__control-wrapper__left">
+                  <i className="fa fa-caret-square-o-right" aria-hidden="true"></i>
+                </button>
+              </div>
+
+              <div className="appearin-iframe__wrapper">
+                <div className="appearin-iframe__content">
+                  <iframe sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+                    src="" id="js-appearin-iframe-holder"
+                    width="100%" height="100%" frameBorder="0"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className={`main-content ${mainContentClass}`}>
             <ChannelHeader title={this.props.params.channelUrl}
               location={this.props.location} />
 
@@ -260,48 +297,6 @@ class Chanel extends Component {
                     value={this.state.inputMessage}
                     onKeyPress={this.handleKeyPress.bind(this)}
                     onChange={this.handleChange.bind(this)}></textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="room-panel">
-            {/*<PeopleInChannel datacontext={users} />*/}
-
-            <div className={`appearin-iframe ${appearinMode} ${isAppearinActive}`}>
-              <div className="appearin-iframe__control-wrapper">
-                {/*<button onClick={this.handleAddVideoRoom.bind(this, false)}
-                  className="appearin-iframe__control-wrapper__close">
-                  <i className="fa fa-close" aria-hidden="true"></i>
-                </button>
-                <button onClick={this.handleChangeMode.bind(this, 'min')}
-                  className="button-primary appearin-iframe__control-wrapper__min">
-                  <i className="fa fa-compress" aria-hidden="true"></i>
-                </button>*/}
-                <button onClick={this.handleChangeMode.bind(this, 'full')}
-                  className="button-primary appearin-iframe__control-wrapper__full">
-                  <i className="fa fa-expand" aria-hidden="true"></i>
-                </button>
-                <button onClick={this.handleChangeMode.bind(this, 'left')}
-                  className="button-primary appearin-iframe__control-wrapper__left">
-                  <i className="fa fa-caret-square-o-right" aria-hidden="true"></i>
-                </button>
-              </div>
-
-              <div className="appearin-iframe__wrapper">
-                <div className="appearin-iframe__create-room">
-                  <a href="javascript:;" className="button button--add-room"
-                    onClick={this.handleAddVideoRoom.bind(this, true)}>
-                    <span className="button--add-room__m-wrapper">
-                      <i className="fa fa-plus" aria-hidden="true"></i>
-                      add video chat room
-                    </span>
-                  </a>
-                </div>
-                <div className="appearin-iframe__content">
-                  <iframe sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-                    src="" id="js-appearin-iframe-holder"
-                    width="100%" height="100%" frameBorder="0"></iframe>
                 </div>
               </div>
             </div>
