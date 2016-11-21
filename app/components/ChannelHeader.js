@@ -29,7 +29,7 @@ class ChannelHeader extends Component {
           <Link to="/">
             <span className="header-bar__icon"></span>
           </Link>
-          {this.props.title || 'Goingsunny'}
+          {this.props.title || 'goingsunny'}
         </h1>
         <div className="header-bar__control-wrapper">
           <Link to={{ pathname: this.props.location.pathname, query: {} }}

@@ -21,7 +21,7 @@ function appStateReducer(state = defaultState, action) {
     case ChannelType.LOADED_POST_BY_SLUG:
       return state.set('currentPost', action.response ? action.response[0] : {});
 
-    case AppStateType.LOADED_CURRENT_SESSION_LIST:
+    case ChannelType.LOADED_CURRENT_SESSION_LIST:
       return state.set('currentSessionList', Immutable.fromJS(action.response));
 
     case AppStateType.ENROLLED_NEXT_SESSION:

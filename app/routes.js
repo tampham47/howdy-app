@@ -19,6 +19,7 @@ import Profile from 'containers/Profile';
 import Feedback from 'containers/Feedback';
 import Blog from 'containers/Blog';
 import MeetingRoom from 'containers/MeetingRoom';
+import Goingsunny from 'containers/Goingsunny';
 
 var NoMatchComp;
 let requireAuth = function(store, nextState, replace) {
@@ -52,7 +53,7 @@ export default function(history, store) {
   return (
     <Router history={history}>
       <Route path="/" component={App} onChange={handleChangeUrl.bind(this)} >
-        <IndexRoute component={MeetingRoom} onEnter={requireAuth.bind(this, store)} />
+        <IndexRoute component={Goingsunny} onEnter={requireAuth.bind(this, store)} />
         <Route path="c/:channelUrl" component={ClassRoom} onEnter={requireAuth.bind(this, store)} />
         <Route path="channel/:channelUrl" component={Chanel} onEnter={requireAuth.bind(this, store)} />
         <Route path="profile" component={Profile} onEnter={requireAuth.bind(this, store)} />
