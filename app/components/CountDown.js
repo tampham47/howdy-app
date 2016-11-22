@@ -17,6 +17,14 @@ import CountDown from 'react-simple-countdown';
 
 class CountDownComp extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      nextSession: this.getNextSessionTime()
+    };
+  }
+
   componentDidMount() {
     listener.sub(ApplicationType.GOT_BROKER_MESSAGE.toString(), function(e) {
       alert(`You will be lead to classroom: ${e.detail.channel}`);
@@ -61,28 +69,37 @@ class CountDownComp extends Component {
     return nextSession.toDate().toString();
   }
 
-  render() {
-    console.log('CountDown.render', this.props.currentUser, this.props.currentSessionList);
+  onCountDownCompleted() {
+    setTimeout(function() {
+      this.setState({
+        nextSession: this.getNextSessionTime()
+      });
+    }.bind(this), 3);
+  }
 
+  render() {
     var currentUser = this.props.currentUser;
     var currentSessionList = this.props.currentSessionList || [];
     var renderButton = <span></span>;
     var countdownRender = <span></span>;
 
     if (this.isEnrolledCurrentSession(currentUser, currentSessionList)) {
-      renderButton = <p>Bạn đã đăng ký tham gia lớp học kế tiếp</p>
+      renderButton = (
+        <button className="count-down-section__btn-joined">Đã tham gia</button>
+      )
     } else {
       renderButton = (
-        <button className="button-primary"
+        <button className="count-down-section__btn-join button-primary"
           onClick={this.handdleEnrollNextSession.bind(this)}>Tham gia lớp học</button>
       )
     }
 
     countdownRender = (
-      <div>
-        <CountDown className="count-down" mins="phút" segs="giây"
-          date={this.getNextSessionTime()} />
-        <p>Ca học mới sẽ bắt đầu sau</p>
+      <div className="count-down">
+        <p className="count-down__helper">Ca học mới sẽ bắt đầu sau</p>
+        <CountDown className="count-down__clock" mins="phút" segs="giây"
+          date={this.state.nextSession}
+          onEnd={this.onCountDownCompleted.bind(this)} />
       </div>
     );
 
@@ -90,8 +107,8 @@ class CountDownComp extends Component {
       <div className="count-down-section">
         {countdownRender}
         {renderButton}
-        <p>Đã có 15 người tham gia</p>
-        <Link to="/c/test-your-devices" className="button button-link">Kiểm tra thiết bị</Link>
+        {/*<p className="count-down-section__info">Đã có 15 người tham gia</p>*/}
+        <Link to="/c/test-your-devices" className="count-down-section__btn-test">Kiểm tra thiết bị</Link>
       </div>
     );
   }

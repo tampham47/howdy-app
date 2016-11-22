@@ -12,7 +12,7 @@ class Lesson extends Component {
   render() {
     var renderHtml;
     var imageList, videoRender;
-    var data = this.props.datacontext;
+    var data = this.props.datacontext || {};
 
     if (data && data.youtubeEmbedLink) {
       videoRender = (
@@ -28,7 +28,7 @@ class Lesson extends Component {
         var item = data[`image${i}`];
         return <img key={i} src={`${config.RESOURCE_PATH}/uploads/${item.filename}`} alt=""/>;
       } else {
-        return <span></span>;
+        return <span key={i}></span>;
       }
     }.bind(this));
 
