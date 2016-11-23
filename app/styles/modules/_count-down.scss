@@ -1,0 +1,71 @@
+/**
+ *
+ */
+
+.count-down-section {
+  padding: 0.5*$gutter;
+
+  p {
+    margin-bottom: 0;
+    margin-bottom: 1rem;
+  }
+
+  button,
+  .button {
+    width: 100%;
+    margin-bottom: 1rem;
+    margin-top: 3rem;
+  }
+
+  &__info {
+    margin-top: $gutter;
+  }
+
+  &__btn-join {
+    margin-top: 3rem;
+  }
+
+  &__btn-joined {
+    margin-top: 3rem;
+    border: 1px doted whitesmoke;
+  }
+
+  &__btn-test {
+    margin-top: $gutter;
+    display: inline-block;
+  }
+}
+
+.count-down {
+  border: 1px solid #283739;
+  padding: 0.5*$gutter;
+  border-radius: 4px;
+
+  &__helper {
+    font-size: 1.4rem;
+  }
+}
+
+.count-down__clock {
+  font-size: 3rem;
+  text-align: center;
+
+  &-col {
+    display: inline-block;
+    margin-right: 0.5*$gutter;
+  }
+
+  .is-day,
+  .is-hour {
+    display: none;
+  }
+
+  .is-day,
+  .is-hour,
+  .is-min,
+  .is-seg {
+    strong {
+      margin-right: 0.5*$gutter;
+    }
+  }
+}

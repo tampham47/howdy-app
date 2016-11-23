@@ -8,6 +8,10 @@ export const UPDATED_NOTIFICATION_AS_READ = Symbol('UPDATED_NOTIFICATION_AS_READ
 export const UPDATED_PROFILE = Symbol('UPDATED_PROFILE');
 export const ADDED_FEEDBACK = Symbol('ADDED_FEEDBACK');
 export const LOADED_POST_BY_SLUG = Symbol('LOADED_POST_BY_SLUG');
+export const UPDATED_LAST_ACCESSED = Symbol('UPDATED_LAST_ACCESSED');
+export const ENROLLED_NEXT_SESSION = Symbol('ENROLLED_NEXT_SESSION');
+export const LOADED_CURRENT_SESSION_LIST = Symbol('LOADED_CURRENT_SESSION_LIST');
+export const GOT_BROKER_MESSAGE = Symbol('GOT_BROKER_MESSAGE');
 
 
 export function updateNotificationPanelState(payload) {
@@ -77,5 +81,51 @@ export function loadPostBySlug(payload) {
       },
       successType: LOADED_POST_BY_SLUG
     }
+  };
+}
+
+export function updateLastAccessed(payload) {
+  return {
+    [CALL_API]: {
+      method: 'post',
+      path: `/user/${payload.id || payload._id}`,
+      body: {
+        lastAccessedAt: new Date()
+      },
+      successType: UPDATED_LAST_ACCESSED
+    }
+  };
+}
+
+export function enrollNextSession(payload) {
+  return {
+    [CALL_API]: {
+      method: 'post',
+      path: '/session',
+      body: payload,
+      successType: ENROLLED_NEXT_SESSION
+    }
+  };
+}
+
+export function loadCurrentSession(payload) {
+  return {
+    [CALL_API]: {
+      method: 'get',
+      path: '/session',
+      query: {
+        query: JSON.stringify({
+          sessionName: payload.sessionName
+        })
+      },
+      successType: LOADED_CURRENT_SESSION_LIST
+    }
+  };
+}
+
+export function getBrokerMessage(payload) {
+  return {
+    type: GOT_BROKER_MESSAGE,
+    response: payload
   };
 }

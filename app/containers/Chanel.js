@@ -116,6 +116,7 @@ class Chanel extends Component {
       isManual: true,
       authUser: this.state.currentUser,
       channelUrl: channelUrl,
+      createdAt: new Date(),
       _user: this.state.currentUser._id,
       _channel: null
     };
@@ -248,7 +249,7 @@ class Chanel extends Component {
 
         <main className="main-area">
           <div className="main-content">
-            <ChannelHeader title={channelDetail.name} datacontext={channelDetail}
+            <ChannelHeader title={this.props.params.channelUrl}
               location={this.props.location} />
 
             <div className="main-content__wrapper">

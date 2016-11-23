@@ -7,6 +7,8 @@ import { CALL_API, CHAIN_API } from 'middleware/api';
 import config from 'config';
 import moment from 'moment';
 
+// import { LOADED_CURRENT_SESSION_LIST } from 'actions/application';
+
 export const SHOWED_ADD_CHANNEL_COMP = Symbol('SHOWED_ADD_CHANNEL_COMP');
 export const CHANEL_CHANGED = Symbol('CHANEL_CHANGED');
 export const CHANNEL_LOADED = Symbol('CHANNEL_LOADED');
@@ -20,9 +22,10 @@ export const LOADED_USER_NOTIFICATIONS = Symbol('LOADED_USER_NOTIFICATIONS');
 export const LOADED_NOTIFICATIONS = Symbol('LOADED_NOTIFICATIONS');
 export const LOADED_LESSON_BY_CURRENT_DATE = Symbol('LOADED_LESSON_BY_CURRENT_DATE');
 export const LOADED_POST_BY_SLUG = Symbol('LOADED_POST_BY_SLUG');
+export const LOADED_CURRENT_SESSION_LIST = Symbol('LOADED_CURRENT_SESSION_LIST');
 
 
-export function fetchChannelData({ channelUrl, userId }) {
+export function fetchChannelData({ channelUrl, userId, sessionName }) {
   return {
     [CHAIN_API]: [
       ()=> {
@@ -77,18 +80,18 @@ export function fetchChannelData({ channelUrl, userId }) {
           }
         }
       },
-      (users)=> {
-        return {
-          [CALL_API]: {
-            method: 'get',
-            path: '/channel',
-            query: {
-              sort: JSON.stringify({ createdAt: 1 }),
-            },
-            successType: CHANNEL_LOADED
-          }
-        };
-      },
+      // (users)=> {
+      //   return {
+      //     [CALL_API]: {
+      //       method: 'get',
+      //       path: '/channel',
+      //       query: {
+      //         sort: JSON.stringify({ createdAt: 1 }),
+      //       },
+      //       successType: CHANNEL_LOADED
+      //     }
+      //   };
+      // },
       (channels) => {
         return {
           [CALL_API]: {
@@ -100,6 +103,20 @@ export function fetchChannelData({ channelUrl, userId }) {
               query: JSON.stringify({ channelUrl: channelUrl})
             },
             successType: LOADED_MESSAGES
+          }
+        }
+      },
+      () => {
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: '/session',
+            query: {
+              query: JSON.stringify({
+                sessionName: sessionName
+              })
+            },
+            successType: LOADED_CURRENT_SESSION_LIST
           }
         }
       }

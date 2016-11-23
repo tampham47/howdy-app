@@ -1,31 +1,37 @@
 /**
- * 2016 gsun
+ * 2016 nau
  * tw
  */
 
 let Listener = function() {};
-let _callbackList = {};
+let _eventList = {};
+
+Listener.prototype.fakeFetchDone = function() {
+  window.dispatchEvent(new CustomEvent('FAKE_FETCH_SUCCESS', {
+    detail: true
+  }));
+};
 
 Listener.prototype.sub = function(actionType, callback) {
-  if (typeof window !== 'undefined') {
-    window.addEventListener(actionType, callback);
-    _callbackList[actionType] = callback;
-  }
+  if (typeof window === 'undefined') { return; }
+
+  _eventList[actionType] = callback;
+  window.addEventListener(actionType, callback);
+};
+
+Listener.prototype.unsub = function(actionType, callback) {
+  if (typeof window === 'undefined') { return; }
+
+  window.removeEventListener(actionType, callback || _eventList[actionType]);
 };
 
 Listener.prototype.pub = function({ action }) {
-  if (typeof window !== 'undefined') {
-    window.dispatchEvent(new CustomEvent(action.type.toString(), {
-      detail: action.response
-    }));
-  }
-};
+  if (!action) {return;}
+  if (typeof window === 'undefined') { return; }
 
-Listener.prototype.unsub = function({ actionType }) {
-  if (typeof window !== 'undefined') {
-    window.removeEventListener(actionType, _callbackList[actionType]);
-    delete _callbackList[actionType];
-  }
+  window.dispatchEvent(new CustomEvent(action.type.toString(), {
+    detail: action.response
+  }));
 };
 
 export default new Listener();
