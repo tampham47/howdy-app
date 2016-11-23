@@ -46,9 +46,9 @@ gulp.task('css', function() {
   return gulp.src('app/styles/main.scss')
     .pipe($.sourcemaps.init())
     .pipe($.sass({
-      importer: moduleImporter({
-        basedir: path.join(__dirname, './node_modules/')
-      }),
+      // importer: moduleImporter({
+      //   basedir: path.join(__dirname, './node_modules/')
+      // }),
     }).on('error', $.sass.logError))
     .pipe($.autoprefixer({
       browsers: ['last 2 versions'],
