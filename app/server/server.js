@@ -26,14 +26,15 @@ let scriptSrcs;
 let styleSrc;
 if ( process.env.NODE_ENV === 'production' ) {
   // let assets = require('../../dist/webpack-assets.json');
-  let refManifest = require('../../dist/rev-manifest.json');
+  // let refManifest = require('../../dist/rev-manifest.json');
   scriptSrcs = [
     // `/${assets.vendor.js}`,
     // `/${assets.app.js}`
     '/vendor.js',
     '/app.js'
   ];
-  styleSrc = `/${refManifest['main.css']}`;
+  // styleSrc = `/${refManifest['main.css']}`;
+  styleSrc = `/main.css`;
 } else {
   scriptSrcs = [
     'http://localhost:3001/static/vendor.js',
