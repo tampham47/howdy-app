@@ -22,9 +22,15 @@
     margin: 0;
     line-height: $header-h;
     vertical-align: middle;
-    margin-left: $gutter;
+    margin-left: 40px;
     font-size: 3.2rem;
     display: inline-block;
+
+    a {
+      padding: 0 10px;
+      margin-left: -10px;
+      color: black;
+    }
   }
 
   &__icon {

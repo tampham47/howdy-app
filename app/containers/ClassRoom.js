@@ -216,21 +216,22 @@ class Chanel extends Component {
     var users = this.props.users.toJS();
     var mainContent;
     var mainContentClass = 'main-content--lesson';
-
-    mainContent = <Lesson datacontext={this.props.channelData.currentLesson} />;
+    var isShowLesson = false;
+    var isShowMessage = false;
 
     switch (this.props.location.query.tab) {
-      case 'message':
-        mainContentClass = '';
-        mainContent = <MessageList datacontext={messageList} />;
-        break;
       case 'lesson':
+        isShowLesson = true;
         mainContentClass = 'main-content--lesson';
         break;
+      case 'message':
+        isShowMessage = true;
+        mainContentClass = '';
+        break;
       case 'setting':
-        mainContent = <ChannelSetting datacontext={channelDetail} />
         break
       default:
+        isShowLesson = true;
     }
 
     return (
@@ -238,13 +239,9 @@ class Chanel extends Component {
         <NotificationPanel
           isActive={this.props.appState.notificationPanelState}
           unreadNotiList={this.state.unreadNotiList} />
-        {/*<AddChannel isActive={chanelData.isShowAddChannelComp} />*/}
-        {/*<LeftMenu chanelList={chanelData.chanelList} />*/}
 
         <main className="main-area">
           <div className="room-panel">
-            {/*<PeopleInChannel datacontext={users} />*/}
-
             <div className={`appearin-iframe ${appearinMode} ${isAppearinActive}`}>
               <div className="appearin-iframe__control-wrapper">
                 <button onClick={this.handleChangeMode.bind(this, 'full')}
@@ -269,11 +266,13 @@ class Chanel extends Component {
 
           <div className={`main-content ${mainContentClass}`}>
             <ChannelHeader title={this.props.params.channelUrl}
+              icon={'fa-chevron-left'}
               location={this.props.location} />
 
             <div className="main-content__wrapper">
               <div id='content-scroller' className="main-content__scroller">
-                { mainContent }
+                <Lesson datacontext={this.props.channelData.currentLesson} isShow={isShowLesson} />
+                <MessageList datacontext={messageList} isShow={isShowMessage} />
               </div>
             </div>
 

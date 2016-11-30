@@ -4,7 +4,9 @@
 
 .lesson-section {
   padding: $gutter;
-  padding-left: 30px;
+  padding-left: 40px;
+  max-width: 710px;
+  padding-bottom: 100px;
 
   p {
     margin-bottom: 0.5*$gutter;

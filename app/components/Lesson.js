@@ -18,7 +18,7 @@ class Lesson extends Component {
       videoRender = (
         <div>
           <h5 className="lesson-section--helper">{data.videoIntro}</h5>
-          <iframe width="100%" height="480" src={data.youtubeEmbedLink} frameBorder="0" allowFullScreen></iframe>
+          <iframe width="100%" height="366" src={data.youtubeEmbedLink} frameBorder="0" allowFullScreen></iframe>
         </div>
       );
     }
@@ -49,7 +49,7 @@ class Lesson extends Component {
     }
 
     return (
-      <section className="lesson-section">
+      <section className={"lesson-section " + (this.props.isShow ? '' : 'u-hide')}>
         { renderHtml }
       </section>
     )

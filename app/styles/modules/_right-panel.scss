@@ -5,11 +5,12 @@
 
 
 .room-panel {
-  background-color: lighten(whitesmoke, 2%);
   height: 100%;
   position: relative;
   width: 330px;
-  // flex: 1;
+  background-color: #2A363B;
+  box-shadow: 4px 0px 4px whitesmoke;
+  z-index: 99;
 
   &__wrapper {
     padding: 0.5*$gutter;

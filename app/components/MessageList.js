@@ -12,7 +12,7 @@ import moment from 'moment';
 class Lesson extends Component {
   render() {
     return (
-      <div className="message-list">
+      <div className={"message-list " + (this.props.isShow ? '' : 'u-hide')}>
         {this.props.datacontext.map(function(item, index) {
           item.authUser = item.authUser || {};
           return (

@@ -31,12 +31,12 @@ let requireAuth = function(store, nextState, replace) {
     var p = nextState.location.pathname;
     replace('/login');
 
-    // replace({
-    //   pathname: '/login',
-    //   query: {
-    //     nextstate: p
-    //   }
-    // });
+    replace({
+      pathname: '/login',
+      query: {
+        nextstate: p
+      }
+    });
   }
 };
 

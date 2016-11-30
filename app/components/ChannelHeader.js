@@ -27,7 +27,7 @@ class ChannelHeader extends Component {
       <div className="header-bar">
         <h1 className="header-bar__title">
           <Link to="/">
-            <span className="header-bar__icon"></span>
+            <i className={"fa " + (this.props.icon || 'fa-home')}></i>
           </Link>
           {this.props.title || 'goingsunny'}
         </h1>
@@ -40,10 +40,6 @@ class ChannelHeader extends Component {
             className={this.getActiveState('message')}>
             <i className="fa fa-paper-plane-o"></i>
           </Link>
-          {/*<Link to={{ pathname: this.props.location.pathname, query: { tab: 'setting' } }}
-            className={this.getActiveState('setting')}>
-            <i className="fa fa-bars"></i>
-          </Link>*/}
         </div>
       </div>
     )

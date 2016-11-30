@@ -108,7 +108,7 @@ class CountDownComp extends Component {
         {countdownRender}
         {renderButton}
         {/*<p className="count-down-section__info">Đã có 15 người tham gia</p>*/}
-        <Link to="/c/test-your-devices" className="count-down-section__btn-test">Kiểm tra thiết bị</Link>
+        <Link to="/c/test-your-devices" className="count-down-section__btn-test">Kiểm tra thiết bị <i className="fa fa-chevron-right"></i></Link>
       </div>
     );
   }

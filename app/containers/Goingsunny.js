@@ -67,8 +67,6 @@ class Chanel extends Component {
       sessionName: utils.getSessionNameByDate()
     });
 
-    // this.handleAddVideoRoom(true);
-
     // check more data later
     var unreadNotiList = this.getUnreadNotifications(this.props.notifications, this.props.userNotifications);
     if (unreadNotiList.length > 0) {
@@ -81,7 +79,6 @@ class Chanel extends Component {
     // using listent only for animation task
     listener.sub(ChannelType.LOADED_MESSAGES.toString(), function() {
       if (!scroller) return;
-      // scroller.scrollTop = scroller.scrollHeight;
     });
     listener.sub(ChannelType.NEW_MESSAGE.toString(), function() {
       if (!scroller) return;
@@ -107,13 +104,7 @@ class Chanel extends Component {
   }
 
   componentWillReceiveProps(props) {
-    console.log('Chanel.componentWillReceiveProps', props);
-    // console.log('Channel.componentDidMount', unreadNotiList, this.props.userNotifications);
-
     var unreadNotiList = this.getUnreadNotifications(props.notifications, props.userNotifications);
-    console.log('Channel.notifications', props.notifications);
-    console.log('Channel.userNotifications', props.userNotifications);
-    console.log('Channel.unreadNotiList', unreadNotiList);
     if (unreadNotiList.length > 0 && !this.props.appState.notificationPanelState) {
       this.props.updateNotificationPanelState(true);
       this.setState({ unreadNotiList });
@@ -166,7 +157,6 @@ class Chanel extends Component {
   }
 
   handleAddVideoRoom(isAppearin) {
-    console.log('Channel.handleAddVideoRoom');
     this.props.showAppearin(isAppearin);
     var iframe = document.getElementById('js-appearin-iframe-holder');
 
@@ -227,21 +217,22 @@ class Chanel extends Component {
     var users = this.props.users.toJS();
     var mainContent;
     var mainContentClass = 'main-content--lesson';
-
-    mainContent = <Lesson datacontext={this.props.channelData.currentLesson} />;
+    var isShowLesson = false;
+    var isShowMessage = false;
 
     switch (this.props.location.query.tab) {
-      case 'message':
-        mainContentClass = '';
-        mainContent = <MessageList datacontext={messageList} />;
-        break;
       case 'lesson':
+        isShowLesson = true;
         mainContentClass = 'main-content--lesson';
         break;
+      case 'message':
+        isShowMessage = true;
+        mainContentClass = '';
+        break;
       case 'setting':
-        mainContent = <ChannelSetting datacontext={channelDetail} />
         break
       default:
+        isShowLesson = true;
     }
 
     return (
@@ -265,7 +256,8 @@ class Chanel extends Component {
 
             <div className="main-content__wrapper">
               <div id='content-scroller' className="main-content__scroller">
-                { mainContent }
+                <Lesson datacontext={this.props.channelData.currentLesson} isShow={isShowLesson} />
+                <MessageList datacontext={messageList} isShow={isShowMessage} />
               </div>
             </div>
 
