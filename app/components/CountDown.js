@@ -74,7 +74,7 @@ class CountDownComp extends Component {
       this.setState({
         nextSession: this.getNextSessionTime()
       });
-    }.bind(this), 3);
+    }.bind(this), 3000);
   }
 
   render() {
