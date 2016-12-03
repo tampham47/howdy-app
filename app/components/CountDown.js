@@ -59,6 +59,7 @@ class CountDownComp extends Component {
 
   getNextSessionTime() {
     var nextSession = moment();
+
     if (nextSession.minutes() < 30) {
       nextSession.minutes(29);
       nextSession.seconds(59);
@@ -66,14 +67,13 @@ class CountDownComp extends Component {
       nextSession.minutes(59);
       nextSession.seconds(59);
     }
+
     return nextSession.toDate().toString();
   }
 
   onCountDownCompleted() {
     setTimeout(function() {
-      this.setState({
-        nextSession: this.getNextSessionTime()
-      });
+      window.location.reload();
     }.bind(this), 3000);
   }
 
