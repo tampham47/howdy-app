@@ -15,10 +15,15 @@ class Lesson extends Component {
     var data = this.props.datacontext || {};
 
     if (data && data.youtubeEmbedLink) {
+      var link = data.youtubeEmbedLink;
+      if (link.indexOf('http') >= 0 && link.indexOf('https') < 0) {
+        link = link.replace('http', 'https');
+      }
+
       videoRender = (
         <div>
           <h5 className="lesson-section--helper">{data.videoIntro}</h5>
-          <iframe width="100%" height="366" src={data.youtubeEmbedLink} frameBorder="0" allowFullScreen></iframe>
+          <iframe width="100%" height="366" src={link} frameBorder="0" allowFullScreen></iframe>
         </div>
       );
     }
@@ -40,6 +45,8 @@ class Lesson extends Component {
           <h5 className="lesson-section--helper">{data.imageIntro}</h5>
           {imageList}
           <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
+          <h6><b><u>Vocabulary</u></b></h6>
+          <div dangerouslySetInnerHTML={{ __html: data.vocabulary }}></div>
         </div>
       );
     } else {
