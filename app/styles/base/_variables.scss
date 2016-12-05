@@ -8,6 +8,15 @@ $bp-larger-than-tablet    : "min-width: 750px" !default;
 $bp-larger-than-desktop   : "min-width: 1000px" !default;
 $bp-larger-than-desktophd : "min-width: 1200px" !default;
 
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+$grid-breakpoints: ( xs: 0, sm: 544px, md: 768px, lg: 992px, xl: 1200px ) !default; // Breakpoints
+$bp-mobile-down: 'max-width: #{map-get($grid-breakpoints, sm)}' !default;
+$bp-tablet-down: 'max-width: #{map-get($grid-breakpoints, md)}' !default;
+$bp-desktop-down: 'max-width: #{map-get($grid-breakpoints, lg)}' !default;
+$bp-desktophd-down: 'max-width: #{map-get($grid-breakpoints, xl)}' !default; // Grid containers
+
+
 // Colors
 $light-grey: #e1e1e1 !default;
 $dark-grey: #333 !default;
@@ -44,3 +53,5 @@ $gutter: 2rem;
 $header-h: 65px;
 $normal-icon-w: 40px;
 $normal-border-radius: 4px;
+
+$bk-mobile-down: '';

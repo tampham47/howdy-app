@@ -36,3 +36,7 @@
 @import "modules/notification";
 @import "modules/lesson";
 @import "modules/count-down";
+
+@media ($bp-mobile-down) {
+  @import "mobile/layout";
+}

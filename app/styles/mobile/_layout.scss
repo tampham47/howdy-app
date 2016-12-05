@@ -1,0 +1,82 @@
+/**
+ *
+ */
+
+$offset-left: 20px;
+
+.main-area {
+  flex-direction: column;
+}
+
+.room-panel {
+  width: 100%;
+}
+
+.main-content {
+  width: 100%;
+  height: auto;
+  min-height: auto;
+}
+
+.header-bar {
+  $control-w: 120px;
+
+  &__title {
+    margin-left: $offset-left;
+    font-size: 2.5rem;
+    display: block;
+    padding-right: $control-w;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &__control-wrapper {
+    // width: $control-w;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+.lesson-section {
+  padding-left: $offset-left;
+
+  iframe {
+    margin-left: -$offset-left;
+    margin-right: -$offset-left;
+    min-width: 320px !important;
+    height: 250px !important;
+    position: relative;
+    left: 0;
+    right: 0;
+  }
+}
+
+.message-item {
+  &__icon {
+    left: 20px;
+  }
+  &__wrapper {
+    margin-left: 70px;
+  }
+}
+
+.room-panel {
+  &__wrapper {
+    padding: 2rem;
+  }
+}
+
+.count-down-section {
+  padding: 0;
+
+  .count-down-section__btn-join {
+    margin-top: 0.5*$gutter;
+    margin-bottom: 0;
+  }
+
+  .count-down-section__btn-test {
+    margin-top: 0.5*$gutter;
+    margin-bottom: 0;
+  }
+}

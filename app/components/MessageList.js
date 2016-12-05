@@ -23,7 +23,7 @@ class Lesson extends Component {
               <div className="message-item__wrapper">
                 <div className="message-item__title">
                   <span className="message-item__title__name">{item.authUser.displayName}</span>
-                  <small className="message-item__title__username">{`@${item.authUser.displayName}`}</small>
+                  {/*<small className="message-item__title__username">{`@${item.authUser.displayName}`}</small>*/}
                   <small className="message-item__title__time">{moment(item.createdAt || null).format('MMM DD, HH:mm')}</small>
                 </div>
                 <MessageItem datacontext={item} />
