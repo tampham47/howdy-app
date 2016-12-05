@@ -72,9 +72,9 @@ class CountDownComp extends Component {
   }
 
   onCountDownCompleted() {
-    setTimeout(function() {
-      window.location.reload();
-    }.bind(this), 3000);
+    // setTimeout(function() {
+    //   window.location.reload();
+    // }.bind(this), 3000);
   }
 
   render() {

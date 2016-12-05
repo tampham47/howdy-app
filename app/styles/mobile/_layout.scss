@@ -70,7 +70,8 @@ $offset-left: 20px;
 .count-down-section {
   padding: 0;
 
-  .count-down-section__btn-join {
+  .count-down-section__btn-join,
+  .count-down-section__btn-joined {
     margin-top: 0.5*$gutter;
     margin-bottom: 0;
   }
