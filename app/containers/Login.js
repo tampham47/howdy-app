@@ -59,7 +59,7 @@ class Login extends Component {
             <p>Ps/ Hãy là người lịch sự, đừng rời khỏi phòng khi chưa hoàn thành bài học hay chưa thông báo cho người đối diện biết nhé. Goingsunny miễn phí, và sẽ luôn như vậy. Như chính con đường đi tìm one piece sẽ không từ chối bất kỳ ai.</p>
 
             <p>---</p>
-            <p>Kho báu onpiece ta để hết ở goingsunny, hãy leo lên đó mà lấy.</p>
+            <p className="p-sign">Kho báu onpiece ta để hết ở goingsunny, hãy leo lên đó mà lấy.</p>
             <p>Thuyền trưởng: <b>D. Xaolonist</b></p>
           </div>
         </div>

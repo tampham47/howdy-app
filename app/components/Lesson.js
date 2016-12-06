@@ -21,10 +21,7 @@ class Lesson extends Component {
       }
 
       videoRender = (
-        <div>
-          <h5 className="lesson-section--helper">{data.videoIntro}</h5>
-          <iframe width="100%" height="366" src={link} frameBorder="0" allowFullScreen></iframe>
-        </div>
+        <iframe width="100%" height="366" src={link} frameBorder="0" allowFullScreen></iframe>
       );
     }
 
@@ -40,6 +37,7 @@ class Lesson extends Component {
     if (data) {
       renderHtml = (
         <div>
+          <h5 className="lesson-section--helper"><i>{data.videoIntro}</i></h5>
           <h5 className="lesson-section--title">{data.name}</h5>
           {videoRender}
           <h5 className="lesson-section--helper">{data.imageIntro}</h5>
