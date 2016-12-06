@@ -31,7 +31,6 @@ $offset-left: 20px;
   }
 
   &__control-wrapper {
-    // width: $control-w;
     position: absolute;
     top: 0;
     right: 0;
@@ -45,7 +44,7 @@ $offset-left: 20px;
     margin-left: -$offset-left;
     margin-right: -$offset-left;
     min-width: 320px !important;
-    height: 250px !important;
+    height: 180px !important;
     position: relative;
     left: 0;
     right: 0;
@@ -73,6 +72,10 @@ $offset-left: 20px;
 
 .count-down-section {
   padding: 0;
+
+  p {
+    text-align: center;
+  }
 
   .count-down-section__btn-join,
   .count-down-section__btn-joined {
