@@ -242,6 +242,12 @@ class Chanel extends Component {
 
         <main className="main-area">
           <div className="room-panel">
+            <div className="room-panel__wrapper">
+              <div className="count-down-section">
+                <a className="count-down-section__btn-joined button-link button" target="_blank"
+                  href={`https://appear.in/${channelUrl}`}>Open {`Appear.in/${channelUrl}`}</a>
+              </div>
+            </div>
             <div className={`appearin-iframe ${appearinMode} ${isAppearinActive}`}>
               <div className="appearin-iframe__control-wrapper">
                 <button onClick={this.handleChangeMode.bind(this, 'full')}
