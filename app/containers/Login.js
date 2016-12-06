@@ -15,17 +15,7 @@ class Login extends Component {
       user = this.props.currentUser;
     }
 
-    // if (user.isAuthenticated) {
-    //   if (this.props.location.query && this.props.location.query.nextstate) {
-    //     this.props.router.push(`/${this.props.location.query.nextstate}`);
-    //   } else {
-    //     this.props.router.push('/');
-    //   }
-    // }
-
     if (user.isAuthenticated) {
-      // var nextstate = this.props.location.query.nextstate ? `/${this.props.location.query.nextstate}` : '/';
-      // this.props.router.push(nextstate);
       this.props.router.push('/');
     }
   }
@@ -50,7 +40,7 @@ class Login extends Component {
 
         <div className="container">
           <div className="brand">
-            <img src="http://image.flaticon.com/icons/svg/123/123894.svg" alt="" />
+            <img src="//image.flaticon.com/icons/svg/123/123894.svg" alt="" />
             <h1>goingsunny</h1>
             <p>fake it 'til you make it</p>
 
