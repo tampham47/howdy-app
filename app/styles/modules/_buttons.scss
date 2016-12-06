@@ -145,3 +145,18 @@ input {
     box-sizing: border-box;
   }
 }
+
+.button {
+  &--join-the-trip {
+    background-color: transparent;
+    border: 1px dashed $c-05;
+    color: $c-05;
+
+    &:hover,
+    &:active {
+      background-color: $c-07;
+      border-color: $c-07;
+      color: white;
+    }
+  }
+}

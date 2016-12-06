@@ -21,6 +21,16 @@ body, .relm {
   display: flex;
 }
 
+body.login-page {
+  height: auto;
+  min-height: auto;
+
+  .relm {
+    height: auto;
+    min-height: auto;
+  }
+}
+
 *,
 *:before,
 *:after {

@@ -1,0 +1,69 @@
+/**
+ *
+ */
+
+
+.container {
+  max-width: 768px;
+}
+
+.wave-wrapper {
+  background: #E0E7E9;
+  min-height: 80%;
+  overflow: hidden;
+  font-weight: 300;
+  padding-top: 2rem;
+  width: 100%;
+  text-align: center;
+}
+
+.brand {
+  margin-top: 50px;
+
+  img {
+    width: 80px;
+    color: $c-05;
+  }
+
+  h1 {
+    margin-top: 0;
+    font-size: 2.5rem;
+    margin-bottom: 0;
+    font-weight: 300;
+  }
+
+  p {
+    margin-top: 10px;
+    font-size: 2rem;
+  }
+}
+
+.intro-message {
+  text-align: left;
+  font-size: 1.6rem;
+  margin-top: 2rem;
+  margin-bottom: 8rem;
+}
+
+@mixin wave-bg($width, $height, $color) {
+  $amplitude: $height * 1.73;
+  $width_half: $width / 2;
+  $height_half: $height / 2;
+
+  background: url('data:image/svg+xml,%3Csvg width%3D%22#{$width}%22 height%3D%22#{$height}%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath d%3D%22M0%2C0 v#{$height_half} c#{$width_half}%2C#{$amplitude} #{$width_half}%2C-#{$amplitude} #{$width}%2C0 v-#{$height_half} z%22 fill%3D%22#{$color}%22%2F%3E%3C%2Fsvg%3E') repeat-x;
+}
+
+.wave {
+  $height: 10;
+  $width: 47;
+
+  height: #{$height}px;
+  margin: 0 #{$width * -1}px;
+  @include wave-bg($width, $height, '%23E0E7E9');
+}
+
+footer {
+  overflow: hidden;
+  height: 200px;
+  background-color: #539DDB;
+}
