@@ -32,14 +32,14 @@ class ChannelHeader extends Component {
           {this.props.title || 'goingsunny'}
         </h1>
         <div className="header-bar__control-wrapper">
-          <Link to={{ pathname: this.props.location.pathname, query: {} }}
+          {/*<Link to={{ pathname: this.props.location.pathname, query: {} }}
             className={this.getActiveState('lesson')}>
             <i className="fa fa-bookmark-o"></i>
-          </Link>
-          <Link to={{ pathname: this.props.location.pathname, query: { tab: 'message' } }}
+          </Link>*/}
+          {/*<Link to={{ pathname: this.props.location.pathname, query: { tab: 'message' } }}
             className={this.getActiveState('message')}>
             <i className="fa fa-paper-plane-o"></i>
-          </Link>
+          </Link>*/}
         </div>
       </div>
     )
