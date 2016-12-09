@@ -38,6 +38,6 @@
 @import "modules/count-down";
 @import "modules/login-wave";
 
-@media ($bp-mobile-down) {
+@media ($bp-tablet-down) {
   @import "mobile/layout";
 }
