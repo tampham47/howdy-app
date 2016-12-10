@@ -65,14 +65,12 @@ class Login extends Component {
             <p>---</p>
             <p>Nếu bạn dùng goingsunny bằng điện thoại hãy cài app <b>appear.in</b> trên điện thoại để có thể gọi video call nhé. Chi tiết có thể xem ở đây <a href="https://appear.in/" target="_blank">appear.in</a>.</p>
             <div className="app-link-group">
-              <a href="https://itunes.apple.com/no/app/appear.in-free-group-video/id878583078?mt=8">
-                <img src="https://devimages.apple.com.edgekey.net/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg"
-                  width="150" alt="Download on the App Store" border="0" />
+              <a href="https://itunes.apple.com/no/app/appear.in-free-group-video/id878583078?mt=8" target="_blank">
+                <img src="/apple-icon.svg" width="150" alt="Download on the App Store" border="0" />
               </a>
 
-              <a href="https://play.google.com/store/apps/details?id=appear.in.app">
-                <img src="http://ww1.prweb.com/prfiles/2015/12/04/13115247/google.png"
-                  width="150" alt="Get it on Google Play" border="0" />
+              <a href="https://play.google.com/store/apps/details?id=appear.in.app" target="_blank">
+                <img src="/google-icon.png" width="150" alt="Get it on Google Play" border="0" />
               </a>
             </div>
           </div>
