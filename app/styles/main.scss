@@ -37,6 +37,7 @@
 @import "modules/lesson";
 @import "modules/count-down";
 @import "modules/login-wave";
+@import "modules/applink";
 
 @media ($bp-tablet-down) {
   @import "mobile/layout";
