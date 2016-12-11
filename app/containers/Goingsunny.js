@@ -69,7 +69,10 @@ class Chanel extends Component {
 
     // check more data later
     var unreadNotiList = this.getUnreadNotifications(this.props.notifications, this.props.userNotifications);
+    console.log('unreadNotiList', unreadNotiList);
+    console.log('unreadNotiList 2', this.props.notifications, this.props.userNotifications);
     if (unreadNotiList.length > 0) {
+      console.log('unreadNotiList', unreadNotiList);
       this.props.updateNotificationPanelState(true);
       this.setState({ unreadNotiList });
     }

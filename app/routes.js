@@ -30,13 +30,6 @@ let requireAuth = function(store, nextState, replace) {
     // Not authenticated, redirect to login.
     var p = nextState.location.pathname;
     replace('/login');
-
-    // replace({
-    //   pathname: '/login',
-    //   query: {
-    //     nextstate: p
-    //   }
-    // });
   }
 };
 
@@ -53,7 +46,9 @@ export default function(history, store) {
   return (
     <Router history={history}>
       <Route path="/" component={App} onChange={handleChangeUrl.bind(this)} >
-        <IndexRoute component={Goingsunny} onEnter={requireAuth.bind(this, store)} />
+        {/*<IndexRoute component={Goingsunny} onEnter={requireAuth.bind(this, store)} />*/}
+        <IndexRoute component={Goingsunny} />
+
         <Route path="c/:channelUrl" component={ClassRoom} onEnter={requireAuth.bind(this, store)} />
         <Route path="channel/:channelUrl" component={Chanel} onEnter={requireAuth.bind(this, store)} />
         <Route path="profile" component={Profile} onEnter={requireAuth.bind(this, store)} />

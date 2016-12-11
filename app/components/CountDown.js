@@ -83,15 +83,24 @@ class CountDownComp extends Component {
     var renderButton = <span></span>;
     var countdownRender = <span></span>;
 
-    if (this.isEnrolledCurrentSession(currentUser, currentSessionList)) {
+    console.log('currentUser', this.props.currentUser);
+    if (!this.props.currentUser._id) {
       renderButton = (
-        <button className="count-down-section__btn-joined">Đã tham gia</button>
+        <div>
+          <a href='/login/facebook' className="button count-down-section__btn-join button-primary">Join the trip with facebook</a>
+        </div>
       )
     } else {
-      renderButton = (
-        <button className="count-down-section__btn-join button-primary"
-          onClick={this.handdleEnrollNextSession.bind(this)}>Tham gia lớp học</button>
-      )
+      if (this.isEnrolledCurrentSession(currentUser, currentSessionList)) {
+        renderButton = (
+          <button className="count-down-section__btn-joined">Đã tham gia</button>
+        )
+      } else {
+        renderButton = (
+          <button className="count-down-section__btn-join button-primary"
+            onClick={this.handdleEnrollNextSession.bind(this)}>Tham gia lớp học</button>
+        )
+      }
     }
 
     countdownRender = (
@@ -107,8 +116,14 @@ class CountDownComp extends Component {
       <div className="count-down-section">
         {countdownRender}
         {renderButton}
+
+        <Link to='/login' className="count-down-section__btn-test">
+          Hướng dẫn <i className="fa fa-chevron-right"></i>
+        </Link>
+        <Link to="/c/test-your-devices" className="count-down-section__btn-test">
+          Kiểm tra thiết bị <i className="fa fa-chevron-right"></i>
+        </Link>
         {/*<p className="count-down-section__info">Đã có 15 người tham gia</p>*/}
-        <Link to="/c/test-your-devices" className="count-down-section__btn-test">Kiểm tra thiết bị <i className="fa fa-chevron-right"></i></Link>
       </div>
     );
   }
