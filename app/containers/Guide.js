@@ -13,6 +13,7 @@ class Login extends Component {
 
     return (
       <div className="wave-wrapper">
+        <Link to="/" className="button wave-wrapper__close">x</Link>
         <div className="container">
           <div className="brand">
             <img src="//image.flaticon.com/icons/svg/123/123894.svg" alt="" />
@@ -34,10 +35,6 @@ class Login extends Component {
             <p>Ps/ Hãy là người lịch sự, đừng rời khỏi phòng khi chưa hoàn thành bài học hay chưa thông báo cho người đối diện biết nhé. Goingsunny miễn phí, và sẽ luôn như vậy. Như chính con đường đi tìm one piece sẽ không từ chối bất kỳ ai.</p>
 
             <p>---</p>
-            <p className="p-sign">Kho báu onpiece ta để hết ở goingsunny, hãy leo lên đó mà lấy.</p>
-            <p>Thuyền trưởng: <b>D. Xaolonist</b></p>
-
-            <p>---</p>
             <p>Nếu bạn dùng goingsunny bằng điện thoại hãy cài app <b>appear.in</b> trên điện thoại để có thể gọi video call nhé. Chi tiết có thể xem ở đây <a href="https://appear.in/" target="_blank">appear.in</a>.</p>
             <div className="app-link-group">
               <a href="https://itunes.apple.com/no/app/appear.in-free-group-video/id878583078?mt=8" target="_blank">
@@ -48,6 +45,11 @@ class Login extends Component {
                 <img src="/google-icon.png" width="150" alt="Get it on Google Play" border="0" />
               </a>
             </div>
+            <br/>
+            <p>---</p>
+            <p className="p-sign">Kho báu onpiece ta để hết ở goingsunny, hãy leo lên đó mà lấy.</p>
+            <p>Thuyền trưởng: <b>D. Xaolonist</b></p>
+
           </div>
         </div>
         <footer>

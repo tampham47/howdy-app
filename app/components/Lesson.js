@@ -43,7 +43,7 @@ class Lesson extends Component {
           <h5 className="lesson-section--helper">{data.imageIntro}</h5>
           {imageList}
           <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
-          <h5>Vocabulary</h5>
+          <h4>Vocabulary</h4>
           <div dangerouslySetInnerHTML={{ __html: data.vocabulary }}></div>
         </div>
       );
