@@ -93,7 +93,7 @@ class CountDownComp extends Component {
     } else {
       if (this.isEnrolledCurrentSession(currentUser, currentSessionList)) {
         renderButton = (
-          <button className="__btn-joined">Đã tham gia</button>
+          <button className="__btn-joined">Đã tham gia ca học tiếp theo</button>
         )
       } else {
         renderButton = (
