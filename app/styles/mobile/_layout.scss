@@ -77,13 +77,12 @@ $offset-left: 20px;
     text-align: center;
   }
 
-  .count-down-section__btn-join,
-  .count-down-section__btn-joined {
+  .button-primary {
     margin-top: 0.5*$gutter;
     margin-bottom: 0;
   }
 
-  .count-down-section__btn-test {
+  .__btn-test {
     margin-top: 0.5*$gutter;
     margin-bottom: 0;
   }
@@ -91,5 +90,26 @@ $offset-left: 20px;
   .button-link {
     line-height: 50px;
     margin-top: 0;
+  }
+}
+
+.notification-p {
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  &__content {
+    border-radius: 0;
+  }
+}
+
+.wave-wrapper {
+  &__close {
+    position: absolute;
+    top: 0.5*$gutter;
+    right: 0.5*$gutter;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 }

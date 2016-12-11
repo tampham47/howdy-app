@@ -65,7 +65,7 @@ class App extends Component {
     console.log('App.render', this.props.location.pathname);
     var location = this.props.location.pathname;
     if (typeof window !== 'undefined') {
-      if (location == '/login') {
+      if (location == '/login' || location == '/guide') {
         document.getElementsByTagName('body')[0].classList.add('login-page');
       } else {
         document.getElementsByTagName('body')[0].classList.remove('login-page');

@@ -245,7 +245,7 @@ class Chanel extends Component {
             <div className="room-panel__wrapper">
               <div className="count-down-section">
                 <a className="count-down-section__btn-joined button-link button" target="_blank"
-                  href={`https://appear.in/${channelUrl}`}>Open {`Appear.in/${channelUrl}`}</a>
+                  href={`https://appear.in/${channelUrl}`}>Open Appearin</a>
               </div>
             </div>
             <div className={`appearin-iframe ${appearinMode} ${isAppearinActive}`}>

@@ -49,10 +49,9 @@ class NotificationPanel extends Component {
               <ul className="notification-list">
                 { notificationList }
               </ul>
-
-                <div className="u-pull-right">
-                  <button onClick={this.handleSubmitButton.bind(this)}>OK</button>
-                </div>
+              <div className="u-pull-right">
+                <button onClick={this.handleSubmitButton.bind(this)}>OK</button>
+              </div>
               </div>
             </div>
           </div>
