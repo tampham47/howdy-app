@@ -20,6 +20,7 @@ import Feedback from 'containers/Feedback';
 import Blog from 'containers/Blog';
 import MeetingRoom from 'containers/MeetingRoom';
 import Goingsunny from 'containers/Goingsunny';
+import Guide from 'containers/Guide';
 
 var NoMatchComp;
 let requireAuth = function(store, nextState, replace) {
@@ -48,14 +49,15 @@ export default function(history, store) {
       <Route path="/" component={App} onChange={handleChangeUrl.bind(this)} >
         {/*<IndexRoute component={Goingsunny} onEnter={requireAuth.bind(this, store)} />*/}
         <IndexRoute component={Goingsunny} />
+        <Route path="c/:channelUrl" component={ClassRoom} />
 
-        <Route path="c/:channelUrl" component={ClassRoom} onEnter={requireAuth.bind(this, store)} />
         <Route path="channel/:channelUrl" component={Chanel} onEnter={requireAuth.bind(this, store)} />
         <Route path="profile" component={Profile} onEnter={requireAuth.bind(this, store)} />
         <Route path="feedback" component={Feedback} onEnter={requireAuth.bind(this, store)} />
         <Route path="blog/:slug" component={Blog} onEnter={requireAuth.bind(this, store)} />
         <Route path="meeting" component={MeetingRoom} onEnter={requireAuth.bind(this, store)} />
 
+        <Route path="guide" component={Guide} />
         <Route path="login" component={Login} />
         <Route path="explore" component={Explore} />
         <Route path="*" component={NoMatchComp} />

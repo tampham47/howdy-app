@@ -117,7 +117,7 @@ class CountDownComp extends Component {
         {countdownRender}
         {renderButton}
 
-        <Link to='/login' className="count-down-section__btn-test">
+        <Link to='/guide' className="count-down-section__btn-test">
           Hướng dẫn <i className="fa fa-chevron-right"></i>
         </Link>
         <Link to="/c/test-your-devices" className="count-down-section__btn-test">
