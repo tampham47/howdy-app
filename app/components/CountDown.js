@@ -87,18 +87,18 @@ class CountDownComp extends Component {
     if (!this.props.currentUser._id) {
       renderButton = (
         <div>
-          <a href='/login/facebook' className="button count-down-section__btn-join button-primary">Join the trip with facebook</a>
+          <a href='/login/facebook' className="button button-primary facebook">Join the trip with facebook</a>
         </div>
       )
     } else {
       if (this.isEnrolledCurrentSession(currentUser, currentSessionList)) {
         renderButton = (
-          <button className="count-down-section__btn-joined">Đã tham gia</button>
+          <button className="__btn-joined">Đã tham gia</button>
         )
       } else {
         renderButton = (
-          <button className="count-down-section__btn-join button-primary"
-            onClick={this.handdleEnrollNextSession.bind(this)}>Tham gia lớp học</button>
+          <button className="__btn-join button-primary"
+            onClick={this.handdleEnrollNextSession.bind(this)}>Tham gia ca học tiếp theo</button>
         )
       }
     }
@@ -117,10 +117,10 @@ class CountDownComp extends Component {
         {countdownRender}
         {renderButton}
 
-        <Link to='/guide' className="count-down-section__btn-test">
+        <Link to='/guide' className="__btn-test">
           Hướng dẫn <i className="fa fa-chevron-right"></i>
         </Link>
-        <Link to="/c/test-your-devices" className="count-down-section__btn-test">
+        <Link to="/c/test-your-devices" className="__btn-test">
           Kiểm tra thiết bị <i className="fa fa-chevron-right"></i>
         </Link>
         {/*<p className="count-down-section__info">Đã có 15 người tham gia</p>*/}

@@ -77,13 +77,12 @@ $offset-left: 20px;
     text-align: center;
   }
 
-  .count-down-section__btn-join,
-  .count-down-section__btn-joined {
+  .button-primary {
     margin-top: 0.5*$gutter;
     margin-bottom: 0;
   }
 
-  .count-down-section__btn-test {
+  .__btn-test {
     margin-top: 0.5*$gutter;
     margin-bottom: 0;
   }

@@ -71,15 +71,15 @@ export function fetchChannelData({ channelUrl, userId, sessionName }) {
           }
         };
       },
-      ()=> {
-        return {
-          [CALL_API]: {
-            method: 'get',
-            path: '/user',
-            successType: LOADED_USER
-          }
-        }
-      },
+      // ()=> {
+      //   return {
+      //     [CALL_API]: {
+      //       method: 'get',
+      //       path: '/user',
+      //       successType: LOADED_USER
+      //     }
+      //   }
+      // },
       // (users)=> {
       //   return {
       //     [CALL_API]: {
@@ -92,20 +92,20 @@ export function fetchChannelData({ channelUrl, userId, sessionName }) {
       //     }
       //   };
       // },
-      (channels) => {
-        return {
-          [CALL_API]: {
-            method: 'get',
-            path: '/message',
-            query: {
-              limit: config.MESSAGE_LIMIT,
-              sort: JSON.stringify({ createdAt: -1 }),
-              query: JSON.stringify({ channelUrl: channelUrl})
-            },
-            successType: LOADED_MESSAGES
-          }
-        }
-      },
+      // () => {
+      //   return {
+      //     [CALL_API]: {
+      //       method: 'get',
+      //       path: '/message',
+      //       query: {
+      //         limit: config.MESSAGE_LIMIT,
+      //         sort: JSON.stringify({ createdAt: -1 }),
+      //         query: JSON.stringify({ channelUrl: channelUrl})
+      //       },
+      //       successType: LOADED_MESSAGES
+      //     }
+      //   }
+      // },
       () => {
         return {
           [CALL_API]: {
