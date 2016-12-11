@@ -12,7 +12,7 @@
   left: 0;
   display: none;
   z-index: 99999;
-  background-color: rgba(grey, 0.8);
+  background-color: rgba(#424242, 0.9);
   overflow-y: scroll;
 
   &._active {
@@ -40,5 +40,5 @@
 }
 
 .notification-list {
-  list-style-type: square;
+  list-style-type: none;
 }

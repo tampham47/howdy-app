@@ -93,3 +93,14 @@ $offset-left: 20px;
     margin-top: 0;
   }
 }
+
+.notification-p {
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  &__content {
+    border-radius: 0;
+  }
+}
