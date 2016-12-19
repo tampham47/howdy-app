@@ -14,11 +14,6 @@
 
   &__wrapper {
     padding: 0.5*$gutter;
-
-    h6 {
-      margin-bottom: 0.5*$gutter;
-      font-size: 1.8rem;
-    }
   }
 
   &__videos,
@@ -41,8 +36,34 @@
   overflow: hidden;
   margin-right: 10px;
   margin-bottom: 0;
+  position: relative;
+  overflow: hidden;
 
   img {
     width: 100%;
+  }
+
+  span {
+    position: absolute;
+    right: 0;
+    transform: translateX(-100%);
+  }
+
+  &:hover {
+    span {
+      transform: translateX(0);
+    }
+  }
+}
+
+.user-next-session {
+  margin-top: 1.5*$gutter;
+
+  &__title {
+    color: $c-08;
+    margin-bottom: 5px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-transform: uppercase;
   }
 }

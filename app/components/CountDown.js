@@ -123,7 +123,24 @@ class CountDownComp extends Component {
         <Link to="/c/test-your-devices" className="__btn-test">
           Kiểm tra thiết bị <i className="fa fa-chevron-right"></i>
         </Link>
-        {/*<p className="count-down-section__info">Đã có 15 người tham gia</p>*/}
+
+        <div className="user-next-session">
+          <h6 className="user-next-session__title">Khóa học kế tiếp</h6>
+          <ul className="people-list">
+            <li className="people-item">
+              <span>Tam Pham</span>
+              <img src="http://orig11.deviantart.net/6719/f/2011/012/c/9/facebook_avatar_by_fyuvix-d372asb.jpg" />
+            </li>
+            <li className="people-item">
+              <span>Tam Pham</span>
+              <img src="http://culturahipster.com/wp-content/uploads/bitstrips-facebook-cultura-hipster-avatar.jpg" />
+            </li>
+            <li className="people-item">
+              <span>Tam Pham</span>
+              <img src="http://data.kenhsinhvien.net/files/2014/02/22/avatar-ep-kinh-9.jpg" />
+            </li>
+          </ul>
+        </div>
       </div>
     );
   }
