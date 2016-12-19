@@ -117,10 +117,13 @@ class CountDownComp extends Component {
         {countdownRender}
         {renderButton}
 
-        <Link to='/guide' className="__btn-test">
+        <Link to='/guide' className="__btn-link">
+          Link vào lớp học vừa rồi <i className="fa fa-chevron-right"></i>
+        </Link>
+        <Link to='/guide' className="__btn-link">
           Hướng dẫn <i className="fa fa-chevron-right"></i>
         </Link>
-        <Link to="/c/test-your-devices" className="__btn-test">
+        <Link to="/c/test-your-devices" className="__btn-link">
           Kiểm tra thiết bị <i className="fa fa-chevron-right"></i>
         </Link>
 
@@ -129,17 +132,24 @@ class CountDownComp extends Component {
           <ul className="people-list">
             <li className="people-item">
               <span>Tam Pham</span>
-              <img src="http://orig11.deviantart.net/6719/f/2011/012/c/9/facebook_avatar_by_fyuvix-d372asb.jpg" />
+              <div className="people-item__img-wrapper">
+                <img src="http://orig11.deviantart.net/6719/f/2011/012/c/9/facebook_avatar_by_fyuvix-d372asb.jpg" />
+              </div>
             </li>
             <li className="people-item">
-              <span>Tam Pham</span>
-              <img src="http://culturahipster.com/wp-content/uploads/bitstrips-facebook-cultura-hipster-avatar.jpg" />
+              <span>Tam Pham 2</span>
+              <div className="people-item__img-wrapper">
+                <img src="http://culturahipster.com/wp-content/uploads/bitstrips-facebook-cultura-hipster-avatar.jpg" />
+              </div>
             </li>
             <li className="people-item">
-              <span>Tam Pham</span>
-              <img src="http://data.kenhsinhvien.net/files/2014/02/22/avatar-ep-kinh-9.jpg" />
+              <span>Tam Pham 3</span>
+              <div className="people-item__img-wrapper">
+                <img src="http://data.kenhsinhvien.net/files/2014/02/22/avatar-ep-kinh-9.jpg" />
+              </div>
             </li>
           </ul>
+          <small className="user-next-session__helper">Đã có 3 người tham gia !</small>
         </div>
       </div>
     );
