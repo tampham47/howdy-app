@@ -11,7 +11,7 @@ let defaultState = Immutable.fromJS({
   notificationPanelState: false,
   currentPost: {},
   currentSessionList: Immutable.fromJS([]),
-  prevSession: Immutable.fromJS({}),
+  prevSession: {},
 });
 
 function appStateReducer(state = defaultState, action) {
@@ -28,12 +28,13 @@ function appStateReducer(state = defaultState, action) {
     case AppStateType.ENROLLED_NEXT_SESSION:
       return state.updateIn(['currentSessionList'], list => list.push(action.response));
 
-    case AppStateType.LOADED_PREV_SESSION:
+    case ChannelType.LOADED_PREV_SESSION:
       var t = {};
-      if (actions.response.length) {
-        t = actions.response[0];
+      if (action.response.length) {
+        t = action.response[0];
       }
-      return state.updateIn(['prevSession'], t);
+      console.log('Prev', t);
+      return state.set('prevSession', t);
 
     default:
       return state;

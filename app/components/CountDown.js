@@ -85,7 +85,8 @@ class CountDownComp extends Component {
     var renderButton = <span></span>;
     var countdownRender = <span></span>;
 
-    console.log('currentUser', this.props.currentUser);
+    console.log('prevSession', this.props.prevSession);
+
     if (!this.props.currentUser._id) {
       renderButton = (
         <div>

@@ -17,7 +17,7 @@ Utils.prototype.getSessionNameByDate = function() {
 };
 
 Utils.prototype.getPrevSessionName = function() {
-  var date = moment().add('minutes', -30).utc();
+  var date = moment().add('minutes', -29).utc();
   var h = date.hour() * 2;
   var m = ((date.minute() / 30) > 1) ? 1 : 0;
   if ((date.minute() / 30) > 1) {

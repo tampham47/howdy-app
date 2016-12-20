@@ -299,6 +299,7 @@ function mapStateToProps(state) {
     notifications: state.notifications.toJS(),
     userNotifications: state.userNotifications.toJS(),
     currentSessionList: state.appState.toJS().currentSessionList,
+    // prevSession: state.appState.toJS().prevSession,
   };
 }
 
