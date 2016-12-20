@@ -39,7 +39,8 @@ class Chanel extends Component {
     return store.dispatch(fetchChannelData({
       channelUrl,
       userId,
-      sessionName: utils.getSessionNameByDate()
+      sessionName: utils.getSessionNameByDate(),
+      prevSessionName: utils.getPrevSessionName()
     }));
   }
 
@@ -64,7 +65,8 @@ class Chanel extends Component {
     this.props.fetchChannelData({
       channelUrl,
       userId,
-      sessionName: utils.getSessionNameByDate()
+      sessionName: utils.getSessionNameByDate(),
+      prevSessionName: utils.getPrevSessionName()
     });
 
     // check more data later
@@ -249,6 +251,7 @@ class Chanel extends Component {
             <div className="room-panel__wrapper">
               <CountDownComp
                 currentUser={this.props.currentUser}
+                prevSession={this.props.appState.prevSession || {}}
                 currentSessionList={this.props.currentSessionList} />
             </div>
           </div>
@@ -295,7 +298,7 @@ function mapStateToProps(state) {
     users: state.users,
     notifications: state.notifications.toJS(),
     userNotifications: state.userNotifications.toJS(),
-    currentSessionList: state.appState.toJS().currentSessionList
+    currentSessionList: state.appState.toJS().currentSessionList,
   };
 }
 

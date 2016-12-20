@@ -10,7 +10,8 @@ import _ from 'lodash';
 let defaultState = Immutable.fromJS({
   notificationPanelState: false,
   currentPost: {},
-  currentSessionList: Immutable.fromJS([])
+  currentSessionList: Immutable.fromJS([]),
+  prevSession: Immutable.fromJS({}),
 });
 
 function appStateReducer(state = defaultState, action) {
@@ -26,6 +27,13 @@ function appStateReducer(state = defaultState, action) {
 
     case AppStateType.ENROLLED_NEXT_SESSION:
       return state.updateIn(['currentSessionList'], list => list.push(action.response));
+
+    case AppStateType.LOADED_PREV_SESSION:
+      var t = {};
+      if (actions.response.length) {
+        t = actions.response[0];
+      }
+      return state.updateIn(['prevSession'], t);
 
     default:
       return state;

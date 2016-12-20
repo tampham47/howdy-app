@@ -23,9 +23,10 @@ export const LOADED_NOTIFICATIONS = Symbol('LOADED_NOTIFICATIONS');
 export const LOADED_LESSON_BY_CURRENT_DATE = Symbol('LOADED_LESSON_BY_CURRENT_DATE');
 export const LOADED_POST_BY_SLUG = Symbol('LOADED_POST_BY_SLUG');
 export const LOADED_CURRENT_SESSION_LIST = Symbol('LOADED_CURRENT_SESSION_LIST');
+export const LOADED_PREV_SESSION = Symbol('LOADED_PREV_SESSION');
 
 
-export function fetchChannelData({ channelUrl, userId, sessionName }) {
+export function fetchChannelData({ channelUrl, userId, sessionName, prevSessionName }) {
   return {
     [CHAIN_API]: [
       ()=> {
@@ -119,7 +120,24 @@ export function fetchChannelData({ channelUrl, userId, sessionName }) {
             successType: LOADED_CURRENT_SESSION_LIST
           }
         }
-      }
+      },
+      () => {
+        console.log('prevSessionName', prevSessionName, userId);
+        if (!userId) return;
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: '/session',
+            query: {
+              query: JSON.stringify({
+                sessionName: prevSessionName,
+                _user: userId
+              })
+            },
+            successType: LOADED_PREV_SESSION
+          }
+        }
+      },
     ]
   }
 }
