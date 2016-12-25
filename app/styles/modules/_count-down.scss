@@ -2,8 +2,10 @@
  *
  */
 
-$content-color: #E84A5F;
-$content-color-02: #FECEA8;
+// $content-color: #E84A5F;
+// $content-color-02: #FECEA8;
+$content-color: $c-08;
+$content-color-02: $c-08;
 $fb-color: #007CB9;
 $fb-light-color: #D5EEFF;
 
@@ -59,7 +61,8 @@ $fb-light-color: #D5EEFF;
     color: $content-color;
   }
 
-  .__btn-test {
+  .__btn-test,
+  .__btn-link {
     margin-top: $gutter;
     color: $content-color;
     display: block;

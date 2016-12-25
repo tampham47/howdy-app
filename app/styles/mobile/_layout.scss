@@ -10,6 +10,7 @@ $offset-left: 20px;
 
 .room-panel {
   width: 100%;
+  overflow: inherit;
 }
 
 .main-content {
@@ -84,7 +85,8 @@ $offset-left: 20px;
     margin-bottom: 0;
   }
 
-  .__btn-test {
+  .__btn-test,
+  .__btn-link {
     margin-top: 0.5*$gutter;
     margin-bottom: 0;
   }

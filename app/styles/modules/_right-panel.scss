@@ -11,14 +11,11 @@
   background-color: #2A363B;
   box-shadow: 4px 0px 4px whitesmoke;
   z-index: 99;
+  padding-bottom: 2*$gutter;
+  overflow-y: scroll;
 
   &__wrapper {
     padding: 0.5*$gutter;
-
-    h6 {
-      margin-bottom: 0.5*$gutter;
-      font-size: 1.8rem;
-    }
   }
 
   &__videos,
@@ -36,13 +33,62 @@
   display: inline-block;
   width: $icon-w;
   height: $icon-w;
-  background-color: pink;
-  border-radius: 4px;
-  overflow: hidden;
   margin-right: 10px;
   margin-bottom: 0;
+  position: relative;
+
+  &__img-wrapper {
+    display: inline-block;
+    width: $icon-w;
+    height: $icon-w;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: pink;
+  }
 
   img {
     width: 100%;
+  }
+
+  span {
+    position: absolute;
+    background-color: white;
+    color: black;
+    border-radius: 2px;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-left: 5px;
+    padding-right: 5px;
+    top: -4px;
+    transform: translateY(-100%);
+    opacity: 0;
+    animation: all 0.4s;
+  }
+
+  &:hover {
+    span {
+      opacity: 1;
+      z-index: 99;
+    }
+  }
+}
+
+.user-next-session {
+  margin-top: 1.5*$gutter;
+
+  &__title {
+    color: lighten($c-08, 20%);
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  &__helper {
+    color: lighten($c-08, 20%);
+  }
+
+  .people-list {
+    margin-bottom: 0;
   }
 }
