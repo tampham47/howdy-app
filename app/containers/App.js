@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import * as ActionType from 'actions/chanels';
 import client from 'middleware/mqtt';
-import { updateLastAccessed, getBrokerMessage } from 'actions/application';
+import { updateLastAccessed, getBrokerMessage, userJoinNextSession } from 'actions/application';
 
 
 class App extends Component {
@@ -23,6 +23,7 @@ class App extends Component {
     client.on('connect', function() {
       client.subscribe('goingsunny');
       client.subscribe('goingsunny_system_meeting');
+      client.subscribe('SYSTEM_CLASS_DATA');
 
       // subscribe for specific data of each user
       if (currentUser) {
@@ -42,10 +43,15 @@ class App extends Component {
             response: messageData
           });
           break;
+        case 'SYSTEM_CLASS_DATA':
+          console.log('SYSTEM_CLASS_DATA', messageData.user);
+          this.props.dispatch(userJoinNextSession(messageData.user));
+          break;
         case 'goingsunny_system_meeting':
           console.log('goingsunny_system_meeting', messageData);
           break;
         default:
+          // on SYSTEM_userId topic
           console.log('App.componentDidMount', topic);
           this.props.dispatch(getBrokerMessage(messageData));
       }

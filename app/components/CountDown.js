@@ -14,6 +14,7 @@ import moment from 'moment';
 import config from 'config';
 import CountDown from 'react-simple-countdown';
 import UserInNextSession from 'components/UserInNextSession';
+import client from 'middleware/mqtt';
 
 
 class CountDownComp extends Component {
@@ -43,7 +44,9 @@ class CountDownComp extends Component {
       _user: curUser.id || curUser._id,
       sessionName: utils.getSessionNameByDate()
     };
+
     this.props.dispatch(enrollNextSession(payload));
+    client.publish('join-class', JSON.stringify(curUser));
   }
 
   isEnrolledCurrentSession(user, sessionList) {
@@ -73,9 +76,11 @@ class CountDownComp extends Component {
   }
 
   onCountDownCompleted() {
-    // setTimeout(function() {
-    //   window.location.reload();
-    // }.bind(this), 3000);
+    if (utils.mobilecheck()) {
+      setTimeout(function() {
+        window.location.reload();
+      }.bind(this), 3000);
+    }
   }
 
   render() {
@@ -131,11 +136,11 @@ class CountDownComp extends Component {
         <Link to="/c/test-your-devices" className="__btn-link">
           Kiểm tra thiết bị <i className="fa fa-chevron-right"></i>
         </Link>
-        <Link to="/c/tampham47" className="__btn-link">
-          Học với D.Xaolonist <i className="fa fa-chevron-right"></i>
+        <Link to="/c/tampham47" className="__btn-link" alt="Nói chuyện với thuyền trưởng từ 20h-21h30 mỗi ngày">
+          D.Xaolonist (20h-21h30) <i className="fa fa-chevron-right"></i>
         </Link>
 
-        <UserInNextSession />
+        <UserInNextSession userInNextSession={this.props.userInNextSession} />
       </div>
     );
   }

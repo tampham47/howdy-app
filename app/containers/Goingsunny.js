@@ -252,7 +252,8 @@ class Chanel extends Component {
               <CountDownComp
                 currentUser={this.props.currentUser}
                 prevSession={this.props.appState.prevSession || {}}
-                currentSessionList={this.props.currentSessionList} />
+                currentSessionList={this.props.currentSessionList}
+                userInNextSession={this.props.userInNextSession} />
             </div>
           </div>
 
@@ -299,6 +300,7 @@ function mapStateToProps(state) {
     notifications: state.notifications.toJS(),
     userNotifications: state.userNotifications.toJS(),
     currentSessionList: state.appState.toJS().currentSessionList,
+    userInNextSession: state.appState.toJS().userInNextSession,
     // prevSession: state.appState.toJS().prevSession,
   };
 }

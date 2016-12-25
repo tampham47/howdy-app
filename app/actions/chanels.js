@@ -115,7 +115,8 @@ export function fetchChannelData({ channelUrl, userId, sessionName, prevSessionN
             query: {
               query: JSON.stringify({
                 sessionName: sessionName
-              })
+              }),
+              'populate': '_user'
             },
             successType: LOADED_CURRENT_SESSION_LIST
           }

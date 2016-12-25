@@ -10,8 +10,9 @@ import _ from 'lodash';
 let defaultState = Immutable.fromJS({
   notificationPanelState: false,
   currentPost: {},
-  currentSessionList: Immutable.fromJS([]),
   prevSession: {},
+  currentSessionList: Immutable.fromJS([]),
+  userInNextSession: Immutable.fromJS([]),
 });
 
 function appStateReducer(state = defaultState, action) {
@@ -23,10 +24,38 @@ function appStateReducer(state = defaultState, action) {
       return state.set('currentPost', action.response ? action.response[0] : {});
 
     case ChannelType.LOADED_CURRENT_SESSION_LIST:
-      return state.set('currentSessionList', Immutable.fromJS(action.response));
+      console.log('LOADED_CURRENT_SESSION_LIST', action.response);
+      var userList = [];
+      var r = action.response || [];
+      for (var i = 0; i < r.length; i++) {
+        userList.push(r[i].user);
+      }
+
+      var userListData = r.map(function(i) {
+        i._user = i.user.id;
+        return i;
+      })
+
+      return state
+        .set('currentSessionList', Immutable.fromJS(userListData))
+        .set('userInNextSession', Immutable.fromJS(userList));
 
     case AppStateType.ENROLLED_NEXT_SESSION:
       return state.updateIn(['currentSessionList'], list => list.push(action.response));
+
+    case AppStateType.NEW_USER_JOINED:
+      return state.updateIn(['userInNextSession'], function(list) {
+        if (!list) {
+          var t = [];
+          t.push(action.response);
+          return Immutable.fromJS(t)
+        } else {
+          return list.push(action.response);
+        }
+      });
+
+    case AppStateType.ON_NEW_SESSION:
+      return state.set('userInNextSession', Immutable.fromJS([]));
 
     case ChannelType.LOADED_PREV_SESSION:
       var t = {};

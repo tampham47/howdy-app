@@ -8,30 +8,33 @@ import { Link } from 'react-router';
 
 class Comp extends Component {
   render() {
+    var userList = this.props.userInNextSession || [];
+
     return (
       <div className="user-next-session">
-        <h6 className="user-next-session__title">Khóa học kế tiếp</h6>
+        <h6 className="user-next-session__title">Ca học kế tiếp</h6>
         <ul className="people-list">
-          <li className="people-item">
-            <span>Tam Pham</span>
-            <div className="people-item__img-wrapper">
-              <img src="http://orig11.deviantart.net/6719/f/2011/012/c/9/facebook_avatar_by_fyuvix-d372asb.jpg" />
-            </div>
-          </li>
-          <li className="people-item">
-            <span>Tam Pham 2</span>
-            <div className="people-item__img-wrapper">
-              <img src="http://culturahipster.com/wp-content/uploads/bitstrips-facebook-cultura-hipster-avatar.jpg" />
-            </div>
-          </li>
-          <li className="people-item">
-            <span>Tam Pham 3</span>
-            <div className="people-item__img-wrapper">
-              <img src="http://data.kenhsinhvien.net/files/2014/02/22/avatar-ep-kinh-9.jpg" />
-            </div>
-          </li>
+        {
+          userList.map(function(i) {
+            return (
+              <li className="people-item" key={i._id}>
+                <span>{i.displayName}</span>
+                <div className="people-item__img-wrapper">
+                  <img src={i.avatar} />
+                </div>
+              </li>
+            )
+          })
+        }
         </ul>
-        <small className="user-next-session__helper">Đã có 3 người tham gia !</small>
+
+        { (userList.length > 0) &&
+          <small className="user-next-session__helper">Đã có {userList.length} người tham gia!</small>
+        }
+
+        { (userList.length == 0) &&
+          <small className="user-next-session__helper">Chưa có ai, hãy là người đầu tiên tham gia!</small>
+        }
       </div>
     )
   }
