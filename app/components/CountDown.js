@@ -137,7 +137,7 @@ class CountDownComp extends Component {
           Kiểm tra thiết bị <i className="fa fa-chevron-right"></i>
         </Link>
         <Link to="/c/tampham47" className="__btn-link" alt="Nói chuyện với thuyền trưởng từ 20h-21h30 mỗi ngày">
-          D.Xaolonist (20h-21h30) <i className="fa fa-chevron-right"></i>
+          Talking with Xaolonist (20h-21h30) <i className="fa fa-chevron-right"></i>
         </Link>
 
         <UserInNextSession userInNextSession={this.props.userInNextSession} />

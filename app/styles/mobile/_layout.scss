@@ -11,6 +11,7 @@ $offset-left: 20px;
 .room-panel {
   width: 100%;
   overflow: inherit;
+  padding-bottom: 0;
 }
 
 .main-content {
@@ -117,4 +118,8 @@ $offset-left: 20px;
     padding-left: 15px;
     padding-right: 15px;
   }
+}
+
+.user-next-session {
+  margin-top: 1rem;
 }

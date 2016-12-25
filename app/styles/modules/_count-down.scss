@@ -6,6 +6,7 @@
 // $content-color-02: #FECEA8;
 $content-color: $c-08;
 $content-color-02: $c-08;
+$cowndown-color: lighten($c-08, 20%);
 $fb-color: #007CB9;
 $fb-light-color: #D5EEFF;
 
@@ -75,10 +76,10 @@ $fb-light-color: #D5EEFF;
 }
 
 .count-down {
-  border: 1px solid $content-color-02;
+  border: 1px solid $cowndown-color;
   padding: 0.5*$gutter;
   border-radius: 4px;
-  color: $content-color-02;
+  color: $cowndown-color;
 
   &__helper {
     font-size: 1.4rem;
