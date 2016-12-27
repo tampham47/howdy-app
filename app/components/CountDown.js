@@ -32,6 +32,13 @@ class CountDownComp extends Component {
       alert(`You will be lead to classroom: ${e.detail.channel}`);
       this.props.router.push(`/c/${e.detail.channel}`);
     }.bind(this));
+
+    // window.unboxdAsyncInit = function() {
+    //   Unboxd.init({
+    //     clientId: "58624d1a5c5e932b3fa24116",
+    //     version: "v1.0"
+    //   });
+    // };
   }
 
   componentWillUnmount() {
@@ -113,8 +120,8 @@ class CountDownComp extends Component {
 
     countdownRender = (
       <div className="count-down">
-        <p className="count-down__helper">Ca học mới sẽ bắt đầu sau</p>
-        <CountDown className="count-down__clock" mins="phút" segs="giây"
+        <p className="count-down__helper">Next session is going to start in</p>
+        <CountDown className="count-down__clock" mins="mins" segs="secs"
           date={this.state.nextSession}
           onEnd={this.onCountDownCompleted.bind(this)} />
       </div>
@@ -131,15 +138,14 @@ class CountDownComp extends Component {
           </Link>
         }
         <Link to='/guide' className="__btn-link">
-          Hướng dẫn <i className="fa fa-chevron-right"></i>
+          Guide <i className="fa fa-chevron-right"></i>
         </Link>
         <Link to="/c/test-your-devices" className="__btn-link">
-          Kiểm tra thiết bị <i className="fa fa-chevron-right"></i>
+          Check your device <i className="fa fa-chevron-right"></i>
         </Link>
-        {/*<Link to="/c/tampham47" className="__btn-link" alt="Nói chuyện với thuyền trưởng từ 20h-21h30 mỗi ngày">
-          Talking with Xaolonist (20h-21h30) <i className="fa fa-chevron-right"></i>
-        </Link>*/}
-
+        <a href="//m.me/goingsunny522" target="_blank" className="__btn-link">
+          Give us your feedback <i className="fa fa-chevron-right"></i>
+        </a>
         <UserInNextSession userInNextSession={this.props.userInNextSession} />
       </div>
     );

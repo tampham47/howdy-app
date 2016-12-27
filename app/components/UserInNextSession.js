@@ -12,7 +12,7 @@ class Comp extends Component {
 
     return (
       <div className="user-next-session">
-        <h6 className="user-next-session__title">Ca học kế tiếp</h6>
+        <h6 className="user-next-session__title">Next session</h6>
         <ul className="people-list">
         {
           userList.map(function(i) {
@@ -29,11 +29,11 @@ class Comp extends Component {
         </ul>
 
         { (userList.length > 0) &&
-          <small className="user-next-session__helper">Đã có {userList.length} người tham gia!</small>
+          <small className="user-next-session__helper">{userList.length} person has joined!</small>
         }
 
         { (userList.length == 0) &&
-          <small className="user-next-session__helper">Chưa có ai, hãy là người đầu tiên tham gia!</small>
+          <small className="user-next-session__helper">Be the first person join next session!</small>
         }
       </div>
     )
