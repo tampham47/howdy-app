@@ -108,12 +108,12 @@ class CountDownComp extends Component {
     } else {
       if (this.isEnrolledCurrentSession(currentUser, currentSessionList)) {
         renderButton = (
-          <button className="__btn-joined">Đã tham gia ca học tiếp theo</button>
+          <button className="__btn-joined">You had joined next session</button>
         )
       } else {
         renderButton = (
           <button className="__btn-join button-primary"
-            onClick={this.handdleEnrollNextSession.bind(this)}>Tham gia ca học tiếp theo</button>
+            onClick={this.handdleEnrollNextSession.bind(this)}>Join next session</button>
         )
       }
     }
@@ -134,7 +134,7 @@ class CountDownComp extends Component {
 
         { this.props.prevSession.roomName &&
           <Link to={`/c/${this.props.prevSession.roomName}`} className="__btn-link">
-            Vào lớp học vừa rồi <i className="fa fa-chevron-right"></i>
+            Join previous session <i className="fa fa-chevron-right"></i>
           </Link>
         }
         <Link to='/guide' className="__btn-link">
