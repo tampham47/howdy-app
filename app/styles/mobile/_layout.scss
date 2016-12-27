@@ -122,4 +122,16 @@ $offset-left: 20px;
 
 .user-next-session {
   margin-top: 1rem;
+
+  &__title {
+    margin-bottom: 0;
+  }
+
+  .people-list {
+    line-height: 12px;
+  }
+
+  .people-item {
+    margin-top: 2px;
+  }
 }
