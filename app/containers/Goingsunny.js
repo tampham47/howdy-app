@@ -35,7 +35,8 @@ class Chanel extends Component {
 
   static fetchData({ store, params }) {
     var channelUrl = params.channelUrl || 'goingsunny';
-    var userId = store.getState().currentUser.id;
+    var currentUser = store.getState().currentUser;
+    var userId = currentUser.id || currentUser._id;
     return store.dispatch(fetchChannelData({
       channelUrl,
       userId,
