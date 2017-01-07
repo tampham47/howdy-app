@@ -37,7 +37,17 @@ class Lesson extends Component {
     if (data) {
       renderHtml = (
         <div>
-          <h5 className="lesson-section--helper"><i>{data.videoIntro}</i></h5>
+          {/*<h5 className="lesson-section--helper"><i>{data.videoIntro}</i></h5>*/}
+          <h5 className="lesson-section--helper">
+            <i>
+              Goingsunny cung cấp cho bạn các video và các đoạn hội thoại mới mỗi ngày,
+              bạn có thể xem và lặp lại các câu để nâng khả năng từ vựng cũng như phát âm của mình.
+              Đồng thời nếu bạn đăng nhập và nhấn vào nút "Join next session" thì bạn có khả năng được
+              kết nối với một người khác để thực hiện 1 cuộc gọi video, trong cuộc gọi video bạn có thể
+              phân vai để lặp lại đoạn hội thoại vừa rồi, nó sẽ giúp nâng cao khả năng phản xạ tiếng anh của bạn.
+              Hãy kiên nhẫn luyện tập, thành công sẽ đến với bạn!
+            </i>
+          </h5>
           <h4 className="lesson-section--title">{data.name}</h4>
           {videoRender}
           <h5 className="lesson-section--helper">{data.imageIntro}</h5>
