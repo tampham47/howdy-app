@@ -14,6 +14,7 @@ export const LOADED_CURRENT_SESSION_LIST = Symbol('LOADED_CURRENT_SESSION_LIST')
 export const GOT_BROKER_MESSAGE = Symbol('GOT_BROKER_MESSAGE');
 export const NEW_USER_JOINED = Symbol('NEW_USER_JOINED');
 export const ON_NEW_SESSION = Symbol('ON_NEW_SESSION');
+export const LOADED_PREVIOUS_SESSION = Symbol('LOADED_PREVIOUS_SESSION');
 
 
 export function updateNotificationPanelState(payload) {
@@ -124,6 +125,23 @@ export function loadCurrentSession(payload) {
     }
   };
 }
+
+export function loadPreviousSession({ prevSessionName, userId }) {
+  return {
+    [CALL_API]: {
+      method: 'get',
+      path: '/session',
+      query: {
+        query: JSON.stringify({
+          sessionName: prevSessionName,
+          _user: userId
+        })
+      },
+      successType: LOADED_PREVIOUS_SESSION
+    }
+  }
+}
+
 
 export function getBrokerMessage(payload) {
   return {

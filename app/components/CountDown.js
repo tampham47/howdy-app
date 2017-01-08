@@ -6,7 +6,7 @@ import goingsunny from 'middleware/debug';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router';
-import { enrollNextSession, loadCurrentSession } from 'actions/application';
+import { enrollNextSession, loadCurrentSession, loadPreviousSession } from 'actions/application';
 import * as ApplicationType from 'actions/application';
 import utils from 'middleware/utils';
 import listener from 'middleware/listener';
@@ -33,16 +33,21 @@ class CountDownComp extends Component {
       this.props.router.push(`/c/${e.detail.channel}`);
     }.bind(this));
 
-    // window.unboxdAsyncInit = function() {
-    //   Unboxd.init({
-    //     clientId: "58624d1a5c5e932b3fa24116",
-    //     version: "v1.0"
-    //   });
-    // };
+    listener.sub(ApplicationType.LOADED_PREVIOUS_SESSION.toString(), function(e) {
+      console.log('LOADED_PREVIOUS_SESSION', e.detail);
+      var data = e.detail.length ? e.detail[0] : null;
+      if (data && data.roomName) {
+        alert(`You will be lead to classroom: ${data.roomName}`);
+        this.props.router.push(`/c/${data.roomName}`);
+      } else {
+        window.location.reload();
+      }
+    }.bind(this));
   }
 
   componentWillUnmount() {
     listener.unsub(ApplicationType.GOT_BROKER_MESSAGE.toString());
+    listener.unsub(ApplicationType.LOADED_PREVIOUS_SESSION.toString());
   }
 
   handdleEnrollNextSession() {
@@ -83,9 +88,18 @@ class CountDownComp extends Component {
   }
 
   onCountDownCompleted() {
-    if (utils.mobilecheck()) {
+
+    if (true || utils.mobilecheck()) {
       setTimeout(function() {
-        window.location.reload();
+        var curUser = this.props.currentUser;
+        var payload = {
+          userId: curUser.id || curUser._id,
+          prevSessionName: utils.getPrevSessionName()
+        };
+
+        if (payload.userId) {
+          this.props.dispatch(loadPreviousSession(payload));
+        }
       }.bind(this), 3000);
     }
   }
