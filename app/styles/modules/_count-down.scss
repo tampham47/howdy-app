@@ -24,7 +24,7 @@ $fb-light-color: #D5EEFF;
     margin-top: 3rem;
     height: 50px;
     line-height: 50px;
-    margin-top: 3rem;
+    margin-top: 2rem;
   }
 
   &__info {
@@ -64,10 +64,10 @@ $fb-light-color: #D5EEFF;
 
   .__btn-test,
   .__btn-link {
-    margin-top: $gutter;
     color: $content-color;
     display: block;
     text-decoration: none;
+    padding: 1rem 0;
 
     &:hover {
       color: darken($content-color, 15%);
