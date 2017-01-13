@@ -2,15 +2,16 @@
  *
  */
 
+import { connect } from 'react-redux';
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
-import { List } from 'immutable';
+import { Link, withRouter } from 'react-router';
 import FacebookLogin from 'react-facebook-login';
+import { loadProfileByToken } from 'actions/application';
 
-class PeopleInChannel extends Component {
+class ReactComp extends Component {
 
   responseFacebook(res) {
-    alert(JSON.stringify(res));
+    this.props.dispatch(loadProfileByToken({ accessToken: res.accessToken }));
   }
 
   render() {
@@ -22,5 +23,5 @@ class PeopleInChannel extends Component {
   }
 }
 
-PeopleInChannel.propTypes = {};
-export default PeopleInChannel;
+ReactComp.propTypes = {};
+export default connect()(withRouter(ReactComp));

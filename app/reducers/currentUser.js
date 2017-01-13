@@ -14,6 +14,9 @@ function currentUserReducer(state = defaultState, action) {
     case ActionType.UPDATED_PROFILE:
       return state.merge(action.response);
 
+    case ActionType.LOADED_PROFILE:
+      return state.merge(action.response);
+
     default:
       return state;
   }

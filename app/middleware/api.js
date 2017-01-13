@@ -55,6 +55,7 @@ function createRequestPromise (apiActionCreator, next, getState, dispatch) {
     let apiAction = apiActionCreator(prevBody)
     let deferred = Promise.defer()
     let params = extractParams(apiAction[CALL_API])
+    console.log('createRequestPromise', params);
 
     superAgent[params.method](params.url)
       .send(params.body)
@@ -91,7 +92,7 @@ function createRequestPromise (apiActionCreator, next, getState, dispatch) {
   }
 }
 
-function extractParams (callApi) {
+function extractParams(callApi) {
   let {
     method,
     path,
@@ -103,7 +104,15 @@ function extractParams (callApi) {
     afterError
   } = callApi
 
-  let url = `${config.API_BASE_URL}${path}`
+
+  console.log('extractParams', callApi);
+
+  var url = '';
+  if (!callApi.isLocal) {
+    url = `${config.API_BASE_URL}${path}`
+  } else {
+    url = `${config.LOCAL_URL}${path}`
+  }
 
   return {
     method,

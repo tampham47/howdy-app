@@ -15,6 +15,7 @@ export const GOT_BROKER_MESSAGE = Symbol('GOT_BROKER_MESSAGE');
 export const NEW_USER_JOINED = Symbol('NEW_USER_JOINED');
 export const ON_NEW_SESSION = Symbol('ON_NEW_SESSION');
 export const LOADED_PREVIOUS_SESSION = Symbol('LOADED_PREVIOUS_SESSION');
+export const LOADED_PROFILE = Symbol('LOADED_PROFILE');
 
 
 export function updateNotificationPanelState(payload) {
@@ -96,6 +97,18 @@ export function updateLastAccessed(payload) {
         lastAccessedAt: new Date()
       },
       successType: UPDATED_LAST_ACCESSED
+    }
+  };
+}
+
+export function loadProfileByToken(payload) {
+  console.log('loadProfileByToken', payload);
+  return {
+    [CALL_API]: {
+      isLocal: true,
+      method: 'get',
+      path: `/auth/facebook/token?access_token=${payload.accessToken}`,
+      successType: LOADED_PROFILE
     }
   };
 }
