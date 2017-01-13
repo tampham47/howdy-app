@@ -14,6 +14,7 @@ import moment from 'moment';
 import config from 'config';
 import CountDown from 'react-simple-countdown';
 import UserInNextSession from 'components/UserInNextSession';
+import FacebookLogin from 'components/FacebookLogin';
 import client from 'middleware/mqtt';
 
 
@@ -116,7 +117,8 @@ class CountDownComp extends Component {
     if (!this.props.currentUser._id) {
       renderButton = (
         <div>
-          <a href='/login/facebook' className="button button-primary facebook">Join the trip with facebook</a>
+          {/*<a href='/login/facebook' className="button button-primary facebook">Join the trip with facebook</a>*/}
+          <FacebookLogin />
         </div>
       )
     } else {

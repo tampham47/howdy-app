@@ -9,7 +9,97 @@ import superAgent from 'superagent';
 import config from 'config';
 import uuid from 'uuid';
 import _ from 'lodash';
+import FacebookTokenStrategy from 'passport-facebook-token';
 var debug = require('debug')('passport');
+
+var mapToGsunProfile = function(profile) {
+  let { id, username, displayName, gender, profileUrl, provider } = profile;
+  var email = 'noemail@goingsunny.com';
+  var avatar = '---';
+
+  if (profile.emails) {
+    email = profile.emails[0].value || email;
+  }
+  if (profile.photos) {
+    avatar = profile.photos[0].value || avatar;
+  }
+
+  return {
+    providerId: id,
+    username,
+    displayName,
+    gender,
+    profileUrl,
+    provider,
+    email,
+    avatar,
+  };
+};
+
+var handleResult = function(accessToken, refreshToken, profile, cb) {
+  console.log('accessToken', accessToken);
+
+  var p = mapToGsunProfile(profile);
+  var queryStr = JSON.stringify({
+    providerId: p.providerId,
+    provider: p.provider
+  });
+
+  var removeSensitiveData = function(data) {
+    delete data.accessToken;
+    delete data.refreshToken;
+    delete data.password;
+
+    return data;
+  };
+
+  // insert user into db via apis
+  superAgent.get(`${config.API_BASE_URL}/user?query=${queryStr}`)
+  .end(function(err, res){
+    debug('ERRR QUERY', err);
+
+    if (res.body.length > 0) {
+      p = _.merge(res.body[0], p);
+      p.password = uuid.v4();
+
+      superAgent.patch(`${config.API_BASE_URL}/user/${p._id}`)
+      .set('Content-Type', 'application/json')
+      .send(p)
+      .end(function(err, res) {
+        debug('ERRR UPDATE', err);
+
+        if (err) {
+          return cb(err, null);
+        } else {
+          return cb(null, removeSensitiveData(res.body));
+        }
+      });
+    } else {
+
+      p.accessToken = accessToken;
+      p.refreshToken = refreshToken;
+      p.password = uuid.v4();
+      p.name = {
+       first: p.displayName
+      };
+
+      debug('INSERT DATA', p);
+
+      superAgent.post(`${config.API_BASE_URL}/user`)
+      .set('Content-Type', 'application/json')
+      .send(p)
+      .end(function(err, res) {
+        debug('ERRR INSERT', err);
+
+        if (err) {
+          return cb(err, null);
+        } else {
+          return cb(null, removeSensitiveData(res.body));
+        }
+      });
+    }
+  });
+};
 
 // Configure the Facebook strategy for use by Passport.
 // OAuth 2.0-based strategies require a `verify` function which receives the
@@ -32,67 +122,18 @@ function(accessToken, refreshToken, profile, cb) {
   // providers.
   // debug(`>>PROFILE ${accessToken} : ${refreshToken} : ${profile}`);
 
-  var p = mapToGsunProfile(profile);
-  var queryStr = JSON.stringify({
-    providerId: p.providerId,
-    provider: p.provider
-  });
-
-  var removeSensitiveData = function(data) {
-    delete data.accessToken;
-    delete data.refreshToken;
-    delete data.password;
-
-    return data;
-  };
-
-  // insert user into db via apis
-  superAgent.get(`${config.API_BASE_URL}/user?query=${queryStr}`)
-    .end(function(err, res){
-      debug('ERRR QUERY', err);
-
-      if (res.body.length > 0) {
-        p = _.merge(res.body[0], p);
-        p.password = uuid.v4();
-
-        superAgent.patch(`${config.API_BASE_URL}/user/${p._id}`)
-        .set('Content-Type', 'application/json')
-        .send(p)
-        .end(function(err, res) {
-          debug('ERRR UPDATE', err);
-
-          if (err) {
-            return cb(err, null);
-          } else {
-            return cb(null, removeSensitiveData(res.body));
-          }
-        });
-      } else {
-
-        p.accessToken = accessToken;
-        p.refreshToken = refreshToken;
-        p.password = uuid.v4();
-        p.name = {
-         first: p.displayName
-        };
-
-        debug('INSERT DATA', p);
-
-        superAgent.post(`${config.API_BASE_URL}/user`)
-        .set('Content-Type', 'application/json')
-        .send(p)
-        .end(function(err, res) {
-          debug('ERRR INSERT', err);
-
-          if (err) {
-            return cb(err, null);
-          } else {
-            return cb(null, removeSensitiveData(res.body));
-          }
-        });
-      }
-    });
+  handleResult(accessToken, refreshToken, profile, cb);
 }));
+
+passport.use(new FacebookTokenStrategy({
+    clientID: '1391679424181926',
+    clientSecret: 'b5106f229d82bad60a493de18dc4473b',
+    enableProof: false
+  }, function(accessToken, refreshToken, profile, done) {
+    console.log('FacebookTokenStrategy', accessToken, refreshToken, profile, done);
+    handleResult(accessToken, refreshToken, profile, done);
+  }
+));
 
 // Configure Passport authenticated session persistence.
 // In order to restore authentication state across HTTP requests, Passport needs
@@ -110,34 +151,10 @@ passport.deserializeUser(function(obj, cb) {
   cb(null, obj);
 });
 
-
-var mapToGsunProfile = function(profile) {
-  let { id, username, displayName, gender, profileUrl, provider } = profile;
-  var email = "noemail@goingsunny.com";
-  var avatar = "---";
-
-  if (profile.emails) {
-    email = profile.emails[0].value || email;
-  }
-  if (profile.photos) {
-    avatar = profile.photos[0].value || avatar;
-  }
-
-  return {
-    providerId: id,
-    username,
-    displayName,
-    gender,
-    profileUrl,
-    provider,
-    email,
-    avatar,
-  };
-};
-
 var PassportFacebook = function(app) {
   // Use application-level middleware for common functionality, including
   // logging, parsing, and session handling.
+
   app.use(require('morgan')('combined'));
   app.use(require('cookie-parser')());
   app.use(require('body-parser').urlencoded({ extended: true }));
@@ -164,6 +181,14 @@ var PassportFacebook = function(app) {
       res.send(req.user);
     }
   );
+
+  app.get('/auth/facebook/token',
+    passport.authenticate('facebook-token', {session: false}),
+    function(req, res) {
+      res.send(req.user);
+    }
+  );
+
 };
 
 export default PassportFacebook;
