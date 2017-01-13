@@ -7,10 +7,21 @@ import React, { Component, PropTypes } from 'react';
 import { Link, withRouter } from 'react-router';
 import FacebookLogin from 'react-facebook-login';
 import { loadProfileByToken } from 'actions/application';
+import AppStorage from 'middleware/AppStorage';
 
 class ReactComp extends Component {
 
+  componentDidMount() {
+    var data = AppStorage.getData();
+    if (data && data.accessToken) {
+      this.props.dispatch(loadProfileByToken({ accessToken: data.accessToken }));
+    }
+  }
+
   responseFacebook(res) {
+    AppStorage.setProps({
+      accessToken: res.accessToken
+    });
     this.props.dispatch(loadProfileByToken({ accessToken: res.accessToken }));
   }
 

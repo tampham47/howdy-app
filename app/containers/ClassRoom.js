@@ -18,7 +18,7 @@ import Lesson from 'components/Lesson';
 import MessageList from 'components/MessageList';
 import ChannelSetting from 'components/ChannelSetting';
 
-import { changeChanel, loadChannels, loadMessageAndChannel, fetchChannelData } from 'actions/chanels';
+import { changeChanel, loadChannels, loadMessageAndChannel, fetchClassRoomData } from 'actions/chanels';
 import { updateNotificationPanelState } from 'actions/application';
 import { showAppearin, changeMode } from 'actions/appearin';
 import * as ChannelType from 'actions/chanels';
@@ -32,8 +32,9 @@ class Chanel extends Component {
 
   static fetchData({ store, params }) {
     var channelUrl = params.channelUrl || 'goingsunny';
-    var userId = store.getState().currentUser.id;
-    return store.dispatch(fetchChannelData({ channelUrl, userId }));
+    var currentUser = store.getState().currentUser;
+    var userId = currentUser.id || currentUser._id;
+    return store.dispatch(fetchClassRoomData({ channelUrl, userId }));
   }
 
   static getDefaultStore({ store, params }) {
@@ -54,7 +55,7 @@ class Chanel extends Component {
   componentDidMount() {
     var channelUrl = this.props.params.channelUrl || 'goingsunny';
     var userId = this.props.currentUser._id || this.props.currentUser.id;
-    this.props.fetchChannelData({ channelUrl, userId });
+    this.props.fetchClassRoomData({ channelUrl, userId });
 
     this.handleAddVideoRoom(true);
 
@@ -322,7 +323,7 @@ var mapDispatchToProps = {
   loadMessageAndChannel,
   showAppearin,
   changeMode,
-  fetchChannelData,
+  fetchClassRoomData,
   updateNotificationPanelState
 }
 

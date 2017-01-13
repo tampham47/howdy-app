@@ -143,6 +143,56 @@ export function fetchChannelData({ channelUrl, userId, sessionName, prevSessionN
   }
 }
 
+export function fetchClassRoomData({ channelUrl, userId, sessionName, prevSessionName }) {
+  return {
+    [CHAIN_API]: [
+      ()=> {
+        var currentDateStr = moment().format('YYYYMMDD');
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: '/lesson',
+            query: {
+              query: JSON.stringify({
+                availableDateStr: currentDateStr
+              })
+            },
+            successType: LOADED_LESSON_BY_CURRENT_DATE
+          }
+        };
+      },
+      (notifications)=> {
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: '/usernotification',
+            query: {
+              query: JSON.stringify({
+                _user: userId
+              })
+            },
+            successType: LOADED_USER_NOTIFICATIONS
+          }
+        };
+      },
+      ()=> {
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: '/notification',
+            query: {
+              query: JSON.stringify({
+                state: 'public'
+              })
+            },
+            successType: LOADED_NOTIFICATIONS
+          }
+        };
+      }
+    ]
+  }
+}
+
 export function openAppearinRoom(payload) {
   return {
     type: OPENED_APPEARIN_ROOM,
