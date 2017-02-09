@@ -6,6 +6,8 @@ let config = {
   MESSAGE_LIMIT: 24,
   // API_BASE_URL: process.env.API_BASE_URL || 'http://localhost:5600/api/v1',
   // API_BASE_SSL_URL: process.env.API_BASE_SSL_URL || 'http://localhost:5600/api/v1',
+  // LOCAL_URL: process.env.LOCAL_URL || 'http://localhost:3000',
+
   LOCAL_URL: process.env.LOCAL_URL || 'https://goingsunny.com',
   API_BASE_URL: process.env.API_BASE_URL || 'https://api.goingsunny.com/api/v1',
   API_BASE_SSL_URL: process.env.API_BASE_SSL_URL || 'https://api.goingsunny.com/api/v1',

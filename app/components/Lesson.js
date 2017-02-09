@@ -38,6 +38,14 @@ class Lesson extends Component {
       renderHtml = (
         <div>
           {/*<h5 className="lesson-section--helper"><i>{data.videoIntro}</i></h5>*/}
+          <h4 className="lesson-section--title">{data.name}</h4>
+          {videoRender}
+          <h5 className="lesson-section--helper">{data.imageIntro}</h5>
+          {imageList}
+          <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
+          <h4>Vocabulary</h4>
+          <div dangerouslySetInnerHTML={{ __html: data.vocabulary }}></div>
+          <br/><br/>
           <h5 className="lesson-section--helper">
             <i>
               Goingsunny cung cấp cho bạn các video và các đoạn hội thoại mới mỗi ngày,
@@ -48,13 +56,6 @@ class Lesson extends Component {
               Hãy kiên nhẫn luyện tập, thành công sẽ đến với bạn!
             </i>
           </h5>
-          <h4 className="lesson-section--title">{data.name}</h4>
-          {videoRender}
-          <h5 className="lesson-section--helper">{data.imageIntro}</h5>
-          {imageList}
-          <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
-          <h4>Vocabulary</h4>
-          <div dangerouslySetInnerHTML={{ __html: data.vocabulary }}></div>
         </div>
       );
     } else {
