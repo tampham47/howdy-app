@@ -46,16 +46,13 @@ class Lesson extends Component {
           <h4>Vocabulary</h4>
           <div dangerouslySetInnerHTML={{ __html: data.vocabulary }}></div>
           <br/><br/>
-          <h5 className="lesson-section--helper">
-            <i>
-              Goingsunny cung cấp cho bạn các video và các đoạn hội thoại mới mỗi ngày,
-              bạn có thể xem và lặp lại các câu để nâng khả năng từ vựng cũng như phát âm của mình.
-              Đồng thời nếu bạn đăng nhập và nhấn vào nút "Join next session" thì bạn có khả năng được
-              kết nối với một người khác để thực hiện 1 cuộc gọi video, trong cuộc gọi video bạn có thể
-              phân vai để lặp lại đoạn hội thoại vừa rồi, nó sẽ giúp nâng cao khả năng phản xạ tiếng anh của bạn.
-              Hãy kiên nhẫn luyện tập, thành công sẽ đến với bạn!
-            </i>
-          </h5>
+          <div className="lesson-section--helper">
+            <span>---</span><br/>
+            <b>Goingsunny hoạt động thế nào?</b>
+            <p>Mỗi ngày Goingsunny sẽ cung cấp cho các bạn một bài học mới, bao gồm 1 video và 1 đoạn hội thoại liên quan, giúp bạn phát triển kỹ năng nghe, ngữ pháp và từ vựng.</p>
+            <p>Đồng thời cứ mỗi 30 phút, nếu bạn đăng nhập và nhấn nút "Join Next Session" thì bạn có cơ hội được kết nối với 1 người khác để phân vai lặp lại đoạn hội thoại, nói chuyện nhiều sẽ giúp bạn tự tin trong giao tiếp hơn.</p>
+            <p>Hãy kiên nhẫn, thành công sẽ đến với bạn :))</p>
+          </div>
         </div>
       );
     } else {

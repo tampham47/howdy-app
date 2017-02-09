@@ -10,9 +10,10 @@ class IntroComp extends Component {
     return (
       <div className="intro-message">
         <b>Goingsunny là gì?</b>
-        <p>Hi, mình là D., fan One Piece. Goingsunny chính là từ ghép của 2 con tàu (going merry và thoudsand sunny) đã đưa băng hải tặc mũ rơm ra biển khơi, đến với tân thế giới, trải qua bao gian khó, nguy hiểm, để đi tìm kho báu One Piece. Goingsunny là một dự án giúp bạn luyện tập tiếng anh hằng ngày, bằng cách xem video và phân vai nói chuyện với bạn của mình. Cách học tiếng anh tự nhiên như những đứa trẻ bản địa, đã học đã lớn lên và đã thành người bản xứ. Bạn sẽ cần rất nhiều thời gian để nói chuyện lưu loát, thế nên xin hãy kiên nhẫn nhé.</p>
+        <p>Hi, mình là Xaolonist, fan One Piece. Goingsunny chính là từ ghép của 2 con tàu (Going Merry và Thoudsand Sunny) đã đưa băng hải tặc mũ rơm ra biển khơi, đến với tân thế giới, trải qua bao gian khó, nguy hiểm, để đi tìm kho báu One Piece. Goingsunny là một dự án giúp bạn luyện tập tiếng anh hằng ngày, bằng cách xem video và phân vai nói chuyện với bạn của mình. Cách học tiếng anh tự nhiên như những đứa trẻ bản địa, đã học đã lớn lên và đã thành người bản xứ. Bạn sẽ cần rất nhiều thời gian để nói chuyện lưu loát, thế nên xin hãy kiên nhẫn nhé.</p>
         <b>Cách hoạt động của Goingsunny?</b>
-        <p>Goingsunny sẽ cung cấp cho bạn các video và đoạn hội thoại mới mỗi ngày. Đồng thời cứ mỗi 30 phút hệ thống sẽ tự động kết nối bạn với 1 người khác đang online, sau đó thực hiện 1 cuộc gọi video giữa 2 người, và rồi 2 người sẽ tự phân vai nói chuyện với nhau. Đừng quên nhấn vào nút <b>“Tham gia lớp học”</b>, nó sẽ cho hệ thống biết bạn sẽ tham gia lớp học kế tiếp.</p>
+        <p>Mỗi ngày Goingsunny sẽ cung cấp cho các bạn một bài học mới, bao gồm 1 video và 1 đoạn hội thoại liên quan, giúp bạn phát triển kỹ năng nghe, ngữ pháp và từ vựng.</p>
+        <p>Đồng thời cứ mỗi 30 phút, nếu bạn đăng nhập và nhấn nút <b>Join Next Session</b> thì bạn có cơ hội được kết nối với 1 người khác để phân vai lặp lại đoạn hội thoại, nói chuyện nhiều sẽ giúp bạn tự tin trong giao tiếp hơn.</p>
         <b>Mục tiêu của goingsunny?</b>
         <p>Mục tiêu của Goingsunny là đem tiếng anh đến với mọi người, vì mình hiểu rằng, làm chủ tiếng anh sẽ mở ra cho chúng ta rất nhiều cánh cửa, rất nhiều cơ hội trong cuộc sống.</p>
         <b>Văn hóa trên goingsunny?</b>

@@ -28,7 +28,7 @@
 
   &--helper {
     font-size: 1.8rem;
-    color: $c-07;
+    color: lighten($dark-grey, 20%);
     font-weight: 300;
     margin-bottom: 4rem;
   }
