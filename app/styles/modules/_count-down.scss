@@ -25,6 +25,7 @@ $fb-light-color: #D5EEFF;
     height: 50px;
     line-height: 50px;
     margin-top: 2rem;
+    // font-size: 14px;
   }
 
   &__info {
@@ -58,8 +59,9 @@ $fb-light-color: #D5EEFF;
   }
 
   .__btn-joined {
-    border: 1px dotted $content-color;
+    border: 2px dotted $content-color;
     color: $content-color;
+    font-size: 14px;
   }
 
   .__btn-test,
