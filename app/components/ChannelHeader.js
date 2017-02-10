@@ -40,6 +40,12 @@ class ChannelHeader extends Component {
             className={this.getActiveState('message')}>
             <i className="fa fa-paper-plane-o"></i>
           </Link>*/}
+          <div className="header-bar__icon">
+            <img src="https://graph.facebook.com/v2.6/1283617604996384/picture?type=large" alt=""/>
+          </div>
+          <div className="header-bar__icon">
+            <img src="https://scontent.xx.fbcdn.net/v/t1.0-1/c90.210.540.540/s50x50/15966023_364430673937982_6412280787230988244_n.jpg?oh=f01f12d6c7a25958e66fc1fe5789fd64&oe=58DD06C8" alt=""/>
+          </div>
         </div>
       </div>
     )
