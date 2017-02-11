@@ -11,7 +11,8 @@ let defaultState = Immutable.fromJS({
   chanelList: [],
   messagesInChanel: {},
   isShowAddChannelComp: false,
-  currentLesson: {}
+  currentLesson: {},
+  userInSession: []
 });
 
 function chanelsReducer(state = defaultState, action) {
@@ -32,6 +33,9 @@ function chanelsReducer(state = defaultState, action) {
       return state
         .set('isShowAddChannelComp', false)
         .updateIn(['chanelList'], list => list.push(action.response));
+
+    case ActionType.LOADED_USER_IN_SESSION:
+      return state.set('userInSession', action.response);
 
     default:
       return state;

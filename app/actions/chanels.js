@@ -24,6 +24,7 @@ export const LOADED_LESSON_BY_CURRENT_DATE = Symbol('LOADED_LESSON_BY_CURRENT_DA
 export const LOADED_POST_BY_SLUG = Symbol('LOADED_POST_BY_SLUG');
 export const LOADED_CURRENT_SESSION_LIST = Symbol('LOADED_CURRENT_SESSION_LIST');
 export const LOADED_PREV_SESSION = Symbol('LOADED_PREV_SESSION');
+export const LOADED_USER_IN_SESSION = Symbol('LOADED_USER_IN_SESSION');
 
 
 export function fetchChannelData({ channelUrl, userId, sessionName, prevSessionName }) {
@@ -72,42 +73,7 @@ export function fetchChannelData({ channelUrl, userId, sessionName, prevSessionN
           }
         };
       },
-      // ()=> {
-      //   return {
-      //     [CALL_API]: {
-      //       method: 'get',
-      //       path: '/user',
-      //       successType: LOADED_USER
-      //     }
-      //   }
-      // },
-      // (users)=> {
-      //   return {
-      //     [CALL_API]: {
-      //       method: 'get',
-      //       path: '/channel',
-      //       query: {
-      //         sort: JSON.stringify({ createdAt: 1 }),
-      //       },
-      //       successType: CHANNEL_LOADED
-      //     }
-      //   };
-      // },
-      // () => {
-      //   return {
-      //     [CALL_API]: {
-      //       method: 'get',
-      //       path: '/message',
-      //       query: {
-      //         limit: config.MESSAGE_LIMIT,
-      //         sort: JSON.stringify({ createdAt: -1 }),
-      //         query: JSON.stringify({ channelUrl: channelUrl})
-      //       },
-      //       successType: LOADED_MESSAGES
-      //     }
-      //   }
-      // },
-      () => {
+      ()=> {
         return {
           [CALL_API]: {
             method: 'get',
@@ -122,7 +88,7 @@ export function fetchChannelData({ channelUrl, userId, sessionName, prevSessionN
           }
         }
       },
-      () => {
+      ()=> {
         console.log('prevSessionName', prevSessionName, userId);
         if (!userId) return;
         return {
@@ -186,6 +152,22 @@ export function fetchClassRoomData({ channelUrl, userId, sessionName, prevSessio
               })
             },
             successType: LOADED_NOTIFICATIONS
+          }
+        };
+      },
+      ()=> {
+        return {
+          [CALL_API]: {
+            method: 'get',
+            path: '/session',
+            query: {
+              query: JSON.stringify({
+                roomName: channelUrl,
+                sessionName: prevSessionName
+              }),
+              populate: '_user'
+            },
+            successType: LOADED_USER_IN_SESSION
           }
         };
       }

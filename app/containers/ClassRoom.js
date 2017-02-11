@@ -25,6 +25,7 @@ import * as ChannelType from 'actions/chanels';
 import * as AppearinType from 'actions/appearin';
 import listener from 'middleware/listener';
 import AppearinSDK from 'appearin-sdk';
+import utils from 'middleware/utils';
 
 var appearin = new AppearinSDK();
 
@@ -34,13 +35,18 @@ class Chanel extends Component {
     var channelUrl = params.channelUrl || 'goingsunny';
     var currentUser = store.getState().currentUser;
     var userId = currentUser.id || currentUser._id;
-    return store.dispatch(fetchClassRoomData({ channelUrl, userId }));
+    return store.dispatch(fetchClassRoomData({
+      channelUrl,
+      userId,
+      sessionName: utils.getSessionNameByDate(),
+      prevSessionName: utils.getPrevSessionName()
+    }));
   }
 
-  static getDefaultStore({ store, params }) {
-    var channelUrl = params.channelUrl || 'goingsunny';
-    store.dispatch(changeChanel({ channelUrl }));
-  }
+  // static getDefaultStore({ store, params }) {
+  //   var channelUrl = params.channelUrl || 'goingsunny';
+  //   store.dispatch(changeChanel({ channelUrl }));
+  // }
 
   constructor(props) {
     super(props);
@@ -55,7 +61,12 @@ class Chanel extends Component {
   componentDidMount() {
     var channelUrl = this.props.params.channelUrl || 'goingsunny';
     var userId = this.props.currentUser._id || this.props.currentUser.id;
-    this.props.fetchClassRoomData({ channelUrl, userId });
+    this.props.fetchClassRoomData({
+      channelUrl,
+      userId,
+      sessionName: utils.getSessionNameByDate(),
+      prevSessionName: utils.getPrevSessionName()
+    });
 
     this.handleAddVideoRoom(true);
 
@@ -245,7 +256,7 @@ class Chanel extends Component {
           <div className="room-panel">
             <div className="room-panel__wrapper">
               <div className="count-down-section">
-                <a className="__btn-joined button-link button" target="_blank"
+                <a className="__btn-to-appear button-link button" target="_blank"
                   href={`https://appear.in/${channelUrl}`}>Open Appear.in App</a>
               </div>
             </div>
@@ -274,7 +285,8 @@ class Chanel extends Component {
           <div className={`main-content ${mainContentClass}`}>
             <ChannelHeader title={this.props.params.channelUrl}
               icon={'fa-chevron-left'}
-              location={this.props.location} />
+              location={this.props.location}
+              userInSession={this.props.channelData.userInSession} />
 
             <div className="main-content__wrapper">
               <div id='content-scroller' className="main-content__scroller">

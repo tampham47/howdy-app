@@ -59,6 +59,11 @@ $fb-light-color: #D5EEFF;
   }
 
   .__btn-joined {
+    border: 1px dotted $content-color;
+    color: $content-color;
+  }
+
+  .__btn-to-appear {
     border: 2px dotted $content-color;
     color: $content-color;
     font-size: 14px;
