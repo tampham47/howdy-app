@@ -3,6 +3,9 @@
 	[
 		{
 			"path": "."
+		},
+		{
+			"path": "/Users/caphao/projects/goingsunny-app"
 		}
 	]
 }

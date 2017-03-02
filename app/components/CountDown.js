@@ -156,6 +156,9 @@ class CountDownComp extends Component {
         <Link to='/guide' className="__btn-link">
           Guide <i className="fa fa-chevron-right"></i>
         </Link>
+        <Link to="/profile" className="__btn-link">
+          Your profile <i className="fa fa-chevron-right"></i>
+        </Link>
         <Link to="/c/test-your-devices" className="__btn-link">
           Check your device <i className="fa fa-chevron-right"></i>
         </Link>
