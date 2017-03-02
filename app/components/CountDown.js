@@ -159,7 +159,7 @@ class CountDownComp extends Component {
         <Link to="/c/test-your-devices" className="__btn-link">
           Check your device <i className="fa fa-chevron-right"></i>
         </Link>
-        <a href="//m.me/goingsunny522" target="_blank" className="__btn-link">
+        <a href="//m.me/goingsunny" target="_blank" className="__btn-link">
           Give us your feedback <i className="fa fa-chevron-right"></i>
         </a>
         <UserInNextSession userInNextSession={this.props.userInNextSession} />
