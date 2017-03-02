@@ -111,9 +111,13 @@ function extractParams(callApi) {
   if (!callApi.isLocal) {
     url = `${config.API_BASE_URL}${path}`
   } else {
-    // url = `${config.LOCAL_URL}${path}`
-    var localHref = window.location.href;
-    localHref = localHref.substr(0, localHref.length - 1);
+    var localHref;
+    if (typeof cordova != 'undefined') {
+      localHref = `${config.LOCAL_URL}${path}`
+    } else {
+      localHref = window.location.href;
+      localHref = localHref.substr(0, localHref.length - 1);
+    }
     url = `${localHref}${path}`;
   }
 
