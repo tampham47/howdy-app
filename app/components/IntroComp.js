@@ -17,7 +17,7 @@ class IntroComp extends Component {
         <b>Mục tiêu của goingsunny?</b>
         <p>Mục tiêu của Goingsunny là đem tiếng anh đến với mọi người, vì mình hiểu rằng, làm chủ tiếng anh sẽ mở ra cho chúng ta rất nhiều cánh cửa, rất nhiều cơ hội trong cuộc sống.</p>
         <b>Văn hóa trên goingsunny?</b>
-        <p>Hãy kiên nhẫn với chính mình và người khác. Hành trình đi tìm kho báu sẽ không vui nếu bạn chỉ đi một mình, thế nên hãy giúp bạn bè mình cùng tiến bộ mỗi ngày nhé, mình chắc rằng ngoài kho báu ở cuối con đường, thì quá trình đi tìm kho báu sẽ giúp mỗi con người ta trưởng thành hơn. Nếu chưa giỏi, hãy cứ làm như chúng ta đã giỏi, đó cũng chính là châm ngôn của goingsunny “fake it til you make it”.</p>
+        <p>Hãy kiên nhẫn với chính mình và người khác. Hành trình đi tìm kho báu sẽ không vui nếu bạn chỉ đi một mình, thế nên hãy giúp bạn bè mình cùng tiến bộ mỗi ngày nhé, mình chắc rằng ngoài kho báu ở cuối con đường, thì quá trình đi tìm kho báu sẽ giúp mỗi con người ta trưởng thành hơn. Nếu chưa giỏi, hãy học khi người khác còn đang ngủ, để trở nên hoàn thiện, đó cũng chính là châm ngôn của goingsunny “fake it til you make it”.</p>
         <p>Ps/ Hãy là người lịch sự, đừng rời khỏi phòng khi chưa hoàn thành bài học hay chưa thông báo cho người đối diện biết nhé. Goingsunny miễn phí, và sẽ luôn như vậy. Như chính con đường đi tìm one piece sẽ không từ chối bất kỳ ai.</p>
 
         <p>---</p>

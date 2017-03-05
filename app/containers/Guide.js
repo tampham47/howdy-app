@@ -20,7 +20,7 @@ class Login extends Component {
             <h1>goingsunny</h1>
             <p>fake it 'til you make it</p>
 
-            <a href='/login/facebook' className="button button--join-the-trip">Join the trip with facebook</a>
+            {/*<a href='/login/facebook' className="button button--join-the-trip">Join the trip with facebook</a>*/}
           </div>
 
           <IntroComp />
