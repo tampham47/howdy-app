@@ -6,6 +6,10 @@ $offset-left: 20px;
 
 .main-area {
   flex-direction: column;
+
+  &:after {
+    clear: both;
+  }
 }
 
 .room-panel {

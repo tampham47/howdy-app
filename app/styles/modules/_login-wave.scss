@@ -10,11 +10,11 @@
 .wave-wrapper {
   background: #E0E7E9;
   min-height: 80%;
-  overflow: hidden;
   font-weight: 300;
-  padding-top: 2rem;
   width: 100%;
-  text-align: center;
+  // text-align: center;
+  // padding-top: 2rem;
+  // overflow: hidden;
 
   &__close {
     position: absolute;
@@ -22,7 +22,18 @@
     right: 3*$gutter;
     padding-left: 15px;
     padding-right: 15px;
+    z-index: 9;
   }
+
+  .container {
+    padding-top: 2rem;
+    text-align: center;
+  }
+}
+
+.wave-wrapper-02 {
+  // background: #E0E7E9;
+  width: 100%;
 }
 
 .brand {
