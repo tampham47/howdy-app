@@ -7,6 +7,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router';
 import IntroComp from 'components/IntroComp';
+import FacebookLogin from 'components/FacebookLogin';
 
 class Login extends Component {
 
@@ -19,6 +20,10 @@ class Login extends Component {
             <img src="//image.flaticon.com/icons/svg/123/123894.svg" alt="" />
             <h1>goingsunny</h1>
             <p>fake it 'til you make it</p>
+
+            { (!this.props.currentUser._id && !this.props.currentUser.id) &&
+              <FacebookLogin />
+            }
 
             {/*<a href='/login/facebook' className="button button--join-the-trip">Join the trip with facebook</a>*/}
           </div>
