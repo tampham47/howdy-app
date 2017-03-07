@@ -8,6 +8,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import LeftMenu from 'components/LeftMenu';
 import HeaderBar from 'components/HeaderBar';
+import ChannelHeader from 'components/ChannelHeader';
+import LayoutDefault from 'containers/LayoutDefault';
+
 import { loadChannels } from 'actions/chanels';
 import { updateProfile } from 'actions/application';
 import listener from 'middleware/listener';
@@ -61,13 +64,11 @@ class Profile extends Component {
     let channelList = this.props.channelList;
 
     return (
-      <div className="relm">
-        <LeftMenu chanelList={this.props.channelList} />
-
+      <div className="wave-wrapper-02">
         <main className="main-area">
-          <div className="main-content">
-            <HeaderBar title='My Profile' />
-            <div className="main-content main-content--expand">
+          <ChannelHeader title={'My Profile'} icon={'fa-chevron-left'} />
+          <div className="main-content main-content--expand">
+            <div className="columns eight offset-by-two">
               <form className="add-room-form" onSubmit={()=>false}>
 
                 <label htmlFor="displayName">Full Name</label>
@@ -113,9 +114,13 @@ class Profile extends Component {
             </div>
           </div>
 
-          <div className="room-panel"></div>
         </main>
+
+        <footer>
+          <div className="wave"></div>
+        </footer>
       </div>
+
     )
   }
 }

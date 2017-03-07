@@ -25,9 +25,9 @@ import Guide from 'containers/Guide';
 var NoMatchComp;
 let requireAuth = function(store, nextState, replace) {
   var u = store.getState().currentUser && store.getState().currentUser.toJS();
-  console.log('>>> REQUIREAUTH', u, (u.isAuthenticated || u.isAuthenticated == 'true'));
+  console.log('>>> REQUIREAUTH', u, u.id);
 
-  if (!(u && (u.isAuthenticated || u.isAuthenticated == 'true'))) {
+  if (!u.id) {
     // Not authenticated, redirect to login.
     var p = nextState.location.pathname;
     replace('/login');
@@ -47,7 +47,6 @@ export default function(history, store) {
   return (
     <Router history={history}>
       <Route path="/" component={App} onChange={handleChangeUrl.bind(this)} >
-        {/*<IndexRoute component={Goingsunny} onEnter={requireAuth.bind(this, store)} />*/}
         <IndexRoute component={Goingsunny} />
         <Route path="c/:channelUrl" component={ClassRoom} />
 
