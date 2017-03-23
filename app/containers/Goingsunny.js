@@ -8,6 +8,7 @@ import client from 'middleware/mqtt';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router';
+import { Helmet } from 'react-helmet';
 
 import LeftMenu from 'components/LeftMenu';
 import ChannelHeader from 'components/ChannelHeader';
@@ -226,6 +227,8 @@ class Chanel extends Component {
     var isShowLesson = false;
     var isShowMessage = false;
 
+    var lesson = this.props.channelData.currentLesson;
+
     switch (this.props.location.query.tab) {
       case 'lesson':
         isShowLesson = true;
@@ -243,6 +246,14 @@ class Chanel extends Component {
 
     return (
       <div className="relm">
+        <Helmet>
+          <title>{lesson.name}</title>
+          <meta property="og:type" content="article" />
+          <meta property="og:url" content="goingsunny.com" />
+          <meta property="og:image" content="https://goingsunny.com/android-chrome-512x512.png" />
+          <meta property="og:title" content={lesson.name} />
+          <meta property="og:description" content={lesson.name} />
+        </Helmet>
         <NotificationPanel
           isActive={this.props.appState.notificationPanelState}
           unreadNotiList={this.state.unreadNotiList} />

@@ -17,6 +17,8 @@ import createRoutes from 'routes';
 import { Provider } from 'react-redux';
 import ppfacebook from './passport-fb';
 import Immutable from 'immutable';
+import { Helmet } from 'react-helmet';
+
 var debug = require('debug')('server');
 
 let server = new Express();
@@ -90,9 +92,18 @@ server.get('*', (req, res, next)=> {
             { <RouterContext {...renderProps}/> }
           </Provider>
         );
+        const helmet = Helmet.renderStatic();
+        console.log('title', helmet.title.toString());
 
         if ( getCurrentUrl() === reqUrl ) {
-          res.render('index', { html, scriptSrcs, reduxState, styleSrc });
+          res.render('index', {
+            html,
+            scriptSrcs,
+            reduxState,
+            styleSrc,
+            headerTitle: helmet.title.toString(),
+            headerMeta: helmet.meta.toString(),
+          });
         } else {
           res.redirect(302, getCurrentUrl());
         }
@@ -117,7 +128,7 @@ server.get('*', (req, res, next)=> {
     }
   });
 
-  function subscribeUrl () {
+  function subscribeUrl() {
     let currentUrl = location.pathname + location.search;
     let unsubscribe = history.listen((newLoc)=> {
       if (newLoc.action === 'PUSH') {

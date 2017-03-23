@@ -8,6 +8,7 @@ import { Link } from 'react-router';
 import * as ActionType from 'actions/chanels';
 import client from 'middleware/mqtt';
 import { updateLastAccessed, getBrokerMessage, userJoinNextSession } from 'actions/application';
+import { Helmet } from 'react-helmet';
 
 
 class App extends Component {
@@ -80,12 +81,31 @@ class App extends Component {
 
     return (
       <div className="relm">
-        {/*<div className="feedback-link">
-          <Link to="/feedback">Feedback</Link>
-        </div>
-        <div className="feedback-link feedback-link--how-it-works">
-          <Link to="/blog/how-it-works">How it works?</Link>
-        </div>*/}
+        <Helmet>
+          <title>Goingsunny - Online learning english system</title>
+          <meta name="description" content="Fake it til you make it, practicing english by role playing"/>
+          <meta name="keywords" content="Learning, English, Chatting, Video calling, Network"/>
+          <meta name="author" content="Tam Pham"/>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+          {/*for Google*/}
+          <meta name="copyright" content="goingsunny.com" />
+          <meta name="application-name" content="goingsunny" />
+
+          {/*for Facebook*/}
+          <meta property="og:title" content="Goingsunny.com" />
+          <meta property="og:type" content="article" />
+          <meta property="og:image" content="https://goingsunny.com/android-chrome-512x512.png" />
+          <meta property="og:url" content="goingsunny.com" />
+          <meta property="og:description" content="Fake it til you make it, practicing english by role playing" />
+
+          {/*for Twitter*/}
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:title" content="Goingsunny.com" />
+          <meta name="twitter:description" content="Fake it til you make it, practicing english by role playing" />
+          <meta name="twitter:image" content="https://goingsunny.com/android-chrome-512x512.png" />
+        </Helmet>
+
         {this.props.children}
       </div>
     );
