@@ -2,10 +2,13 @@
  *
  */
 
+import config from 'config';
+import moment from 'moment';
+
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import config from 'config';
+import FacebookProvider, { Like } from 'react-facebook';
 
 
 class Lesson extends Component {
@@ -39,6 +42,11 @@ class Lesson extends Component {
         <div>
           {/*<h5 className="lesson-section--helper"><i>{data.videoIntro}</i></h5>*/}
           <h4 className="lesson-section--title">{data.name}</h4>
+          <div style={{marginBottom: '12px'}}>
+            <FacebookProvider appID="1391679424181926">
+              <Like href={`https://goingsunny.com/?${moment().format('YYYYMMDD')}`} colorScheme="dark" showFaces share />
+            </FacebookProvider>
+          </div>
           {videoRender}
           <h5 className="lesson-section--helper">{data.imageIntro}</h5>
           {imageList}

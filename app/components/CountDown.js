@@ -171,6 +171,8 @@ class CountDownComp extends Component {
           Give us your feedback <i className="fa fa-chevron-right"></i>
         </a>
         <UserInNextSession userInNextSession={this.props.userInNextSession} />
+
+        {/*<div className="fb-page" data-href="https://www.facebook.com/goingsunny/" data-small-header="true" data-adapt-container-width="false" data-hide-cover="true" data-show-facepile="false"><blockquote cite="https://www.facebook.com/goingsunny/" className="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/goingsunny/">Going Sunny</a></blockquote></div>*/}
       </div>
     );
   }

@@ -29,8 +29,8 @@ import AppearinSDK from 'appearin-sdk';
 import utils from 'middleware/utils';
 import CountDownComp from 'components/CountDown';
 
-
 var appearin = new AppearinSDK();
+
 
 class Chanel extends Component {
 
