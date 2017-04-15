@@ -5,7 +5,16 @@
 			"path": "."
 		},
 		{
-			"path": "/Users/caphao/projects/goingsunny-app"
+			"path": "/Users/xaolonist/projects/gsun-api"
+		},
+		{
+			"path": "/Users/xaolonist/projects/gsun-broker"
+		},
+		{
+			"path": "/Users/xaolonist/projects/gsun-app"
+		},
+		{
+			"path": "/Users/xaolonist/projects/gsun-crawler"
 		}
 	]
 }

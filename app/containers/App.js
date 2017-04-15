@@ -83,7 +83,7 @@ class App extends Component {
       <div className="relm">
         <Helmet>
           <title>Goingsunny - Online learning english system</title>
-          <meta name="description" content="Fake it til you make it, practicing english by role playing"/>
+          <meta name="description" content="Let's speak english!"/>
           <meta name="keywords" content="Learning, English, Chatting, Video calling, Network"/>
           <meta name="author" content="Tam Pham"/>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -97,12 +97,12 @@ class App extends Component {
           <meta property="og:type" content="article" />
           <meta property="og:image" content="https://goingsunny.com/android-chrome-512x512.png" />
           <meta property="og:url" content="goingsunny.com" />
-          <meta property="og:description" content="Fake it til you make it, practicing english by role playing" />
+          <meta property="og:description" content="Let's speak english!" />
 
           {/*for Twitter*/}
           <meta name="twitter:card" content="summary" />
           <meta name="twitter:title" content="Goingsunny.com" />
-          <meta name="twitter:description" content="Fake it til you make it, practicing english by role playing" />
+          <meta name="twitter:description" content="Let's speak english!" />
           <meta name="twitter:image" content="https://goingsunny.com/android-chrome-512x512.png" />
         </Helmet>
 

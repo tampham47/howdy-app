@@ -247,12 +247,12 @@ class Chanel extends Component {
     return (
       <div className="relm">
         <Helmet>
-          <title>{lesson.name}</title>
+          <title>{lesson.metaTitle || lesson.name}</title>
           <meta property="og:type" content="article" />
           <meta property="og:url" content="goingsunny.com" />
-          <meta property="og:image" content="https://goingsunny.com/android-chrome-512x512.png" />
-          <meta property="og:title" content={lesson.name} />
-          <meta property="og:description" content={lesson.name} />
+          <meta property="og:image" content={lesson.metaImage || "https://goingsunny.com/android-chrome-512x512.png"} />
+          <meta property="og:title" content={lesson.metaTitle || lesson.name} />
+          <meta property="og:description" content={lesson.metaDescription || lesson.name} />
         </Helmet>
         <NotificationPanel
           isActive={this.props.appState.notificationPanelState}

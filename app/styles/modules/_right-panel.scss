@@ -12,7 +12,7 @@
   box-shadow: 4px 0px 4px whitesmoke;
   z-index: 99;
   padding-bottom: 2*$gutter;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   &__wrapper {
     padding: 0.5*$gutter;
