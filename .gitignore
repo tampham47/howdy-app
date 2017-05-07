@@ -6,3 +6,5 @@ _deploy
 
 *.sublime-workspace
 *.log
+
+.vscode
