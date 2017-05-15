@@ -5,13 +5,13 @@
 
 
 .room-panel {
-  height: 100%;
-  position: relative;
-  width: 330px;
+  width: 320px;
+  min-width: 320px;
   background-color: #2A363B;
   box-shadow: 4px 0px 4px whitesmoke;
   z-index: 99;
   padding-bottom: 2*$gutter;
+  align-items: stretch;
   overflow-y: auto;
 
   &__wrapper {
