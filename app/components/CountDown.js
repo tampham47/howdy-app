@@ -115,12 +115,7 @@ class CountDownComp extends Component {
     console.log('prevSession', this.props.prevSession);
 
     if (!this.props.currentUser._id && !this.props.currentUser.id) {
-      renderButton = (
-        <div>
-          {/*<a href='/login/facebook' className="button button-primary facebook">Join the trip with facebook</a>*/}
-          <FacebookLogin />
-        </div>
-      )
+      renderButton = <FacebookLogin />;
     } else {
       if (this.isEnrolledCurrentSession(currentUser, currentSessionList)) {
         renderButton = (

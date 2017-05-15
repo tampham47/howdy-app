@@ -28,7 +28,8 @@ class ReactComp extends Component {
   render() {
     return (
       <FacebookLogin cssClass="button button-primary facebook"
-        appId="1391679424181926" autoLoad={false} fields="name,email,picture"
+        appId="1391679424181926" autoLoad={true} fields="name,email,picture"
+        scope="public_profile"
         callback={this.responseFacebook.bind(this)} />
     )
   }
