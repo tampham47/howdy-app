@@ -31,6 +31,11 @@ pre, blockquote, dl, figure, table, p, ul, ol, form {
   }
 }
 
+.target-element {
+  margin-top: -60px;
+  padding-top: 60px;
+}
+
 .container {
   max-width: $content-w;
   margin-left: auto;
@@ -43,6 +48,10 @@ pre, blockquote, dl, figure, table, p, ul, ol, form {
   top: 0;
   right: 0;
   bottom: 0;
+}
+
+.section {
+  margin-bottom: $bl * 2;
 }
 
 header {
@@ -117,6 +126,19 @@ nav {
 
   button {
     margin-bottom: 0;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+
+    &:hover {
+      font-weight: bold;
+    }
+
+    &:target {
+      text-decoration: underline;
+    }
   }
 
   &._active {

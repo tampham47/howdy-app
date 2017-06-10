@@ -47,10 +47,19 @@ class Lesson extends Component {
                   <button className="button-primary">Join and talk</button>
                 </li>
                 <li className="menu-item">5mins 36s</li>
-                <li className="menu-item">lesson</li>
-                <li className="menu-item _active">vocabulary</li>
-                <li className="menu-item">related videos</li>
-                <li className="menu-item">quiz</li>
+
+                <li className="menu-item">
+                  <a href="#lesson">lesson</a>
+                </li>
+                <li className="menu-item">
+                  <a href="#vocabulary">vocabulary</a>
+                </li>
+                <li className="menu-item">
+                  <a href="#related-videos">related videos</a>
+                </li>
+                <li className="menu-item">
+                  <a href="#quiz">quiz</a>
+                </li>
               </ul>
             </div>
           </div>
@@ -62,39 +71,59 @@ class Lesson extends Component {
 
         {data && (
           <div className="container main">
-            <div className="mobile-nav">
+            {/*<div className="mobile-nav">
               <ul className="menu-list">
                 <li className="menu-item">
-                  <button>Join and talk</button>
+                  <button className="button-primary">Join and talk</button>
                 </li>
                 <li className="menu-item">5mins 36s</li>
-                <li className="menu-item">lesson</li>
-                <li className="menu-item _active">vocabulary</li>
-                <li className="menu-item">related videos</li>
-                <li className="menu-item">quiz</li>
+
+                <li className="menu-item">
+                  <a href="#lesson">lesson</a>
+                </li>
+                <li className="menu-item">
+                  <a href="#vocabulary">vocabulary</a>
+                </li>
+                <li className="menu-item">
+                  <a href="#related-videos">related videos</a>
+                </li>
+                <li className="menu-item">
+                  <a href="#quiz">quiz</a>
+                </li>
               </ul>
-            </div>
+            </div>*/}
 
-            <div>
+            <div id="lesson" className="target-element"></div>
+            <div className="section">
               <h4>{data.name}</h4>
-              {/*<p>
-                Next session is going to start in 5mins:4s.
-                Join and prove your speaking skill with others.
-              </p>*/}
+              <div className="video-wrp">
+                {videoRender}
+              </div>
+              <div className="lesson">
+                {imageList}
+                <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
+              </div>
             </div>
 
-            <div className="video-wrp">
-              {videoRender}
-            </div>
-
-            <div className="lesson">
-              {imageList}
-              <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
-            </div>
-
-            <div className="vocabulary-wrp">
+            <div id="vocabulary" className="target-element"></div>
+            <div className="section">
               <h5>Vocabulary</h5>
               <div dangerouslySetInnerHTML={{ __html: data.vocabulary }}></div>
+            </div>
+
+            <div id="related-videos" className="target-element"></div>
+            <div className="section">
+              <h5>Related Videos</h5>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente quisquam nesciunt quos! Magnam laudantium eveniet recusandae ab ullam, deleniti rerum optio expedita voluptatibus repudiandae odit fugit! Sint, iste sequi ipsam!</p>
+            </div>
+
+            <div id="quiz" className="target-element"></div>
+            <div className="section">
+              <h5>Quiz</h5>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente quisquam nesciunt
+              quos! Magnam laudantium eveniet recusandae ab ullam, deleniti rerum optio expedita voluptatibus repudiandae odit fugit! Sint, iste sequi ipsam!</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente quisquam nesciunt quos! Magnam laudantium eveniet recusandae ab ullam, deleniti rerum optio expedita voluptatibus repudiandae odit fugit! Sint, iste sequi ipsam!</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente quisquam nesciunt quos! Magnam laudantium eveniet recusandae ab ullam, deleniti rerum optio expedita voluptatibus repudiandae odit fugit! Sint, iste sequi ipsam!</p>
             </div>
 
             <div style={{marginTop: '36px'}}>
