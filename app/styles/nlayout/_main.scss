@@ -1,0 +1,213 @@
+$content-w: 650px;
+$header-h: 54px;
+$bl: 12px;
+
+// http://colorhunt.co/c/72112
+$color01: #303841;
+$color02: #BE3144;
+$color03: #3A4750;
+$color04: #D3D6DB;
+
+ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  font-size: 16px;
+}
+
+pre, blockquote, dl, figure, table, p, ul, ol, form {
+  margin-bottom: $bl / 2;
+}
+
+.button.button-primary, button.button-primary {
+  background-color: $color02;
+  border-color: $color02;
+
+  &:hover {
+    background-color: darken($color02, 20%);
+    border-color: $color02;
+  }
+}
+
+.container {
+  max-width: $content-w;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container-fixed {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+header {
+  background-color: $color01;
+  margin-bottom: 2*$bl;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 9999;
+  color: white;
+}
+
+.header {
+  display: flex;
+  a {
+    display: inline-block;
+    line-height: $header-h;
+    color: white;
+  }
+
+  &__left {
+    flex: 2;
+  }
+
+  &__right {
+    flex: 2;
+
+    a {
+      float: right;
+      padding: 0 $bl;
+      margin-right: -$bl;
+      text-decoration: none;
+      margin-left: $bl;
+    }
+  }
+}
+
+nav {
+  height: $header-h;
+
+  .title {
+    font-size: 24px;
+    line-height: $header-h;
+  }
+}
+
+.menu-wrapper {
+  position: relative;
+  width: $content-w;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+  height: 100vh;
+}
+
+.menu {
+  position: absolute;
+  width: 200px;
+  left: 0;
+  transform: translateX(-100%);
+  margin-top: 20%;
+}
+
+.menu-list {
+  list-style-type: none;
+  padding-bottom: 0;
+}
+.menu-item {
+  text-align: right;
+  padding-right: 36px;
+  margin-bottom: $bl;
+
+  button {
+    margin-bottom: 0;
+  }
+
+  &._active {
+    font-weight: bold;
+  }
+}
+
+.main {
+  margin-top: $header-h + $bl*2;
+  min-width: 320px;
+  margin-bottom: 200px;
+}
+
+
+.mobile-nav {
+  height: 38px;
+  overflow-y: hidden;
+  margin-bottom: $bl*2;
+
+  .menu-list {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+  .menu-item {
+    display: inline;
+    padding-right: 0;
+    padding: 0 6px;
+
+    &:first-child {
+      padding-left: 0;
+    }
+    &:last-child {
+      padding-right: $bl*2;
+    }
+  }
+}
+
+.video-wrp {
+  margin: $bl 0px;
+}
+
+// made with love
+.mwl {
+  font-size: 14px;
+  color: #666;
+}
+.mwl a {
+  color: #000000;
+  text-decoration: none;
+}
+.mwl .fa {
+  color: #E90606;
+  margin: 0 3px;
+  font-size: 16px;
+  animation: pound 0.35s infinite alternate;
+  -webkit-animation: pound 0.35s infinite alternate;
+}
+
+@-webkit-keyframes pound {
+  to {
+    transform: scale(1.1);
+  }
+}
+@keyframes pound {
+  to {
+    transform: scale(1.1);
+  }
+}
+
+/* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
+@media (min-width:320px)  {
+}
+
+/* smartphones, Android phones, landscape iPhone */
+@media (max-width:480px)  {
+  background-color: green;
+}
+
+/* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
+@media (min-width:600px)  {
+}
+
+/* tablet, landscape iPad, lo-res laptops ands desktops */
+@media (min-width:801px)  {
+}
+
+/* big landscape tablets, laptops, and desktops */
+@media (min-width:1025px) {
+}
+
+/* hi-res laptops and desktops */
+@media (min-width:1281px) {
+}

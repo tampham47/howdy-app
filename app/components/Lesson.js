@@ -37,42 +37,74 @@ class Lesson extends Component {
       }
     }.bind(this));
 
-    if (data) {
-      renderHtml = (
-        <div>
-          {/*<h5 className="lesson-section--helper"><i>{data.videoIntro}</i></h5>*/}
-          <h4 className="lesson-section--title">{data.name}</h4>
-          <div style={{marginBottom: '12px'}}>
-            <FacebookProvider appID="1391679424181926">
-              <Like href={`https://goingsunny.com/?${moment().format('YYYYMMDD')}`} colorScheme="dark" showFaces share />
-            </FacebookProvider>
-          </div>
-          {videoRender}
-          <h5 className="lesson-section--helper">{data.imageIntro}</h5>
-          {imageList}
-          <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
-          <h4>Vocabulary</h4>
-          <div dangerouslySetInnerHTML={{ __html: data.vocabulary }}></div>
-          <br/><br/>
-          <div className="lesson-section--helper">
-            <span>---</span><br/>
-            <b>Goingsunny hoạt động thế nào?</b>
-            <p>Mỗi ngày Goingsunny sẽ cung cấp cho các bạn một bài học mới, bao gồm 1 video và 1 đoạn hội thoại liên quan, giúp bạn phát triển kỹ năng nghe, ngữ pháp và từ vựng.</p>
-            <p>Đồng thời cứ mỗi 30 phút, nếu bạn đăng nhập và nhấn nút "Join Next Session" thì bạn có cơ hội được kết nối với 1 người khác để phân vai lặp lại đoạn hội thoại, nói chuyện nhiều sẽ giúp bạn tự tin trong giao tiếp hơn.</p>
-            <p>Hãy kiên nhẫn, thành công sẽ đến với bạn :))</p>
+    return (
+      <div>
+        <div className="container-fixed">
+          <div className="menu-wrapper">
+            <div className="menu">
+              <ul className="menu-list">
+                <li className="menu-item">
+                  <button className="button-primary">Join and talk</button>
+                </li>
+                <li className="menu-item">5mins 36s</li>
+                <li className="menu-item">lesson</li>
+                <li className="menu-item _active">vocabulary</li>
+                <li className="menu-item">related videos</li>
+                <li className="menu-item">quiz</li>
+              </ul>
+            </div>
           </div>
         </div>
-      );
-    } else {
-      renderHtml = (
-        <p>There has no lesson today.</p>
-      )
-    }
 
-    return (
-      <section className={"lesson-section " + (this.props.isShow ? '' : 'u-hide')}>
-        { renderHtml }
-      </section>
+        {!data && (
+          <p>There has no lesson today.</p>
+        )}
+
+        {data && (
+          <div className="container main">
+            <div className="mobile-nav">
+              <ul className="menu-list">
+                <li className="menu-item">
+                  <button>Join and talk</button>
+                </li>
+                <li className="menu-item">5mins 36s</li>
+                <li className="menu-item">lesson</li>
+                <li className="menu-item _active">vocabulary</li>
+                <li className="menu-item">related videos</li>
+                <li className="menu-item">quiz</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4>{data.name}</h4>
+              {/*<p>
+                Next session is going to start in 5mins:4s.
+                Join and prove your speaking skill with others.
+              </p>*/}
+            </div>
+
+            <div className="video-wrp">
+              {videoRender}
+            </div>
+
+            <div className="lesson">
+              {imageList}
+              <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
+            </div>
+
+            <div className="vocabulary-wrp">
+              <h5>Vocabulary</h5>
+              <div dangerouslySetInnerHTML={{ __html: data.vocabulary }}></div>
+            </div>
+
+            <div style={{marginTop: '36px'}}>
+              <FacebookProvider appID="1391679424181926">
+                <Like href={`https://goingsunny.com/?${moment().format('YYYYMMDD')}`} colorScheme="dark" showFaces share />
+              </FacebookProvider>
+            </div>
+          </div>
+        )}
+      </div>
     )
   }
 }

@@ -244,8 +244,60 @@ class Chanel extends Component {
         isShowLesson = true;
     }
 
+    /*<div className="relm">
+      <Helmet>
+        <title>{lesson.metaTitle || lesson.name}</title>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="goingsunny.com" />
+        <meta property="og:image" content={lesson.metaImage || "https://goingsunny.com/android-chrome-512x512.png"} />
+        <meta property="og:title" content={lesson.metaTitle || lesson.name} />
+        <meta property="og:description" content={lesson.metaDescription || lesson.name} />
+      </Helmet>
+      <NotificationPanel
+        isActive={this.props.appState.notificationPanelState}
+        unreadNotiList={this.state.unreadNotiList} />
+
+      <main className="main-area">
+        <div className="room-panel">
+          <div className="room-panel__wrapper">
+            <CountDownComp
+              currentUser={this.props.currentUser}
+              prevSession={this.props.appState.prevSession || {}}
+              currentSessionList={this.props.currentSessionList}
+              userInNextSession={this.props.userInNextSession} />
+          </div>
+        </div>
+
+        <div className={`main-content ${mainContentClass}`}>
+          <ChannelHeader title={this.props.params.channelUrl}
+            location={this.props.location} />
+
+          <div className="main-content__wrapper">
+            <div id='content-scroller' className="main-content__scroller">
+              <Lesson datacontext={this.props.channelData.currentLesson} isShow={isShowLesson} />
+              <MessageList datacontext={messageList} isShow={isShowMessage} />
+            </div>
+          </div>
+
+          <div className="input-area">
+            <div className="input-area__wrapper">
+              <div className="input-area__icon">
+                {<img src={propsData.currentUser.avatar} alt=""/>}
+              </div>
+              <div className="input-area__content-wrapper">
+                <textarea name="" id="" cols="30" rows="10" placeholder="Click here to type chat message"
+                  value={this.state.inputMessage}
+                  onKeyPress={this.handleKeyPress.bind(this)}
+                  onChange={this.handleChange.bind(this)}></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>*/
+
     return (
-      <div className="relm">
+      <section>
         <Helmet>
           <title>{lesson.metaTitle || lesson.name}</title>
           <meta property="og:type" content="article" />
@@ -254,48 +306,21 @@ class Chanel extends Component {
           <meta property="og:title" content={lesson.metaTitle || lesson.name} />
           <meta property="og:description" content={lesson.metaDescription || lesson.name} />
         </Helmet>
-        <NotificationPanel
-          isActive={this.props.appState.notificationPanelState}
-          unreadNotiList={this.state.unreadNotiList} />
 
-        <main className="main-area">
-          <div className="room-panel">
-            <div className="room-panel__wrapper">
-              <CountDownComp
-                currentUser={this.props.currentUser}
-                prevSession={this.props.appState.prevSession || {}}
-                currentSessionList={this.props.currentSessionList}
-                userInNextSession={this.props.userInNextSession} />
-            </div>
+        <header>
+          <div className="container header">
+            <nav className="header__left">
+              <h4 className="title">GOING SUNNY</h4>
+            </nav>
+            <nav className="header__right">
+              <a href="#"><i className="fa fa-bars"></i></a>
+              <a href="#">login with facebook</a>
+            </nav>
           </div>
+        </header>
 
-          <div className={`main-content ${mainContentClass}`}>
-            <ChannelHeader title={this.props.params.channelUrl}
-              location={this.props.location} />
-
-            <div className="main-content__wrapper">
-              <div id='content-scroller' className="main-content__scroller">
-                <Lesson datacontext={this.props.channelData.currentLesson} isShow={isShowLesson} />
-                <MessageList datacontext={messageList} isShow={isShowMessage} />
-              </div>
-            </div>
-
-            <div className="input-area">
-              <div className="input-area__wrapper">
-                <div className="input-area__icon">
-                  {<img src={propsData.currentUser.avatar} alt=""/>}
-                </div>
-                <div className="input-area__content-wrapper">
-                  <textarea name="" id="" cols="30" rows="10" placeholder="Click here to type chat message"
-                    value={this.state.inputMessage}
-                    onKeyPress={this.handleKeyPress.bind(this)}
-                    onChange={this.handleChange.bind(this)}></textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-        </main>
-      </div>
+        <Lesson datacontext={this.props.channelData.currentLesson} />
+      </section>
     );
   }
 }
