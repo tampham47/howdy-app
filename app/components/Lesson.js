@@ -55,10 +55,10 @@ class Lesson extends Component {
                   <a href="#vocabulary">vocabulary</a>
                 </li>
                 <li className="menu-item">
-                  <a href="#related-videos">related videos</a>
+                  <a href="#grammar">grammar</a>
                 </li>
                 <li className="menu-item">
-                  <a href="#quiz">quiz</a>
+                  <a href="#related-videos">related videos</a>
                 </li>
               </ul>
             </div>
@@ -95,10 +95,15 @@ class Lesson extends Component {
 
             <div id="lesson" className="target-element"></div>
             <div className="section">
-              <h4>{data.name}</h4>
+              <h3 className="main-title">{data.name}</h3>
               <div className="video-wrp">
                 {videoRender}
               </div>
+
+              <FacebookProvider appID="1391679424181926">
+                <Like href={`https://goingsunny.com/?${moment().format('YYYYMMDD')}`}
+                  colorScheme="dark" share />
+              </FacebookProvider>
               <div className="lesson">
                 {imageList}
                 <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
@@ -107,28 +112,29 @@ class Lesson extends Component {
 
             <div id="vocabulary" className="target-element"></div>
             <div className="section">
-              <h5>Vocabulary</h5>
+              <h3 className="main-title">Vocabulary</h3>
               <div dangerouslySetInnerHTML={{ __html: data.vocabulary }}></div>
             </div>
 
-            <div id="related-videos" className="target-element"></div>
+            <div id="grammar" className="target-element"></div>
             <div className="section">
-              <h5>Related Videos</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente quisquam nesciunt quos! Magnam laudantium eveniet recusandae ab ullam, deleniti rerum optio expedita voluptatibus repudiandae odit fugit! Sint, iste sequi ipsam!</p>
-            </div>
-
-            <div id="quiz" className="target-element"></div>
-            <div className="section">
-              <h5>Quiz</h5>
+              <h3 className="main-title">Grammar</h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente quisquam nesciunt
               quos! Magnam laudantium eveniet recusandae ab ullam, deleniti rerum optio expedita voluptatibus repudiandae odit fugit! Sint, iste sequi ipsam!</p>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente quisquam nesciunt quos! Magnam laudantium eveniet recusandae ab ullam, deleniti rerum optio expedita voluptatibus repudiandae odit fugit! Sint, iste sequi ipsam!</p>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente quisquam nesciunt quos! Magnam laudantium eveniet recusandae ab ullam, deleniti rerum optio expedita voluptatibus repudiandae odit fugit! Sint, iste sequi ipsam!</p>
             </div>
 
+            <div id="related-videos" className="target-element"></div>
+            <div className="section">
+              <h3 className="main-title">Related Videos</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente quisquam nesciunt quos! Magnam laudantium eveniet recusandae ab ullam, deleniti rerum optio expedita voluptatibus repudiandae odit fugit! Sint, iste sequi ipsam!</p>
+            </div>
+
             <div style={{marginTop: '36px'}}>
               <FacebookProvider appID="1391679424181926">
-                <Like href={`https://goingsunny.com/?${moment().format('YYYYMMDD')}`} colorScheme="dark" showFaces share />
+                <Like href={`https://goingsunny.com/?${moment().format('YYYYMMDD')}`}
+                  colorScheme="dark" showFaces share />
               </FacebookProvider>
             </div>
           </div>

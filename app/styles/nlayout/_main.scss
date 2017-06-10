@@ -52,6 +52,30 @@ pre, blockquote, dl, figure, table, p, ul, ol, form {
 
 .section {
   margin-bottom: $bl * 2;
+
+  h4 {
+    font-size: 22px;
+    margin-top: 24px;
+
+    &:first-child {
+      margin-top: 12px;
+    }
+  }
+}
+
+.main-title {
+  position: relative;
+  margin-bottom: $bl * 1.5;
+  font-size: 28px;
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    border-bottom: 4px solid $color02;
+  }
 }
 
 header {
