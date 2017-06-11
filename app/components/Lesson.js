@@ -45,12 +45,11 @@ class Lesson extends Component {
             <div className="menu">
               <Scrollspy className="menu-list"
                 items={ ['', '', 'lesson', 'vocabulary', 'grammar', 'related-videos'] }
-                // offset={60}
-                currentClassName="_active">
+                offset={-60} currentClassName="_active">
                 <li className="menu-item">
                   <button className="button-primary">Join and talk</button>
                 </li>
-                <li className="menu-item">5mins 36s</li>
+                <li className="menu-item"><span className="strong">*</span> 5mins 36s</li>
 
                 <li className="menu-item">
                   <a href="#lesson">lesson</a>
@@ -76,11 +75,13 @@ class Lesson extends Component {
         {data && (
           <div className="container main">
             <div className="mobile-nav" style={{ display: 'none' }}>
-              <ul className="menu-list">
+              <Scrollspy className="menu-list"
+                items={ ['', '', 'lesson', 'vocabulary', 'grammar', 'related-videos'] }
+                offset={-60} currentClassName="_active">
                 <li className="menu-item">
                   <button className="button-primary">Join and talk</button>
                 </li>
-                <li className="menu-item">5mins 36s</li>
+                <li className="menu-item"><span className="strong">*</span> 5mins 36s</li>
 
                 <li className="menu-item">
                   <a href="#lesson">lesson</a>
@@ -89,16 +90,15 @@ class Lesson extends Component {
                   <a href="#vocabulary">vocabulary</a>
                 </li>
                 <li className="menu-item">
-                  <a href="#related-videos">related videos</a>
+                  <a href="#grammar">grammar</a>
                 </li>
                 <li className="menu-item">
-                  <a href="#quiz">quiz</a>
+                  <a href="#related-videos">related videos</a>
                 </li>
-              </ul>
+              </Scrollspy>
             </div>
 
-            <div id="lesson" className="target-element"></div>
-            <div className="section">
+            <div id="lesson" className="section target-element">
               <h3 className="main-title">{data.name}</h3>
               <div className="video-wrp">
                 {videoRender}
@@ -114,14 +114,12 @@ class Lesson extends Component {
               </div>
             </div>
 
-            <div id="vocabulary" className="target-element"></div>
-            <div className="section">
+            <div id="vocabulary" className="section target-element">
               <h3 className="main-title">Vocabulary</h3>
               <div dangerouslySetInnerHTML={{ __html: data.vocabulary }}></div>
             </div>
 
-            <div id="grammar" className="target-element"></div>
-            <div className="section">
+            <div id="grammar" className="section target-element">
               <h3 className="main-title">Grammar</h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente quisquam nesciunt
               quos! Magnam laudantium eveniet recusandae ab ullam, deleniti rerum optio expedita voluptatibus repudiandae odit fugit! Sint, iste sequi ipsam!</p>
@@ -129,8 +127,7 @@ class Lesson extends Component {
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente quisquam nesciunt quos! Magnam laudantium eveniet recusandae ab ullam, deleniti rerum optio expedita voluptatibus repudiandae odit fugit! Sint, iste sequi ipsam!</p>
             </div>
 
-            <div id="related-videos" className="target-element"></div>
-            <div className="section">
+            <div id="related-videos" className="section target-element">
               <h3 className="main-title">Related Videos</h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente quisquam nesciunt quos! Magnam laudantium eveniet recusandae ab ullam, deleniti rerum optio expedita voluptatibus repudiandae odit fugit! Sint, iste sequi ipsam!</p>
             </div>
