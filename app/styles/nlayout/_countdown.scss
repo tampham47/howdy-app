@@ -1,0 +1,28 @@
+// COUNTDOWN
+
+.countdown {
+  display: inline;
+
+  p {
+    margin-bottom: 0;
+  }
+
+  &-col {
+    display: inline-block;
+    margin-left: 4px;
+  }
+
+  .is-day,
+  .is-hour {
+    display: none;
+  }
+
+  .is-day,
+  .is-hour,
+  .is-min,
+  .is-seg {
+    strong {
+      margin-right: 4px;
+    }
+  }
+}

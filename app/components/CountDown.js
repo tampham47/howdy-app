@@ -51,28 +51,28 @@ class CountDownComp extends Component {
     listener.unsub(ApplicationType.LOADED_PREVIOUS_SESSION.toString());
   }
 
-  handdleEnrollNextSession() {
-    var curUser = this.props.currentUser;
-    var payload = {
-      _user: curUser.id || curUser._id,
-      sessionName: utils.getSessionNameByDate()
-    };
+  // handdleEnrollNextSession() {
+  //   var curUser = this.props.currentUser;
+  //   var payload = {
+  //     _user: curUser.id || curUser._id,
+  //     sessionName: utils.getSessionNameByDate()
+  //   };
 
-    this.props.dispatch(enrollNextSession(payload));
-    client.publish('join-class', JSON.stringify(curUser));
-  }
+  //   this.props.dispatch(enrollNextSession(payload));
+  //   client.publish('join-class', JSON.stringify(curUser));
+  // }
 
-  isEnrolledCurrentSession(user, sessionList) {
-    goingsunny.log('isEnrolledCurrentSession', user, sessionList);
-    var userId = user.id || user._id;
+  // isEnrolledCurrentSession(user, sessionList) {
+  //   goingsunny.log('isEnrolledCurrentSession', user, sessionList);
+  //   var userId = user.id || user._id;
 
-    for (var i=0; i<sessionList.length; i++) {
-      if (sessionList[i]._user === userId || sessionList[i].user === userId) {
-        return true;
-      }
-    }
-    return false;
-  }
+  //   for (var i=0; i<sessionList.length; i++) {
+  //     if (sessionList[i]._user === userId || sessionList[i].user === userId) {
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+  // }
 
   getNextSessionTime() {
     var nextSession = moment();
@@ -89,7 +89,6 @@ class CountDownComp extends Component {
   }
 
   onCountDownCompleted() {
-
     if (true || utils.mobilecheck()) {
       setTimeout(function() {
         var curUser = this.props.currentUser;
@@ -106,69 +105,43 @@ class CountDownComp extends Component {
   }
 
   render() {
-    var currentUser = this.props.currentUser;
-    var userId = currentUser._id;
-    var currentSessionList = this.props.currentSessionList || [];
-    var renderButton = <span></span>;
-    var countdownRender = <span></span>;
+    // var currentUser = this.props.currentUser;
+    // var userId = currentUser._id;
+    // var currentSessionList = this.props.currentSessionList || [];
+    // var renderButton = <span></span>;
+    // var countdownRender = <span></span>;
 
-    console.log('prevSession', this.props.prevSession);
+    // console.log('prevSession', this.props.prevSession);
 
-    if (!this.props.currentUser._id && !this.props.currentUser.id) {
-      renderButton = <FacebookLogin />;
-    } else {
-      if (this.isEnrolledCurrentSession(currentUser, currentSessionList)) {
-        renderButton = (
-          <button className="__btn-joined">You had joined next session</button>
-        )
-      } else {
-        renderButton = (
-          <button className="__btn-join button-primary"
-            onClick={this.handdleEnrollNextSession.bind(this)}>Join next session</button>
-        )
-      }
-    }
+    // if (!this.props.currentUser._id && !this.props.currentUser.id) {
+    //   renderButton = <FacebookLogin />;
+    // } else {
+    //   if (this.isEnrolledCurrentSession(currentUser, currentSessionList)) {
+    //     renderButton = (
+    //       <button className="__btn-joined">You had joined next session</button>
+    //     )
+    //   } else {
+    //     renderButton = (
+    //       <button className="__btn-join button-primary"
+    //         onClick={this.handdleEnrollNextSession.bind(this)}>Join next session</button>
+    //     )
+    //   }
+    // }
 
-    countdownRender = (
-      <div className="count-down">
-        <p className="count-down__helper">Next session is going to start in</p>
-        <CountDown className="count-down__clock" mins="mins" segs="secs"
-          date={this.state.nextSession}
-          onEnd={this.onCountDownCompleted.bind(this)} />
-      </div>
-    );
+    // countdownRender = (
+    //   <div className="count-down">
+    //     <p className="count-down__helper">Next session is going to start in</p>
+    //     <CountDown className="count-down__clock" mins="mins" segs="secs"
+    //       date={this.state.nextSession}
+    //       onEnd={this.onCountDownCompleted.bind(this)} />
+    //   </div>
+    // );
 
     return (
-      <div className="count-down-section">
-        {countdownRender}
-        {renderButton}
-
-        { this.props.prevSession.roomName &&
-          <Link to={`/c/${this.props.prevSession.roomName}`} className="__btn-link">
-            Join previous session <i className="fa fa-chevron-right"></i>
-          </Link>
-        }
-
-        <Link to='/guide' className="__btn-link">
-          Guide <i className="fa fa-chevron-right"></i>
-        </Link>
-
-        { (this.props.currentUser._id || this.props.currentUser.id) &&
-          <Link to="/profile" className="__btn-link">
-            Your profile <i className="fa fa-chevron-right"></i>
-          </Link>
-        }
-
-        <Link to="/c/test-your-devices" className="__btn-link">
-          Check your device <i className="fa fa-chevron-right"></i>
-        </Link>
-        <a href="//m.me/goingsunny" target="_blank" className="__btn-link">
-          Give us your feedback <i className="fa fa-chevron-right"></i>
-        </a>
-        <UserInNextSession userInNextSession={this.props.userInNextSession} />
-
-        {/*<div className="fb-page" data-href="https://www.facebook.com/goingsunny/" data-small-header="true" data-adapt-container-width="false" data-hide-cover="true" data-show-facepile="false"><blockquote cite="https://www.facebook.com/goingsunny/" className="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/goingsunny/">Going Sunny</a></blockquote></div>*/}
-      </div>
+      <CountDown className="countdown"
+        mins="mins" segs="s"
+        date={this.state.nextSession}
+        onEnd={this.onCountDownCompleted.bind(this)} />
     );
   }
 }

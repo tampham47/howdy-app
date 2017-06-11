@@ -11,6 +11,8 @@ import { Link } from 'react-router';
 import FacebookProvider, { Like } from 'react-facebook';
 import Scrollspy from 'react-scrollspy';
 
+import CountDown from './CountDown';
+
 
 class Lesson extends Component {
   render() {
@@ -49,7 +51,10 @@ class Lesson extends Component {
                 <li className="menu-item">
                   <button className="button-primary">Join and talk</button>
                 </li>
-                <li className="menu-item"><span className="strong">*</span> 5mins 36s</li>
+                <li className="menu-item">
+                  <span className="strong">*</span>
+                  <CountDown />
+                </li>
 
                 <li className="menu-item">
                   <a href="#lesson">lesson</a>
