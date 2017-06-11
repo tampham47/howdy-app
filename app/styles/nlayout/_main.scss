@@ -157,7 +157,8 @@ nav {
     color: black;
 
     &:hover {
-      font-weight: bold;
+      // font-weight: bold;
+      border-bottom: 2px dotted $color02;
     }
 
     &:target {
@@ -166,7 +167,10 @@ nav {
   }
 
   &._active {
-    font-weight: bold;
+    a {
+      font-weight: bold;
+      color: $color02;
+    }
   }
 }
 

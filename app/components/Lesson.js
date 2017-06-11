@@ -9,6 +9,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import FacebookProvider, { Like } from 'react-facebook';
+import Scrollspy from 'react-scrollspy';
 
 
 class Lesson extends Component {
@@ -42,7 +43,10 @@ class Lesson extends Component {
         <div className="container-fixed">
           <div className="menu-wrapper">
             <div className="menu">
-              <ul className="menu-list">
+              <Scrollspy className="menu-list"
+                items={ ['', '', 'lesson', 'vocabulary', 'grammar', 'related-videos'] }
+                // offset={60}
+                currentClassName="_active">
                 <li className="menu-item">
                   <button className="button-primary">Join and talk</button>
                 </li>
@@ -60,7 +64,7 @@ class Lesson extends Component {
                 <li className="menu-item">
                   <a href="#related-videos">related videos</a>
                 </li>
-              </ul>
+              </Scrollspy>
             </div>
           </div>
         </div>
@@ -71,7 +75,7 @@ class Lesson extends Component {
 
         {data && (
           <div className="container main">
-            {/*<div className="mobile-nav">
+            <div className="mobile-nav" style={{ display: 'none' }}>
               <ul className="menu-list">
                 <li className="menu-item">
                   <button className="button-primary">Join and talk</button>
@@ -91,7 +95,7 @@ class Lesson extends Component {
                   <a href="#quiz">quiz</a>
                 </li>
               </ul>
-            </div>*/}
+            </div>
 
             <div id="lesson" className="target-element"></div>
             <div className="section">
