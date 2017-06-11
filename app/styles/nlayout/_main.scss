@@ -1,5 +1,5 @@
 $content-w: 650px;
-$header-h: 54px;
+$header-h: 48px;
 $bl: 12px;
 
 // http://colorhunt.co/c/72112
@@ -19,6 +19,11 @@ p {
 
 pre, blockquote, dl, figure, table, p, ul, ol, form {
   margin-bottom: $bl / 2;
+}
+
+.strong {
+  color: $color02;
+  font-weight: bold;
 }
 
 .button.button-primary, button.button-primary {
