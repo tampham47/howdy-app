@@ -31,14 +31,14 @@ class Lesson extends Component {
       );
     }
 
-    imageList = ['01', '02', '03', '04', '05'].map(function(i, index) {
-      if (data[`image${i}`]) {
-        var item = data[`image${i}`];
-        return <img key={i} src={`${config.RESOURCE_PATH}/uploads/${item.filename}`} alt=""/>;
-      } else {
-        return <span key={i}></span>;
-      }
-    }.bind(this));
+    // imageList = ['01', '02', '03', '04', '05'].map(function(i, index) {
+    //   if (data[`image${i}`]) {
+    //     var item = data[`image${i}`];
+    //     return <img key={i} src={`${config.RESOURCE_PATH}/uploads/${item.filename}`} alt=""/>;
+    //   } else {
+    //     return <span key={i}></span>;
+    //   }
+    // }.bind(this));
 
     return (
       <div>
@@ -114,7 +114,6 @@ class Lesson extends Component {
                   colorScheme="dark" share />
               </FacebookProvider>
               <div className="lesson">
-                {imageList}
                 <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
               </div>
             </div>

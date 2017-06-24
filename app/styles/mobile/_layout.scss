@@ -1,5 +1,4 @@
 // header
-
 .header {
   &__left {
     flex: 3;
@@ -7,5 +6,9 @@
 
   &__right {
     flex: 1;
+
+    a:last-child {
+      display: none;
+    }
   }
 }

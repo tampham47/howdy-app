@@ -39,8 +39,8 @@
 // @import "modules/login-wave";
 // @import "modules/applink";
 
-@import "modules/main";
-@import "modules/countdown";
+@import "layout/main";
+@import "layout/countdown";
 
 @media ($bp-tablet-down) {
   @import "mobile/layout";
