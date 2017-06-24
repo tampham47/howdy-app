@@ -79,7 +79,7 @@ class Lesson extends Component {
 
         {data && (
           <div className="container main">
-            <div className="mobile-nav" style={{ display: 'none' }}>
+            <div className="mobile-nav">
               <Scrollspy className="menu-list"
                 items={ ['', '', 'lesson', 'vocabulary', 'grammar', 'related-videos'] }
                 offset={-60} currentClassName="_active">
@@ -125,9 +125,6 @@ class Lesson extends Component {
 
             <div id="grammar" className="section target-element">
               <h3 className="main-title">Grammar</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente quisquam nesciunt
-              quos! Magnam laudantium eveniet recusandae ab ullam, deleniti rerum optio expedita voluptatibus repudiandae odit fugit! Sint, iste sequi ipsam!</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente quisquam nesciunt quos! Magnam laudantium eveniet recusandae ab ullam, deleniti rerum optio expedita voluptatibus repudiandae odit fugit! Sint, iste sequi ipsam!</p>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente quisquam nesciunt quos! Magnam laudantium eveniet recusandae ab ullam, deleniti rerum optio expedita voluptatibus repudiandae odit fugit! Sint, iste sequi ipsam!</p>
             </div>
 
