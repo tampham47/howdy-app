@@ -121,16 +121,19 @@ class Lesson extends Component {
             <div id="vocabulary" className="section target-element">
               <h3 className="main-title">Vocabulary</h3>
               <div dangerouslySetInnerHTML={{ __html: data.vocabulary }}></div>
+              {!data.vocabulary.trim() && (
+                <p>No vocabulary today.</p>
+              )}
             </div>
 
             <div id="grammar" className="section target-element">
               <h3 className="main-title">Grammar</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente quisquam nesciunt quos! Magnam laudantium eveniet recusandae ab ullam, deleniti rerum optio expedita voluptatibus repudiandae odit fugit! Sint, iste sequi ipsam!</p>
+              <p>No grammar today.</p>
             </div>
 
             <div id="related-videos" className="section target-element">
               <h3 className="main-title">Related Videos</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente quisquam nesciunt quos! Magnam laudantium eveniet recusandae ab ullam, deleniti rerum optio expedita voluptatibus repudiandae odit fugit! Sint, iste sequi ipsam!</p>
+              <p>No related video today.</p>
             </div>
 
             <div style={{marginTop: '36px'}}>
