@@ -19,6 +19,7 @@ class Lesson extends Component {
     var renderHtml;
     var imageList, videoRender;
     var data = this.props.datacontext || {};
+    var targetDate = this.props.targetDate || moment().format('YYYYMMDD');
 
     if (data && data.youtubeEmbedLink) {
       var link = data.youtubeEmbedLink;
@@ -101,7 +102,7 @@ class Lesson extends Component {
               </div>
 
               <FacebookProvider appID="1391679424181926">
-                <Like href={`https://goingsunny.com/?${moment().format('YYYYMMDD')}`}
+                <Like href={`https://goingsunny.com/?d=${targetDate}`}
                   colorScheme="dark" share />
               </FacebookProvider>
               <div className="lesson">
@@ -129,7 +130,7 @@ class Lesson extends Component {
 
             <div style={{marginTop: '36px'}}>
               <FacebookProvider appID="1391679424181926">
-                <Like href={`https://goingsunny.com/?${moment().format('YYYYMMDD')}`}
+                <Like href={`https://goingsunny.com/?d=${targetDate}`}
                   colorScheme="dark" showFaces share />
               </FacebookProvider>
             </div>

@@ -27,11 +27,15 @@ export const LOADED_PREV_SESSION = Symbol('LOADED_PREV_SESSION');
 export const LOADED_USER_IN_SESSION = Symbol('LOADED_USER_IN_SESSION');
 
 
-export function fetchChannelData({ channelUrl, userId, sessionName, prevSessionName }) {
+export function fetchChannelData({ channelUrl, userId, sessionName, prevSessionName, targetDate }) {
   return {
     [CHAIN_API]: [
       ()=> {
         var currentDateStr = moment().format('YYYYMMDD');
+        if (targetDate) {
+          currentDateStr = targetDate;
+        }
+
         return {
           [CALL_API]: {
             method: 'get',

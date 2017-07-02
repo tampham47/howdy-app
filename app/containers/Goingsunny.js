@@ -19,7 +19,12 @@ import Lesson from 'components/Lesson';
 import MessageList from 'components/MessageList';
 import ChannelSetting from 'components/ChannelSetting';
 
-import { changeChanel, loadChannels, loadMessageAndChannel, fetchChannelData } from 'actions/chanels';
+import {
+  changeChanel,
+  loadChannels,
+  loadMessageAndChannel,
+  fetchChannelData,
+} from 'actions/chanels';
 import { updateNotificationPanelState } from 'actions/application';
 import { showAppearin, changeMode } from 'actions/appearin';
 import * as ChannelType from 'actions/chanels';
@@ -34,15 +39,18 @@ var appearin = new AppearinSDK();
 
 class Chanel extends Component {
 
-  static fetchData({ store, params }) {
+  static fetchData({ store, params, query }) {
     var channelUrl = params.channelUrl || 'goingsunny';
     var currentUser = store.getState().currentUser;
     var userId = currentUser.id || currentUser._id;
+    var d = query.d;
+
     return store.dispatch(fetchChannelData({
       channelUrl,
       userId,
       sessionName: utils.getSessionNameByDate(),
-      prevSessionName: utils.getPrevSessionName()
+      prevSessionName: utils.getPrevSessionName(),
+      targetDate: d,
     }));
   }
 
@@ -62,21 +70,20 @@ class Chanel extends Component {
   }
 
   componentDidMount() {
+    var d = this.props.location.query.d;
     var channelUrl = this.props.params.channelUrl || 'goingsunny';
     var userId = this.props.currentUser._id || this.props.currentUser.id;
     this.props.fetchChannelData({
       channelUrl,
       userId,
       sessionName: utils.getSessionNameByDate(),
-      prevSessionName: utils.getPrevSessionName()
+      prevSessionName: utils.getPrevSessionName(),
+      targetDate: d,
     });
 
     // check more data later
     var unreadNotiList = this.getUnreadNotifications(this.props.notifications, this.props.userNotifications);
-    console.log('unreadNotiList', unreadNotiList);
-    console.log('unreadNotiList 2', this.props.notifications, this.props.userNotifications);
     if (unreadNotiList.length > 0) {
-      console.log('unreadNotiList', unreadNotiList);
       this.props.updateNotificationPanelState(true);
       this.setState({ unreadNotiList });
     }
@@ -112,7 +119,6 @@ class Chanel extends Component {
 
   componentWillReceiveProps(props) {
     var unreadNotiList = this.getUnreadNotifications(props.notifications, props.userNotifications);
-    console.log('componentWillReceiveProps', unreadNotiList, props.notifications, props.userNotifications);
     if (unreadNotiList.length > 0 && !this.props.appState.notificationPanelState) {
       this.props.updateNotificationPanelState(true);
       this.setState({ unreadNotiList });
@@ -211,6 +217,7 @@ class Chanel extends Component {
   render() {
     var channelUrl = this.props.params.channelUrl || 'goingsunny';
     var propsData = JSON.parse(JSON.stringify(this.props));
+    var targetDate = this.props.location.query.d;
 
     var chanelData = this.props.chanels;
     var currentChanel = chanelData.currentChanel;
@@ -267,7 +274,10 @@ class Chanel extends Component {
           </div>
         </header>
 
-        <Lesson datacontext={this.props.channelData.currentLesson} />
+        <Lesson
+          datacontext={this.props.channelData.currentLesson}
+          targetDate={targetDate}
+        />
       </section>
     );
   }
@@ -286,7 +296,6 @@ function mapStateToProps(state) {
     userNotifications: state.userNotifications.toJS(),
     currentSessionList: state.appState.toJS().currentSessionList,
     userInNextSession: state.appState.toJS().userInNextSession,
-    // prevSession: state.appState.toJS().prevSession,
   };
 }
 

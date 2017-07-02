@@ -55,13 +55,11 @@ function createRequestPromise (apiActionCreator, next, getState, dispatch) {
     let apiAction = apiActionCreator(prevBody)
     let deferred = Promise.defer()
     let params = extractParams(apiAction[CALL_API])
-    console.log('createRequestPromise', params);
 
     superAgent[params.method](params.url)
       .send(params.body)
       .query(params.query)
       .end((err, res)=> {
-        console.log('superagent', !!err);
         if (err) {
           if ( params.errorType ) {
             dispatch(actionWith(apiAction, {
@@ -103,9 +101,6 @@ function extractParams(callApi) {
     afterSuccess,
     afterError
   } = callApi
-
-
-  console.log('extractParams', callApi);
 
   var url = '';
   if (!callApi.isLocal) {
