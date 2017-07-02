@@ -1,6 +1,6 @@
 {
-  "name": "Goingsunny",
-  "version": "0.0.0",
+  "name": "goingsunny",
+  "version": "0.2.0",
   "description": "Learning english by natural way",
   "scripts": {
     "start": "cross-env NODE_PATH=./app concurrently --kill-others \"node app/server\" \"node webpack.server.js\" \"gulp css:watch\"",
