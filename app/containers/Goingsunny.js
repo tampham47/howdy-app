@@ -260,10 +260,10 @@ class Chanel extends Component {
             <nav className="header__left">
               <h4 className="title">GOING SUNNY</h4>
             </nav>
-            <nav className="header__right">
+            {/*<nav className="header__right">
               <a href="#"><i className="fa fa-bars"></i></a>
               <a href="#">login with facebook</a>
-            </nav>
+            </nav>*/}
           </div>
         </header>
 

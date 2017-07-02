@@ -31,30 +31,21 @@ class Lesson extends Component {
       );
     }
 
-    // imageList = ['01', '02', '03', '04', '05'].map(function(i, index) {
-    //   if (data[`image${i}`]) {
-    //     var item = data[`image${i}`];
-    //     return <img key={i} src={`${config.RESOURCE_PATH}/uploads/${item.filename}`} alt=""/>;
-    //   } else {
-    //     return <span key={i}></span>;
-    //   }
-    // }.bind(this));
-
     return (
       <div>
         <div className="container-fixed">
           <div className="menu-wrapper">
             <div className="menu">
               <Scrollspy className="menu-list"
-                items={ ['', '', 'lesson', 'vocabulary', 'grammar', 'related-videos'] }
+                items={ ['lesson', 'vocabulary', 'grammar', 'related-videos'] }
                 offset={-60} currentClassName="_active">
-                <li className="menu-item">
+                {/*<li className="menu-item">
                   <button className="button-primary">Join and talk</button>
                 </li>
                 <li className="menu-item">
                   <span className="strong">*</span>
                   <CountDown />
-                </li>
+                </li>*/}
 
                 <li className="menu-item">
                   <a href="#lesson">lesson</a>
@@ -81,12 +72,12 @@ class Lesson extends Component {
           <div className="container main">
             <div className="mobile-nav">
               <Scrollspy className="menu-list"
-                items={ ['', '', 'lesson', 'vocabulary', 'grammar', 'related-videos'] }
+                items={ ['lesson', 'vocabulary', 'grammar', 'related-videos'] }
                 offset={-60} currentClassName="_active">
-                <li className="menu-item">
+                {/*<li className="menu-item">
                   <button className="button-primary">Join and talk</button>
                 </li>
-                <li className="menu-item"><span className="strong">*</span> 5mins 36s</li>
+                <li className="menu-item"><span className="strong">*</span> 5mins 36s</li>*/}
 
                 <li className="menu-item">
                   <a href="#lesson">lesson</a>
