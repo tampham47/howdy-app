@@ -8,19 +8,22 @@ import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute } from 'react-router';
 import configureStore from 'store/configureStore';
 
-import requireAuthentication from 'containers/Auth';
 import App from 'containers/App';
-import Login from 'containers/Login';
-import Chanel from 'containers/Chanel';
-import ClassRoom from 'containers/ClassRoom';
-import Explore from 'containers/Explore';
-import Intro from 'containers/Intro';
-import Profile from 'containers/Profile';
-import Feedback from 'containers/Feedback';
-import Blog from 'containers/Blog';
-import MeetingRoom from 'containers/MeetingRoom';
 import Goingsunny from 'containers/Goingsunny';
-import Guide from 'containers/Guide';
+
+// import Login from 'containers/Login';
+// import Guide from 'containers/Guide';
+// import Profile from 'containers/Profile';
+// import Feedback from 'containers/Feedback';
+
+// These are going to deprecated
+// import Intro from 'containers/Intro';
+// import Explore from 'containers/Explore';
+// import Blog from 'containers/Blog';
+// import MeetingRoom from 'containers/MeetingRoom';
+// import Chanel from 'containers/Chanel';
+// import ClassRoom from 'containers/ClassRoom';
+// import requireAuthentication from 'containers/Auth';
 
 var NoMatchComp;
 let requireAuth = function(store, nextState, replace) {
@@ -48,18 +51,12 @@ export default function(history, store) {
     <Router history={history}>
       <Route path="/" component={App} onChange={handleChangeUrl.bind(this)} >
         <IndexRoute component={Goingsunny} />
-        <Route path="c/:channelUrl" component={ClassRoom} />
 
-        <Route path="meeting" component={MeetingRoom} onEnter={requireAuth.bind(this, store)} />
-        <Route path="channel/:channelUrl" component={Chanel} onEnter={requireAuth.bind(this, store)} />
-        <Route path="profile" component={Profile} onEnter={requireAuth.bind(this, store)} />
+        {/*<Route path="profile" component={Profile} onEnter={requireAuth.bind(this, store)} />
         <Route path="feedback" component={Feedback} onEnter={requireAuth.bind(this, store)} />
-        <Route path="blog/:slug" component={Blog} onEnter={requireAuth.bind(this, store)} />
-
         <Route path="guide" component={Guide} />
-        <Route path="login" component={Login} />
+        <Route path="login" component={Login} />*/}
 
-        <Route path="explore" component={Explore} />
         <Route path="*" component={NoMatchComp} />
       </Route>
     </Router>

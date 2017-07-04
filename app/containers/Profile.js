@@ -9,7 +9,6 @@ import { Link } from 'react-router';
 import LeftMenu from 'components/LeftMenu';
 import HeaderBar from 'components/HeaderBar';
 import ChannelHeader from 'components/ChannelHeader';
-import LayoutDefault from 'containers/LayoutDefault';
 
 import { loadChannels } from 'actions/chanels';
 import { updateProfile } from 'actions/application';

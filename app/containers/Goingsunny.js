@@ -10,14 +10,14 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router';
 import { Helmet } from 'react-helmet';
 
-import LeftMenu from 'components/LeftMenu';
-import ChannelHeader from 'components/ChannelHeader';
-import PeopleInChannel from 'components/PeopleInChannel';
-import AddChannel from 'components/AddChannel';
-import NotificationPanel from 'components/NotificationPanel';
+// import LeftMenu from 'components/LeftMenu';
+// import ChannelHeader from 'components/ChannelHeader';
+// import PeopleInChannel from 'components/PeopleInChannel';
+// import AddChannel from 'components/AddChannel';
+// import NotificationPanel from 'components/NotificationPanel';
+// import MessageList from 'components/MessageList';
+// import ChannelSetting from 'components/ChannelSetting';
 import Lesson from 'components/Lesson';
-import MessageList from 'components/MessageList';
-import ChannelSetting from 'components/ChannelSetting';
 
 import {
   changeChanel,
