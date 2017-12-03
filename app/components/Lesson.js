@@ -16,6 +16,10 @@ import CountDown from './CountDown';
 
 class Lesson extends Component {
   render() {
+    if (!this.props.datacontext) {
+      return <p>There has no lesson today.</p>;
+    }
+
     var renderHtml;
     var imageList, videoRender;
     var data = this.props.datacontext || {};
@@ -42,27 +46,22 @@ class Lesson extends Component {
               <Scrollspy className="menu-list"
                 items={ ['lesson', 'vocabulary', 'grammar', 'related-videos'] }
                 offset={-60} currentClassName="_active">
-
                 <li className="menu-item">
-                  <a href="#lesson">lesson</a>
+                  <a href="#lesson">Video</a>
                 </li>
                 <li className="menu-item">
-                  <a href="#vocabulary">vocabulary</a>
+                  <a href="#vocabulary">Vocabulary</a>
                 </li>
                 <li className="menu-item">
-                  <a href="#grammar">grammar</a>
+                  <a href="#brainstorming">Brainstorming</a>
                 </li>
                 <li className="menu-item">
-                  <a href="#related-videos">related videos</a>
+                  <a href="#maincontent">Main content</a>
                 </li>
               </Scrollspy>
             </div>
           </div>
         </div>
-
-        {!data && (
-          <p>There has no lesson today.</p>
-        )}
 
         {data && (
           <div className="container main">
