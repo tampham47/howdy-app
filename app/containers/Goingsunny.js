@@ -35,7 +35,9 @@ class Howdy extends Component {
   collectVocab(lesson) {
     const vocab = [];
     for (var i = 1; i < 10; i++) {
-      vocab.push(lesson[`vocab0${i}`]);
+      if (lesson[`vocab0${i}`].word) {
+        vocab.push(lesson[`vocab0${i}`]);
+      }
     }
     return vocab;
   }
