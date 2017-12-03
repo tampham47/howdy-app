@@ -10,13 +10,6 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router';
 import { Helmet } from 'react-helmet';
 
-// import LeftMenu from 'components/LeftMenu';
-// import ChannelHeader from 'components/ChannelHeader';
-// import PeopleInChannel from 'components/PeopleInChannel';
-// import AddChannel from 'components/AddChannel';
-// import NotificationPanel from 'components/NotificationPanel';
-// import MessageList from 'components/MessageList';
-// import ChannelSetting from 'components/ChannelSetting';
 import Lesson from 'components/Lesson';
 
 import {
@@ -46,10 +39,6 @@ class Chanel extends Component {
     var d = query.d;
 
     return store.dispatch(fetchChannelData({
-      channelUrl,
-      userId,
-      sessionName: utils.getSessionNameByDate(),
-      prevSessionName: utils.getPrevSessionName(),
       targetDate: d,
     }));
   }
@@ -74,10 +63,6 @@ class Chanel extends Component {
     var channelUrl = this.props.params.channelUrl || 'goingsunny';
     var userId = this.props.currentUser._id || this.props.currentUser.id;
     this.props.fetchChannelData({
-      channelUrl,
-      userId,
-      sessionName: utils.getSessionNameByDate(),
-      prevSessionName: utils.getPrevSessionName(),
       targetDate: d,
     });
 
@@ -118,7 +103,10 @@ class Chanel extends Component {
   }
 
   componentWillReceiveProps(props) {
-    var unreadNotiList = this.getUnreadNotifications(props.notifications, props.userNotifications);
+    var unreadNotiList = this.getUnreadNotifications(
+      props.notifications, 
+      props.userNotifications
+    );
     if (unreadNotiList.length > 0 && !this.props.appState.notificationPanelState) {
       this.props.updateNotificationPanelState(true);
       this.setState({ unreadNotiList });
@@ -151,7 +139,7 @@ class Chanel extends Component {
       e.stopPropagation();
       e.preventDefault();
 
-      if (this.state.inputMessage.trim() === '')  {
+      if (this.state.inputMessage.trim() === '') {
         return;
       }
 
