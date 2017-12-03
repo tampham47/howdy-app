@@ -27,7 +27,7 @@ export const LOADED_PREV_SESSION = Symbol('LOADED_PREV_SESSION');
 export const LOADED_USER_IN_SESSION = Symbol('LOADED_USER_IN_SESSION');
 
 
-export function fetchChannelData({ channelUrl, userId, sessionName, prevSessionName, targetDate }) {
+export function fetchChannelData({ targetDate }) {
   return {
     [CHAIN_API]: [
       ()=> {
@@ -39,7 +39,7 @@ export function fetchChannelData({ channelUrl, userId, sessionName, prevSessionN
         return {
           [CALL_API]: {
             method: 'get',
-            path: '/lesson',
+            path: '/howdylesson',
             query: {
               query: JSON.stringify({
                 availableDateStr: currentDateStr
@@ -48,66 +48,6 @@ export function fetchChannelData({ channelUrl, userId, sessionName, prevSessionN
             successType: LOADED_LESSON_BY_CURRENT_DATE
           }
         };
-      },
-      (notifications)=> {
-        return {
-          [CALL_API]: {
-            method: 'get',
-            path: '/usernotification',
-            query: {
-              query: JSON.stringify({
-                _user: userId
-              })
-            },
-            successType: LOADED_USER_NOTIFICATIONS
-          }
-        };
-      },
-      ()=> {
-        return {
-          [CALL_API]: {
-            method: 'get',
-            path: '/notification',
-            query: {
-              query: JSON.stringify({
-                state: 'public'
-              })
-            },
-            successType: LOADED_NOTIFICATIONS
-          }
-        };
-      },
-      ()=> {
-        return {
-          [CALL_API]: {
-            method: 'get',
-            path: '/session',
-            query: {
-              query: JSON.stringify({
-                sessionName: sessionName
-              }),
-              'populate': '_user'
-            },
-            successType: LOADED_CURRENT_SESSION_LIST
-          }
-        }
-      },
-      ()=> {
-        console.log('prevSessionName', prevSessionName, userId);
-        if (!userId) return;
-        return {
-          [CALL_API]: {
-            method: 'get',
-            path: '/session',
-            query: {
-              query: JSON.stringify({
-                sessionName: prevSessionName,
-                _user: userId
-              })
-            },
-            successType: LOADED_PREV_SESSION
-          }
-        }
       },
     ]
   }
