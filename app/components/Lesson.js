@@ -16,19 +16,25 @@ import CountDown from './CountDown';
 
 class Lesson extends Component {
   render() {
+    if (!this.props.datacontext) {
+      return <p>There has no lesson today.</p>;
+    }
+
     var renderHtml;
     var imageList, videoRender;
     var data = this.props.datacontext || {};
     var targetDate = this.props.targetDate || moment().format('YYYYMMDD');
 
-    if (data && data.youtubeEmbedLink) {
-      var link = data.youtubeEmbedLink;
+    if (data && data.youtubeLink) {
+      var width = window ? window.innerWidth : 768;
+      var height = width > 768 ? 366 : 180;
+      var link = data.youtubeLink;
       if (link.indexOf('http') >= 0 && link.indexOf('https') < 0) {
         link = link.replace('http', 'https');
       }
 
       videoRender = (
-        <iframe width="100%" height="366" src={link} frameBorder="0" allowFullScreen></iframe>
+        <iframe width="100%" height={height} src={link} frameBorder="0" allowFullScreen></iframe>
       );
     }
 
@@ -40,27 +46,22 @@ class Lesson extends Component {
               <Scrollspy className="menu-list"
                 items={ ['lesson', 'vocabulary', 'grammar', 'related-videos'] }
                 offset={-60} currentClassName="_active">
-
                 <li className="menu-item">
-                  <a href="#lesson">lesson</a>
+                  <a href="#lesson">Video</a>
                 </li>
                 <li className="menu-item">
-                  <a href="#vocabulary">vocabulary</a>
+                  <a href="#vocabulary">Vocabulary</a>
                 </li>
                 <li className="menu-item">
-                  <a href="#grammar">grammar</a>
+                  <a href="#brainstorming">Brainstorming</a>
                 </li>
                 <li className="menu-item">
-                  <a href="#related-videos">related videos</a>
+                  <a href="#maincontent">Main content</a>
                 </li>
               </Scrollspy>
             </div>
           </div>
         </div>
-
-        {!data && (
-          <p>There has no lesson today.</p>
-        )}
 
         {data && (
           <div className="container main">
@@ -69,16 +70,16 @@ class Lesson extends Component {
                 items={ ['lesson', 'vocabulary', 'grammar', 'related-videos'] }
                 offset={-60} currentClassName="_active">
                 <li className="menu-item">
-                  <a href="#lesson">lesson</a>
+                  <a href="#lesson">Video</a>
                 </li>
                 <li className="menu-item">
-                  <a href="#vocabulary">vocabulary</a>
+                  <a href="#vocabulary">Vocabulary</a>
                 </li>
                 <li className="menu-item">
-                  <a href="#grammar">grammar</a>
+                  <a href="#brainstorming">Brainstorming</a>
                 </li>
                 <li className="menu-item">
-                  <a href="#related-videos">related videos</a>
+                  <a href="#maincontent">Main content</a>
                 </li>
               </Scrollspy>
             </div>
@@ -93,27 +94,36 @@ class Lesson extends Component {
                 <Like href={`https://goingsunny.com/?d=${targetDate}`}
                   colorScheme="dark" share />
               </FacebookProvider>
-              <div className="lesson">
-                <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
-              </div>
             </div>
 
             <div id="vocabulary" className="section target-element">
               <h3 className="main-title">Vocabulary</h3>
-              <div dangerouslySetInnerHTML={{ __html: data.vocabulary }}></div>
-              {!data.vocabulary.trim() && (
+              {data.vocabularies.map(i => {
+                return (
+                  <div>
+                    <p>
+                      <b>{i.word}</b>&nbsp;({i.pron})<br/>
+                      {i.example}
+                    </p>
+                  </div>
+                )
+              })}
+              {!data.vocabulary && (
                 <p>No vocabulary today.</p>
               )}
             </div>
 
-            <div id="grammar" className="section target-element">
-              <h3 className="main-title">Grammar</h3>
-              <p>No grammar today.</p>
+            <div id="brainstorming" className="section target-element">
+              <h3 className="main-title">Brainstorming</h3>
+              <div dangerouslySetInnerHTML={{ __html: data.brainstorming }}></div>
+              {!data.brainstorming && (
+                <p>No brainstorming today.</p>
+              )}
             </div>
 
-            <div id="related-videos" className="section target-element">
-              <h3 className="main-title">Related Videos</h3>
-              <p>No related video today.</p>
+            <div id="maincontent" className="section target-element">
+              <h3 className="main-title">Main content</h3>
+              <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
             </div>
 
             <div style={{marginTop: '36px'}}>

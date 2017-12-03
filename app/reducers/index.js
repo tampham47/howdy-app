@@ -15,11 +15,6 @@ import notifications from 'reducers/notifications';
 import userNotifications from 'reducers/userNotifications';
 import appState from 'reducers/application';
 
-// import questions from 'reducers/questions';
-// import questionDetail from 'reducers/questionDetail';
-// import messagePanel from 'reducers/messagePanel';
-// import authUser from 'reducers/authUser';
-
 const rootReducer = combineReducers({
   appState,
   chanels,
