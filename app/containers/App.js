@@ -18,7 +18,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log('App.currentUser', this.props.currentUser && this.props.currentUser.toJS());
     var currentUser = this.props.currentUser ? this.props.currentUser.toJS() : null;
 
     client.on('connect', function() {
@@ -45,15 +44,12 @@ class App extends Component {
           });
           break;
         case 'SYSTEM_CLASS_DATA':
-          console.log('SYSTEM_CLASS_DATA', messageData.user);
           this.props.dispatch(userJoinNextSession(messageData.user));
           break;
         case 'goingsunny_system_meeting':
-          console.log('goingsunny_system_meeting', messageData);
           break;
         default:
           // on SYSTEM_userId topic
-          console.log('App.componentDidMount', topic);
           this.props.dispatch(getBrokerMessage(messageData));
       }
     }.bind(this));
@@ -69,7 +65,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('App.render', this.props.location.pathname);
     var location = this.props.location.pathname;
     if (typeof window !== 'undefined') {
       if (location == '/login' || location == '/guide') {

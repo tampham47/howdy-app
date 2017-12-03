@@ -91,8 +91,6 @@ class Feedback extends Component {
                 <div className="add-room-form__controls">
                   <input className="button button-primary" type="button" value="Submit"
                     onClick={this.handleSubmitButton.bind(this)}/>
-                  {/*<input className="button" type="button" value="Cancel"
-                    onClick={this.handleCancelButton.bind(this)} />*/}
                 </div>
               </form>
             </div>

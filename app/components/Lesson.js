@@ -40,13 +40,6 @@ class Lesson extends Component {
               <Scrollspy className="menu-list"
                 items={ ['lesson', 'vocabulary', 'grammar', 'related-videos'] }
                 offset={-60} currentClassName="_active">
-                {/*<li className="menu-item">
-                  <button className="button-primary">Join and talk</button>
-                </li>
-                <li className="menu-item">
-                  <span className="strong">*</span>
-                  <CountDown />
-                </li>*/}
 
                 <li className="menu-item">
                   <a href="#lesson">lesson</a>
@@ -75,11 +68,6 @@ class Lesson extends Component {
               <Scrollspy className="menu-list"
                 items={ ['lesson', 'vocabulary', 'grammar', 'related-videos'] }
                 offset={-60} currentClassName="_active">
-                {/*<li className="menu-item">
-                  <button className="button-primary">Join and talk</button>
-                </li>
-                <li className="menu-item"><span className="strong">*</span> 5mins 36s</li>*/}
-
                 <li className="menu-item">
                   <a href="#lesson">lesson</a>
                 </li>

@@ -15,14 +15,11 @@ class NotificationPanel extends Component {
     super(props);
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
-  handleCancelButton() {
-  }
+  handleCancelButton() {}
 
   handleSubmitButton() {
-    console.log('handleSubmitButton');
     var notiList = this.props.unreadNotiList;
     var user = this.props.currentUser;
 
@@ -31,8 +28,6 @@ class NotificationPanel extends Component {
   }
 
   render() {
-    console.log('NotificationPanel.render', this.props.currentUser);
-
     var isActive = this.props.isActive ? '_active' : '';
     var notificationList = this.props.unreadNotiList.map(function(i) {
       return (
