@@ -26,7 +26,7 @@ class Lesson extends Component {
     var targetDate = this.props.targetDate || moment().format('YYYYMMDD');
 
     if (data && data.youtubeLink) {
-      var width = window ? window.innerWidth : 768;
+      var width = (typeof window !== 'undefined') ? window.innerWidth : 320;
       var height = width > 768 ? 366 : 180;
       var link = data.youtubeLink;
       if (link.indexOf('http') >= 0 && link.indexOf('https') < 0) {
