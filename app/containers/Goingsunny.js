@@ -32,9 +32,18 @@ class Howdy extends Component {
     });
   }
 
+  collectVocab(lesson) {
+    const vocab = [];
+    for (var i = 1; i < 10; i++) {
+      vocab.push(lesson[`vocab0${i}`]);
+    }
+    return vocab;
+  }
+
   render() {
     var targetDate = this.props.location.query.d;
     var lesson = this.props.lesson;
+    lesson.vocabularies = this.collectVocab(lesson);
 
     return (
       <section>

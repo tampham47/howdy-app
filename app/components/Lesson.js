@@ -98,7 +98,16 @@ class Lesson extends Component {
 
             <div id="vocabulary" className="section target-element">
               <h3 className="main-title">Vocabulary</h3>
-              <div dangerouslySetInnerHTML={{ __html: data.vocabulary }}></div>
+              {data.vocabularies.map(i => {
+                return (
+                  <div>
+                    <p>
+                      <b>{i.word}</b>&nbsp;({i.pron})<br/>
+                      {i.example}
+                    </p>
+                  </div>
+                )
+              })}
               {!data.vocabulary && (
                 <p>No vocabulary today.</p>
               )}
