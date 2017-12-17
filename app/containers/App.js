@@ -102,12 +102,6 @@ class App extends Component {
         </Helmet>
 
         {this.props.children}
-
-        <p style={{ textAlign: 'center' }}>
-          <span className="mwl">
-            made with <i className="fa fa-heart pulse"></i> by xaolonist
-          </span>
-        </p>
       </div>
     );
   }
